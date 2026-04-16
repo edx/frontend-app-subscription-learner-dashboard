@@ -21,7 +21,7 @@ const messages = defineMessages({
     description: 'Course card verified banner ribbon alt-text',
     defaultMessage: 'ID Verified Ribbon/Badge',
   },
-  subsCourse:{
+  subsCourse: {
     id: 'subs.courses',
     defaultMessage: 'Courses',
     description: 'Subs Courses',
