@@ -37,8 +37,6 @@ export const CourseList = ({ courseListData }) => {
           />
         )}
       </div>
-
-      <SubsCourseCard dataList={visibleList} numPages={numPages} setPageNumber={setPageNumber}  />
     </>
   );
 };
