@@ -8,7 +8,6 @@ import {
 import CourseCard from '../../../containers/CourseCard';
 
 import { useIsCollapsed } from './hooks';
-import SubsCourseCard from '@src/containers/SubsCourseCard';
 
 export const CourseList = ({ courseListData }) => {
   const {
