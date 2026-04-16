@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import { Card } from '@openedx/paragon';
+import { Card, Button } from '@openedx/paragon';
 
 import { useIsCollapsed } from './hooks';
 import CourseCardMenu from './components/CourseCardMenu';
@@ -8,7 +8,6 @@ import CourseCardActions from './components/CourseCardActions';
 import CourseCardDetails from './components/CourseCardDetails';
 import CourseCardTitle from './components/CourseCardTitle';
 
-import './CourseCard.scss';
 
 const SubsCourseCardView = ({
   cardId,
@@ -56,20 +55,17 @@ const SubsCourseCardView = ({
                         variant="warning"
                         className="bg-light"
                     >
-                        {/* <CourseCardBanners cardId={cardId} /> */}
                         <div className="d-flex align-items-center mt-1">
                             <div style={{ flex: "0 0 70%" }} className="pe-3">
                                 <p className="mb-0 font-weight-semi-bold">
-                                    Yuccie pabst four loko flexitarian activated charcoal viral health goth
-                                    craft beer dreamcatcher subway tile meditation microdosing...
+                                    This is limited courses. The details may follow up soon.
                                 </p>
                             </div>
 
                             <div style={{ flex: "0 0 30%" }} className="d-flex justify-content-end">
-                                {/* <Button variant="outline-dark" data-testid="view-redeem-button" size="md">
+                                <Button variant="outline-dark" data-testid="view-redeem-button" size="md">
                                     Redeem
-                                </Button> */}
-                                <CourseCardActions cardId={cardId} />
+                                </Button>
                             </div>
                         </div>
                     </Card.Status>
@@ -80,8 +76,8 @@ const SubsCourseCardView = ({
 };
 SubsCourseCardView.propTypes = {
   cardId: PropTypes.string.isRequired,
-  badge: PropTypes.bool.isRequired,
-  isLimitedAccess: PropTypes.bool.isRequired
+  badge: PropTypes.bool,
+  isLimitedAccess: PropTypes.bool
 };
 
 export default SubsCourseCardView;

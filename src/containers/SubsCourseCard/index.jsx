@@ -1,28 +1,34 @@
 import PropTypes from 'prop-types';
 
-import { useIsCollapsed } from './hooks';
 
-import './CourseCard.scss';
+import { useIntl } from '@openedx/frontend-base';
+import { Icon } from '@openedx/paragon';
+import { Info } from '@openedx/paragon/icons';
+import { Pagination } from '@openedx/paragon';
+
+import { useIsCollapsed } from './hooks';
 import SubsCourseCardView from './SubsCourseCardView';
+import messages from './messages';
 
 const SubsCourseCard = ({
   cardId,
   dataList = [],
   numPages = 0,
-  setPageNumber = 0
+  setPageNumber
 }) => {
     const isCollapsed = useIsCollapsed();
-
+    const { formatMessage } = useIntl();
+console.log(messages)
     return (
       <div>
           <div className="d-flex align-items-center gap-2 mt-4 mb-3">
               <h3 className="mb-0 fw-semibold" data-testid="card-header">
-                  Courses
+                  {formatMessage(messages.subsCourse)}
               </h3>
           </div>
 
-          {visibleList.map(({ cardId }) => (
-            <SubsCourseCardView cardId={cardId} badge = {true} />
+          {dataList.map(({ cardId }) => (
+            <SubsCourseCardView key={cardId} cardId={cardId} badge={true} />
           ))}
           {numPages > 1 && (
             <Pagination
@@ -36,14 +42,14 @@ const SubsCourseCard = ({
 
           <div className="d-flex align-items-center gap-2 mt-4 mb-3">
               <h3 className="mb-0 fw-semibold" data-testid="card-header">
-                  Limited access courses
+                  {formatMessage(messages.limitedCourse)}
               </h3>
 
               <Icon src={Info} className="text-muted m-2" style={{fontSize: "14px"}}  />
           </div>
 
-          {visibleList.map(({ cardId }) => (
-            <SubsCourseCardView cardId={cardId} badge = {false} isLimitedAccess = {true} />
+          {dataList.map(({ cardId }) => (
+            <SubsCourseCardView key={cardId} cardId={cardId} badge={false} isLimitedAccess={true} />
           ))}
           {numPages > 1 && (
             <Pagination
@@ -59,9 +65,9 @@ const SubsCourseCard = ({
 };
 SubsCourseCard.propTypes = {
   cardId: PropTypes.string.isRequired,
-  dataList: PropTypes.array.isRequired,
-  numPages: PropTypes.number.isRequired,
-  setPageNumber: PropTypes.number.isRequired
+  dataList: PropTypes.array,
+  numPages: PropTypes.number,
+  setPageNumber: PropTypes.func
 };
 
 export default SubsCourseCard;

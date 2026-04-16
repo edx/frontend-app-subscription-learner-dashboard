@@ -8,6 +8,7 @@ import {
 import CourseCard from '../../../containers/CourseCard';
 
 import { useIsCollapsed } from './hooks';
+import SubsCourseCard from '@src/containers/SubsCourseCard';
 
 export const CourseList = ({ courseListData }) => {
   const {
@@ -36,6 +37,8 @@ export const CourseList = ({ courseListData }) => {
           />
         )}
       </div>
+
+      <SubsCourseCard dataList={visibleList} numPages={numPages} setPageNumber={setPageNumber}  />
     </>
   );
 };
