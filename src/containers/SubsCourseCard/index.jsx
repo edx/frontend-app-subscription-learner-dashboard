@@ -18,7 +18,7 @@ const SubsCourseCard = ({
 }) => {
     const isCollapsed = useIsCollapsed();
     const { formatMessage } = useIntl();
-console.log(messages)
+
     return (
       <div>
           <div className="d-flex align-items-center gap-2 mt-4 mb-3">
