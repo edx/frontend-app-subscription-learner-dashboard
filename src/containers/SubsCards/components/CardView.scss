@@ -1,0 +1,102 @@
+.custom-carousel-wrapper {
+    position: relative;
+    padding: 0;
+    background-color: #d1cccc;
+
+    .carousel-card {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .carousel-card > * {
+        flex-shrink: 0;
+    }
+
+    .card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cards-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        align-items: stretch;
+    }
+
+    .cards-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .text-truncate-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Thumbnail */
+    .card-thumbnail {
+        top: 60%;
+        width: clamp(100px, 50%, 140px);
+        height: 80px;
+        object-fit: cover;
+        border-radius: 6px;
+        left: 10%;
+    }
+}
+
+.skeleton {
+    flex: 1 1 300px;
+    max-width: 350px;
+    height: 450px;
+
+    .skeleton-image {
+        width: 100%; 
+        height: 200px;
+    }
+
+    .skeleton-header {
+        width: 70%; 
+        height: 20px;
+    }
+
+    .skeleton-footer {
+        width: 50px;
+    }
+}
+
+/* ===== Tablet ===== */
+@media (max-width: 1199px) {
+    .custom-carousel-wrapper .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .custom-carousel-wrapper {
+        overflow: hidden;
+    
+        .cards-container {
+            display: flex;
+            grid-template-columns: none;
+            overflow-x: auto;
+
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            padding: 0 16px;
+        }
+
+        .carousel-card {
+            flex: 0 0 calc(100vw - 32px);
+            max-width: calc(100vw - 32px);
+
+            scroll-snap-align: center;
+            scroll-snap-stop: always;
+        }
+    }
+}
