@@ -1,70 +1,74 @@
-import { FC } from "react";
-import { Alert, Card } from "@openedx/paragon";
-import { CarouselProps } from "../types";
-import { CardSkeleton } from "./CardSkeleton";
-import "./CardView.scss";
+import { FC } from 'react';
+import { Alert, Card, Badge, Icon } from '@openedx/paragon';
+import { School } from '@openedx/paragon/icons';
+
+import { CarouselProps } from '../types';
+import { CardSkeleton } from './CardSkeleton';
+import './CardView.scss';
 
 export const CardView: FC<CarouselProps> = ({ data, isLoading, isError }) => {
-    if (isLoading) {
-        return (
-            <CardSkeleton />
-        );
-    }
-
-    if (isError) {
-        return (
-            <Alert variant="danger" data-testid="cardView-error">
-                Failed to load data. Please try again later.
-            </Alert>
-        );
-    }
-
+  if (isLoading) {
     return (
-        <div className="custom-carousel-wrapper" data-testid="card-view">
-            <div className="cards-container p-3">
-                {data.map((item) => ( 
-                    <Card 
-                        key={item.id}
-                        className="shadow-sm d-flex flex-column rounded carousel-card min-h-0 overflow-hidden"
-                        variant={item.hasTag ? "dark" : "light"}
-                        data-testid="card"
-                    >
-                        <div className="position-relative">
-                            <Card.ImageCap src={item.url} srcAlt={item.title} data-testid="card-image" />
-
-                            {/* Overlay thumbnail */}
-                            {item.thumbnail && (
-                                <img
-                                    src={item.thumbnail}
-                                    alt="thumbnail"
-                                    className="position-absolute translate-middle-y shadow-sm border bg-white card-thumbnail"
-                                    data-testid="card-thumbnail"
-                                />
-                            )}
-                        </div>
-
-                        <Card.Header title={item.title} data-testid="card-header" />
-
-                        <Card.Section className="flex-grow-1 d-flex flex-column overflow-hidden min-h-0" data-testid="card-body">
-                            <div className="flex-grow-1 min-h-0">
-                                <p className="text-truncate-3 mb-2">{item.body}</p>
-                            </div>
-
-                            {item.hasTag && (
-                                <div className="flex-shrink-0 mt-2" data-testid="card-badge">
-                                    <span className="badge bg-warning text-dark small">
-                                        {item.tagText}
-                                    </span>
-                                </div>
-                            )}
-                        </Card.Section>
-
-                        <Card.Footer className="d-flex justify-content-between align-items-center" data-testid="course">
-                            <span className={`small ${item.hasTag ? "text-white" : "text-muted"}`}>Course</span>
-                        </Card.Footer>
-                    </Card>
-                ))}
-            </div>
-        </div>
+      <CardSkeleton />
     );
+  }
+
+  if (isError) {
+    return (
+      <Alert variant="danger" data-testid="cardView-error">
+        Failed to load data. Please try again later.
+      </Alert>
+    );
+  }
+
+  return (
+    <div className="custom-carousel-wrapper" data-testid="card-view">
+      <div className="cards-container p-3">
+        {data.map((item) => (
+          <Card
+            key={item.id}
+            className="shadow-sm d-flex flex-column rounded carousel-card min-h-0 overflow-hidden"
+            variant={item.hasTag ? 'dark' : 'light'}
+            data-testid="card"
+          >
+            <div className="position-relative">
+              <Card.ImageCap src={item.url || ''} srcAlt={item.title} data-testid="card-image" />
+
+              {/* Overlay thumbnail */}
+              {item.thumbnail && (
+                <img
+                  src={item.thumbnail || ''}
+                  alt="thumbnail"
+                  className="position-absolute translate-middle-y shadow-sm border bg-white card-thumbnail"
+                  data-testid="card-thumbnail"
+                />
+              )}
+            </div>
+
+            <Card.Header title={item.title || ''} data-testid="card-header" />
+
+            <Card.Section className="flex-grow-1 d-flex flex-column overflow-hidden min-h-0" data-testid="card-body">
+              <div className="flex-grow-1 min-h-0">
+                <p className="text-truncate-3 mb-2">{item.body || ''}</p>
+              </div>
+
+              {item.hasTag && (
+                <Badge
+                  variant="light"
+                  className="d-inline-flex align-items-center px-2 py-1 align-self-start"
+                >
+                  <Icon src={School} className="mr-2" />
+                  {item.tagText || ''}
+                </Badge>
+              )}
+            </Card.Section>
+
+            <Card.Footer className="d-flex justify-content-between align-items-center" data-testid="course">
+              <span className={`small ${item.hasTag ? 'text-white' : 'text-muted'}`}>Course</span>
+            </Card.Footer>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
 };
