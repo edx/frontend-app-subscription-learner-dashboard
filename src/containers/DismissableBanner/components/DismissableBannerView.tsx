@@ -40,7 +40,7 @@ export const DismissableBannerView: FC<{
             Renew Subscription
             <Icon
               src={OpenInNew}
-              className="mis-2 in-new-icon"
+              className="mr-2 in-new-icon"
             />
           </a>,
         ]}

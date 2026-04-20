@@ -1,4 +1,4 @@
-import { BannerItem } from '../types';
+import type { BannerItem } from '../types';
 
 export const fetchBannerData = async (): Promise<BannerItem> => {
   const res = await fetch('https://dummyjson.com/c/a378-aff0-4799-98d2');
@@ -10,7 +10,5 @@ export const fetchBannerData = async (): Promise<BannerItem> => {
     id: data.id,
     title: data.title,
     body: data.body,
-    isLoading: false,
-    isError: false,
   };
 };

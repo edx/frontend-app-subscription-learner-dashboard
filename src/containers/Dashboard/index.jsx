@@ -10,7 +10,7 @@ import LoadingView from './LoadingView';
 import DashboardLayout from './DashboardLayout';
 import hooks from './hooks';
 import './index.scss';
-import { Banner } from '../DismissableBanner/container/DismissableBanner';
+import { Banner } from '../DismissableBanner';
 
 export const Dashboard = () => {
   const { data, isPending } = useInitializeLearnerHome();

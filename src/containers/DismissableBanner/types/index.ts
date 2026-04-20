@@ -1,7 +1,6 @@
-export interface BannerItem {
+export interface BannerData {
   id: string | number,
   title: string,
   body: string,
-  isLoading: boolean,
-  isError: boolean,
 }
+export type BannerItem = BannerData;
