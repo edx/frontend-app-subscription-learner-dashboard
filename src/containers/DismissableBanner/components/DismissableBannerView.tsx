@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Alert, Icon, Button } from '@openedx/paragon';
+import { Alert, Icon } from '@openedx/paragon';
 import { CheckCircle, OpenInNew } from '@openedx/paragon/icons';
 import { BannerItem } from '../types';
 import './DismissableBannerView.scss';
@@ -10,7 +10,7 @@ export const DismissableBannerView: FC<{
   isError: boolean,
 }> = ({ bannerData, isLoading, isError }) => {
   const [showPageBanner, setShowPageBanner] = useState(true);
-  // const [variant, setVariant] = useState<'info'>('success');
+  // const [variant, setVariant] = useState<'info' | 'warning'>('success');
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -23,20 +23,26 @@ export const DismissableBannerView: FC<{
   return (
     <div className="dismissable-banner-container">
       <Alert
-        variant="success"
+        variant="warning"
         icon={CheckCircle}
         dismissible
         closeLabel="Dismiss"
         show={showPageBanner}
         onClose={() => setShowPageBanner(false)}
         actions={[
-          <Button key="renew-subscription-button">
+          <a
+            key="renew-link"
+            className="renew-button"
+            href="https://courses.edx.org/renew-subscription"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Renew Subscription
             <Icon
               src={OpenInNew}
               className="mis-2 in-new-icon"
             />
-            Renew Subscription
-          </Button>,
+          </a>,
         ]}
       >
         <Alert.Heading>{bannerData.title}</Alert.Heading>
