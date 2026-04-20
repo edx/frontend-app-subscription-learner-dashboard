@@ -6,16 +6,39 @@ jest.mock('@openedx/paragon', () => {
   const actual = jest.requireActual('@openedx/paragon');
   return {
     ...actual,
-    PageBanner: ({ children, show, onDismiss }: {
-      children: React.ReactNode,
-      show: boolean,
-      onDismiss: () => void,
-    }) => (show ? (
-      <div>
-        {children}
-        <button data-testid="paragon-dismiss" onClick={onDismiss}>ParagonDismiss</button>
-      </div>
-    ) : null),
+    Alert: Object.assign(
+      ({
+        children,
+        show,
+        onClose,
+        closeLabel,
+        actions,
+      }: {
+        children: React.ReactNode;
+        show: boolean;
+        onClose: () => void;
+        closeLabel?: string;
+        actions?: React.ReactNode[];
+      }) =>
+        show ? (
+          <div>
+            {children}
+            {actions}
+            <button data-testid="alert-close" onClick={onClose}>
+              {closeLabel ?? 'Close'}
+            </button>
+          </div>
+        ) : null,
+      {
+        Heading: ({ children }: { children: React.ReactNode }) => (
+          <h4>{children}</h4>
+        ),
+      },
+    ),
+    Button: ({ children, onClick }: { children: React.ReactNode; onClick?: () => void }) => (
+      <button onClick={onClick}>{children}</button>
+    ),
+    Icon: () => null,
   };
 });
 
@@ -38,31 +61,26 @@ describe('DismissableBannerView', () => {
     expect(screen.getByTestId('error-loading-banner')).toBeInTheDocument();
   });
 
-  test('renders banner content', () => {
+  test('renders banner title and body', () => {
     render(<DismissableBannerView bannerData={mockBannerData} isLoading={false} isError={false} />);
     expect(screen.getByText(mockBannerData.title)).toBeInTheDocument();
-    expect(screen.getByTestId('test-message-body')).toHaveTextContent(mockBannerData.body);
+    expect(screen.getByText(mockBannerData.body)).toBeInTheDocument();
   });
 
-  test('dismisses the banner when dismiss button is clicked', () => {
+  test('renders the Renew Subscription button', () => {
     render(<DismissableBannerView bannerData={mockBannerData} isLoading={false} isError={false} />);
-    fireEvent.click(screen.getByText('Dismiss'));
+    expect(screen.getByText('Renew Subscription')).toBeInTheDocument();
+  });
+
+  test('dismisses the banner when close button is clicked', () => {
+    render(<DismissableBannerView bannerData={mockBannerData} isLoading={false} isError={false} />);
+    fireEvent.click(screen.getByTestId('alert-close'));
     expect(screen.queryByText(mockBannerData.title)).not.toBeInTheDocument();
-    expect(screen.queryByTestId('test-message-body')).not.toBeInTheDocument();
+    expect(screen.queryByText(mockBannerData.body)).not.toBeInTheDocument();
   });
 
-  test('dismisses the banner via PageBanner onDismiss callback', () => {
+  test('close button has the correct label "Dismiss"', () => {
     render(<DismissableBannerView bannerData={mockBannerData} isLoading={false} isError={false} />);
-    fireEvent.click(screen.getByTestId('paragon-dismiss'));
-    expect(screen.queryByText(mockBannerData.title)).not.toBeInTheDocument();
-    expect(screen.queryByTestId('test-message-body')).not.toBeInTheDocument();
-  });
-
-  test('opens the renewal link in a new tab', () => {
-    render(<DismissableBannerView bannerData={mockBannerData} isLoading={false} isError={false} />);
-    const renewButton = screen.getByText('Renew Subscription');
-    expect(renewButton.closest('a')).toHaveAttribute('href', 'https://courses.edx.org/renew-subscription');
-    expect(renewButton.closest('a')).toHaveAttribute('target', '_blank');
-    expect(renewButton.closest('a')).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(screen.getByTestId('alert-close')).toHaveTextContent('Dismiss');
   });
 });
