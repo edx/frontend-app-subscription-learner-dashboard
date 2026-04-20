@@ -1,0 +1,72 @@
+.dismissable-banner-container {
+    margin-top: 20px;
+    .pgn__pageBanner-component {
+        &.pgn__pageBanner__light {
+            // box-shadow: 0px 1px 2px 0px #00000026;
+            box-shadow: 0px 1px 4px 0px #00000026;
+            background-color: #F2FAF7;
+            border-radius: 6px;
+            padding: 24px;
+
+            .pgn__pageBanner-content {
+                justify-content: space-between;
+                .banner-content-container {
+                    .banner-title-container {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        .correct-icon {
+                            width: 24px;
+                            height: 24px;
+                            color: #0D7D4D;
+                        }
+                        .message-title {
+                            font-weight: 600;
+                            font-size: 24px;
+                            color: #000000;
+                        }
+                    }
+                    .message-body {
+                        font-weight: 400;
+                        font-size: 14px;
+                        color: #454545;
+
+                    }
+                }
+                .action-container {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    vertical-align: middle;
+                    .dismiss-button {
+                        width: 76px;
+                        height: 36px;
+                        margin-left: 20px;
+                        background-color: transparent;
+                        border: none;
+                        font-weight: 500;
+                        font-size: 14px;
+                    }
+                    .renew-button {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        width: 180px;
+                        height: 36px;
+                        margin-left: 20px;
+                        background-color: #A75B30;
+                        border: none;
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: #FFFFFF;
+                        border-radius: 18px;
+                        padding: 0 10px;
+                        &:hover {
+                            text-decoration: none;
+                          }
+                    }
+                }
+            }
+        }
+    }
+}
