@@ -5,7 +5,9 @@ const optimizedData = (data: string, size: number) => {
 };
 
 export const fetchCardsData = async (): Promise<CardItem[]> => {
-  const res = await fetch('https://dummyjson.com/products?limit=4');
+  const url = 'https://dummyjson.com/products?limit=4';
+
+  const res = await fetch(url);
   const data = await res.json();
   const finalData: CardItem[] = data?.products?.map((item) => ({
     id: item.id,

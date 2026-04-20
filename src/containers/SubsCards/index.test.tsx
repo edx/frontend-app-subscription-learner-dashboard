@@ -33,7 +33,7 @@ describe('Card Component', () => {
       isError: false,
     });
 
-    render(<SubsCard />);
+    render(<SubsCard data={[]} isLoading={true} isError={false} />);
 
     expect(screen.getByTestId('card-view')).toBeInTheDocument();
     expect(screen.getByTestId('loading')).toHaveTextContent('true');
@@ -47,13 +47,22 @@ describe('Card Component', () => {
       isError: true,
     });
 
-    render(<SubsCard />);
+    render(<SubsCard data={[]} isLoading={false} isError={true} />);
 
     expect(screen.getByTestId('error')).toHaveTextContent('true');
   });
 
   it('renders data correctly', () => {
-    const mockData = [{ id: 1, title: 'Test Card' }];
+    const mockData = [{
+      id: 1,
+      title: 'Test Card',
+      body: 'This is a test card description',
+      url: 'https://example.com/image.jpg',
+      thumbnail: 'https://example.com/thumbnail.jpg',
+      hasTag: false,
+      tagText: 'Professional Certificate',
+      footerLabel: 'Test Category'
+    }];
 
     when(mockedUseCards).calledWith().mockReturnValue({
       data: mockData,
@@ -61,7 +70,7 @@ describe('Card Component', () => {
       isError: false,
     });
 
-    render(<SubsCard />);
+    render(<SubsCard data={mockData} isLoading={false} isError={false} />);
 
     expect(screen.getByTestId('data')).toHaveTextContent(
       JSON.stringify(mockData)
@@ -77,7 +86,7 @@ describe('Card Component', () => {
       isError: false,
     });
 
-    const { container } = render(<SubsCard />);
+    const { container } = render(<SubsCard data={[]} isLoading={false} isError={false} />);
 
     expect(container.querySelector('.container')).toBeInTheDocument();
   });

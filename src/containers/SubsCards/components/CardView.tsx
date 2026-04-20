@@ -2,11 +2,11 @@ import { FC } from 'react';
 import { Alert, Card, Badge, Icon } from '@openedx/paragon';
 import { School } from '@openedx/paragon/icons';
 
-import { CarouselProps } from '../types';
+import { CardProps } from '../types';
 import { CardSkeleton } from './CardSkeleton';
 import './CardView.scss';
 
-export const CardView: FC<CarouselProps> = ({ data, isLoading, isError }) => {
+export const CardView: FC<CardProps> = ({ data, isLoading, isError }) => {
   if (isLoading) {
     return (
       <CardSkeleton />

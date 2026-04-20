@@ -9,7 +9,7 @@ export interface CardItem {
   footerLabel: string,
 }
 
-export interface CarouselProps {
+export interface CardProps {
   data: CardItem[],
   isLoading: boolean,
   isError: boolean,
