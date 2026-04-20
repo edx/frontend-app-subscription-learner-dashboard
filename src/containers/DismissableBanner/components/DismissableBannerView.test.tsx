@@ -14,11 +14,11 @@ jest.mock('@openedx/paragon', () => {
         closeLabel,
         actions,
       }: {
-        children: React.ReactNode;
-        show: boolean;
-        onClose: () => void;
-        closeLabel?: string;
-        actions?: React.ReactNode[];
+        children: React.ReactNode,
+        show: boolean,
+        onClose: () => void,
+        closeLabel?: string,
+        actions?: React.ReactNode[],
       }) =>
         show ? (
           <div>
@@ -35,7 +35,7 @@ jest.mock('@openedx/paragon', () => {
         ),
       },
     ),
-    Button: ({ children, onClick }: { children: React.ReactNode; onClick?: () => void }) => (
+    Button: ({ children, onClick }: { children: React.ReactNode, onClick?: () => void }) => (
       <button onClick={onClick}>{children}</button>
     ),
     Icon: () => null,

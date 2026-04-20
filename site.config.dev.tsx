@@ -8,9 +8,9 @@ const siteConfig: SiteConfig = {
   siteId: 'learner-dashboard-dev',
   siteName: 'Learner Dashboard Dev',
   baseUrl: 'http://apps.local.openedx.io:1996',
-  lmsBaseUrl: 'http://local.openedx.io:18000',
-  loginUrl: 'http://local.openedx.io:18000/login',
-  logoutUrl: 'http://local.openedx.io:18000/logout',
+  lmsBaseUrl: 'http://local.openedx.io:8000',
+  loginUrl: 'http://local.openedx.io:8000/login',
+  logoutUrl: 'http://local.openedx.io:8000/logout',
 
   environment: EnvironmentTypes.DEVELOPMENT,
   apps: [
@@ -30,7 +30,7 @@ const siteConfig: SiteConfig = {
     },
     {
       role: 'org.openedx.frontend.role.logout',
-      url: 'http://local.openedx.io:18000/logout'
+      url: 'http://local.openedx.io:8000/logout'
     },
   ],
 
