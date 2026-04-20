@@ -36,6 +36,14 @@ describe('useBanner', () => {
   });
 
   test('initializes with default state', () => {
+    globalThis.fetch = jest.fn(() =>
+      Promise.resolve({
+        ok: true,
+        status: 200,
+        json: () => Promise.resolve(undefined),
+      } as Response)
+    );
+
     const { result } = renderUseBannerHook();
     expect(result.current.data).toBeUndefined();
     expect(result.current.isLoading).toBe(true);

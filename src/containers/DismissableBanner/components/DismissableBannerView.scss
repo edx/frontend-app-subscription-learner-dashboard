@@ -1,17 +1,17 @@
 .dismissable-banner-container {
-    margin-top: 20px;
+    margin-top: var(--pgn-spacing-lg);
     .renew-button {
         display: flex;
         flex-direction: row;
         align-items: center;
         width: 180px;
         height: 36px;
-        margin-left: 20px;
+        margin-left: var(--pgn-spacing-lg);;
         background-color: #A75B30;
         border: none;
         font-size: 14px;
         font-weight: 500;
-        color: #FFFFFF;
+        color: var(--pgn-color-white);;
         border-radius: 18px;
         padding: 0 10px;
         &:hover {

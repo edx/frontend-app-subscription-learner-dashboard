@@ -30,9 +30,11 @@ const createWrapper = () => {
   return Wrapper;
 };
 
+const originalFetch = globalThis.fetch;
+
 describe('DismissableBanner', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    globalThis.fetch = originalFetch;
   });
 
   test('renders loading state initially', async () => {
