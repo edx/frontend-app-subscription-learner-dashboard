@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 
-
 import { useIntl } from '@openedx/frontend-base';
 import { Icon } from '@openedx/paragon';
 import { Info } from '@openedx/paragon/icons';
@@ -11,7 +10,6 @@ import SubsCourseCardView from './SubsCourseCardView';
 import messages from './messages';
 
 const SubsCourseCard = ({
-  cardId,
   dataList = [],
   numPages = 0,
   setPageNumber
@@ -28,7 +26,7 @@ const SubsCourseCard = ({
           </div>
 
           {dataList.map(({ cardId }) => (
-            <SubsCourseCardView key={cardId} cardId={cardId} badge={true} />
+            <SubsCourseCardView key={cardId} cardId={cardId} badge={true} orientation={'horizontal'} />
           ))}
           {numPages > 1 && (
             <Pagination
@@ -49,7 +47,7 @@ const SubsCourseCard = ({
           </div>
 
           {dataList.map(({ cardId }) => (
-            <SubsCourseCardView key={cardId} cardId={cardId} badge={false} isLimitedAccess={true} />
+            <SubsCourseCardView key={cardId} cardId={cardId} badge={false} isLimitedAccess={true}  orientation={'vertical'} />
           ))}
           {numPages > 1 && (
             <Pagination
@@ -64,7 +62,6 @@ const SubsCourseCard = ({
     );
 };
 SubsCourseCard.propTypes = {
-  cardId: PropTypes.string.isRequired,
   dataList: PropTypes.array,
   numPages: PropTypes.number,
   setPageNumber: PropTypes.func

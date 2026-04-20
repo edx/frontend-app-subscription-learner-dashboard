@@ -20,13 +20,15 @@ export const CourseCardDetails = ({ cardId }) => {
 
   return (
     <div data-testid="CourseCardDetails">
-      <div className="small text-muted mb-2" data-testid="course-provider">
-          {providerName || ''}
-      </div>
+      {providerName && (
+        <div className="small text-muted mb-2" data-testid="course-provider">
+            {providerName}
+        </div>
+      )}
 
       {!(isEntitlement && !isFulfilled) && accessMessage && (
         <div className="small text-muted mt-2" data-testid="course-end-date">
-            {accessMessage || ''}
+            {accessMessage}
         </div>
       )}
 

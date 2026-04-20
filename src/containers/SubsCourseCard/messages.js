@@ -24,12 +24,12 @@ const messages = defineMessages({
   subsCourse: {
     id: 'subs.courses',
     defaultMessage: 'Courses',
-    description: 'Subs Courses',
+    description: 'Label for courses belonging to a user\'s active subscription',
   },
   limitedCourse: {
     id: 'subs.limitedCourses',
     defaultMessage: 'Limited access courses',
-    description: 'Subs Limited Courses',
+    description: 'Label for subscription courses with limited access',
   }
 });
 

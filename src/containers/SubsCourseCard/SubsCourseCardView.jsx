@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 
-import { Card, Button } from '@openedx/paragon';
+import { Card, Button, Badge, Row, Col } from '@openedx/paragon';
 
-import { useIsCollapsed } from './hooks';
 import CourseCardMenu from './components/CourseCardMenu';
 import CourseCardActions from './components/CourseCardActions';
 import CourseCardDetails from './components/CourseCardDetails';
@@ -13,10 +12,8 @@ const SubsCourseCardView = ({
   cardId,
   badge = false,
   isLimitedAccess = false,
+  orientation
 }) => {
-  const isCollapsed = useIsCollapsed();
-  const orientation = !isCollapsed ? 'vertical' : 'horizontal';
-  
 
     return (
         <div id={cardId} data-testid="CourseCard">
@@ -33,21 +30,23 @@ const SubsCourseCardView = ({
                         </div>
                     </div>
 
-                    <div className="d-flex justify-content-between align-items-center mt-3">
-                        <div className="d-flex align-items-center gap-2">
+                    <Row className="align-items-center mt-3">
+                        <Col xs={12} lg="auto" className="mb-2 mb-lg-0">
                             {badge ? (
-                                <span className="badge bg-success text-white px-2 py-1">
+                                <Badge variant="success" className="px-3 py-2">
                                     Verified with edx Unlimited
-                                </span>
-                            ) : 
+                                </Badge>
+                            ) : (
                                 <span className="small text-primary">
                                     Included in edx Unlimited
                                 </span>
-                            }
-                        </div>
-                        
-                        <CourseCardActions cardId={cardId} />
-                    </div>
+                            )}
+                        </Col>
+
+                        <Col xs={12} lg className="d-flex justify-content-lg-end">
+                            <CourseCardActions cardId={cardId} />
+                        </Col>
+                    </Row>
                 </Card.Section>
 
                 {isLimitedAccess && (
@@ -55,19 +54,23 @@ const SubsCourseCardView = ({
                         variant="warning"
                         className="bg-light"
                     >
-                        <div className="d-flex align-items-center mt-1">
-                            <div style={{ flex: "0 0 70%" }} className="pe-3">
+                        <Row className="align-items-center mt-1">
+                            <Col xs={12} lg={8} className="pe-lg-3">
                                 <p className="mb-0 font-weight-semi-bold">
-                                    This is limited courses. The details may follow up soon.
+                                    This is a limited set of courses. More details will follow soon.
                                 </p>
-                            </div>
+                            </Col>
 
-                            <div style={{ flex: "0 0 30%" }} className="d-flex justify-content-end">
-                                <Button variant="outline-dark" data-testid="view-redeem-button" size="md">
+                            <Col xs={12} lg={4}
+                                className="d-flex justify-content-lg-end mt-2 mt-lg-0"
+                            >
+                                <Button variant="outline-dark" data-testid="view-redeem-button"
+                                        size="md" className="w-100 w-lg-auto"
+                                >
                                     Redeem
                                 </Button>
-                            </div>
-                        </div>
+                            </Col>
+                        </Row>
                     </Card.Status>
                 )}
             </Card>
@@ -77,7 +80,8 @@ const SubsCourseCardView = ({
 SubsCourseCardView.propTypes = {
   cardId: PropTypes.string.isRequired,
   badge: PropTypes.bool,
-  isLimitedAccess: PropTypes.bool
+  isLimitedAccess: PropTypes.bool,
+  orientation: PropTypes.oneOf(['horizontal', 'vertical'])
 };
 
 export default SubsCourseCardView;
