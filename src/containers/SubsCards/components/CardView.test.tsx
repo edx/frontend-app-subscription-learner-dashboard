@@ -29,12 +29,13 @@ describe('CardView (Real UI Integration Test)', () => {
       thumbnail: 'https://via.placeholder.com/50',
       hasTag: true,
       tagText: 'New',
+      footerLabel: 'Test Category'
     },
   ];
 
   it('renders full card UI without mocks', () => {
     render(
-      <CardView data={mockData as any} isLoading={false} isError={false} />
+      <CardView data={mockData} isLoading={false} isError={false} />
     );
 
     // container exists
@@ -45,7 +46,7 @@ describe('CardView (Real UI Integration Test)', () => {
     expect(screen.getByText('Test Body Content')).toBeInTheDocument();
 
     // image exists
-    expect(screen.getByRole('img', { name: 'Test Card' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Test Card main-image' })).toBeInTheDocument();
 
     // badge exists
     expect(screen.getByText('New')).toBeInTheDocument();
@@ -57,7 +58,7 @@ describe('CardView (Real UI Integration Test)', () => {
     );
 
     // instead of mocked skeleton
-    expect(screen.getByTestId('skeleton') || screen.getByText(/loading/i)).toBeTruthy();
+    expect(screen.getByTestId('skeleton')).toBeTruthy();
   });
 
   it('renders error alert using real UI', () => {

@@ -32,39 +32,39 @@ export const CardView: FC<CardProps> = ({ data, isLoading, isError }) => {
             data-testid="card"
           >
             <div className="position-relative">
-              <Card.ImageCap src={item.url || ''} srcAlt={item.title} data-testid="card-image" />
+              <Card.ImageCap src={item.url} srcAlt={`${item.title} main-image`} data-testid="card-image" />
 
               {/* Overlay thumbnail */}
               {item.thumbnail && (
                 <img
                   src={item.thumbnail || ''}
-                  alt="thumbnail"
+                  alt={`${item.title} thumbnail-image`}
                   className="position-absolute translate-middle-y shadow-sm border bg-white card-thumbnail"
                   data-testid="card-thumbnail"
                 />
               )}
             </div>
 
-            <Card.Header title={item.title || ''} data-testid="card-header" />
+            <Card.Header title={item.title} data-testid="card-header" />
 
             <Card.Section className="flex-grow-1 d-flex flex-column overflow-hidden min-h-0" data-testid="card-body">
               <div className="flex-grow-1 min-h-0">
-                <p className="text-truncate-3 mb-2">{item.body || ''}</p>
+                <p className="text-truncate-3 mb-2">{item.body}</p>
               </div>
 
-              {item.hasTag && (
+              {(item.hasTag && item.tagText) && (
                 <Badge
                   variant="light"
                   className="d-inline-flex align-items-center px-2 py-1 align-self-start"
                 >
                   <Icon src={School} className="mr-2" />
-                  {item.tagText || ''}
+                  {item.tagText}
                 </Badge>
               )}
             </Card.Section>
 
             <Card.Footer className="d-flex justify-content-between align-items-center" data-testid="course">
-              <span className={`small ${item.hasTag ? 'text-white' : 'text-muted'}`}>Course</span>
+              <span className={`small ${item.hasTag ? 'text-white' : 'text-muted'}`}>{item.footerLabel}</span>
             </Card.Footer>
           </Card>
         ))}
