@@ -1,30 +1,21 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Pagination } from '@openedx/paragon';
-import {
-  ActiveCourseFilters,
-} from '../../../containers/CourseFilterControls';
 import CourseCard from '../../../containers/CourseCard';
 
 import { useIsCollapsed } from './hooks';
 
 export const CourseList = ({ courseListData }) => {
   const {
-    setPageNumber, numPages, visibleList, showFilters,
+    setPageNumber, numPages, visibleList, badge, isLimitedAccess,
   } = courseListData;
 
   const isCollapsed = useIsCollapsed();
   return (
     <>
-      {showFilters && (
-        <div id="course-list-active-filters-container">
-          <ActiveCourseFilters />
-        </div>
-      )}
       <div className="d-flex flex-column flex-grow-1">
         {visibleList.map(({ cardId }) => (
-          <CourseCard key={cardId} cardId={cardId} />
+          <CourseCard key={cardId} cardId={cardId} badge={badge} isLimitedAccess={isLimitedAccess} />
         ))}
         {numPages > 1 && (
           <Pagination

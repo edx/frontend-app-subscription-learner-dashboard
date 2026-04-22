@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 import { useIntl } from '@openedx/frontend-base';
 import { Dropdown, Icon, IconButton } from '@openedx/paragon';
-import { MoreVert } from '@openedx/paragon/icons';
+import { MoreVert, Share } from '@openedx/paragon/icons';
 
 import EmailSettingsModal from '@src/containers/EmailSettingsModal';
 import UnenrollConfirmModal from '@src/containers/UnenrollConfirmModal';
@@ -38,7 +38,14 @@ export const CourseCardMenu = ({ cardId }) => {
   }
 
   return (
-    <>
+    <div className="d-flex gap-2">
+      <IconButton 
+          src={Share}
+          iconAs={Icon}
+          alt="Share"
+          variant="primary"
+          data-testid="share-course-button"
+      />
       <Dropdown onToggle={handleToggleDropdown}>
         <Dropdown.Toggle
           id={`course-actions-dropdown-${cardId}`}
@@ -58,7 +65,7 @@ export const CourseCardMenu = ({ cardId }) => {
               {formatMessage(messages.unenroll)}
             </Dropdown.Item>
           )}
-          <SocialShareMenu cardId={cardId} emailSettings={emailSettings} />
+          {/* <SocialShareMenu cardId={cardId} emailSettings={emailSettings} /> */}
         </Dropdown.Menu>
       </Dropdown>
       <UnenrollConfirmModal
@@ -73,7 +80,7 @@ export const CourseCardMenu = ({ cardId }) => {
           cardId={cardId}
         />
       )}
-    </>
+    </div>
   );
 };
 CourseCardMenu.propTypes = {

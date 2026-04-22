@@ -48,22 +48,30 @@ export const CoursesPanel = () => {
   }, [numPages, pageNumber, setPageNumber]);
 
   const courseListData = {
-    filterOptions: filters,
     setPageNumber,
     numPages,
     visibleList,
-    showFilters: filters.length > 0,
+    badge: true,
+    isLimitedAccess: false,
+  };
+
+  const limitedCourseListData = {
+    ...courseListData,
+    badge: false,
+    isLimitedAccess: true,
   };
 
   return (
     <div className="course-list-container">
       <div className="course-list-heading-container">
         <h2 className="course-list-title">{formatMessage(messages.myCourses)}</h2>
-        <div className="course-filter-controls-container">
-          <CourseFilterControls />
-        </div>
       </div>
       {hasCourses ? <CourseListSlot courseListData={courseListData} /> : <NoCoursesViewSlot />}
+
+      <div className="course-list-heading-container">
+        <h2 className="course-list-title">{formatMessage(messages.limitedCourse)}</h2>
+      </div>
+      {hasCourses ? <CourseListSlot courseListData={limitedCourseListData} /> : <NoCoursesViewSlot />}
     </div>
   );
 };

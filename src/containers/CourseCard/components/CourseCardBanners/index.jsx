@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Row, Col, Button } from '@openedx/paragon';
 
 import { useCourseData } from '@src/hooks';
 
@@ -17,11 +18,25 @@ export const CourseCardBanners = ({ cardId }) => {
   const { isEnrolled = false } = courseData.enrollment;
   return (
     <div className="course-card-banners" data-testid="CourseCardBanners">
-      <RelatedProgramsBanner cardId={cardId} />
-      <CourseBannerSlot cardId={cardId} />
-      <EntitlementBanner cardId={cardId} />
-      {isEnrolled && <CertificateBanner cardId={cardId} />}
-      {isEnrolled && <CreditBanner cardId={cardId} />}
+      <Row className="align-items-center mt-1">
+        <Col xs={12} lg={8} className="pe-lg-3">
+            <RelatedProgramsBanner cardId={cardId} />
+            <CourseBannerSlot cardId={cardId} />
+            <EntitlementBanner cardId={cardId} />
+            {isEnrolled && <CertificateBanner cardId={cardId} />}
+            {isEnrolled && <CreditBanner cardId={cardId} />}
+        </Col>
+
+        <Col xs={12} lg={4}
+            className="d-flex justify-content-lg-end mt-2 mt-lg-0"
+        >
+            <Button variant="outline-dark" data-testid="view-redeem-button"
+                    size="md" className="w-100 w-lg-auto"
+            >
+                Redeem
+            </Button>
+        </Col>
+      </Row>
     </div>
   );
 };
