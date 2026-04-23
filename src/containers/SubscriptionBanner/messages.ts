@@ -31,6 +31,11 @@ const messages = defineMessages({
     description: 'Message to learners with an cancelled subscription',
     defaultMessage: 'Your subscription expired on {subscriptionEndDate}. Renew now to continue enjoying your courses without interruption.',
   },
+  renewSubscriptionButton: {
+    id: 'learner-dash.courseCard.banners.renewSubscriptionButton',
+    description: 'Renew Subscription',
+    defaultMessage: 'Renew Subscription',
+  },
 });
 
 export default messages;

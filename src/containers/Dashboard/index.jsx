@@ -19,9 +19,11 @@ export const Dashboard = () => {
   const showSelectSessionModal = selectSessionModal.cardId !== null;
 
   const hasCourses = useMemo(() => data?.courses?.length > 0, [data]);
+  // TODO: We can replace the below hardcoded subscriptionBannerData with the actual data from the API once we have the API ready. 
+  // For now, we can use this hardcoded data to test the SubscriptionBanner component.
   const subscriptionBannerData = {
     isSubscribed: true,
-    subscriptionStatus: 'cancelled',
+    subscriptionStatus: 'cancelled', // can be 'active', 'cancelled', 'expired'
     subscriptionStartDate: '05/22/25',
     subscriptionEndDate: '05/22/26',
     subscriptionRenewalDate: '05/22/26',

@@ -3,7 +3,6 @@ import { Alert, Icon, Button, Variant } from '@openedx/paragon';
 import { CheckCircle, Info, OpenInNew } from '@openedx/paragon/icons';
 import { useIntl } from '@openedx/frontend-base';
 import { BannerItem } from '../types';
-import './SubscriptionBanner.scss';
 import { utilHooks } from '@src/hooks';
 import messages from '../messages';
 
@@ -22,26 +21,35 @@ export const SubscriptionBanner: FC<{
       setShowPageBanner(false);
       return;
     }
-
-    if (subscriptionBannerData.subscriptionStatus === 'active') {
-      setBannerVariant('success');
-      setBannerTitle(formatMessage(messages.activeSubscriptionTitle));
-      // setBannerBody(`On ${formatDate(subscriptionBannerData.subscriptionStartDate)} you subscribed to edX subscription product. Your subscription will renew on ${formatDate(subscriptionBannerData.subscriptionRenewalDate)} for ${subscriptionBannerData.subscriptionRenewalPrice}.`);
-      setBannerBody(formatMessage(messages.activeSubscriptionBody, {
-        subscriptionStartDate: formatDate(subscriptionBannerData.subscriptionStartDate), subscriptionRenewalDate: formatDate(subscriptionBannerData.subscriptionRenewalDate), subscriptionRenewalPrice: subscriptionBannerData.subscriptionRenewalPrice
-      }));
-    } else if (subscriptionBannerData.subscriptionStatus === 'trial') {
-      setBannerVariant('success');
-      setBannerTitle(formatMessage(messages.activeTrialSubscriptionTitle));
-      setBannerBody(formatMessage(messages.activeTrialSubscriptionBody, {
-        subscriptionStartDate: formatDate(subscriptionBannerData.subscriptionStartDate), subscriptionRenewalDate: formatDate(subscriptionBannerData.subscriptionRenewalDate), subscriptionRenewalPrice: subscriptionBannerData.subscriptionRenewalPrice
-      }));
-    } else if (subscriptionBannerData.subscriptionStatus === 'cancelled') {
-      setBannerVariant('warning');
-      setBannerTitle(formatMessage(messages.cancelledSubscriptionTitle));
-      setBannerBody(formatMessage(messages.cancelledSubscriptionBody, {
-        subscriptionEndDate: formatDate(subscriptionBannerData.subscriptionStartDate),
-      }));
+    switch (subscriptionBannerData.subscriptionStatus) {
+      case 'active':
+        setBannerVariant('success');
+        setBannerTitle(formatMessage(messages.activeSubscriptionTitle));
+        setBannerBody(formatMessage(messages.activeSubscriptionBody, {
+          subscriptionStartDate: formatDate(subscriptionBannerData.subscriptionStartDate),
+          subscriptionRenewalDate: formatDate(subscriptionBannerData.subscriptionRenewalDate),
+          subscriptionRenewalPrice: subscriptionBannerData.subscriptionRenewalPrice,
+        }));
+        break;
+      case 'trial':
+        setBannerVariant('success');
+        setBannerTitle(formatMessage(messages.activeTrialSubscriptionTitle));
+        setBannerBody(formatMessage(messages.activeTrialSubscriptionBody, {
+          subscriptionStartDate: formatDate(subscriptionBannerData.subscriptionStartDate),
+          subscriptionRenewalDate: formatDate(subscriptionBannerData.subscriptionRenewalDate),
+          subscriptionRenewalPrice: subscriptionBannerData.subscriptionRenewalPrice,
+        }));
+        break;
+      case 'cancelled':
+        setBannerVariant('warning');
+        setBannerTitle(formatMessage(messages.cancelledSubscriptionTitle));
+        setBannerBody(formatMessage(messages.cancelledSubscriptionBody, {
+          subscriptionEndDate: formatDate(subscriptionBannerData.subscriptionStartDate),
+        }));
+        break;
+      default:
+        setShowPageBanner(false);
+        break;
     }
   }, [subscriptionBannerData, formatDate, formatMessage]);
 
@@ -58,7 +66,7 @@ export const SubscriptionBanner: FC<{
             rel="noopener noreferrer"
             role="link"
           >
-            Renew Subscription
+            {formatMessage(messages.renewSubscriptionButton)}
             <Icon
               src={OpenInNew}
               className="mr-2 in-new-icon"
@@ -72,7 +80,7 @@ export const SubscriptionBanner: FC<{
   }, [subscriptionBannerData.subscriptionStatus]);
 
   return (
-    <div className="subscription-banner-container">
+    <div className=".mt-3\.5">
       <Alert
         variant={bannerVariant}
         icon={subscriptionBannerData.subscriptionStatus === 'cancelled' ? Info : CheckCircle}
