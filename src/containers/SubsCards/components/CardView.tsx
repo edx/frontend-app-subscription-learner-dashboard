@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Alert, Card, Badge, Icon } from '@openedx/paragon';
+import { Alert, Card, Badge, Icon, Image } from '@openedx/paragon';
 import { School } from '@openedx/paragon/icons';
 
 import { CardProps } from '../types';
@@ -23,7 +23,7 @@ export const CardView: FC<CardProps> = ({ data, isLoading, isError }) => {
 
   return (
     <div className="custom-carousel-wrapper" data-testid="card-view">
-      <div className="cards-container p-3">
+      <div className="cards-container p-2">
         {data.map((item) => (
           <Card
             key={item.id}
@@ -36,10 +36,10 @@ export const CardView: FC<CardProps> = ({ data, isLoading, isError }) => {
 
               {/* Overlay thumbnail */}
               {item.thumbnail && (
-                <img
+                <Image
                   src={item.thumbnail || ''}
                   alt={`${item.title} thumbnail-image`}
-                  className="position-absolute translate-middle-y shadow-sm border bg-white card-thumbnail"
+                  className="position-absolute border bg-white card-thumbnail"
                   data-testid="card-thumbnail"
                 />
               )}
