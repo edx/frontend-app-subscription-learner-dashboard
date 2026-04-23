@@ -10,7 +10,7 @@ import LoadingView from './LoadingView';
 import DashboardLayout from './DashboardLayout';
 import hooks from './hooks';
 import './index.scss';
-import { Banner } from '../DismissableBanner';
+import { SubscriptionBanner} from '../SubscriptionBanner';
 
 export const Dashboard = () => {
   const { data, isPending } = useInitializeLearnerHome();
@@ -19,6 +19,14 @@ export const Dashboard = () => {
   const showSelectSessionModal = selectSessionModal.cardId !== null;
 
   const hasCourses = useMemo(() => data?.courses?.length > 0, [data]);
+  const subscriptionBannerData = {
+    isSubscribed: true,
+    subscriptionStatus: 'cancelled',
+    subscriptionStartDate: '05/22/25',
+    subscriptionEndDate: '05/22/26',
+    subscriptionRenewalDate: '05/22/26',
+    subscriptionRenewalPrice: '$36',
+  }
 
   return (
     <div id="learnerdashboardroot">
@@ -36,7 +44,9 @@ export const Dashboard = () => {
               ? (<LoadingView />)
               : (
                 <DashboardLayout>
-                  <Banner />
+                  <SubscriptionBanner
+                        subscriptionBannerData={subscriptionBannerData}
+                      />
                   <CoursesPanel />
                 </DashboardLayout>
               )}
