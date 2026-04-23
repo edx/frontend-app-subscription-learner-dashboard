@@ -7,7 +7,6 @@ import { MoreVert, Share } from '@openedx/paragon/icons';
 import EmailSettingsModal from '@src/containers/EmailSettingsModal';
 import UnenrollConfirmModal from '@src/containers/UnenrollConfirmModal';
 import { useCourseData, useIsMasquerading } from '@src/hooks';
-import SocialShareMenu from './SocialShareMenu';
 import {
   useEmailSettings,
   useUnenrollData,
@@ -65,7 +64,6 @@ export const CourseCardMenu = ({ cardId }) => {
               {formatMessage(messages.unenroll)}
             </Dropdown.Item>
           )}
-          {/* <SocialShareMenu cardId={cardId} emailSettings={emailSettings} /> */}
         </Dropdown.Menu>
       </Dropdown>
       <UnenrollConfirmModal

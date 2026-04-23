@@ -10,7 +10,7 @@ import CourseCardDetails from './components/CourseCardDetails';
 import CourseCardTitle from './components/CourseCardTitle';
 
 import './CourseCard.scss';
-import CourseCardNewBanner from './components/CourseCardNewBanner';
+import CourseCardBanners from './components/CourseCardBanners';
 
 export const CourseCard = ({
   cardId,
@@ -35,7 +35,7 @@ export const CourseCard = ({
               </Card.Section>
             </Card.Body>
           </div>
-          <CourseCardNewBanner isLimitedAccess={isLimitedAccess} />
+          <CourseCardBanners cardId={cardId} isLimitedAccess={isLimitedAccess} />
         </div>
       </Card>
     </div>

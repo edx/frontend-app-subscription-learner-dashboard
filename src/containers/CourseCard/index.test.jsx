@@ -9,12 +9,14 @@ jest.mock('./hooks', () => ({
 }));
 
 const namesMockComponents = [
+  'CourseCardBanners',
   'CourseCardMenu',
   'CourseCardActions',
   'CourseCardDetails',
   'CourseCardTitle',
 ];
 
+jest.mock('./components/CourseCardBanners', () => jest.fn(() => <div>CourseCardBanners</div>));
 jest.mock('./components/CourseCardMenu', () => jest.fn(() => <div>CourseCardMenu</div>));
 jest.mock('./components/CourseCardActions', () => jest.fn(() => <div>CourseCardActions</div>));
 jest.mock('./components/CourseCardDetails', () => jest.fn(() => <div>CourseCardDetails</div>));

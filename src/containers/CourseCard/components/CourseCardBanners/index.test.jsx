@@ -6,18 +6,10 @@ import { useCourseData } from '@src/hooks';
 
 import CourseCardBanners from '.';
 
-jest.mock('./CourseBanner', () => jest.fn(() => <div>CourseBanner</div>));
-jest.mock('./CertificateBanner', () => jest.fn(() => <div>CertificateBanner</div>));
-jest.mock('./CreditBanner', () => jest.fn(() => <div>CreditBanner</div>));
-jest.mock('./EntitlementBanner', () => jest.fn(() => <div>EntitlementBanner</div>));
-jest.mock('./RelatedProgramsBanner', () => jest.fn(() => <div>RelatedProgramsBanner</div>));
+jest.mock('./RedeemBanner', () => jest.fn(() => <div>RedeemBanner</div>));
 
 const mockedComponents = [
-  'CourseBanner',
-  'CertificateBanner',
-  'CreditBanner',
-  'EntitlementBanner',
-  'RelatedProgramsBanner',
+  'RedeemBanner'
 ];
 
 jest.mock('@src/hooks', () => ({
@@ -31,6 +23,7 @@ jest.mock('@src/hooks', () => ({
 describe('CourseCardBanners', () => {
   const props = {
     cardId: 'test-card-id',
+    isLimitedAccess: true
   };
   it('renders default CourseCardBanners', () => {
     render(<MemoryRouter><IntlProvider locale="en"><CourseCardBanners {...props} /></IntlProvider></MemoryRouter>);
@@ -43,14 +36,5 @@ describe('CourseCardBanners', () => {
     useCourseData.mockReturnValue(null);
     const { container } = render(<MemoryRouter><IntlProvider locale="en"><CourseCardBanners {...props} /></IntlProvider></MemoryRouter>);
     expect(container.firstChild).toBeNull();
-  });
-  it('render with isEnrolled false', () => {
-    useCourseData.mockReturnValue({ enrollment: { isEnrolled: false } });
-    render(<MemoryRouter><IntlProvider locale="en"><CourseCardBanners {...props} /></IntlProvider></MemoryRouter>);
-    const mockedComponentsIfNotEnrolled = mockedComponents.slice(-2);
-    mockedComponentsIfNotEnrolled.map((componentName) => {
-      const mockedComponent = screen.getByText(componentName);
-      return expect(mockedComponent).toBeInTheDocument();
-    });
   });
 });
