@@ -10,7 +10,7 @@ import LoadingView from './LoadingView';
 import DashboardLayout from './DashboardLayout';
 import hooks from './hooks';
 import './index.scss';
-import { SubscriptionBanner} from '../SubscriptionBanner';
+import { SubscriptionBanner } from '../SubscriptionBanner';
 
 export const Dashboard = () => {
   const { data, isPending } = useInitializeLearnerHome();
@@ -23,7 +23,7 @@ export const Dashboard = () => {
   // For now, we can use this hardcoded data to test the SubscriptionBanner component.
   const subscriptionBannerData = {
     isSubscribed: true,
-    subscriptionStatus: 'cancelled', // can be 'active', 'cancelled', 'expired'
+    subscriptionStatus: 'trial', // can be 'active', 'cancelled', 'expired'
     subscriptionStartDate: '05/22/25',
     subscriptionEndDate: '05/22/26',
     subscriptionRenewalDate: '05/22/26',
@@ -47,8 +47,8 @@ export const Dashboard = () => {
               : (
                 <DashboardLayout>
                   <SubscriptionBanner
-                        subscriptionBannerData={subscriptionBannerData}
-                      />
+                    subscriptionBannerData={subscriptionBannerData}
+                  />
                   <CoursesPanel />
                 </DashboardLayout>
               )}

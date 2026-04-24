@@ -59,6 +59,7 @@ export const SubscriptionBanner: FC<{
         [
           <Button
             key="renew-subscription"
+            data-testid="renew-button"
             className="renew-button"
             variant="primary"
             href="https://courses.edx.org/renew-subscription"
