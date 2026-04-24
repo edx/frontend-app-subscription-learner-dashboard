@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { ActionRow, Row, Col, Badge  } from '@openedx/paragon';
+import { useIntl } from '@openedx/frontend-base';
 
 import { useCourseData, useEntitlementInfo } from '@src/hooks';
 
@@ -10,28 +11,30 @@ import SelectSessionButton from './SelectSessionButton';
 import BeginCourseButton from './BeginCourseButton';
 import ResumeButton from './ResumeButton';
 import ViewCourseButton from './ViewCourseButton';
+import messages from './messages';
 
-export const CourseCardActions = ({ cardId, badge }) => {
+export const CourseCardActions = ({ cardId, vefifiedCourse }) => {
   const cardData = useCourseData(cardId);
+  const { formatMessage } = useIntl();
   const hasStarted = cardData.enrollment.hasStarted || false;
   const { isEntitlement, isFulfilled } = useEntitlementInfo(cardData);
   const isArchived = cardData.courseRun.isArchived || false;
 
   return (
     <Row className="align-items-center mt-3">
-        <Col xs={12} lg="auto" className="mb-2 mb-lg-0">
-            {badge ? (
+        <Col xs={12} sm={6} className="mb-2 mb-lg-0">
+            {vefifiedCourse ? (
                 <Badge variant="success" className="px-3 py-2">
-                    Verified with edx Unlimited
+                    {formatMessage(messages.subsVerifiedCourseText)}
                 </Badge>
             ) : (
-                <span className="small text-primary">
-                    Included in edx Unlimited
+                <span className="small text-info">
+                    {formatMessage(messages.subsIncludedCourseText)}
                 </span>
             )}
         </Col>
 
-        <Col xs={12} lg className="d-flex justify-content-lg-end">
+        <Col xs={12} className="d-flex justify-content-end" sm={6}>
             <ActionRow data-test-id="CourseCardActions">
               <CourseCardActionSlot cardId={cardId} />
               {isEntitlement && (isFulfilled
@@ -53,7 +56,7 @@ export const CourseCardActions = ({ cardId, badge }) => {
 };
 CourseCardActions.propTypes = {
   cardId: PropTypes.string.isRequired,
-  badge: PropTypes.bool,
+  vefifiedCourse: PropTypes.bool,
 };
 
 export default CourseCardActions;

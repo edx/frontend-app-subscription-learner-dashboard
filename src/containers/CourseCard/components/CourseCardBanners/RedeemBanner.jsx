@@ -1,8 +1,10 @@
-import PropTypes from 'prop-types';
-
 import { Card, Button, Row, Col } from '@openedx/paragon';
+import { useIntl } from '@openedx/frontend-base';
+import messages from './messages';
 
 const RedeemBanner = () => {
+    const { formatMessage } = useIntl();
+
     return (
         <Card.Status
             variant="warning"
@@ -15,13 +17,13 @@ const RedeemBanner = () => {
                     </p>
                 </Col>
 
-                <Col xs={12} lg={4}
-                    className="d-flex justify-content-lg-end mt-2 mt-lg-0"
+                <Col xs={12} sm={4}
+                    className="d-flex justify-content-end mt-2 mt-lg-0"
                 >
                     <Button variant="outline-dark" data-testid="view-redeem-button"
-                            size="md" className="w-100 w-lg-auto"
+                            size="md"
                     >
-                        Redeem
+                        {formatMessage(messages.redeem)}
                     </Button>
                 </Col>
             </Row>

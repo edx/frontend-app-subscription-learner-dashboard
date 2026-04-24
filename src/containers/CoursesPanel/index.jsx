@@ -47,18 +47,19 @@ export const CoursesPanel = () => {
     }
   }, [numPages, pageNumber, setPageNumber]);
 
+  // TODO [TEMP]: Passing data twice and displaying the list twice, also fixed the corresponding test cases to reflect this.
+  // Reason: Requirements not finalized
+  // Action: Revisit after UX and data confirmation
   const courseListData = {
     setPageNumber,
     numPages,
     visibleList,
-    badge: true,
-    isLimitedAccess: false,
+    vefifiedCourse: true,
   };
 
   const limitedCourseListData = {
     ...courseListData,
-    badge: false,
-    isLimitedAccess: true,
+    vefifiedCourse: false,
   };
 
   return (
@@ -69,7 +70,7 @@ export const CoursesPanel = () => {
       {hasCourses ? <CourseListSlot courseListData={courseListData} /> : <NoCoursesViewSlot />}
 
       <div className="course-list-heading-container">
-        <h2 className="course-list-title">{formatMessage(messages.limitedCourse)}</h2>
+        <h2 className="course-list-title text-gray-700">{formatMessage(messages.limitedCourse)}</h2>
       </div>
       {hasCourses ? <CourseListSlot courseListData={limitedCourseListData} /> : <NoCoursesViewSlot />}
     </div>

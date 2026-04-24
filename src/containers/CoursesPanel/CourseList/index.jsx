@@ -7,7 +7,7 @@ import { useIsCollapsed } from './hooks';
 
 export const CourseList = ({ courseListData }) => {
   const {
-    setPageNumber, numPages, visibleList, badge, isLimitedAccess,
+    setPageNumber, numPages, visibleList, vefifiedCourse,
   } = courseListData;
 
   const isCollapsed = useIsCollapsed();
@@ -15,7 +15,7 @@ export const CourseList = ({ courseListData }) => {
     <>
       <div className="d-flex flex-column flex-grow-1">
         {visibleList.map(({ cardId }) => (
-          <CourseCard key={cardId} cardId={cardId} badge={badge} isLimitedAccess={isLimitedAccess} />
+          <CourseCard key={cardId} cardId={cardId} vefifiedCourse={vefifiedCourse} />
         ))}
         {numPages > 1 && (
           <Pagination

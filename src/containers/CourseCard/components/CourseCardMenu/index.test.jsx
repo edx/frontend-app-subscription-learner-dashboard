@@ -13,6 +13,7 @@ jest.mock('@src/hooks', () => ({
   useCourseData: jest.fn(),
   useIsMasquerading: jest.fn(),
 }));
+jest.mock('./SocialShareMenu', () => jest.fn(() => <div>SocialShareMenu</div>));
 jest.mock('@src/containers/EmailSettingsModal', () => jest.fn(() => <div>EmailSettingsModal</div>));
 jest.mock('@src/containers/UnenrollConfirmModal', () => jest.fn(() => <div>UnenrollConfirmModal</div>));
 jest.mock('./hooks', () => ({
@@ -114,6 +115,8 @@ describe('CourseCardMenu', () => {
           await user.click(dropdown);
           const unenrollOption = screen.queryByRole('button', { name: messages.unenroll.defaultMessage });
           expect(unenrollOption).toBeNull();
+          const socialShareMenu = screen.getByText('SocialShareMenu');
+          expect(socialShareMenu).toBeInTheDocument();
           const unenrollConfirmModal = screen.getByText('UnenrollConfirmModal');
           expect(unenrollConfirmModal).toBeInTheDocument();
           const emailSettingsModal = screen.queryByText('EmailSettingsModal');
@@ -139,6 +142,8 @@ describe('CourseCardMenu', () => {
 
               const unenrollOption = screen.getByRole('button', { name: messages.unenroll.defaultMessage });
               expect(unenrollOption).toBeInTheDocument();
+              const socialShareMenu = screen.getByText('SocialShareMenu');
+              expect(socialShareMenu).toBeInTheDocument();
               const unenrollConfirmModal = screen.getByText('UnenrollConfirmModal');
               expect(unenrollConfirmModal).toBeInTheDocument();
               const emailSettingsModal = screen.getByText('EmailSettingsModal');
@@ -158,6 +163,8 @@ describe('CourseCardMenu', () => {
               const unenrollOption = screen.getByRole('button', { name: messages.unenroll.defaultMessage });
               expect(unenrollOption).toBeInTheDocument();
               expect(unenrollOption).toHaveAttribute('aria-disabled', 'true');
+              const socialShareMenu = screen.getByText('SocialShareMenu');
+              expect(socialShareMenu).toBeInTheDocument();
               const unenrollConfirmModal = screen.getByText('UnenrollConfirmModal');
               expect(unenrollConfirmModal).toBeInTheDocument();
               const emailSettingsModal = screen.getByText('EmailSettingsModal');

@@ -21,6 +21,16 @@ const messages = defineMessages({
     description: 'Course card select-session button text',
     defaultMessage: 'Select Session',
   },
+  subsVerifiedCourseText: {
+    id: 'subs.learner-dash.courseCard.actions.verifiedText',
+    description: 'Text for verified courses included in edx Unlimited',
+    defaultMessage: 'Verified with edX Unlimited',
+  },
+  subsIncludedCourseText: {
+    id: 'subs.learner-dash.courseCard.actions.includedText',
+    description: 'Text for courses included in edx Unlimited',
+    defaultMessage: 'Included in edX Unlimited',
+  },
 });
 
 export default messages;

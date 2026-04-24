@@ -14,8 +14,7 @@ import CourseCardBanners from './components/CourseCardBanners';
 
 export const CourseCard = ({
   cardId,
-  badge,
-  isLimitedAccess
+  vefifiedCourse
 }) => {
   const isCollapsed = useIsCollapsed();
   const orientation = isCollapsed ? 'vertical' : 'horizontal';
@@ -31,11 +30,11 @@ export const CourseCard = ({
               />
               <Card.Section className="pt-0">
                 <CourseCardDetails cardId={cardId} />
-                <CourseCardActions cardId={cardId} badge={badge} />
+                <CourseCardActions cardId={cardId} vefifiedCourse={vefifiedCourse} />
               </Card.Section>
             </Card.Body>
           </div>
-          <CourseCardBanners cardId={cardId} isLimitedAccess={isLimitedAccess} />
+          <CourseCardBanners cardId={cardId} vefifiedCourse={vefifiedCourse} />
         </div>
       </Card>
     </div>
@@ -43,8 +42,7 @@ export const CourseCard = ({
 };
 CourseCard.propTypes = {
   cardId: PropTypes.string.isRequired,
-  badge: PropTypes.bool,
-  isLimitedAccess: PropTypes.bool,
+  vefifiedCourse: PropTypes.bool,
 };
 
 export default CourseCard;
