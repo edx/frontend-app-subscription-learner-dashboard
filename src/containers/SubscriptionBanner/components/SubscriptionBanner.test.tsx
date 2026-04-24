@@ -33,9 +33,6 @@ jest.mock('@src/hooks', () => ({
   },
 }));
 
-// Removed the mock for '@openedx/paragon' as it's unnecessary. 
-// Instead, ensure the `data-testid` is added directly to the Paragon Button component in the actual implementation.
-
 const mockBannerData = {
   isSubscribed: true,
   subscriptionStatus: 'active',
