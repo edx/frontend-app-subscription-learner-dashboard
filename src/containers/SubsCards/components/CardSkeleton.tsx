@@ -34,14 +34,15 @@ export const CardSkeleton: FC = () => {
       {Array.from({ length: count }).map((_, idx) => (
         <Card
           key={`skeleton-card-${idx}`} // eslint-disable-line react/no-array-index-key
-          className="shadow-sm d-flex flex-column m-2 rounded skeleton"
+          className="shadow-sm d-flex flex-column m-2 rounded w-100 skeleton"
+          style={{ maxWidth: 350 }}
           data-testid="skeleton-card"
         >
 
-          <Skeleton className="skeleton-image" />
+          <Skeleton height={200} />
 
           <Card.Header>
-            <Skeleton className="skeleton-header" />
+            <Skeleton height={200} />
           </Card.Header>
 
           <Card.Section className="flex-grow-1 d-flex flex-column overflow-hidden min-h-0">
@@ -51,7 +52,7 @@ export const CardSkeleton: FC = () => {
           </Card.Section>
 
           <Card.Footer className="d-flex justify-content-between align-items-center">
-            <Skeleton className="skeleton-footer" />
+            <Skeleton height={20} />
           </Card.Footer>
         </Card>
       ))}

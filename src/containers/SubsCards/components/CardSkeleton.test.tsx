@@ -10,9 +10,6 @@ const createMatchMedia = (matches: boolean) =>
     onchange: null,
     addEventListener: jest.fn(),
     removeEventListener: jest.fn(),
-    addListener: jest.fn(),
-    removeListener: jest.fn(),
-    dispatchEvent: jest.fn(),
   }));
 
 describe('CardSkeleton', () => {
@@ -31,15 +28,9 @@ describe('CardSkeleton', () => {
   });
 
   it('renders 2 skeleton cards on tablet', () => {
-    let callCount = 0;
-
     window.matchMedia = jest.fn().mockImplementation((query: string) => {
-      callCount++;
-
       return {
-        matches:
-                    query === '(max-width: 1199px)'
-                    && callCount === 1,
+        matches: query === '(max-width: 1199px)',
         media: query,
         onchange: null,
         addEventListener: jest.fn(),
@@ -49,13 +40,13 @@ describe('CardSkeleton', () => {
 
     render(<CardSkeleton />);
 
-    const container = screen.getByTestId('skeleton');
-    expect(container).toBeInTheDocument();
+    expect(screen.getByTestId('skeleton')).toBeInTheDocument();
+    expect(screen.getAllByText('', { selector: '.skeleton' }).length).toBe(2);
   });
 
   it('renders 4 skeleton cards on desktop', () => {
     window.matchMedia = jest.fn().mockImplementation((query: string) => ({
-      matches: false, // neither mobile nor tablet
+      matches: false,
       media: query,
       onchange: null,
       addEventListener: jest.fn(),
@@ -64,7 +55,7 @@ describe('CardSkeleton', () => {
 
     render(<CardSkeleton />);
 
-    const container = screen.getByTestId('skeleton');
-    expect(container).toBeInTheDocument();
+    expect(screen.getByTestId('skeleton')).toBeInTheDocument();
+    expect(screen.getAllByText('', { selector: '.skeleton' }).length).toBe(4);
   });
 });
