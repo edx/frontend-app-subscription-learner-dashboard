@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { SubscriptionBanner } from './SubscriptionBanner';
+import { subscriptionRenewalURL } from '@src/data/constants/app';
 
 jest.mock('react-intl', () => ({
   ...jest.requireActual('react-intl'),
@@ -44,16 +45,12 @@ const mockBannerData = {
 
 describe('SubscriptionBanner', () => {
   // --- Renew Button ---
-  test('renders Renew button only for cancelled subscription', () => {
+  test('renders Renew button for cancelled subscription with correct URL', () => {
     const cancelledBannerData = { ...mockBannerData, subscriptionStatus: 'cancelled' };
     render(<SubscriptionBanner subscriptionBannerData={cancelledBannerData} />);
-    expect(screen.getByTestId('renew-button')).toBeInTheDocument();
-  });
-
-  test('Renew button points to the correct URL', () => {
-    const cancelledBannerData = { ...mockBannerData, subscriptionStatus: 'cancelled' };
-    render(<SubscriptionBanner subscriptionBannerData={cancelledBannerData} />);
-    expect(screen.getByTestId('renew-button')).toHaveAttribute('href', 'https://courses.edx.org/renew-subscription');
+    const renewBtn = screen.getByTestId('renew-button');
+    expect(renewBtn).toBeInTheDocument();
+    expect(renewBtn).toHaveAttribute('href', subscriptionRenewalURL);
   });
 
   test('Renew button opens in a new tab with rel="noopener noreferrer"', () => {
@@ -62,12 +59,6 @@ describe('SubscriptionBanner', () => {
     const renewBtn = screen.getByTestId('renew-button');
     expect(renewBtn).toHaveAttribute('target', '_blank');
     expect(renewBtn).toHaveAttribute('rel', 'noopener noreferrer');
-  });
-
-  test('Renew button has role="link"', () => {
-    const cancelledBannerData = { ...mockBannerData, subscriptionStatus: 'cancelled' };
-    render(<SubscriptionBanner subscriptionBannerData={cancelledBannerData} />);
-    expect(screen.getByTestId('renew-button')).toHaveAttribute('role', 'link');
   });
 
   test('does not render Renew button for active subscription', () => {

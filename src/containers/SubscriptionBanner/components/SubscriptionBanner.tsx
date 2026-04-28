@@ -5,6 +5,7 @@ import { useIntl } from '@openedx/frontend-base';
 import { BannerItem } from '../types';
 import { utilHooks } from '@src/hooks';
 import messages from '../messages';
+import { subscriptionRenewalURL } from '@src/data/constants/app';
 
 export const SubscriptionBanner: FC<{
   subscriptionBannerData: BannerItem,
@@ -17,10 +18,6 @@ export const SubscriptionBanner: FC<{
   const formatDate = utilHooks.useFormatDate();
 
   useEffect(() => {
-    if (!subscriptionBannerData.isSubscribed) {
-      setShowPageBanner(false);
-      return;
-    }
     switch (subscriptionBannerData.subscriptionStatus) {
       case 'active':
         setBannerVariant('success');
@@ -62,7 +59,7 @@ export const SubscriptionBanner: FC<{
             data-testid="renew-button"
             className="renew-button"
             variant="primary"
-            href="https://courses.edx.org/renew-subscription"
+            href={subscriptionRenewalURL}
             target="_blank"
             rel="noopener noreferrer"
             role="link"

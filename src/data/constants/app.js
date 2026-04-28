@@ -15,3 +15,5 @@ export const FilterKeys = StrictDict({
 });
 
 export const ListPageSize = 25;
+
+export const subscriptionRenewalURL = 'https://courses.edx.org/renew-subscription';
