@@ -28,7 +28,6 @@ export const CardView: FC<CardProps> = ({ data, isLoading, isError }) => {
           {data.map((item) => (
             <div key={item.id} className="col-12 col-md-6 col-xl-3 d-flex card-snap mb-2">
               <Card
-                key={item.id}
                 className="shadow-sm d-flex flex-column rounded w-100 overflow-hidden"
                 variant={item.hasTag ? 'dark' : 'light'}
                 data-testid="card"

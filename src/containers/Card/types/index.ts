@@ -5,7 +5,7 @@ export interface CardItem {
   hasTag?: boolean,
   tagText?: string,
   url: string,
-  thumbnail: string,
+  thumbnail?: string,
   footerLabel: string,
 }
 

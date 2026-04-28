@@ -52,6 +52,6 @@ export const fetchCardsData = async (): Promise<CardItem[]> => {
     return finalData;
   } catch (error) {
     console.error('Error fetching cards data:', error);
-    return [];
+    throw error;
   }
 };

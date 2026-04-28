@@ -24,7 +24,7 @@ describe('CardSkeleton', () => {
     render(<CardSkeleton />);
 
     expect(screen.getByTestId('skeleton')).toBeInTheDocument();
-    expect(screen.getAllByText('', { selector: '.skeleton' }).length).toBe(1);
+    expect(screen.getAllByTestId('skeleton-card')).toHaveLength(1);
   });
 
   it('renders 2 skeleton cards on tablet', () => {
@@ -41,7 +41,7 @@ describe('CardSkeleton', () => {
     render(<CardSkeleton />);
 
     expect(screen.getByTestId('skeleton')).toBeInTheDocument();
-    expect(screen.getAllByText('', { selector: '.skeleton' }).length).toBe(2);
+    expect(screen.getAllByTestId('skeleton-card')).toHaveLength(2);
   });
 
   it('renders 4 skeleton cards on desktop', () => {
@@ -56,6 +56,6 @@ describe('CardSkeleton', () => {
     render(<CardSkeleton />);
 
     expect(screen.getByTestId('skeleton')).toBeInTheDocument();
-    expect(screen.getAllByText('', { selector: '.skeleton' }).length).toBe(4);
+    expect(screen.getAllByTestId('skeleton-card')).toHaveLength(4);
   });
 });

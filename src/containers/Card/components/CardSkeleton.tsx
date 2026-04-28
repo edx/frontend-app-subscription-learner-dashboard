@@ -2,7 +2,18 @@ import { FC, useEffect, useState } from 'react';
 import { Skeleton, Card } from '@openedx/paragon';
 
 export const CardSkeleton: FC = () => {
-  const [count, setCount] = useState(0);
+  const getInitialCount = () => {
+    if (typeof window === 'undefined') return 4;
+
+    const mobile = window.matchMedia('(max-width: 767px)');
+    const tablet = window.matchMedia('(max-width: 1199px)');
+
+    if (mobile.matches) return 1;
+    if (tablet.matches) return 2;
+    return 4;
+  };
+
+  const [count, setCount] = useState(getInitialCount);
 
   useEffect(() => {
     const mobile = window.matchMedia('(max-width: 767px)');
@@ -17,8 +28,6 @@ export const CardSkeleton: FC = () => {
         setCount(4);
       }
     };
-
-    handleChange();
 
     mobile.addEventListener('change', handleChange);
     tablet.addEventListener('change', handleChange);

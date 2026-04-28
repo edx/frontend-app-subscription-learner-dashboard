@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderHook, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useCards } from './useCards';
+import { useCard } from './useCard';
 import { fetchCardsData } from '../api/fetchCardsData';
 
 jest.mock('../api/fetchCardsData');
@@ -26,7 +26,7 @@ const createWrapper = () => {
   return Wrapper;
 };
 
-describe('useCards', () => {
+describe('useCard', () => {
   it('should fetch and return cards data successfully', async () => {
     const mockData = [{
       id: 1,
@@ -41,7 +41,7 @@ describe('useCards', () => {
 
     mockedFetchCardsData.mockResolvedValue(mockData);
 
-    const { result } = renderHook(() => useCards(), {
+    const { result } = renderHook(() => useCard(), {
       wrapper: createWrapper(),
     });
 
@@ -55,7 +55,7 @@ describe('useCards', () => {
   it('should handle error state', async () => {
     mockedFetchCardsData.mockRejectedValue(new Error('API Error'));
 
-    const { result } = renderHook(() => useCards({ retry: false }),
+    const { result } = renderHook(() => useCard({ retry: false }),
       {
         wrapper: createWrapper(),
       }
@@ -71,7 +71,7 @@ describe('useCards', () => {
   it('should have correct query configuration', async () => {
     mockedFetchCardsData.mockResolvedValue([]);
 
-    const { result } = renderHook(() => useCards(), {
+    const { result } = renderHook(() => useCard(), {
       wrapper: createWrapper(),
     });
 
