@@ -28,7 +28,7 @@ const messages = defineMessages({
   },
   subsIncludedCourseText: {
     id: 'subs.learner-dash.courseCard.actions.includedText',
-    description: 'Text for courses included in edx Unlimited',
+    description: 'Text for unverified (audited) courses included in edx Unlimited',
     defaultMessage: 'Included in edX Unlimited',
   },
 });

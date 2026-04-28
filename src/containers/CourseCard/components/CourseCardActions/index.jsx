@@ -13,7 +13,7 @@ import ResumeButton from './ResumeButton';
 import ViewCourseButton from './ViewCourseButton';
 import messages from './messages';
 
-export const CourseCardActions = ({ cardId, vefifiedCourse }) => {
+export const CourseCardActions = ({ cardId, verifiedCourse }) => {
   const cardData = useCourseData(cardId);
   const { formatMessage } = useIntl();
   const hasStarted = cardData.enrollment.hasStarted || false;
@@ -23,7 +23,11 @@ export const CourseCardActions = ({ cardId, vefifiedCourse }) => {
   return (
     <Row className="align-items-center mt-3">
         <Col xs={12} sm={6} className="mb-2 mb-lg-0">
-            {vefifiedCourse ? (
+            {/* TODO [TEMP]: Showing 2 types of badges for now. After backend connection, can anticipate 3rd type of badge as well
+                Reason: Development before backend connection
+                Action: Revisit after backend connection and finalize badge types and conditions for each type
+            */}
+            {verifiedCourse ? (
                 <Badge variant="success" className="px-3 py-2">
                     {formatMessage(messages.subsVerifiedCourseText)}
                 </Badge>
@@ -56,7 +60,7 @@ export const CourseCardActions = ({ cardId, vefifiedCourse }) => {
 };
 CourseCardActions.propTypes = {
   cardId: PropTypes.string.isRequired,
-  vefifiedCourse: PropTypes.bool,
+  verifiedCourse: PropTypes.bool,
 };
 
 export default CourseCardActions;

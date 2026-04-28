@@ -54,12 +54,12 @@ export const CoursesPanel = () => {
     setPageNumber,
     numPages,
     visibleList,
-    vefifiedCourse: true,
+    verifiedCourse: true,
   };
 
   const limitedCourseListData = {
     ...courseListData,
-    vefifiedCourse: false,
+    verifiedCourse: false,
   };
 
   return (

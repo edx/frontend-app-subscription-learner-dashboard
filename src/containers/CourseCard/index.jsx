@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Card } from '@openedx/paragon';
@@ -14,7 +13,7 @@ import CourseCardBanners from './components/CourseCardBanners';
 
 export const CourseCard = ({
   cardId,
-  vefifiedCourse
+  verifiedCourse
 }) => {
   const isCollapsed = useIsCollapsed();
   const orientation = isCollapsed ? 'vertical' : 'horizontal';
@@ -30,11 +29,11 @@ export const CourseCard = ({
               />
               <Card.Section className="pt-0">
                 <CourseCardDetails cardId={cardId} />
-                <CourseCardActions cardId={cardId} vefifiedCourse={vefifiedCourse} />
+                <CourseCardActions cardId={cardId} verifiedCourse={verifiedCourse} />
               </Card.Section>
             </Card.Body>
           </div>
-          <CourseCardBanners cardId={cardId} vefifiedCourse={vefifiedCourse} />
+          <CourseCardBanners cardId={cardId} verifiedCourse={verifiedCourse} />
         </div>
       </Card>
     </div>
@@ -42,7 +41,7 @@ export const CourseCard = ({
 };
 CourseCard.propTypes = {
   cardId: PropTypes.string.isRequired,
-  vefifiedCourse: PropTypes.bool,
+  verifiedCourse: PropTypes.bool,
 };
 
 export default CourseCard;
