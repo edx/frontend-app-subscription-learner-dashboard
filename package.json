@@ -29,7 +29,7 @@
     "lint:fix": "openedx lint --fix .",
     "prepack": "npm run build",
     "test": "openedx test --coverage --passWithNoTests",
-    "prepare": "husky"
+    "prepare": "if [ -z \"$CI\" ]; then husky; fi"
   },
   "author": "Open edX",
   "license": "AGPL-3.0",
