@@ -2,31 +2,55 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import DashboardTabs from './DashboardTabs';
 
-jest.mock('@openedx/paragon', () => {
-  const React = require('react');
-  return {
-    Tabs: ({ children, onSelect }) => <>{React.Children.map(children, child => React.cloneElement(child, { onSelect }))}</>,
-    Tab: ({ title, children, eventKey, onSelect }) => <span onClick={() => onSelect && onSelect(eventKey, {})}>{title}{children}</span>,
-  };
-});
+jest.mock('@openedx/paragon', () => ({
+  Tabs: ({ children, className }) => <div className={className}>{children}</div>,
+  Tab: ({ title, children, eventKey, onSelect }) => (
+    <div>
+      <button type="button" onClick={() => onSelect && onSelect(eventKey)}>
+        {title}
+      </button>
+      <div>{children}</div>
+    </div>
+  ),
+}));
+
+jest.mock('../../containers/CoursesPanel', () => () => (
+  <div data-testid="courses-panel">Courses Panel Content</div>
+));
 
 describe('DashboardTabs', () => {
-  it('renders tabs and handles click', () => {
-    const onSelect = jest.fn();
+  it('renders all tab titles', () => {
+    render(<DashboardTabs />);
 
-    render(
-      <DashboardTabs
-        activeTab="tab1"
-        onSelect={onSelect}
-        tabs={[
-          { key: 'tab1', title: 'Tab 1', panel: <div>Tab 1 Content</div> },
-          { key: 'tab2', title: 'Tab 2', panel: <div>Tab 2 Content</div> },
-        ]}
-      />
-    );
-    expect(screen.getByText('Tab 1')).toBeInTheDocument();
-    expect(screen.getByText('Tab 1 Content')).toBeInTheDocument();
-    fireEvent.click(screen.getByText('Tab 2'));
-    expect(onSelect).toHaveBeenCalledWith('tab2', expect.anything());
+    expect(screen.getByText('Courses')).toBeInTheDocument();
+    expect(screen.getByText('Programs')).toBeInTheDocument();
+    expect(screen.getByText('History')).toBeInTheDocument();
+  });
+
+  it('Courses tab is active by default and shows CoursesPanel', () => {
+    render(<DashboardTabs />);
+
+    expect(screen.getByTestId('courses-panel')).toBeInTheDocument();
+  });
+
+  it('switches to Programs tab on click', () => {
+    render(<DashboardTabs />);
+
+    fireEvent.click(screen.getByText('Programs'));
+
+    expect(
+      screen.getByText('Programs tab will be available soon.')
+    ).toBeInTheDocument();
+  });
+
+  it('switches to History tab on click', () => {
+    render(<DashboardTabs />);
+
+    fireEvent.click(screen.getByText('History'));
+
+    expect(
+      screen.getByText('History tab will be available soon.')
+    ).toBeInTheDocument();
   });
 });
+

@@ -1,39 +1,50 @@
-import React from 'react';
-import type { ReactNode } from 'react';
-
+import React, { useMemo, useState, useCallback } from 'react';
 import { Tabs, Tab } from '@openedx/paragon';
+import CoursesPanel from '../../containers/CoursesPanel';
 
-export interface DashboardTab {
-  key: string,
-  title: ReactNode,
-  panel: ReactNode,
-}
+const DashboardTabs = () => {
+  // Defining the tabs here
+  const dashboardTabs = useMemo(() => ([
+    {
+      key: 'courses',
+      title: 'Courses',
+      panel: <CoursesPanel />,
+    },
+    {
+      key: 'programs',
+      title: 'Programs',
+      panel: <span>Programs tab will be available soon.</span>,
+    },
+    {
+      key: 'history',
+      title: 'History',
+      panel: <span>History tab will be available soon.</span>,
+    },
+  ]), []);
 
-interface DashboardTabsProps {
-  activeTab: string,
-  onSelect: (tabKey: string | null) => void,
-  tabs: DashboardTab[],
-}
+  const [activeTab, setActiveTab] = useState(dashboardTabs[0].key);
+  const handleTabSelect = useCallback((tabKey) => {
+    if (tabKey) {
+      setActiveTab(tabKey);
+    }
+  }, []);
 
-export const DashboardTabs = ({
-  activeTab,
-  onSelect,
-  tabs,
-}: DashboardTabsProps) => (
-  <Tabs
-    id="subscription-dashboard-tabs"
-    defaultActiveKey={tabs[0]?.key}
-    activeKey={activeTab}
-    onSelect={onSelect}
-    className="mb-4"
-    mountOnEnter
-  >
-    {tabs.map(tab => (
-      <Tab eventKey={tab.key} title={tab.title} key={tab.key}>
-        {tab.panel}
-      </Tab>
-    ))}
-  </Tabs>
-);
+  return (
+    <Tabs
+      id="subscription-dashboard-tabs"
+      defaultActiveKey={dashboardTabs[0]?.key}
+      activeKey={activeTab}
+      onSelect={handleTabSelect}
+      className="mb-4"
+      mountOnEnter
+    >
+      {dashboardTabs.map(tab => (
+        <Tab eventKey={tab.key} title={tab.title} key={tab.key}>
+          {tab.panel}
+        </Tab>
+      ))}
+    </Tabs>
+  );
+};
 
 export default DashboardTabs;
