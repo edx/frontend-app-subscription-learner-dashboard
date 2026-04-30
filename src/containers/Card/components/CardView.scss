@@ -5,15 +5,6 @@
   overflow: hidden;
 }
 
-/* Thumbnail */
-.card-thumbnail {
-  top: 60%;
-  width: clamp(100px, 50%, 140px);
-  height: 80px;
-  object-fit: cover;
-  left: 10%;
-}
-
 .cards-scroll {
   -ms-overflow-style: none;
   scrollbar-width: none;

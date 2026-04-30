@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Alert, Card, Badge, Icon, Image } from '@openedx/paragon';
+import { Alert, Card, Badge, Icon } from '@openedx/paragon';
 import { School } from '@openedx/paragon/icons';
 
 import { CardProps } from '../types';
@@ -33,17 +33,13 @@ export const CardView: FC<CardProps> = ({ data, isLoading, isError }) => {
                 data-testid="card"
               >
                 <div className="position-relative">
-                  <Card.ImageCap src={item.url} srcAlt={`${item.title} main-image`} data-testid="card-image" />
-
-                  {/* Overlay thumbnail */}
-                  {item.thumbnail && (
-                    <Image
-                      src={item.thumbnail || ''}
-                      alt={`${item.title} thumbnail-image`}
-                      className="position-absolute border bg-white rounded card-thumbnail"
-                      data-testid="card-thumbnail"
-                    />
-                  )}
+                  <Card.ImageCap
+                    src={item.url}
+                    srcAlt={`${item.title} main-image`}
+                    data-testid="card-image"
+                    logoSrc={item.thumbnail || ''}
+                    logoAlt={`${item.title} thumbnail-image`}
+                  />
                 </div>
 
                 <Card.Header title={item.title} data-testid="card-header" />

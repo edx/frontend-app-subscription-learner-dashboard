@@ -1,16 +1,16 @@
 import { render, screen, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
-
 import { CardSkeleton } from './CardSkeleton';
+import { useWindowSize } from '@openedx/paragon';
 
-const createMatchMedia = (matches: boolean) =>
-  jest.fn().mockImplementation((query: string) => ({
-    matches,
-    media: query,
-    onchange: null,
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-  }));
+jest.mock('@openedx/paragon', () => ({
+  ...jest.requireActual('@openedx/paragon'),
+  useWindowSize: jest.fn(),
+}));
+
+const mockWidth = (width: number) => {
+  (useWindowSize as jest.Mock).mockReturnValue({ width });
+};
 
 describe('CardSkeleton', () => {
   afterEach(() => {
@@ -18,44 +18,15 @@ describe('CardSkeleton', () => {
     jest.clearAllMocks();
   });
 
-  it('renders 1 skeleton card on mobile', () => {
-    window.matchMedia = createMatchMedia(true);
+  it.each([
+    [500, 1],
+    [1000, 2],
+    [1400, 4],
+  ])('renders %i cards for width %i', (width, expected) => {
+    mockWidth(width);
 
     render(<CardSkeleton />);
 
-    expect(screen.getByTestId('skeleton')).toBeInTheDocument();
-    expect(screen.getAllByTestId('skeleton-card')).toHaveLength(1);
-  });
-
-  it('renders 2 skeleton cards on tablet', () => {
-    window.matchMedia = jest.fn().mockImplementation((query: string) => {
-      return {
-        matches: query === '(max-width: 1199px)',
-        media: query,
-        onchange: null,
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-      };
-    });
-
-    render(<CardSkeleton />);
-
-    expect(screen.getByTestId('skeleton')).toBeInTheDocument();
-    expect(screen.getAllByTestId('skeleton-card')).toHaveLength(2);
-  });
-
-  it('renders 4 skeleton cards on desktop', () => {
-    window.matchMedia = jest.fn().mockImplementation((query: string) => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-    }));
-
-    render(<CardSkeleton />);
-
-    expect(screen.getByTestId('skeleton')).toBeInTheDocument();
-    expect(screen.getAllByTestId('skeleton-card')).toHaveLength(4);
+    expect(screen.getAllByTestId('skeleton-card')).toHaveLength(expected);
   });
 });
