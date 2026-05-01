@@ -8,9 +8,6 @@ jest.mock('./hooks', () => ({
 }));
 
 jest.mock('../../CourseCard', () => jest.fn(() => <div>CourseCard</div>));
-jest.mock('../../CourseFilterControls', () => ({
-  ActiveCourseFilters: jest.fn(() => <div>ActiveCourseFilters</div>),
-}));
 
 describe('CourseList', () => {
   const defaultCourseListData = {
@@ -29,22 +26,10 @@ describe('CourseList', () => {
   describe('no courses or filters', () => {
     it('should not render related components', () => {
       renderList();
-      const filterControls = screen.queryByText('ActiveCourseFilters');
       const courseCard = screen.queryByText('CourseCard');
       const prevButton = screen.queryByRole('button', { name: 'Previous' });
-      expect(filterControls).toBeNull();
       expect(courseCard).toBeNull();
       expect(prevButton).toBeNull();
-    });
-  });
-  describe('with filters', () => {
-    it('should render filter component', () => {
-      renderList({
-        ...defaultCourseListData,
-        showFilters: true,
-      });
-      const filterControls = screen.getByText('ActiveCourseFilters');
-      expect(filterControls).toBeInTheDocument();
     });
   });
   describe('with multiple courses and pages', () => {

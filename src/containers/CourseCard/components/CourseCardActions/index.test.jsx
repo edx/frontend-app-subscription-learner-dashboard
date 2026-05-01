@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { IntlProvider } from '@openedx/frontend-base';
 import { useCourseData } from '@src/hooks';
 import CourseCardActions from '.';
 
@@ -29,7 +30,7 @@ describe('CourseCardActions', () => {
       entitlement: isEntitlement !== null ? { isEntitlement, isFulfilled } : null,
     });
   };
-  const renderComponent = () => render(<CourseCardActions {...props} />);
+  const renderComponent = () => render(<IntlProvider locale="en"><CourseCardActions {...props} /></IntlProvider>);
   describe('hooks', () => {
     it('initializes hooks', () => {
       mockHooks();
