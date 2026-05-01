@@ -1,4 +1,4 @@
-export interface CardItem {
+export interface ProductCardItem {
   id: string | number,
   title: string,
   body: string,
@@ -9,8 +9,7 @@ export interface CardItem {
   footerLabel: string,
 }
 
-export interface CardProps {
-  data: CardItem[],
+export interface ProductCardProps {
+  item: ProductCardItem,
   isLoading: boolean,
-  isError: boolean,
 }

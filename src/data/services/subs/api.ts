@@ -1,12 +1,13 @@
-import { CardItem } from '../types';
+export const fetchRecommendedCourses = async () => {
+  /* TODO [TEMP]: Replace with actual API call to fetch recommended courses data. For now, returning hardcoded data to simulate the API response. Also, built the test case for the same.
+      Reason: The API endpoint is not yet available and the data structure is still being finalized.
+      Action: Revisit after endpoint is made available.
+    */
 
-const optimizedData = (data: string, size: number) => {
-  return data.length > size ? `${data.slice(0, size)}...` : data;
-};
+  const optimizedData = (data: string, size: number) => data.length > size ? `${data.slice(0, size)}...` : data;
 
-export const fetchCardsData = async (): Promise<CardItem[]> => {
   try {
-    const finalData: CardItem[] = [
+    const finalData = [
       {
         id: 1,
         title: optimizedData('Essence Mascara Lash Princess', 30),
@@ -33,7 +34,7 @@ export const fetchCardsData = async (): Promise<CardItem[]> => {
         body: optimizedData('The Powder Canister is a finely milled setting powder designed to set makeup and control shine. With a lightweight and translucent formula, it provides a smooth and matte finish.', 100),
         url: 'https://cdn.dummyjson.com/product-images/beauty/powder-canister/1.webp',
         thumbnail: 'https://cdn.dummyjson.com/product-images/beauty/powder-canister/thumbnail.webp',
-        hasTag: true,
+        hasTag: true, // TODO
         tagText: 'Professional Certificate',
         footerLabel: '2 Courses'
       },
