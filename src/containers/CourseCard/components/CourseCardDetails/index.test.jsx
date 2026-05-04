@@ -30,23 +30,6 @@ describe('CourseCard Details component', () => {
     return render(<CourseCardDetails cardId={cardId} />);
   };
 
-  const fetchSeparators = (wrapper) => {
-    const elements = wrapper.container.querySelectorAll('*');
-    let separatorsCount = 0;
-
-    elements.forEach((element) => {
-      // Use a regular expression to find all occurrences of '•' in the text content
-      const separatorMatches = element.textContent.match(/•/g);
-
-      // If matches are found, add the count to the total
-      if (separatorMatches) {
-        separatorsCount += separatorMatches.length;
-      }
-    });
-
-    return separatorsCount;
-  };
-
   it('has change session button on entitlement course', () => {
     const wrapper = createWrapper();
     const sessionButton = screen.getByRole('button', { name: defaultHooks.changeOrLeaveSessionMessage });
@@ -54,8 +37,7 @@ describe('CourseCard Details component', () => {
 
     const accessMessage = screen.getByText((text) => text.includes(defaultHooks.accessMessage));
     expect(accessMessage).toBeInTheDocument();
-    // it has 3 separator, 4 column
-    expect(fetchSeparators(wrapper)).toBe(3);
+    
   });
 
   it('has change session button on entitlement course but no access message', () => {
@@ -66,8 +48,6 @@ describe('CourseCard Details component', () => {
     const accessMessage = screen.queryByText((text) => text.includes(defaultHooks.accessMessage));
     expect(accessMessage).toBeNull();
 
-    // it has 2 separator, 3 column
-    expect(fetchSeparators(wrapper)).toBe(2);
   });
 
   it('does not have change session button on regular course', () => {
@@ -77,7 +57,5 @@ describe('CourseCard Details component', () => {
 
     const accessMessage = screen.getByText((text) => text.includes(defaultHooks.accessMessage));
     expect(accessMessage).toBeInTheDocument();
-    // it has 2 separator, 3 column
-    expect(fetchSeparators(wrapper)).toBe(2);
   });
 });

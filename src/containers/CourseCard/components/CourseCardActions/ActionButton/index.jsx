@@ -9,6 +9,7 @@ export const ActionButton = (props) => {
     <Button
       {...props}
       {...isSmall && { size: 'sm' }}
+      className="w-auto"
     />
   );
 };
