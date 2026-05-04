@@ -7,9 +7,20 @@ import { utilHooks } from '@src/hooks';
 import messages from '../messages';
 import { subscriptionRenewalURL } from '@src/data/constants/app';
 
-export const SubscriptionBanner: FC<{
-  subscriptionBannerData: BannerItem,
-}> = ({ subscriptionBannerData }) => {
+  // TODO: We can replace the below hardcoded subscriptionBannerData with the actual data from the API once we have the API ready. 
+  // For now, we can use this hardcoded data to test the SubscriptionBanner component.
+  // Refer to https://2u-internal.atlassian.net/browse/SUBS-377 for more details on the API integration.
+  // And https://github.com/edx/frontend-app-subscription-learner-dashboard/pull/2#discussion_r3139442324 for the implementation details of the API integration.
+  const subscriptionBannerData = {
+    isSubscribed: true,
+    subscriptionStatus: 'trial', // can be 'active', 'cancelled', 'expired'
+    subscriptionStartDate: '05/22/25',
+    subscriptionEndDate: '05/22/26',
+    subscriptionRenewalDate: '05/22/26',
+    subscriptionRenewalPrice: '$36',
+  }
+
+export const SubscriptionBanner: FC = () => {
   const { formatMessage } = useIntl();
   const [showPageBanner, setShowPageBanner] = useState<boolean>(true);
   const [bannerBody, setBannerBody] = useState('');
