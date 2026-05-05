@@ -1,12 +1,10 @@
 import React from 'react';
 import { useIntl } from '@openedx/frontend-base';
-
 import messages from './messages';
 import { Button, Image } from '@openedx/paragon';
 import { Search } from '@openedx/paragon/icons';
 import { baseAppUrl } from '@src/data/services/lms/urls';
 
-import emptyCourseSVG from '@src/assets/empty-course.svg';
 import { useInitializeLearnerHome } from '@src/data/hooks';
 
 export const NoCoursesView = () => {
