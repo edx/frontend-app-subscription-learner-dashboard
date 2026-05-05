@@ -13,7 +13,7 @@ export const NoCoursesView = () => {
   const courseSearchUrl = learnerData?.platformSettings?.courseSearchUrl || '';
 
   return (
-    <div id="no-courses-content-view">
+    <div className="no-courses-content-view">
       <p>{formatMessage(messages.inProgressCoursesPrompt)}</p>
       <Button
         variant="brand"
