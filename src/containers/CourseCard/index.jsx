@@ -1,20 +1,19 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Card } from '@openedx/paragon';
 
 import { useIsCollapsed } from './hooks';
-import CourseCardBanners from './components/CourseCardBanners';
-import CourseCardImage from './components/CourseCardImage';
 import CourseCardMenu from './components/CourseCardMenu';
 import CourseCardActions from './components/CourseCardActions';
 import CourseCardDetails from './components/CourseCardDetails';
 import CourseCardTitle from './components/CourseCardTitle';
 
 import './CourseCard.scss';
+import CourseCardBanners from './components/CourseCardBanners';
 
 export const CourseCard = ({
   cardId,
+  verifiedCourse
 }) => {
   const isCollapsed = useIsCollapsed();
   const orientation = isCollapsed ? 'vertical' : 'horizontal';
@@ -23,7 +22,6 @@ export const CourseCard = ({
       <Card orientation={orientation}>
         <div className="d-flex flex-column w-100">
           <div {...(!isCollapsed && { className: 'd-flex' })}>
-            <CourseCardImage cardId={cardId} orientation="horizontal" />
             <Card.Body>
               <Card.Header
                 title={<CourseCardTitle cardId={cardId} />}
@@ -31,13 +29,11 @@ export const CourseCard = ({
               />
               <Card.Section className="pt-0">
                 <CourseCardDetails cardId={cardId} />
+                <CourseCardActions cardId={cardId} verifiedCourse={verifiedCourse} />
               </Card.Section>
-              <Card.Footer orientation={orientation}>
-                <CourseCardActions cardId={cardId} />
-              </Card.Footer>
             </Card.Body>
           </div>
-          <CourseCardBanners cardId={cardId} />
+          <CourseCardBanners cardId={cardId} verifiedCourse={verifiedCourse} />
         </div>
       </Card>
     </div>
@@ -45,6 +41,7 @@ export const CourseCard = ({
 };
 CourseCard.propTypes = {
   cardId: PropTypes.string.isRequired,
+  verifiedCourse: PropTypes.bool,
 };
 
 export default CourseCard;

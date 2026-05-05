@@ -1,13 +1,14 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import { useSelectSessionModal } from '@src/data/context';
 import { useInitializeLearnerHome } from '@src/data/hooks';
 import SelectSessionModal from '../../containers/SelectSessionModal';
-import CoursesPanel from '../../containers/CoursesPanel';
+import DashboardTabs from './DashboardTabs';
 import DashboardModalSlot from '../../slots/DashboardModalSlot';
 
 import LoadingView from './LoadingView';
 import DashboardLayout from './DashboardLayout';
+
 import hooks from './hooks';
 import './index.scss';
 import { SubscriptionBanner } from '../SubscriptionBanner';
@@ -37,6 +38,7 @@ export const Dashboard = () => {
               : (
                 <DashboardLayout>
                   <SubscriptionBanner />
+                  <DashboardTabs />
                 </DashboardLayout>
               )}
           </div>

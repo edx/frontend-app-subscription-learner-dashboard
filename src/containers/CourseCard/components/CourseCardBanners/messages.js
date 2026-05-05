@@ -101,6 +101,11 @@ const messages = defineMessages({
     description: 'Course has not started message',
     defaultMessage: 'You can\'t access this course just yet because the course hasn\'t started yet. The course will start on {startDate}.',
   },
+  redeem: {
+    id: 'learner-dash.courseCard.banners.redeem',
+    description: 'Redeem link text',
+    defaultMessage: 'Redeem',
+  },
 });
 
 export default messages;

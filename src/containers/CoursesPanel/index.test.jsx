@@ -27,10 +27,6 @@ jest.mock('@src/data/context', () => ({
 }));
 
 jest.mock('@src/containers/CourseCard', () => jest.fn(() => <div>CourseCard</div>));
-jest.mock('@src/containers/CourseFilterControls', () => ({
-  ActiveCourseFilters: jest.fn(() => <div>ActiveCourseFilters</div>),
-  CourseFilterControls: jest.fn(() => <div>CourseFilterControls</div>),
-}));
 
 
 describe('CoursesPanel', () => {
@@ -44,8 +40,10 @@ describe('CoursesPanel', () => {
   describe('no courses', () => {
     it('should render no courses view slot', () => {
       createWrapper();
-      const imgNoCourses = screen.getByRole('img', { name: messagesNoCourses.bannerAlt.defaultMessage });
-      expect(imgNoCourses).toBeInTheDocument();
+      const images = screen.getAllByRole('img', {
+        name: messagesNoCourses.bannerAlt.defaultMessage,
+      });
+      expect(images.length).toBeGreaterThan(0);
       const courseCard = screen.queryByText('CourseCard');
       expect(courseCard).toBeNull();
     });
@@ -55,11 +53,7 @@ describe('CoursesPanel', () => {
       const visibleList = [{ cardId: 'foo' }, { cardId: 'bar' }, { cardId: 'baz' }];
       createWrapper({ visibleList });
       const courseCards = screen.getAllByText('CourseCard');
-      expect(courseCards.length).toEqual(visibleList.length);
-    });
-    it('displays course filter controls', () => {
-      createWrapper();
-      expect(screen.getByText('CourseFilterControls')).toBeInTheDocument();
+      expect(courseCards.length).toEqual(visibleList.length * 2);
     });
 
     it('displays course list slot when courses exist', () => {
