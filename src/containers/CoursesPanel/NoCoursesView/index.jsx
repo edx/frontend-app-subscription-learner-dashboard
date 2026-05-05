@@ -1,5 +1,7 @@
 import React from 'react';
 import { useIntl } from '@openedx/frontend-base';
+
+import messages from './messages';
 import { Button, Image } from '@openedx/paragon';
 import { Search } from '@openedx/paragon/icons';
 import { baseAppUrl } from '@src/data/services/lms/urls';
@@ -7,32 +9,21 @@ import { baseAppUrl } from '@src/data/services/lms/urls';
 import emptyCourseSVG from '@src/assets/empty-course.svg';
 import { useInitializeLearnerHome } from '@src/data/hooks';
 
-import messages from './messages';
-import './index.scss';
-
 export const NoCoursesView = () => {
   const { formatMessage } = useIntl();
   const { data: learnerData } = useInitializeLearnerHome();
   const courseSearchUrl = learnerData?.platformSettings?.courseSearchUrl || '';
+
   return (
-    <div
-      id="no-courses-content-view"
-      className="d-flex align-items-center justify-content-center mb-4.5"
-    >
-      <Image src={emptyCourseSVG} alt={formatMessage(messages.bannerAlt)} />
-      <h3 className="h1">
-        {formatMessage(messages.lookingForChallengePrompt)}
-      </h3>
-      <p>
-        {formatMessage(messages.exploreCoursesPrompt)}
-      </p>
+    <div id="no-courses-content-view">
+      <p>{formatMessage(messages.inProgressCoursesPrompt)}</p>
       <Button
         variant="brand"
         as="a"
         href={baseAppUrl(courseSearchUrl)}
         iconBefore={Search}
       >
-        {formatMessage(messages.exploreCoursesButton)}
+        {formatMessage(messages.findCoursesButton)}
       </Button>
     </div>
   );

@@ -19,21 +19,14 @@ jest.mock('@src/data/hooks', () => ({
 }));
 
 describe('NoCoursesView', () => {
-  it('should display image, heading and button', () => {
+  it('renders the empty courses placeholder', () => {
     render(<IntlProvider locale="en"><EmptyCourse /></IntlProvider>);
-    const image = screen.getByRole('img', { alt: formatMessage(messages.bannerAlt) });
-    expect(image).toBeInTheDocument();
-  });
-  it('should display heading and prompt', () => {
-    render(<IntlProvider locale="en"><EmptyCourse /></IntlProvider>);
-    const heading = screen.getByText(formatMessage(messages.lookingForChallengePrompt));
-    const prompt = screen.getByText(formatMessage(messages.exploreCoursesPrompt));
-    expect(heading).toBeInTheDocument();
+    const prompt = screen.getByText(formatMessage(messages.inProgressCoursesPrompt));
     expect(prompt).toBeInTheDocument();
   });
   it('should display button', () => {
     render(<IntlProvider locale="en"><EmptyCourse /></IntlProvider>);
-    const button = screen.getByRole('link', { name: formatMessage(messages.exploreCoursesButton) });
+    const button = screen.getByRole('link', { name: formatMessage(messages.findCoursesButton) });
     expect(button).toBeInTheDocument();
     expect(button.href).toBe(baseAppUrl(courseSearchUrl));
   });
