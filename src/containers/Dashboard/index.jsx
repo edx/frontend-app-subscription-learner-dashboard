@@ -11,6 +11,7 @@ import DashboardLayout from './DashboardLayout';
 
 import hooks from './hooks';
 import './index.scss';
+import { SubscriptionBanner } from '../SubscriptionBanner';
 
 export const Dashboard = () => {
   const { data, isPending } = useInitializeLearnerHome();
@@ -36,6 +37,7 @@ export const Dashboard = () => {
               ? (<LoadingView />)
               : (
                 <DashboardLayout>
+                  <SubscriptionBanner />
                   <DashboardTabs />
                 </DashboardLayout>
               )}
