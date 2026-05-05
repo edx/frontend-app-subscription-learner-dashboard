@@ -37,7 +37,6 @@ export const Dashboard = () => {
               : (
                 <DashboardLayout>
                   <SubscriptionBanner />
-                  <CoursesPanel />
                 </DashboardLayout>
               )}
           </div>

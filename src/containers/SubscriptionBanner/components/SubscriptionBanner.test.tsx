@@ -47,7 +47,7 @@ describe('SubscriptionBanner', () => {
   // --- Renew Button ---
   test('renders Renew button for cancelled subscription with correct URL', () => {
     const cancelledBannerData = { ...mockBannerData, subscriptionStatus: 'cancelled' };
-    render(<SubscriptionBanner subscriptionBannerData={cancelledBannerData} />);
+    render(<SubscriptionBanner />);
     const renewBtn = screen.getByTestId('renew-button');
     expect(renewBtn).toBeInTheDocument();
     expect(renewBtn).toHaveAttribute('href', subscriptionRenewalURL);
@@ -55,31 +55,31 @@ describe('SubscriptionBanner', () => {
 
   test('Renew button opens in a new tab with rel="noopener noreferrer"', () => {
     const cancelledBannerData = { ...mockBannerData, subscriptionStatus: 'cancelled' };
-    render(<SubscriptionBanner subscriptionBannerData={cancelledBannerData} />);
+    render(<SubscriptionBanner />);
     const renewBtn = screen.getByTestId('renew-button');
     expect(renewBtn).toHaveAttribute('target', '_blank');
     expect(renewBtn).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
   test('does not render Renew button for active subscription', () => {
-    render(<SubscriptionBanner subscriptionBannerData={mockBannerData} />);
+    render(<SubscriptionBanner />);
     expect(screen.queryByTestId('renew-button')).not.toBeInTheDocument();
   });
 
   test('does not render Renew button for trial subscription', () => {
     const trialBannerData = { ...mockBannerData, subscriptionStatus: 'trial' };
-    render(<SubscriptionBanner subscriptionBannerData={trialBannerData} />);
+    render(<SubscriptionBanner />);
     expect(screen.queryByTestId('renew-button')).not.toBeInTheDocument();
   });
   // --- Dismiss ---
   test('does not render banner when not subscribed', () => {
     const notSubscribedData = { ...mockBannerData, isSubscribed: false };
-    render(<SubscriptionBanner subscriptionBannerData={notSubscribedData} />);
+    render(<SubscriptionBanner />);
     expect(screen.queryByTestId('alert-banner')).not.toBeInTheDocument();
   });
 
   test('dismisses the banner when close button is clicked', async () => {
-    render(<SubscriptionBanner subscriptionBannerData={mockBannerData} />);
+    render(<SubscriptionBanner />);
     await userEvent.click(
       screen.getByRole('button', { name: /dismiss/i })
     );

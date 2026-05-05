@@ -2,14 +2,13 @@ import { FC, useEffect, useState, useMemo } from 'react';
 import { Alert, Icon, Button, Variant } from '@openedx/paragon';
 import { CheckCircle, Info, OpenInNew } from '@openedx/paragon/icons';
 import { useIntl } from '@openedx/frontend-base';
-import { BannerItem } from '../types';
 import { utilHooks } from '@src/hooks';
 import messages from '../messages';
 import { subscriptionRenewalURL } from '@src/data/constants/app';
 
   // TODO: We can replace the below hardcoded subscriptionBannerData with the actual data from the API once we have the API ready. 
   // For now, we can use this hardcoded data to test the SubscriptionBanner component.
-  // Refer to https://2u-internal.atlassian.net/browse/SUBS-377 for more details on the API integration.
+  // Refer to https://2u-internal.atlassian.net/browse/SUBS-442 for more details on the API integration.
   // And https://github.com/edx/frontend-app-subscription-learner-dashboard/pull/2#discussion_r3139442324 for the implementation details of the API integration.
   const subscriptionBannerData = {
     isSubscribed: true,
