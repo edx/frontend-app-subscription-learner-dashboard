@@ -26,7 +26,7 @@ describe('ProductCard', () => {
     body: 'Test Body Content',
     url: 'https://via.placeholder.com/150',
     thumbnail: 'https://via.placeholder.com/50',
-    hasTag: true,
+    isProgram: true,
     tagText: 'New',
     footerLabel: 'Test Category',
   };
@@ -64,14 +64,14 @@ describe('ProductCard', () => {
   });
 
   describe('Badge Rendering', () => {
-    it('renders badge when hasTag is true and tagText exists', () => {
+    it('renders badge when isProgram is true and tagText exists', () => {
       renderComponent();
 
       expect(screen.getByText('New')).toBeInTheDocument();
     });
 
-    it('does not render badge when hasTag is false', () => {
-      renderComponent({ hasTag: false });
+    it('does not render badge when isProgram is false', () => {
+      renderComponent({ isProgram: false });
 
       expect(screen.queryByText('New')).not.toBeInTheDocument();
     });

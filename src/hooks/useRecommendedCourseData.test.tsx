@@ -30,7 +30,7 @@ describe('useRecommendedCourseData', () => {
       body: 'This is a test course description',
       url: 'https://example.com/image.jpg',
       thumbnail: 'https://example.com/thumbnail.jpg',
-      hasTag: false,
+      isProgram: false,
       tagText: 'Professional Certificate',
       footerLabel: 'Test Category'
     }];

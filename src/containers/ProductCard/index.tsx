@@ -10,7 +10,7 @@ export const ProductCard: FC<ProductCardProps> = ({ item, isLoading }) => {
   return (
     <Card
       className="shadow-sm d-flex flex-column rounded w-100 overflow-hidden"
-      variant={item.hasTag ? 'dark' : 'light'}
+      variant={item.isProgram ? 'dark' : 'light'}
       data-testid="product-card"
       isLoading={isLoading}
     >
@@ -31,7 +31,7 @@ export const ProductCard: FC<ProductCardProps> = ({ item, isLoading }) => {
           <p className="text-truncate-3 mb-2">{item.body}</p>
         </div>
 
-        {(item.hasTag && item.tagText) && (
+        {(item.isProgram && item.tagText) && (
           <Badge
             variant="light"
             className="d-inline-flex align-items-center px-2 py-1 align-self-start"
@@ -43,7 +43,7 @@ export const ProductCard: FC<ProductCardProps> = ({ item, isLoading }) => {
       </Card.Section>
 
       <Card.Footer className="d-flex justify-content-between align-items-center">
-        <span className={`small ${item.hasTag ? 'text-white' : 'text-muted'}`}>{item.footerLabel}</span>
+        <span className={`small ${item.isProgram ? 'text-white' : 'text-muted'}`}>{item.footerLabel}</span>
       </Card.Footer>
     </Card>
   );

@@ -2,7 +2,7 @@ export interface ProductCardItem {
   id: string | number,
   title: string,
   body: string,
-  hasTag?: boolean,
+  isProgram?: boolean,
   tagText?: string,
   url: string,
   thumbnail?: string,
