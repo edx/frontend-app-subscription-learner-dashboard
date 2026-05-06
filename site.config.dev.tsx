@@ -9,10 +9,17 @@ import '@openedx/brand-openedx/dist/light.min.css';
 const siteConfig: SiteConfig = {
   siteId: 'learner-dashboard-dev',
   siteName: 'Learner Dashboard Dev',
+<<<<<<< mfrank/update-frotend-base-style-manifest
   baseUrl: 'http://localhost:1996',
   lmsBaseUrl: 'http://localhost:18000',
   loginUrl: 'http://localhost:18000/login',
   logoutUrl: 'http://localhost:18000/logout',
+=======
+  baseUrl: 'http://apps.local.openedx.io:1996',
+  lmsBaseUrl: 'http://local.openedx.io:18000',
+  loginUrl: 'http://local.openedx.io:18000/login',
+  logoutUrl: 'http://local.openedx.io:18000/logout',
+>>>>>>> frontend-base
 
   environment: EnvironmentTypes.DEVELOPMENT,
   apps: [
@@ -32,7 +39,11 @@ const siteConfig: SiteConfig = {
     },
     {
       role: 'org.openedx.frontend.role.logout',
+<<<<<<< mfrank/update-frotend-base-style-manifest
       url: 'http://localhost:18000/logout'
+=======
+      url: 'http://local.openedx.io:18000/logout'
+>>>>>>> frontend-base
     },
   ],
 

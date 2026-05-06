@@ -47,23 +47,32 @@ export const CoursesPanel = () => {
     }
   }, [numPages, pageNumber, setPageNumber]);
 
+  // TODO [TEMP]: Passing data twice and displaying the list twice, also fixed the corresponding test cases to reflect this.
+  // Reason: Requirements not finalized
+  // Action: Revisit after UX and data confirmation
   const courseListData = {
-    filterOptions: filters,
     setPageNumber,
     numPages,
     visibleList,
-    showFilters: filters.length > 0,
+    verifiedCourse: true,
+  };
+
+  const limitedCourseListData = {
+    ...courseListData,
+    verifiedCourse: false,
   };
 
   return (
     <div className="course-list-container">
       <div className="course-list-heading-container">
         <h2 className="course-list-title">{formatMessage(messages.myCourses)}</h2>
-        <div className="course-filter-controls-container">
-          <CourseFilterControls />
-        </div>
       </div>
       {hasCourses ? <CourseListSlot courseListData={courseListData} /> : <NoCoursesViewSlot />}
+
+      <div className="course-list-heading-container">
+        <h2 className="course-list-title text-gray-700">{formatMessage(messages.limitedCourse)}</h2>
+      </div>
+      {hasCourses ? <CourseListSlot courseListData={limitedCourseListData} /> : <NoCoursesViewSlot />}
     </div>
   );
 };

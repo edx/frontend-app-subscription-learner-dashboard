@@ -15,7 +15,7 @@ describe('ActionButton', () => {
     useIsCollapsed.mockReturnValue(true);
     render(<ActionButton {...props} />);
     const button = screen.getByRole('button', { name: 'Test' });
-    expect(button).toHaveClass('btn-sm', 'custom-class');
+    expect(button).toHaveClass('btn-sm', 'btn-primary', 'w-auto', 'btn');
   });
 
   it('is not collapsed', () => {

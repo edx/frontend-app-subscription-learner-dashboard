@@ -1,0 +1,1 @@
+export { fetchRecommendedCourses } from './api';
