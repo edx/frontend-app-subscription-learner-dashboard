@@ -40,10 +40,8 @@ describe('CoursesPanel', () => {
   describe('no courses', () => {
     it('should render no courses view slot', () => {
       createWrapper();
-      const images = screen.getAllByRole('img', {
-        name: messagesNoCourses.bannerAlt.defaultMessage,
-      });
-      expect(images.length).toBeGreaterThan(0);
+      const placeholders = screen.getAllByText(messagesNoCourses.inProgressCoursesPrompt.defaultMessage);
+      expect(placeholders).toHaveLength(2);
       const courseCard = screen.queryByText('CourseCard');
       expect(courseCard).toBeNull();
     });
