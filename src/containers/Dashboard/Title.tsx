@@ -9,9 +9,9 @@ export const Title: FC = () => {
 
   return (
     <Col xs={12} className="my-4">
-      <h3 className="font-weight-bold mb-2" data-testid="dashboard-title">
+      <h2 className="font-weight-bold mb-2" data-testid="dashboard-title">
         {formatMessage(messages.dashboardTitle)}
-      </h3>
+      </h2>
       <p className="mb-0 text-body" data-testid="dashboard-subtitle">
         {formatMessage(messages.dashboardSubtitle)}
       </p>
