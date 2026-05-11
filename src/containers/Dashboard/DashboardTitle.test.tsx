@@ -2,17 +2,17 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { IntlProvider } from '@openedx/frontend-base';
 
-import { Title } from './Title';
+import { DashboardTitle } from './DashboardTitle';
 import messages from './messages';
 
 const renderComponent = (intlMessages: Record<string, string> = {}) =>
   render(
     <IntlProvider locale="en" messages={intlMessages}>
-      <Title />
+      <DashboardTitle />
     </IntlProvider>
   );
 
-describe('Title', () => {
+describe('DashboardTitle', () => {
   it('renders title and subtitle correctly', () => {
     renderComponent({
       [messages.dashboardTitle.id]: 'Dashboard Title',

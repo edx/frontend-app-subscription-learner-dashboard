@@ -4,7 +4,7 @@ import { useIntl } from '@openedx/frontend-base';
 
 import messages from './messages';
 
-export const Title: FC = () => {
+export const DashboardTitle: FC = () => {
   const { formatMessage } = useIntl();
 
   return (

@@ -12,7 +12,7 @@ import DashboardLayout from './DashboardLayout';
 import hooks from './hooks';
 import './index.scss';
 import { SubscriptionBanner } from '../SubscriptionBanner';
-import { Title } from './Title';
+import { DashboardTitle } from './DashboardTitle';
 
 export const Dashboard = () => {
   const { data, isPending } = useInitializeLearnerHome();
@@ -39,7 +39,7 @@ export const Dashboard = () => {
               : (
                 <DashboardLayout>
                   <SubscriptionBanner />
-                  <Title />
+                  <DashboardTitle />
                   <DashboardTabs />
                 </DashboardLayout>
               )}
