@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import DashboardTabs from './DashboardTabs';
 
+/* eslint-disable */  // as per suggestion
 jest.mock('@openedx/paragon', () => ({
   Tabs: ({ children, className }) => <div className={className}>{children}</div>,
   Tab: ({ title, children, eventKey, onSelect }) => (
@@ -17,6 +18,7 @@ jest.mock('@openedx/paragon', () => ({
 jest.mock('../../containers/CoursesPanel', () => () => (
   <div data-testid="courses-panel">Courses Panel Content</div>
 ));
+/* eslint-enable */
 
 describe('DashboardTabs', () => {
   it('renders all tab titles', () => {
@@ -53,4 +55,3 @@ describe('DashboardTabs', () => {
     ).toBeInTheDocument();
   });
 });
-

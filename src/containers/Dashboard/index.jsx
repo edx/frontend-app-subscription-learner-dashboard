@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { useSelectSessionModal } from '@src/data/context';
 import { useInitializeLearnerHome } from '@src/data/hooks';
@@ -12,6 +12,7 @@ import DashboardLayout from './DashboardLayout';
 import hooks from './hooks';
 import './index.scss';
 import { SubscriptionBanner } from '../SubscriptionBanner';
+import { Title } from './Title';
 
 export const Dashboard = () => {
   const { data, isPending } = useInitializeLearnerHome();
@@ -38,6 +39,7 @@ export const Dashboard = () => {
               : (
                 <DashboardLayout>
                   <SubscriptionBanner />
+                  <Title />
                   <DashboardTabs />
                 </DashboardLayout>
               )}
