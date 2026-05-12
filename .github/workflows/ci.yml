@@ -37,6 +37,7 @@ jobs:
       run: npm run build
 
     - name: Run Coverage
+      if: ${{ secrets.CODECOV_TOKEN != '' }}
       uses: codecov/codecov-action@v5
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
