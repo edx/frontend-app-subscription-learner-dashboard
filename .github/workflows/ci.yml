@@ -36,7 +36,12 @@ jobs:
     - name: Build
       run: npm run build
 
+    - name: Skip Coverage Upload (No Token)
+      if: ${{ secrets.CODECOV_TOKEN == '' }}
+      run: echo "Skipping Codecov upload because CODECOV_TOKEN is not configured."
+
     - name: Run Coverage
+      if: ${{ secrets.CODECOV_TOKEN != '' }}
       uses: codecov/codecov-action@v5
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
