@@ -34,19 +34,9 @@ jest.mock('@src/hooks', () => ({
   },
 }));
 
-const mockBannerData = {
-  isSubscribed: true,
-  subscriptionStatus: 'active',
-  subscriptionStartDate: '05/22/25',
-  subscriptionEndDate: '05/22/26',
-  subscriptionRenewalDate: '05/22/26',
-  subscriptionRenewalPrice: '$36',
-};
-
 describe('SubscriptionBanner', () => {
   // --- Renew Button ---
   test('renders Renew button for cancelled subscription with correct URL', () => {
-    const cancelledBannerData = { ...mockBannerData, subscriptionStatus: 'cancelled' };
     render(<SubscriptionBanner />);
     const renewBtn = screen.getByTestId('renew-button');
     expect(renewBtn).toBeInTheDocument();
@@ -54,7 +44,6 @@ describe('SubscriptionBanner', () => {
   });
 
   test('Renew button opens in a new tab with rel="noopener noreferrer"', () => {
-    const cancelledBannerData = { ...mockBannerData, subscriptionStatus: 'cancelled' };
     render(<SubscriptionBanner />);
     const renewBtn = screen.getByTestId('renew-button');
     expect(renewBtn).toHaveAttribute('target', '_blank');
@@ -67,13 +56,11 @@ describe('SubscriptionBanner', () => {
   });
 
   test('does not render Renew button for trial subscription', () => {
-    const trialBannerData = { ...mockBannerData, subscriptionStatus: 'trial' };
     render(<SubscriptionBanner />);
     expect(screen.queryByTestId('renew-button')).not.toBeInTheDocument();
   });
   // --- Dismiss ---
   test('does not render banner when not subscribed', () => {
-    const notSubscribedData = { ...mockBannerData, isSubscribed: false };
     render(<SubscriptionBanner />);
     expect(screen.queryByTestId('alert-banner')).not.toBeInTheDocument();
   });
