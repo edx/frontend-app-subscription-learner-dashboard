@@ -13,10 +13,6 @@ const siteConfig: SiteConfig = {
   lmsBaseUrl: 'http://localhost:18000',
   loginUrl: 'http://localhost:18000/login',
   logoutUrl: 'http://localhost:18000/logout',
-  baseUrl: 'http://apps.local.openedx.io:1996',
-  lmsBaseUrl: 'http://local.openedx.io:18000',
-  loginUrl: 'http://local.openedx.io:18000/login',
-  logoutUrl: 'http://local.openedx.io:18000/logout',
 
   environment: EnvironmentTypes.DEVELOPMENT,
   apps: [
