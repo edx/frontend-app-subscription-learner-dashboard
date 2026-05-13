@@ -8,9 +8,6 @@
 .. |ci-badge| image:: https://github.com/openedx/frontend-app-learner-dashboard/actions/workflows/ci.yml/badge.svg
     :target: https://github.com/openedx/frontend-app-learner-dashboard/actions/workflows/ci.yml
     :alt: Continuous Integration
-.. |codecov-badge| image:: https://codecov.io/github/openedx/frontend-app-learner-dashboard/coverage.svg?branch=master
-    :target: https://app.codecov.io/github/openedx/frontend-app-learner-dashboard?branch=master
-    :alt: Codecov
 
 frontend-app-learner-dashboard
 ==============================

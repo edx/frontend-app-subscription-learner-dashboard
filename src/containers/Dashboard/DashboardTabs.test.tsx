@@ -2,21 +2,58 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import DashboardTabs from './DashboardTabs';
 
-jest.mock('@openedx/paragon', () => ({
-  Tabs: ({ children, className }) => <div className={className}>{children}</div>,
-  Tab: ({ title, children, eventKey, onSelect }) => (
+interface TabsProps {
+  children?: React.ReactNode,
+  className?: string,
+};
+
+interface TabProps {
+  title?: React.ReactNode,
+  children?: React.ReactNode,
+  eventKey?: string | number,
+  onSelect?: (key: string | number | undefined) => void,
+};
+
+jest.mock('@openedx/paragon', () => {
+  const MockTabs = ({ children, className }: TabsProps) => (
+    <div className={className}>{children}</div>
+  );
+
+  MockTabs.displayName = 'MockTabs';
+
+  const MockTab = ({
+    title,
+    children,
+    eventKey,
+    onSelect,
+  }: TabProps) => (
     <div>
-      <button type="button" onClick={() => onSelect && onSelect(eventKey)}>
+      <button type="button" onClick={() => onSelect?.(eventKey)}>
         {title}
       </button>
       <div>{children}</div>
     </div>
-  ),
-}));
+  );
 
-jest.mock('../../containers/CoursesPanel', () => () => (
-  <div data-testid="courses-panel">Courses Panel Content</div>
-));
+  MockTab.displayName = 'MockTab';
+
+  return {
+    Tabs: MockTabs,
+    Tab: MockTab,
+  };
+});
+
+jest.mock('../../containers/CoursesPanel', () => {
+  const MockCoursesPanel = () => (
+    <div data-testid="courses-panel">
+      Courses Panel Content
+    </div>
+  );
+
+  MockCoursesPanel.displayName = 'MockCoursesPanel';
+
+  return MockCoursesPanel;
+});
 
 describe('DashboardTabs', () => {
   it('renders all tab titles', () => {
@@ -53,4 +90,3 @@ describe('DashboardTabs', () => {
     ).toBeInTheDocument();
   });
 });
-
