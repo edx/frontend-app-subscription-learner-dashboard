@@ -35,10 +35,3 @@ jobs:
 
     - name: Build
       run: npm run build
-
-    - name: Run Coverage
-      if: ${{ secrets.CODECOV_TOKEN != '' }}
-      uses: codecov/codecov-action@v5
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        fail_ci_if_error: true
