@@ -1,0 +1,9 @@
+export interface SubscriptionInformationData {
+  isSubscribed: boolean,
+  subscriptionStatus: string,
+  subscriptionStartDate: string,
+  subscriptionEndDate: string,
+  subscriptionRenewalDate: string,
+  subscriptionRenewalPrice: string,
+}
+export type InformationItem = SubscriptionInformationData;

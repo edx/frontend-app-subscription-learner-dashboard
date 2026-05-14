@@ -1,0 +1,80 @@
+import { FC, useMemo } from 'react';
+import { Alert, Button, Image } from '@openedx/paragon';
+import { useIntl } from '@openedx/frontend-base';
+import { utilHooks } from '@src/hooks';
+import messages from '../messages';
+import { manageSubscriptionURL } from '@src/data/constants/app';
+import './subscriptionInformation.scss';
+
+// TODO: We can replace the below hardcoded subscriptionInformationData with the actual data from the API once we have the API ready.
+// For now, we can use this hardcoded data to test the SubscriptionInformation component.
+const subscriptionInformationData = {
+  isSubscribed: true,
+  subscriptionStatus: 'cancelled', // can be 'active', 'cancelled', 'expired'
+  subscriptionStartDate: '05/22/25',
+  subscriptionEndDate: '05/22/26',
+  subscriptionRenewalDate: '05/22/26',
+  subscriptionRenewalPrice: '$36',
+  numberOfCoursesEnrolled: 5,
+  totalSavings: '$120',
+};
+
+export const SubscriptionInformation: FC = () => {
+  const { formatMessage } = useIntl();
+  const formatDate = utilHooks.useFormatDate();
+
+  const getSubscriptionAction = useMemo(() => {
+    return (
+      [
+        <Button
+          key="manage-subscription"
+          data-testid="manage-button"
+          className="manage-button"
+          variant="primary"
+          href={manageSubscriptionURL}
+          target="_blank"
+          rel="noopener noreferrer"
+          role="link"
+        >
+          {formatMessage(messages.manageSubscriptionMessage)}
+        </Button>,
+      ]
+    );
+  }, []);
+
+  return (
+    <div className="container subscription-information" style={{ padding: '20px' }}>
+      <Image
+        className="mr-2"
+        src="https://www.edx.org/trademark-logos/edx-logo-elm.svg"
+        rounded
+        alt="Image description"
+        style={{ width: '60px', height: '40px', }}
+      />
+      {subscriptionInformationData.subscriptionStatus == 'cancelled' ? (
+        <h3>{formatMessage(messages.cancelledMessage, { totalSavings: subscriptionInformationData.totalSavings })}</h3>
+      ) : <></>}
+      <p>
+        {formatMessage(messages.coursesEnrollmentMessage, {
+          numberOfCoursesEnrolled: subscriptionInformationData.numberOfCoursesEnrolled,
+          totalSavings: subscriptionInformationData.totalSavings,
+        })}
+      </p>
+      <Alert
+        variant="info"
+        dismissible={false}
+        closeLabel="Dismiss"
+        show={true}
+        actions={getSubscriptionAction}
+        className="subscription-status-alert"
+      >
+        <Alert.Heading>{formatMessage(messages.statusMessage)}</Alert.Heading>
+        <p>
+          {formatMessage(messages.renewalMessage, {
+            subscriptionRenewalDate: formatDate(subscriptionInformationData.subscriptionRenewalDate),
+          })}
+        </p>
+      </Alert>
+    </div>
+  );
+};
