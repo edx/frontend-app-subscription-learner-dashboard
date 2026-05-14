@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 import { Pagination } from '@openedx/paragon';
-import CourseCard from '../../../containers/CourseCard';
+import CourseCard from '@src/containers/CourseCard';
 
 import { useIsCollapsed } from './hooks';
 
