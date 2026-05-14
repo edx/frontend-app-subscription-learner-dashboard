@@ -1,16 +1,17 @@
 |license-badge| |status-badge| |ci-badge| |codecov-badge|
 
-.. |license-badge| image:: https://img.shields.io/github/license/openedx/frontend-app-learner-dashboard.svg
-    :target: https://github.com/openedx/frontend-app-learner-dashboard/blob/master/LICENSE
+.. |license-badge| image:: https://img.shields.io/github/license/edx/frontend-app-subscription-learner-dashboard.svg
+    :target: https://github.com/edx/frontend-app-subscription-learner-dashboard/blob/master/LICENSE
     :alt: License
 .. |status-badge| image:: https://img.shields.io/badge/Status-Maintained-brightgreen
     :alt: Maintained
-.. |ci-badge| image:: https://github.com/openedx/frontend-app-learner-dashboard/actions/workflows/ci.yml/badge.svg
-    :target: https://github.com/openedx/frontend-app-learner-dashboard/actions/workflows/ci.yml
+.. |ci-badge| image:: https://github.com/edx/frontend-app-subscription-learner-dashboard/actions/workflows/ci.yml/badge.svg
+    :target: https://github.com/edx/frontend-app-subscription-learner-dashboard/actions/workflows/ci.yml
     :alt: Continuous Integration
 
-frontend-app-learner-dashboard
-==============================
+frontend-app-subscription-learner-dashboard
+===========================================
+
 
 The Learner Home app is a microfrontend (MFE) course listing experience for the Open edX Learning Management System
 (LMS).  This experience was designed to provide a clean and functional interface to allow learners to view all of their
@@ -39,7 +40,7 @@ The code in this repository is licensed under the AGPLv3 unless otherwise noted.
 
 Please see the `license`_ for more info.
 
-.. _license: https://github.com/openedx/frontend-app-learner-dashboard/blob/master/LICENSE
+.. _license: https://github.com/edx/frontend-app-subscription-learner-dashboard/blob/master/LICENSE
 
 Getting Help
 ------------
@@ -54,7 +55,7 @@ Our real-time conversations are on Slack. You can request a `Slack invitation`_,
 For anything non-trivial, the best path is to open an issue in this repository with as many details about the issue you
 are facing as you can provide.
 
-https://github.com/openedx/frontend-app-learner-dashboard/issues
+https://github.com/edx/frontend-app-subscription-learner-dashboard/issues
 
 For more information about these options, see the `Getting Help`_ page.
 

@@ -3,10 +3,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: 'frontend-app-learner-dashboard'
-  description: 'The Microfrontend for the course listing interface allowing learners to view and act upon enrollments.'
+  name: 'frontend-app-subscription-learner-dashboard'
+  description: 'The Microfrontend for the course listing interface allowing subscription learners to view and act upon enrollments.'
   links:
-    - url: 'https://github.com/openedx/frontend-app-learner-dashboard/blob/master/README.rst'
+    - url: 'https://github.com/edx/frontend-app-subscription-learner-dashboard/blob/master/README.rst'
       title: 'Documentation'
       icon: 'Article'
   annotations:

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useIntl } from '@openedx/frontend-base';
 
 import { EXECUTIVE_EDUCATION_COURSE_MODES } from '@src/data/constants/course';
+import { baseAppUrl } from '@src/data/services/lms/urls';
 import track from '@src/tracking';
 import { useCourseTrackingEvent, useCourseData } from '@src/hooks';
 import { useInitializeLearnerHome } from '@src/data/hooks';
@@ -15,7 +16,7 @@ export const ResumeButton = ({ cardId }) => {
   const { formatMessage } = useIntl();
   const { data: learnerData } = useInitializeLearnerHome();
   const courseData = useCourseData(cardId);
-  const resumeUrl = courseData?.courseRun?.resumeUrl;
+  const resumeUrl = baseAppUrl(courseData?.courseRun?.resumeUrl);
   const execEdTrackingParam = useMemo(() => {
     const isExecEd2UCourse = EXECUTIVE_EDUCATION_COURSE_MODES.includes(courseData.enrollment.mode);
     const { authOrgId } = learnerData.enterpriseDashboard || {};

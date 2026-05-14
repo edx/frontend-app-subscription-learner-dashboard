@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { IntlProvider } from '@openedx/frontend-base';
 import { useCourseTrackingEvent, useCourseData } from '@src/hooks';
+import { baseAppUrl } from '@src/data/services/lms/urls';
 
 import track from '@src/tracking';
 import useActionDisabledState from '../hooks';
@@ -84,7 +85,7 @@ describe('ResumeButton', () => {
         expect(useCourseTrackingEvent).toHaveBeenCalledWith(
           track.course.enterCourseClicked,
           props.cardId,
-          `home-url?org_id=${authOrgId}`,
+          `${baseAppUrl('home-url')}?org_id=${authOrgId}`,
         );
       });
     });
