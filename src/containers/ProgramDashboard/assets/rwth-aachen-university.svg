@@ -1,0 +1,47 @@
+<svg width="174" height="87.45954895019531" viewBox="0 0 828 383" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rwthTitle rwthDesc">
+  <title id="rwthTitle">RWTH Aachen University logo</title>
+  <desc id="rwthDesc">Stylized RWTH Aachen University wordmark with dark blue RWTH and light blue AACHEN UNIVERSITY on a transparent background.</desc>
+
+  <defs>
+    <linearGradient id="rwthLightBlue" x1="404" y1="74" x2="716" y2="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#C6DCF3" />
+      <stop offset="1" stop-color="#8FB7DE" />
+    </linearGradient>
+  </defs>
+
+  <g transform="skewX(-12)">
+    <text
+      x="96"
+      y="184"
+      fill="#005CA9"
+      font-family="Arial Black, Helvetica, Arial, sans-serif"
+      font-size="126"
+      font-weight="900"
+      letter-spacing="-6"
+    >
+      RWTH
+    </text>
+    <text
+      x="405"
+      y="184"
+      fill="url(#rwthLightBlue)"
+      font-family="Arial Black, Helvetica, Arial, sans-serif"
+      font-size="104"
+      font-weight="900"
+      letter-spacing="-5"
+    >
+      AACHEN
+    </text>
+    <text
+      x="302"
+      y="286"
+      fill="url(#rwthLightBlue)"
+      font-family="Arial Black, Helvetica, Arial, sans-serif"
+      font-size="116"
+      font-weight="900"
+      letter-spacing="-6"
+    >
+      UNIVERSITY
+    </text>
+  </g>
+</svg>

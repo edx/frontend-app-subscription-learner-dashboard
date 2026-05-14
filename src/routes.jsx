@@ -12,6 +12,18 @@ const routes = [
       const module = await import('./Main');
       return { Component: module.default };
     },
+  },
+  {
+    id: 'org.openedx.frontend.route.learnerDashboard.programProgress',
+    path: '/program-progress/:uuid',
+    loader: authenticatedLoader,
+    handle: {
+      role: 'org.openedx.frontend.role.programProgress'
+    },
+    async lazy () {
+      const module = await import('./containers/ProgramDashboard/ProgramProgress/index');
+      return { Component: module.default };
+    },
   }
 ];
 
