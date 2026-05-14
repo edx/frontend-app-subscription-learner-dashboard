@@ -26,6 +26,7 @@
     "i18n_extract": "openedx formatjs extract",
     "lint": "openedx lint .",
     "lint:fix": "openedx lint --fix .",
+    "types": "tsc --noEmit",
     "prepack": "npm run build",
     "test": "openedx test --coverage --passWithNoTests",
     "prepare": "if [ -z \"$CI\" ]; then husky; fi"
