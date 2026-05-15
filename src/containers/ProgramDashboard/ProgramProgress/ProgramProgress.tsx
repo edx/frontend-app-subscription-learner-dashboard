@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
+import { useParams } from 'react-router-dom';
 import { Col, Container, Row } from '@openedx/paragon';
 import { logError, camelCaseObject } from '@openedx/frontend-base';
 import { getProgramProgressData } from '../data/api';
@@ -22,8 +23,8 @@ const ProgramProgress: React.FC = () => {
     && programProgressData.urls
   );
 
-  // Dummy UUID for testing; replace with the real UUID when API is implemented and fetch from route params.
-  const uuid = '74196513-220f-4e7a-97a1-6036110ee0e0';
+  // Fetch UUID from route params
+  const { uuid } = useParams() as { uuid: string };
 
   useEffect(() => {
     if (!uuid) {
