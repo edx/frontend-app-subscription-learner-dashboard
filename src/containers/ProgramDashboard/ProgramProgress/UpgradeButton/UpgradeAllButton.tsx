@@ -11,7 +11,9 @@ const UpgradeAllButton: React.FC = () => {
   const { urls } = programProgressData;
 
   const getAllRemainingCoursesPrice = () => {
-    if (!programProgressData.programData) { return null; }
+    if (!programProgressData.programData) {
+      return null;
+    }
     const { discountData } = programProgressData.programData;
 
     if (discountData) {

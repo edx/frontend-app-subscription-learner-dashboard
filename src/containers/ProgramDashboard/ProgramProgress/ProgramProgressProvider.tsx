@@ -2,7 +2,6 @@ import React, {
   createContext, useMemo, useState,
 } from 'react';
 import {
-  ProgramProgressData,
   ProgramProgressProviderProps,
   ProgramProgressContextValueType,
 } from '../data/types';
