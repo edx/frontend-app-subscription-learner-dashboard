@@ -3,7 +3,6 @@ import { useIntl } from '@openedx/frontend-base';
 import messages from './messages';
 
 import './index.scss';
-import React from 'react';
 
 export const ProgramsPanel: FC = () => {
   const { formatMessage } = useIntl();

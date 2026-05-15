@@ -9,7 +9,7 @@ const messages = defineMessages({
   programsMessage: {
     id: 'subs.programsMessage',
     defaultMessage: 'In-progress professional certificate programs will be found here.',
-    description: 'Label for programs tab of learner dashboard',
+    description: 'Message shown in the Programs tab of the learner dashboard',
   }
 });
 
