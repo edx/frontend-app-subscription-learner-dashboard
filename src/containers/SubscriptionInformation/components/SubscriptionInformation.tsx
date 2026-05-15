@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import { Alert, Button, Image } from '@openedx/paragon';
 import { useIntl } from '@openedx/frontend-base';
 import { utilHooks } from '@src/hooks';

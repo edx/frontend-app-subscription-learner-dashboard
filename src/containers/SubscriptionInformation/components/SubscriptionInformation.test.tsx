@@ -26,13 +26,13 @@ describe('SubscriptionInformation', () => {
   describe('edX Logo', () => {
     it('renders the edX logo image', () => {
       render(<SubscriptionInformation />);
-      const logo = screen.getByAltText('Image description');
+      const logo = screen.getByAltText('edX Logo');
       expect(logo).toBeInTheDocument();
     });
 
     it('renders the edX logo with the correct src', () => {
       render(<SubscriptionInformation />);
-      const logo = screen.getByAltText('Image description');
+      const logo = screen.getByAltText('edX Logo');
       expect(logo).toHaveAttribute('src', 'https://www.edx.org/trademark-logos/edx-logo-elm.svg');
     });
   });
