@@ -1,9 +1,11 @@
+import { FC } from 'react';
 import { useIntl } from '@openedx/frontend-base';
 import messages from './messages';
 
 import './index.scss';
+import React from 'react';
 
-export const ProgramsPanel = () => {
+export const ProgramsPanel: FC = () => {
   const { formatMessage } = useIntl();
 
   return (
@@ -15,7 +17,5 @@ export const ProgramsPanel = () => {
     </div>
   );
 };
-
-ProgramsPanel.propTypes = {};
 
 export default ProgramsPanel;
