@@ -1,0 +1,25 @@
+@use "@openedx/paragon/styles/css/core/custom-media-breakpoints.css";
+
+.programs-list-heading-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.programs-list-title {
+  font-size: var(--pgn-typography-font-size-h3-base);
+  margin: var(--pgn-spacing-spacer-3) 0;
+}
+
+@media (--pgn-size-breakpoint-max-width-md) {
+  .programs-list-heading-container {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+
+  .programs-list-title {
+    font-size: var(--pgn-typography-font-size-h3-base);
+    margin: var(--pgn-spacing-spacer-2) 0;
+  }
+}
