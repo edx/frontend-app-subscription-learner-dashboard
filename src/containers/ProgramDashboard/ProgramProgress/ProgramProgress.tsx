@@ -23,7 +23,7 @@ const ProgramProgress: React.FC = () => {
     && programProgressData.urls
   );
 
-  // Dummy UUID for testing; replace with the real UUID from route params.
+  // Dummy UUID for testing; replace with the real UUID when API is implemented and fetch from route params.
   const uuid = '74196513-220f-4e7a-97a1-6036110ee0e0';
 
   useEffect(() => {
