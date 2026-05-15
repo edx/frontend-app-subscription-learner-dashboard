@@ -1,5 +1,5 @@
 import { render, screen, RenderResult } from '@testing-library/react';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
+import { IntlProvider } from '@openedx/frontend-base';
 
 import ProgramProgressHeader from './ProgramProgressHeader';
 import { getProgramIcon } from '../data/util';

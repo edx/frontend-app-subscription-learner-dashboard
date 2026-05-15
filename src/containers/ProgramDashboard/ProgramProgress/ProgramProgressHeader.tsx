@@ -1,6 +1,6 @@
 import React from 'react';
-import { useIntl } from '@edx/frontend-platform/i18n';
-import { Row, Col } from '@openedx/paragon';
+import { useIntl } from '@openedx/frontend-base';
+import { Row, Col, Image } from '@openedx/paragon';
 import { ProgramProgressHeaderProps } from '../data/types';
 import { getProgramIcon } from '../data/util';
 import rwthAachenUniversityLogo from '../assets/rwth-aachen-university.svg';
@@ -17,9 +17,9 @@ const ProgramProgressHeader: React.FC<ProgramProgressHeaderProps> = ({
     <Row className="justify-content-between pb-4.5">
       <Col sm={8} xs={12} className="d-flex flex-column align-items-start">
         <div className="d-flex align-items-center">
-          <img src={programIcon} alt={`${programType} icon`} className="program-icon mr-1" />
+          <Image src={programIcon} alt={`${programType} icon`} className="program-icon mr-1" />
           <h4 className="program-type-label font-weight-bold">
-            {programType} program
+            {formatMessage(messages.programTypeLabel, { programType })}
           </h4>
         </div>
         <h2 className="program-title font-weight-normal">
@@ -33,7 +33,7 @@ const ProgramProgressHeader: React.FC<ProgramProgressHeaderProps> = ({
           </div>
           <div>
             {authoringOrganizations.map(org => (
-              <img
+              <Image
                 key={org.uuid}
                 id="org-image"
                 src={org.certificateLogoImageUrl || org.logoImageUrl || rwthAachenUniversityLogo}

@@ -47,8 +47,8 @@ export interface ProgramProgressData {
     buyButtonUrl: string | undefined,
     programRecordUrl: string | undefined,
   },
-  courseData: any,
-  programData: any,
+  courseData: any | null,
+  programData: ProgramData | null,
 }
 
 export interface ProgramProgressHeaderProps {
@@ -60,4 +60,14 @@ export interface ProgramProgressHeaderProps {
 export interface ProgramProgressInfoProps {
   allCoursesCompleted: boolean,
   totalCoursesInProgram: number,
+  programTitle: string,
+}
+
+export interface ProgramProgressProviderProps {
+  children: import('react').ReactNode,
+}
+
+export interface ProgramProgressContextValueType {
+  programProgressData: ProgramProgressData,
+  setProgramProgressData: (data: ProgramProgressData) => void,
 }

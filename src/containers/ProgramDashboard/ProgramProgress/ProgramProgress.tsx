@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Col, Container, Row } from '@openedx/paragon';
-import { logError } from '@edx/frontend-platform/logging';
-import { camelCaseObject } from '@edx/frontend-platform/utils';
+import { logError, camelCaseObject } from '@openedx/frontend-base';
 import { getProgramProgressData } from '../data/api';
 import { ProgramProgressContext, ProgramProgressContextValueType } from './ProgramProgressProvider';
 import ProgramProgressHeader from './ProgramProgressHeader';
@@ -75,8 +74,8 @@ const ProgramProgress: React.FC = () => {
       <Helmet title={`${programData?.title}`} />
       <Container fluid={false} size="xl" className="p-4.5">
         <ProgramProgressHeader
-          programTitle={programData?.title}
-          programType={programData?.type}
+          programTitle={programData?.title ?? ''}
+          programType={programData?.type ?? ''}
           authoringOrganizations={programData?.authoringOrganizations}
         />
         <Row>
@@ -84,6 +83,7 @@ const ProgramProgress: React.FC = () => {
             <ProgramProgressInfo
               allCoursesCompleted={allCoursesCompleted}
               totalCoursesInProgram={totalCoursesInProgram}
+              programTitle={programData?.title ?? ''}
             />
           </Col>
         </Row>

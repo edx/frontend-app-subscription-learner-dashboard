@@ -1,4 +1,4 @@
-import { defineMessages } from '@edx/frontend-platform/i18n';
+import { defineMessages } from '@openedx/frontend-base';
 
 const messages = defineMessages({
   programProgressInstitutions: {
@@ -6,13 +6,18 @@ const messages = defineMessages({
     id: 'program.progress.institutions',
     description: 'Label text for organization image logos',
   },
+  programTypeLabel: {
+    defaultMessage: '{programType} program',
+    id: 'program.progress.program.type.label',
+    description: 'Label displaying the program type (e.g. "MicroMasters program", "Professional Certificate program")',
+  },
   programProgressCompleteHeader: {
     defaultMessage: 'Congratulations!',
     id: 'program.progress.complete.header',
     description: 'header text for the program progress page when all courses are complete',
   },
   programProgressCompleteText: {
-    defaultMessage: 'You have successfully completed all the requirements for the Adventures and the Final Frontier Professional Certificate.',
+    defaultMessage: 'You have successfully completed all the requirements for {programTitle}.',
     id: 'program.progress.complete.text',
     description: 'text to display when a user has completed all of the courses for the program',
   },

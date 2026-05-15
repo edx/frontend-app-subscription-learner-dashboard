@@ -1,5 +1,5 @@
 import { render, RenderResult, screen } from '@testing-library/react';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
+import { IntlProvider } from '@openedx/frontend-base';
 
 import ProgramProgressInfo from './ProgramProgressInfo';
 import messages from './messages';
@@ -11,6 +11,7 @@ jest.mock('./UpgradeButton', () => ({
 const defaultProps = {
   allCoursesCompleted: true,
   totalCoursesInProgram: 3,
+  programTitle: 'Test Professional Certificate',
 };
 
 const renderComponent = (props = {}): RenderResult => render(
@@ -28,7 +29,7 @@ describe('ProramProgressInfo', () => {
     renderComponent();
 
     expect(screen.getByText(messages.programProgressCompleteHeader.defaultMessage)).toBeInTheDocument();
-    expect(screen.getByText(messages.programProgressCompleteText.defaultMessage)).toBeInTheDocument();
+    expect(screen.getByText(`You have successfully completed all the requirements for ${defaultProps.programTitle}.`)).toBeInTheDocument();
   });
 
   it('renders the correct text when the user has NOT completed all of the courses in a program', () => {

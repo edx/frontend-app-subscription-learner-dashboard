@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Button } from '@openedx/paragon';
-import { FormattedNumber, useIntl } from '@edx/frontend-platform/i18n';
+import { FormattedNumber, useIntl } from '@openedx/frontend-base';
 import messages from './messages';
 import './index.scss';
 import { ProgramProgressContext, ProgramProgressContextValueType } from '../ProgramProgressProvider';
@@ -11,6 +11,7 @@ const UpgradeAllButton: React.FC = () => {
   const { urls } = programProgressData;
 
   const getAllRemainingCoursesPrice = () => {
+    if (!programProgressData.programData) { return null; }
     const { discountData } = programProgressData.programData;
 
     if (discountData) {

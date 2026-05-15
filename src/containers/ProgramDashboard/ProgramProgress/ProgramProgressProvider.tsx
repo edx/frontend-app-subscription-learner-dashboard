@@ -1,16 +1,13 @@
 import React, {
-  createContext, ReactNode, useMemo, useState,
+  createContext, useMemo, useState,
 } from 'react';
-import { ProgramProgressData } from '../data/types';
+import {
+  ProgramProgressData,
+  ProgramProgressProviderProps,
+  ProgramProgressContextValueType,
+} from '../data/types';
 
-export interface ProgramProgressProviderProps {
-  children: ReactNode,
-}
-
-export interface ProgramProgressContextValueType {
-  programProgressData: ProgramProgressData,
-  setProgramProgressData: (data: ProgramProgressData) => void,
-}
+export type { ProgramProgressProviderProps, ProgramProgressContextValueType };
 
 const defaultContextValue: ProgramProgressContextValueType = {
   programProgressData: {

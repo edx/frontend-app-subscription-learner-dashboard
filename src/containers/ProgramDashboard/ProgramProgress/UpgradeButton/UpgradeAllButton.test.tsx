@@ -1,5 +1,5 @@
 import React from 'react';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
+import { IntlProvider } from '@openedx/frontend-base';
 import { render, RenderResult, screen } from '@testing-library/react';
 import UpgradeAllButton from './UpgradeAllButton';
 import { ProgramProgressContext } from '../ProgramProgressProvider';
