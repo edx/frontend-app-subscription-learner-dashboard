@@ -23,24 +23,20 @@ export const SubscriptionInformation: FC = () => {
   const { formatMessage } = useIntl();
   const formatDate = utilHooks.useFormatDate();
 
-  const getSubscriptionAction = useMemo(() => {
-    return (
-      [
-        <Button
-          key="manage-subscription"
-          data-testid="manage-button"
-          className="manage-button"
-          variant="primary"
-          href={manageSubscriptionURL}
-          target="_blank"
-          rel="noopener noreferrer"
-          role="link"
-        >
-          {formatMessage(messages.manageSubscriptionMessage)}
-        </Button>,
-      ]
-    );
-  }, []);
+  const subscriptionActions = [
+    <Button
+      key="manage-subscription"
+      data-testid="manage-button"
+      className="manage-button"
+      variant="primary"
+      href={manageSubscriptionURL}
+      target="_blank"
+      rel="noopener noreferrer"
+      role="link"
+    >
+      {formatMessage(messages.manageSubscriptionMessage)}
+    </Button>,
+  ];
 
   return (
     <div className="container subscription-information" style={{ padding: '20px' }}>
@@ -48,12 +44,13 @@ export const SubscriptionInformation: FC = () => {
         className="mr-2"
         src="https://www.edx.org/trademark-logos/edx-logo-elm.svg"
         rounded
-        alt="Image description"
-        style={{ width: '60px', height: '40px', }}
+        alt="edX Logo"
+        width={40}
+        height={60}
       />
-      {subscriptionInformationData.subscriptionStatus == 'cancelled' ? (
+      {subscriptionInformationData.subscriptionStatus === 'cancelled' ? (
         <h3>{formatMessage(messages.cancelledMessage, { totalSavings: subscriptionInformationData.totalSavings })}</h3>
-      ) : <></>}
+      ) : null}
       <p>
         {formatMessage(messages.coursesEnrollmentMessage, {
           numberOfCoursesEnrolled: subscriptionInformationData.numberOfCoursesEnrolled,
@@ -61,11 +58,9 @@ export const SubscriptionInformation: FC = () => {
         })}
       </p>
       <Alert
-        variant="info"
         dismissible={false}
-        closeLabel="Dismiss"
         show={true}
-        actions={getSubscriptionAction}
+        actions={subscriptionActions}
         className="subscription-status-alert"
       >
         <Alert.Heading>{formatMessage(messages.statusMessage)}</Alert.Heading>

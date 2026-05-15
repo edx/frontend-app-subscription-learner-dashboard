@@ -18,7 +18,7 @@ jest.mock('@openedx/frontend-base', () => ({
 
 jest.mock('@src/hooks', () => ({
   utilHooks: {
-    useFormatDate: () => () => (date: string) => date,
+    useFormatDate: () => (date: string) => date,
   },
 }));
 
@@ -57,7 +57,7 @@ describe('SubscriptionInformation', () => {
       expect(btn).toBeInTheDocument();
     });
 
-    it('button has correct href pointing to subscriptionRenewalURL', () => {
+    it('button has correct href pointing to manageSubscriptionURL', () => {
       render(<SubscriptionInformation />);
       const btn = screen.getByTestId('manage-button');
       expect(btn).toHaveAttribute('href', manageSubscriptionURL);
