@@ -84,7 +84,7 @@ describe('SubscriptionInformation', () => {
     });
 
     it('renders the subscription-status-alert class on the alert', () => {
-      const { container } = render(<SubscriptionInformation />);
+      const { container } = renderComponent();
       expect(container.querySelector('.subscription-status-alert')).toBeInTheDocument();
     });
   });
