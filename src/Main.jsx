@@ -12,8 +12,8 @@ const Main = () => (
     <ContextProviders>
       <PageWrap>
         <Dashboard />
+        <SubscriptionInformation />
       </PageWrap>
-      <SubscriptionInformation />
     </ContextProviders>
   </CurrentAppProvider>
 );
