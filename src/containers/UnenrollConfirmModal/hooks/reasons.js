@@ -5,10 +5,10 @@ import {
   useCourseTrackingEvent,
   utilHooks,
   useEntitlementInfo,
-} from 'hooks';
-import { StrictDict } from 'utils';
-import track from 'tracking';
-import { useUnenrollFromCourse } from 'data/hooks';
+} from '@src/hooks';
+import { StrictDict } from '@src/utils';
+import track from '@src/tracking';
+import { useUnenrollFromCourse } from '@src/data/hooks';
 import * as module from './reasons';
 import constants from '../constants';
 

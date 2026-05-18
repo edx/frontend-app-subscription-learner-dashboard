@@ -1,10 +1,6 @@
-import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { apiKeys, enableEmailsAction, unenrollmentAction } from 'data/services/lms/constants';
-import urls from 'data/services/lms/urls';
-import { stringifyUrl } from 'data/services/lms/utils';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import eventNames from 'tracking/constants';
+import { getAuthenticatedHttpClient } from '@openedx/frontend-base';
+import urls from '@src/data/services/lms/urls';
+import { stringifyUrl } from '@src/data/services/lms/utils';
 import {
   initializeList,
   unenrollFromCourse,
@@ -18,11 +14,26 @@ import {
 } from './api';
 
 // Mock dependencies
-jest.mock('@edx/frontend-platform/auth');
-jest.mock('data/services/lms/constants');
-jest.mock('data/services/lms/urls');
-jest.mock('data/services/lms/utils');
-jest.mock('tracking/constants');
+jest.mock('@openedx/frontend-base', () => ({
+  ...jest.requireActual('@openedx/frontend-base'),
+  getAuthenticatedHttpClient: jest.fn(),
+}));
+jest.mock('@src/data/services/lms/constants', () => ({
+  apiKeys: {
+    user: 'user',
+    courseId: 'course_id',
+    courseRunId: 'course_run_id',
+    isRefund: 'is_refund',
+  },
+  enableEmailsAction: { enable: true },
+  unenrollmentAction: { action: 'unenroll' },
+}));
+jest.mock('@src/data/services/lms/urls');
+jest.mock('@src/data/services/lms/utils');
+jest.mock('@src/tracking/constants', () => ({
+  __esModule: true,
+  default: { shareClicked: 'share_clicked' },
+}));
 
 const mockHttpClient = {
   get: jest.fn(),
@@ -39,27 +50,13 @@ describe('API functions', () => {
     jest.clearAllMocks();
     mockedGetAuthenticatedHttpClient.mockReturnValue(mockHttpClient as any);
 
-    // Mock constants
-    (apiKeys as any) = {
-      user: 'user',
-      courseId: 'course_id',
-      courseRunId: 'course_run_id',
-      isRefund: 'is_refund',
-    };
-
-    (enableEmailsAction as any) = { enable: true };
-    (unenrollmentAction as any) = { action: 'unenroll' };
-    (eventNames as any) = { shareClicked: 'share_clicked' };
-
     // Mock urls
-    (urls as any) = {
-      getInitApiUrl: jest.fn(() => '/api/init'),
-      courseUnenroll: jest.fn(() => '/api/unenroll'),
-      entitlementEnrollment: jest.fn((uuid) => `/api/entitlement/${uuid}`),
-      updateEmailSettings: jest.fn(() => '/api/email-settings'),
-      event: jest.fn(() => '/api/event'),
-      creditRequestUrl: jest.fn((providerId) => `/api/credit/${providerId}`),
-    };
+    (urls as any).getInitApiUrl = jest.fn(() => '/api/init');
+    (urls as any).courseUnenroll = jest.fn(() => '/api/unenroll');
+    (urls as any).entitlementEnrollment = jest.fn((uuid) => `/api/entitlement/${uuid}`);
+    (urls as any).updateEmailSettings = jest.fn(() => '/api/email-settings');
+    (urls as any).event = jest.fn(() => '/api/event');
+    (urls as any).creditRequestUrl = jest.fn((providerId) => `/api/credit/${providerId}`);
 
     mockedStringifyUrl.mockImplementation((url, params) => {
       const paramString = Object.entries(params || {}).map(([key, value]) => `${key}=${value}`).join('&');

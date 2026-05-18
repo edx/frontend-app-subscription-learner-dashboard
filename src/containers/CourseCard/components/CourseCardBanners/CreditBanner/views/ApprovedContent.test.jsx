@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
-import { formatMessage } from 'testUtils';
-import { useCourseData, useIsMasquerading } from 'hooks';
+import { IntlProvider } from '@openedx/frontend-base';
+import { formatMessage } from '@src/testUtils';
+import { useCourseData, useIsMasquerading } from '@src/hooks';
 import messages from './messages';
 import ApprovedContent from './ApprovedContent';
 
-jest.mock('hooks', () => ({
+jest.mock('@src/hooks', () => ({
   useCourseData: jest.fn(),
   useIsMasquerading: jest.fn(),
 }));

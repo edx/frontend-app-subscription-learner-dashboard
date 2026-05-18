@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 
 import { MailtoLink, Hyperlink } from '@openedx/paragon';
 import { CheckCircle } from '@openedx/paragon/icons';
-import { useIntl } from '@edx/frontend-platform/i18n';
-import { baseAppUrl } from 'data/services/lms/urls';
+import { useIntl } from '@openedx/frontend-base';
+import { baseAppUrl } from '@src/data/services/lms/urls';
 
-import { useInitializeLearnerHome } from 'data/hooks';
-import { utilHooks, useCourseData } from 'hooks';
-import Banner from 'components/Banner';
+import { useInitializeLearnerHome } from '@src/data/hooks';
+import { utilHooks, useCourseData } from '@src/hooks';
+import Banner from '@src/components/Banner';
 
 import messages from './messages';
 

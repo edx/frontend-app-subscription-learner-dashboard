@@ -1,43 +1,37 @@
 import { renderHook, act } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useIntl } from '@edx/frontend-platform/i18n';
-import { useCourseData } from 'hooks';
-import { useSelectSessionModal } from 'data/context';
-import * as api from 'data/services/lms/api';
+import { useIntl } from '@openedx/frontend-base';
+import { useCourseData } from '@src/hooks';
+import { useSelectSessionModal } from '@src/data/context';
+import * as api from '@src/data/services/lms/api';
 
 import { useSelectSessionModalData } from './hooks';
 import { LEAVE_OPTION } from './constants';
 import messages from './messages';
 
-jest.mock('data/services/lms/api', () => ({
+jest.mock('@src/data/services/lms/api', () => ({
   deleteEntitlementEnrollment: jest.fn(),
   updateEntitlementEnrollment: jest.fn(),
 }));
 
-jest.mock('hooks', () => ({
+jest.mock('@src/hooks', () => ({
   useCourseData: jest.fn(),
 }));
 
-jest.mock('data/context', () => ({
+jest.mock('@src/data/context', () => ({
   useSelectSessionModal: jest.fn(),
 }));
 
-jest.mock('@edx/frontend-platform/i18n', () => {
-  const { formatMessage } = jest.requireActual('testUtils');
+jest.mock('@openedx/frontend-base', () => {
+  const { formatMessage } = jest.requireActual('@src/testUtils');
   return {
-    ...jest.requireActual('@edx/frontend-platform/i18n'),
-    useIntl: () => ({
-      formatMessage,
-    }),
+    ...jest.requireActual('@openedx/frontend-base'),
+    useIntl: () => ({ formatMessage }),
+    logError: jest.fn(),
   };
 });
 
-jest.mock('@edx/frontend-platform/logging', () => ({
-  ...jest.requireActual('@edx/frontend-platform/logging'),
-  logError: jest.fn(),
-}));
-
-jest.mock('tracking', () => ({
+jest.mock('@src/tracking', () => ({
   entitlements: {
     newSession: jest.fn(() => jest.fn()),
     switchSession: jest.fn(() => jest.fn()),

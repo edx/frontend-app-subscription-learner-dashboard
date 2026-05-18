@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { StrictDict } from 'utils';
+import { useAppConfig } from '@openedx/frontend-base';
+import { StrictDict } from '@src/utils';
+import { useCourseData } from '@src/hooks';
+import { useUnenrollFromCourse } from '@src/data/hooks';
 
-import { useInitializeLearnerHome, useUnenrollFromCourse } from 'data/hooks';
-import { configuration } from 'config';
-import { useCourseData } from 'hooks';
 import { useUnenrollReasons } from './reasons';
 import * as module from '.';
 
@@ -21,14 +21,14 @@ export const modalStates = StrictDict({
 export const useUnenrollData = ({ closeModal, cardId }) => {
   const [isConfirmed, setIsConfirmed] = module.state.confirmed(false);
   const reason = useUnenrollReasons({ cardId });
-  const { refetch: refreshList } = useInitializeLearnerHome();
+  const appConfig = useAppConfig();
   const courseData = useCourseData(cardId);
   const courseId = courseData?.courseRun?.courseId;
 
   const { mutate: unenrollFromCourse } = useUnenrollFromCourse();
 
   const confirm = () => {
-    if (!configuration.SHOW_UNENROLL_SURVEY) {
+    if (!appConfig.SHOW_UNENROLL_SURVEY) {
       unenrollFromCourse({ courseId });
     }
     setIsConfirmed(true);
@@ -36,7 +36,7 @@ export const useUnenrollData = ({ closeModal, cardId }) => {
 
   let modalState;
   if (isConfirmed) {
-    modalState = (reason.isSubmitted || !configuration.SHOW_UNENROLL_SURVEY)
+    modalState = (reason.isSubmitted || !appConfig.SHOW_UNENROLL_SURVEY)
       ? modalStates.finished : modalStates.reason;
   } else {
     modalState = modalStates.confirm;
@@ -47,17 +47,13 @@ export const useUnenrollData = ({ closeModal, cardId }) => {
     setIsConfirmed(false);
     reason.handleClear();
   };
-  const closeAndRefresh = () => {
-    refreshList();
-    close();
-  };
 
   return {
     isConfirmed,
     confirm,
     reason,
     close,
-    closeAndRefresh,
+    closeAndRefresh: close,
     modalState,
   };
 };

@@ -1,6 +1,6 @@
-import { useIntl } from '@edx/frontend-platform/i18n';
-import { utilHooks, useCourseData, useEntitlementInfo } from 'hooks';
-import { useSelectSessionModal } from 'data/context';
+import { useIntl } from '@openedx/frontend-base';
+import { utilHooks, useCourseData, useEntitlementInfo } from '@src/hooks';
+import { useSelectSessionModal } from '@src/data/context';
 
 import * as hooks from './hooks';
 import messages from './messages';
@@ -11,8 +11,10 @@ export const useAccessMessage = ({ cardId }) => {
   const { courseRun, enrollment } = courseData || {};
   const formatDate = utilHooks.useFormatDate();
   if (!courseRun.isStarted) {
-    if (!courseRun.startDate && !courseRun.advertisedStart) { return null; }
-    const startDate = courseRun.advertisedStart ? courseRun.advertisedStart : formatDate(courseRun.startDate);
+    if (!courseRun.startDate && !courseRun.advertisedStart) {
+      return null;
+    }
+    const startDate = courseRun.advertisedStart || formatDate(courseRun.startDate);
     return formatMessage(messages.courseStarts, { startDate });
   }
   if (enrollment?.isEnrolled) {
@@ -28,7 +30,9 @@ export const useAccessMessage = ({ cardId }) => {
         { accessExpirationDate: formatDate(accessExpirationDate) },
       );
     }
-    if (!endDate) { return null; }
+    if (!endDate) {
+      return null;
+    }
     return formatMessage(
       isArchived ? messages.courseEnded : messages.courseEnds,
       { endDate: formatDate(endDate) },

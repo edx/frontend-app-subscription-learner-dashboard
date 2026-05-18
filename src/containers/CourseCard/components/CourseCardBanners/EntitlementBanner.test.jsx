@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
-import { formatMessage } from 'testUtils';
+import { IntlProvider } from '@openedx/frontend-base';
+import { formatMessage } from '@src/testUtils';
 
-import { useCourseData } from 'hooks';
+import { useCourseData } from '@src/hooks';
 import EntitlementBanner from './EntitlementBanner';
 import messages from './messages';
 
@@ -12,7 +12,7 @@ jest.mock('react', () => ({
   useMemo: (fn) => fn(),
 }));
 
-jest.mock('data/hooks', () => ({
+jest.mock('@src/data/hooks', () => ({
   useInitializeLearnerHome: jest.fn().mockReturnValue({
     data: {
       platformSettings: {
@@ -22,14 +22,14 @@ jest.mock('data/hooks', () => ({
   }),
 }));
 const mockUpdateSelectSessionModal = jest.fn().mockName('updateSelectSessionModal');
-jest.mock('data/context/SelectSessionProvider', () => ({
+jest.mock('@src/data/context/SelectSessionProvider', () => ({
   useSelectSessionModal: () => ({
     updateSelectSessionModal: mockUpdateSelectSessionModal,
   }),
 }));
 
-jest.mock('hooks', () => ({
-  ...jest.requireActual('hooks'),
+jest.mock('@src/hooks', () => ({
+  ...jest.requireActual('@src/hooks'),
   useCourseData: jest.fn(),
   utilHooks: {
     useFormatDate: () => date => date?.toDateString(),

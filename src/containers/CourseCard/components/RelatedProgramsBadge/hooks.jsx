@@ -1,8 +1,8 @@
 import React from 'react';
-import { useIntl } from '@edx/frontend-platform/i18n';
+import { useIntl } from '@openedx/frontend-base';
 
-import { StrictDict } from 'utils';
-import { useCourseData } from 'hooks';
+import { StrictDict } from '@src/utils';
+import { useCourseData } from '@src/hooks';
 
 import messages from './messages';
 import * as module from './hooks';

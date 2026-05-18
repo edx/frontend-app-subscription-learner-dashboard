@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
-import { useCourseTrackingEvent } from 'hooks';
+import { IntlProvider } from '@openedx/frontend-base';
+import { useCourseTrackingEvent } from '@src/hooks';
 
-import track from 'tracking';
+import track from '@src/tracking';
 import useActionDisabledState from '../hooks';
 import ViewCourseButton from './ViewCourseButton';
 
-jest.mock('hooks', () => ({
+jest.mock('@src/hooks', () => ({
   useCourseData: jest.fn().mockReturnValue({
     courseRun: { homeUrl: 'homeUrl' },
   }),
@@ -16,7 +16,7 @@ jest.mock('hooks', () => ({
   }),
 }));
 
-jest.mock('tracking', () => ({
+jest.mock('@src/tracking', () => ({
   course: {
     enterCourseClicked: jest.fn().mockName('segment.enterCourseClicked'),
   },

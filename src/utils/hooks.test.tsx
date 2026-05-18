@@ -1,6 +1,6 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 import { render } from '@testing-library/react';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
+import { IntlProvider } from '@openedx/frontend-base';
 import { useFormatDate } from './hooks';
 import dateFormatter from './dateFormatter';
 
@@ -12,7 +12,7 @@ const TestComponent = ({ date }: { date: Date | string }) => {
   return <div>{formattedDate}</div>;
 };
 
-const renderWithIntl = (component: React.ReactNode) => render(
+const renderWithIntl = (component: ReactNode) => render(
   <IntlProvider locale="en" messages={{}}>
     {component}
   </IntlProvider>,

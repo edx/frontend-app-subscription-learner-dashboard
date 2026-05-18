@@ -1,13 +1,14 @@
-import { sendTrackEvent } from '@edx/frontend-platform/analytics';
+import { sendTrackEvent } from '@openedx/frontend-base';
 
-import { appName } from 'tracking/constants';
+import { appName } from '@src/tracking/constants';
 
 import { createEventTracker, createLinkTracker, LINK_TIMEOUT } from './utils';
 
 jest.useFakeTimers();
 jest.spyOn(global, 'setTimeout');
 
-jest.mock('@edx/frontend-platform/analytics', () => ({
+jest.mock('@openedx/frontend-base', () => ({
+  ...jest.requireActual('@openedx/frontend-base'),
   sendTrackEvent: jest.fn(),
 }));
 

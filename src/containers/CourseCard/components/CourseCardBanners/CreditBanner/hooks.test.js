@@ -1,6 +1,6 @@
-import { keyStore } from 'utils';
-import { useCourseData } from 'hooks';
-import { useInitializeLearnerHome } from 'data/hooks';
+import { keyStore } from '@src/utils';
+import { useCourseData } from '@src/hooks';
+import { useInitializeLearnerHome } from '@src/data/hooks';
 
 import ApprovedContent from './views/ApprovedContent';
 import EligibleContent from './views/EligibleContent';
@@ -15,11 +15,11 @@ jest.mock('react', () => ({
   useMemo: (fn) => fn(),
 }));
 
-jest.mock('hooks', () => ({
+jest.mock('@src/hooks', () => ({
   useCourseData: jest.fn(),
 }));
 
-jest.mock('data/hooks', () => ({
+jest.mock('@src/data/hooks', () => ({
   useInitializeLearnerHome: jest.fn(),
 }));
 

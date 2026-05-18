@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { useIntl } from '@edx/frontend-platform/i18n';
+import { useIntl } from '@openedx/frontend-base';
 
-import { useIsMasquerading } from 'hooks';
+import { useIsMasquerading } from '@src/hooks';
 import CreditContent from './components/CreditContent';
 import ProviderLink from './components/ProviderLink';
 import hooks from './hooks';

@@ -2,20 +2,20 @@ import { when } from 'jest-when';
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
+import { IntlProvider } from '@openedx/frontend-base';
 
-import { useCourseData, useIsMasquerading } from 'hooks';
+import { useCourseData, useIsMasquerading } from '@src/hooks';
 import * as hooks from './hooks';
 import CourseCardMenu from '.';
 import messages from './messages';
 
-jest.mock('hooks', () => ({
+jest.mock('@src/hooks', () => ({
   useCourseData: jest.fn(),
   useIsMasquerading: jest.fn(),
 }));
 jest.mock('./SocialShareMenu', () => jest.fn(() => <div>SocialShareMenu</div>));
-jest.mock('containers/EmailSettingsModal', () => jest.fn(() => <div>EmailSettingsModal</div>));
-jest.mock('containers/UnenrollConfirmModal', () => jest.fn(() => <div>UnenrollConfirmModal</div>));
+jest.mock('@src/containers/EmailSettingsModal', () => jest.fn(() => <div>EmailSettingsModal</div>));
+jest.mock('@src/containers/UnenrollConfirmModal', () => jest.fn(() => <div>UnenrollConfirmModal</div>));
 jest.mock('./hooks', () => ({
   useEmailSettings: jest.fn(),
   useUnenrollData: jest.fn(),

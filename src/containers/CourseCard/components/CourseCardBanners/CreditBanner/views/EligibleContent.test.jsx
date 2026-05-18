@@ -1,18 +1,18 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
+import { IntlProvider } from '@openedx/frontend-base';
 
-import { useCourseData } from 'hooks';
-import track from 'tracking';
+import { useCourseData } from '@src/hooks';
+import track from '@src/tracking';
 
 import messages from './messages';
 import EligibleContent from './EligibleContent';
 
-jest.mock('hooks', () => ({
+jest.mock('@src/hooks', () => ({
   useCourseData: jest.fn(),
 }));
 
-jest.mock('tracking', () => ({
+jest.mock('@src/tracking', () => ({
   credit: {
     purchase: jest.fn(),
   },

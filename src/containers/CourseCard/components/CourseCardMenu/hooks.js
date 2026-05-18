@@ -1,8 +1,8 @@
-import track from 'tracking';
-import { useCourseData, useCourseTrackingEvent } from 'hooks';
+import track from '@src/tracking';
+import { useCourseData, useCourseTrackingEvent } from '@src/hooks';
 import { useState } from 'react';
-import { StrictDict } from 'utils';
-import { useInitializeLearnerHome } from 'data/hooks';
+import { StrictDict } from '@src/utils';
+import { useInitializeLearnerHome } from '@src/data/hooks';
 
 export const state = StrictDict({
   isUnenrollConfirmVisible: (val) => useState(val), // eslint-disable-line
@@ -33,7 +33,9 @@ export const useHandleToggleDropdown = (cardId) => {
     cardId,
   );
   return (isOpen) => {
-    if (isOpen) { trackCourseEvent(); }
+    if (isOpen) {
+      trackCourseEvent();
+    }
   };
 };
 

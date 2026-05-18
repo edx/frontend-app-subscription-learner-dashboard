@@ -1,5 +1,5 @@
-import { useMasquerade } from 'data/context';
-import { useInitializeLearnerHome } from 'data/hooks';
+import { useMasquerade } from '@src/data/context';
+import { useInitializeLearnerHome } from '@src/data/hooks';
 
 const useIsMasquerading = () => {
   const { masqueradeUser } = useMasquerade();

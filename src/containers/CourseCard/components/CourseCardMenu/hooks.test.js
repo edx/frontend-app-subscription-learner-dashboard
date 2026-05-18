@@ -1,15 +1,15 @@
-import { useCourseData, useCourseTrackingEvent } from 'hooks';
-import { useInitializeLearnerHome } from 'data/hooks';
-import track from 'tracking';
-import { MockUseState } from 'testUtils';
+import { useCourseData, useCourseTrackingEvent } from '@src/hooks';
+import { useInitializeLearnerHome } from '@src/data/hooks';
+import track from '@src/tracking';
+import { MockUseState } from '@src/testUtils';
 
 import * as hooks from './hooks';
 
-jest.mock('data/hooks', () => ({
+jest.mock('@src/data/hooks', () => ({
   useInitializeLearnerHome: jest.fn(),
 }));
 
-jest.mock('hooks', () => ({
+jest.mock('@src/hooks', () => ({
   useCourseData: jest.fn(),
   useCourseTrackingEvent: jest.fn(),
 }));
@@ -69,7 +69,9 @@ describe('CourseCardMenu hooks', () => {
   });
 
   describe('useHandleToggleDropdown', () => {
-    beforeEach(() => { out = hooks.useHandleToggleDropdown(cardId); });
+    beforeEach(() => {
+      out = hooks.useHandleToggleDropdown(cardId);
+    });
     describe('behavior', () => {
       it('initializes course event tracker with event name and card ID', () => {
         expect(useCourseTrackingEvent).toHaveBeenCalledWith(

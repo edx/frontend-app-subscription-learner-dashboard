@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
-import { useIntl } from '@edx/frontend-platform/i18n';
-import { EXECUTIVE_EDUCATION_COURSE_MODES } from 'data/constants/course';
+import { useIntl } from '@openedx/frontend-base';
+import { EXECUTIVE_EDUCATION_COURSE_MODES } from '@src/data/constants/course';
 
-import track from 'tracking';
-import { useCourseData, useCourseTrackingEvent } from 'hooks';
-import { useInitializeLearnerHome } from 'data/hooks';
+import track from '@src/tracking';
+import { useCourseData, useCourseTrackingEvent } from '@src/hooks';
+import { useInitializeLearnerHome } from '@src/data/hooks';
 import useActionDisabledState from '../hooks';
 import ActionButton from './ActionButton';
 import messages from './messages';

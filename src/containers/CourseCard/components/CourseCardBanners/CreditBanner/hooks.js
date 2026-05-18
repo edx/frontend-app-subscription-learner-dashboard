@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import { useInitializeLearnerHome } from 'data/hooks';
-import { StrictDict } from 'utils';
+import { useInitializeLearnerHome } from '@src/data/hooks';
+import { StrictDict } from '@src/utils';
 
-import { useCourseData } from 'hooks';
+import { useCourseData } from '@src/hooks';
 
 import ApprovedContent from './views/ApprovedContent';
 import EligibleContent from './views/EligibleContent';
@@ -39,7 +39,9 @@ export const useCreditBannerData = (cardId) => {
       requestStatus: creditData.requestStatus,
     };
   }, [courseData]);
-  if (!credit.isEligible || !courseData?.credit?.isEligible) { return null; }
+  if (!credit.isEligible || !courseData?.credit?.isEligible) {
+    return null;
+  }
 
   const { error, purchased, requestStatus } = credit;
   let ContentComponent = EligibleContent;

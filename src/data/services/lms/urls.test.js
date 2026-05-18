@@ -1,4 +1,5 @@
-import { getConfig } from '@edx/frontend-platform';
+import { getAppConfig, getSiteConfig } from '@openedx/frontend-base';
+import { appId } from '@src/constants';
 import * as urls from './urls';
 
 describe('urls', () => {
@@ -10,7 +11,7 @@ describe('urls', () => {
     it('returns the url if it is relative', () => {
       const url = '/edx.org';
       expect(urls.baseAppUrl(url)).toEqual(
-        `${getConfig().LMS_BASE_URL}${url}`,
+        `${getSiteConfig().lmsBaseUrl}${url}`,
       );
     });
     it('return null if url is null', () => {
@@ -25,7 +26,7 @@ describe('urls', () => {
     it('returns the url if it is relative', () => {
       const url = '/edx.org';
       expect(urls.learningMfeUrl(url)).toEqual(
-        `${getConfig().LEARNING_BASE_URL}${url}`,
+        `${getAppConfig(appId).LEARNING_BASE_URL}${url}`,
       );
     });
     it('return null if url is null', () => {
@@ -40,7 +41,7 @@ describe('urls', () => {
     });
     it('returns CREDIT_PURCHASE_URL if set, with courseId', () => {
       const courseId = 'test-course-id';
-      const config = getConfig();
+      const config = getAppConfig(appId);
       config.CREDIT_PURCHASE_URL = 'http://credit-purchase.example.com';
       const url = urls.creditPurchaseUrl(courseId);
       expect(url).toBe(`http://credit-purchase.example.com/${courseId}/`);

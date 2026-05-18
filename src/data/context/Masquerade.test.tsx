@@ -1,10 +1,9 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 import { renderHook, act } from '@testing-library/react';
 import { MasqueradeProvider, useMasquerade } from './MasqueradeProvider';
 
 describe('MasqueradeProvider and useMasquerade', () => {
-  // eslint-disable-next-line func-names
-  const createWrapper = () => function ({ children }: { children: React.ReactNode }) {
+  const createWrapper = () => function Wrapper({ children }: { children: ReactNode }) {
     return <MasqueradeProvider>{children}</MasqueradeProvider>;
   };
 
@@ -352,7 +351,7 @@ describe('MasqueradeProvider and useMasquerade', () => {
     });
 
     it('should handle provider re-renders without losing state', () => {
-      const TestWrapper = ({ rerenderTrigger, children }: { rerenderTrigger: number; children: React.ReactNode }) => (
+      const TestWrapper = ({ rerenderTrigger, children }: { rerenderTrigger: number, children: ReactNode }) => (
         <MasqueradeProvider>
           <div data-testid={`rerender-${rerenderTrigger}`}>
             {children}
@@ -512,8 +511,8 @@ describe('MasqueradeProvider and useMasquerade', () => {
         wrapper: createWrapper(),
       });
 
-      const stringUser: string = 'typed-user@test.com';
-      const undefinedUser: undefined = undefined;
+      const stringUser = 'typed-user@test.com';
+      const undefinedUser = undefined;
 
       act(() => {
         result.current.setMasqueradeUser(stringUser);

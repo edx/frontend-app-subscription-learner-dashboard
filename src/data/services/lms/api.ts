@@ -1,8 +1,8 @@
-import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
-import { apiKeys, enableEmailsAction, unenrollmentAction } from 'data/services/lms/constants';
-import urls from 'data/services/lms/urls';
-import { stringifyUrl } from 'data/services/lms/utils';
-import eventNames from 'tracking/constants';
+import { getAuthenticatedHttpClient } from '@openedx/frontend-base';
+import { apiKeys, enableEmailsAction, unenrollmentAction } from '@src/data/services/lms/constants';
+import urls from '@src/data/services/lms/urls';
+import { stringifyUrl } from '@src/data/services/lms/utils';
+import eventNames from '@src/tracking/constants';
 
 const initializeList = async (user) => {
   const { data } = await getAuthenticatedHttpClient().get(

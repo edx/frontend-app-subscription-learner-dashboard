@@ -1,14 +1,8 @@
-import { useInitializeLearnerHome } from 'data/hooks';
-import { useMemo } from 'react';
-import { getTransformedCourseDataList } from 'utils/dataTransformers';
+import { useInitializeLearnerHome } from '@src/data/hooks';
 
 const useCourseData = (cardId: string) => {
   const { data } = useInitializeLearnerHome();
-  const courseData = useMemo(() => {
-    const courseList = getTransformedCourseDataList(data?.courses || []);
-    return courseList?.find((c: any) => c.cardId === cardId);
-  }, [cardId, data?.courses]);
-  return courseData;
+  return data?.coursesByCardId?.[cardId];
 };
 
 export default useCourseData;

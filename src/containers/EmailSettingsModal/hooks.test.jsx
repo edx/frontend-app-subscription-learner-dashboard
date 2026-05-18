@@ -1,17 +1,17 @@
 import { renderHook, act } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useCourseData } from 'hooks';
-import * as api from 'data/services/lms/api';
+import { useCourseData } from '@src/hooks';
+import * as api from '@src/data/services/lms/api';
 
 import { useEmailData } from './hooks';
 
-jest.mock('hooks', () => ({
+jest.mock('@src/hooks', () => ({
   useCourseData: jest.fn(() => ({
     enrollment: {},
   })),
 }));
 
-jest.mock('data/services/lms/api', () => ({
+jest.mock('@src/data/services/lms/api', () => ({
   updateEmailSettings: jest.fn(),
 }));
 

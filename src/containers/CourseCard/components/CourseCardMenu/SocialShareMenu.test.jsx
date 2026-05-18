@@ -1,20 +1,20 @@
 import { when } from 'jest-when';
 
-import { IntlProvider } from '@edx/frontend-platform/i18n';
+import { IntlProvider } from '@openedx/frontend-base';
 import { render, screen } from '@testing-library/react';
 
-import track from 'tracking';
-import { useCourseTrackingEvent, useCourseData, useIsMasquerading } from 'hooks';
+import track from '@src/tracking';
+import { useCourseTrackingEvent, useCourseData, useIsMasquerading } from '@src/hooks';
 
 import { useEmailSettings, useCardSocialSettingsData } from './hooks';
 import SocialShareMenu from './SocialShareMenu';
 import messages from './messages';
 
-jest.mock('tracking', () => ({
+jest.mock('@src/tracking', () => ({
   socialShare: 'test-social-share-key',
 }));
 
-jest.mock('hooks', () => ({
+jest.mock('@src/hooks', () => ({
   useCourseData: jest.fn(),
   useCourseTrackingEvent: jest.fn((...args) => ({ trackCourseEvent: args })),
   useIsMasquerading: jest.fn(),
@@ -115,6 +115,7 @@ describe('SocialShareMenu', () => {
           it('is disabled', () => {
             const emailSettingsButton = screen.getByRole('button', { name: messages.emailSettings.defaultMessage });
             expect(emailSettingsButton).toHaveAttribute('aria-disabled', 'true');
+            expect(emailSettingsButton).toHaveClass('disabled');
           });
         } else {
           it('is enabled', () => {

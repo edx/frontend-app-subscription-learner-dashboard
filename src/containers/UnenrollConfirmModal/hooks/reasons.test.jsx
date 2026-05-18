@@ -1,21 +1,21 @@
 import { renderHook, act } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import track from 'tracking';
+import track from '@src/tracking';
 import {
   useCourseData,
   useCourseTrackingEvent,
   useEntitlementInfo,
-} from 'hooks';
-import * as api from 'data/services/lms/api';
+} from '@src/hooks';
+import * as api from '@src/data/services/lms/api';
 
 import { useUnenrollReasons } from './reasons';
 import constants from '../constants';
 
-jest.mock('data/services/lms/api', () => ({
+jest.mock('@src/data/services/lms/api', () => ({
   unenrollFromCourse: jest.fn(),
 }));
 
-jest.mock('hooks', () => ({
+jest.mock('@src/hooks', () => ({
   useCourseTrackingEvent: jest.fn(),
   useCourseData: jest.fn(),
   useEntitlementInfo: jest.fn(),

@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
-import { useIntl } from '@edx/frontend-platform/i18n';
+import { useIntl } from '@openedx/frontend-base';
 
-import { useCourseData, useIsMasquerading } from 'hooks';
+import { useCourseData, useIsMasquerading } from '@src/hooks';
 import CreditContent from './components/CreditContent';
 import ProviderLink from './components/ProviderLink';
 

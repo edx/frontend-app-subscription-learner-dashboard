@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import { formatMessage } from 'testUtils';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
-import { useCourseData } from 'hooks';
+import { formatMessage } from '@src/testUtils';
+import { IntlProvider } from '@openedx/frontend-base';
+import { useCourseData } from '@src/hooks';
 
 import { FinishedPane } from './FinishedPane';
 import messages from './messages';
 
-jest.mock('hooks', () => ({
+jest.mock('@src/hooks', () => ({
   useCourseData: jest.fn(),
 }));
 

@@ -1,5 +1,5 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query';
-import { logError } from '@edx/frontend-platform/logging';
+import { logError } from '@openedx/frontend-base';
 import {
   createCreditRequest,
   deleteEntitlementEnrollment,
@@ -7,38 +7,38 @@ import {
   unenrollFromCourse,
   updateEmailSettings,
   updateEntitlementEnrollment,
-} from 'data/services/lms/api';
-import { learnerDashboardQueryKeys } from './queryKeys';
+} from '@src/data/services/lms/api';
+import { learnerDashboardQueryKeys, learnerDashboardMutationKeys } from './queryKeys';
 
-type UpdateEntitlementProps = {
-  uuid: string;
-  courseId: string;
-};
+interface UpdateEntitlementProps {
+  uuid: string,
+  courseId: string,
+}
 
-type DeleteEntitlementParams = {
-  uuid: string;
-  isRefundable: boolean;
-};
+interface DeleteEntitlementParams {
+  uuid: string,
+  isRefundable: boolean,
+}
 
-type UpdateEmailSettingsParams = {
-  courseId: string;
-  enable: boolean;
-};
+interface UpdateEmailSettingsParams {
+  courseId: string,
+  enable: boolean,
+}
 
-type CreditParams = {
-  providerId: string;
-  courseId: string;
-  username: string;
-};
+interface CreditParams {
+  providerId: string,
+  courseId: string,
+  username: string,
+}
 
 const useUnenrollFromCourse = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: learnerDashboardQueryKeys.unenrollFromCourse(),
+    mutationKey: learnerDashboardMutationKeys.unenrollFromCourse(),
     mutationFn: ({ courseId }: { courseId: string }) => unenrollFromCourse({ courseId }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: learnerDashboardQueryKeys.initialize() });
+      queryClient.invalidateQueries({ queryKey: learnerDashboardQueryKeys.initializeBase() });
     },
     onError: (error, variables) => {
       logError(`Failed to unenroll from course ${variables.courseId}:`, error);
@@ -50,10 +50,10 @@ const useUpdateEntitlementEnrollment = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: learnerDashboardQueryKeys.updateEntitlementEnrollment(),
+    mutationKey: learnerDashboardMutationKeys.updateEntitlementEnrollment(),
     mutationFn: ({ uuid, courseId }: UpdateEntitlementProps) => updateEntitlementEnrollment({ uuid, courseId }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: learnerDashboardQueryKeys.initialize() });
+      queryClient.invalidateQueries({ queryKey: learnerDashboardQueryKeys.initializeBase() });
     },
     onError: (error, variables) => {
       logError(`Failed to update entitlement enrollment for UUID ${variables.uuid}:`, error);
@@ -65,10 +65,10 @@ const useDeleteEntitlementEnrollment = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: learnerDashboardQueryKeys.deleteEntitlementEnrollment(),
+    mutationKey: learnerDashboardMutationKeys.deleteEntitlementEnrollment(),
     mutationFn: (params: DeleteEntitlementParams) => deleteEntitlementEnrollment(params),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: learnerDashboardQueryKeys.initialize() });
+      queryClient.invalidateQueries({ queryKey: learnerDashboardQueryKeys.initializeBase() });
     },
     onError: (error, variables) => {
       logError(`Failed to delete entitlement enrollment for UUID ${variables.uuid}:`, error);
@@ -80,10 +80,10 @@ const useUpdateEmailSettings = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: learnerDashboardQueryKeys.updateEmailSettings(),
+    mutationKey: learnerDashboardMutationKeys.updateEmailSettings(),
     mutationFn: ({ courseId, enable }: UpdateEmailSettingsParams) => updateEmailSettings({ courseId, enable }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: learnerDashboardQueryKeys.initialize() });
+      queryClient.invalidateQueries({ queryKey: learnerDashboardQueryKeys.initializeBase() });
     },
     onError: (error, variables) => {
       logError(`Failed to update email settings for course ${variables.courseId}:`, error);
@@ -95,10 +95,10 @@ const useCreateCreditRequest = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: learnerDashboardQueryKeys.createCreditRequest(),
+    mutationKey: learnerDashboardMutationKeys.createCreditRequest(),
     mutationFn: (props: CreditParams) => createCreditRequest(props),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: learnerDashboardQueryKeys.initialize() });
+      queryClient.invalidateQueries({ queryKey: learnerDashboardQueryKeys.initializeBase() });
     },
     onError: (error, variables) => {
       logError(`Failed to create credit request for course ${variables.courseId} with provider ${variables.providerId}:`, error);
@@ -110,10 +110,10 @@ const useSendConfirmEmail = (sendEmailUrl: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: learnerDashboardQueryKeys.sendConfirmEmail(sendEmailUrl),
+    mutationKey: learnerDashboardMutationKeys.sendConfirmEmail(sendEmailUrl),
     mutationFn: () => sendConfirmEmail(sendEmailUrl),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: learnerDashboardQueryKeys.initialize() });
+      queryClient.invalidateQueries({ queryKey: learnerDashboardQueryKeys.initializeBase() });
     },
     onError: (error) => {
       logError('Failed to send confirmation email:', error);

@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
-import { useCourseData, useIsMasquerading } from 'hooks';
+import { IntlProvider } from '@openedx/frontend-base';
+import { useCourseData, useIsMasquerading } from '@src/hooks';
 
 import messages from './messages';
 import PendingContent from './PendingContent';
 
-jest.mock('hooks', () => ({
+jest.mock('@src/hooks', () => ({
   useCourseData: jest.fn(),
   useIsMasquerading: jest.fn(),
 }));
@@ -61,6 +61,7 @@ describe('PendingContent component', () => {
           useIsMasquerading.mockReturnValue(true);
           renderPendingContent();
           const button = screen.getByRole('link', { name: messages.viewDetails.defaultMessage });
+          expect(button).toHaveAttribute('aria-disabled', 'true');
           expect(button).toHaveClass('disabled');
         });
       });

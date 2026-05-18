@@ -1,10 +1,11 @@
 import { render, screen } from '@testing-library/react';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
+import { IntlProvider } from '@openedx/frontend-base';
+import { MemoryRouter } from 'react-router';
 
 import hooks from './hooks';
 import DashboardLayout from './DashboardLayout';
 
-jest.mock('data/hooks', () => ({
+jest.mock('@src/data/hooks', () => ({
   useInitializeLearnerHome: jest.fn().mockReturnValue({
     data: {
       platformSettings: {
@@ -18,9 +19,6 @@ jest.mock('./hooks', () => ({
   useDashboardLayoutData: jest.fn(),
 }));
 
-jest.mock('@openedx/frontend-plugin-framework', () => ({
-  PluginSlot: 'PluginSlot',
-}));
 
 const hookProps = {
   isCollapsed: true,
@@ -34,7 +32,7 @@ const children = <div>test children</div>;
 describe('DashboardLayout', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    render(<IntlProvider locale="en"><DashboardLayout>{children}</DashboardLayout></IntlProvider>);
+    render(<MemoryRouter><IntlProvider locale="en"><DashboardLayout>{children}</DashboardLayout></IntlProvider></MemoryRouter>);
   });
 
   const testColumns = () => {
@@ -55,7 +53,8 @@ describe('DashboardLayout', () => {
       const courseListCol = screen.getByText('test children').parentElement;
       const sidebarCol = courseListCol.nextSibling;
       expect(sidebarCol).toHaveClass('sidebar-column');
-      expect(sidebarCol.children[0]).toHaveAttribute('id', 'org.openedx.frontend.learner_dashboard.widget_sidebar.v1');
+      // Slot renders its default children directly (no wrapper with slot id)
+      expect(sidebarCol.children.length).toBeGreaterThan(0);
     });
   };
   const testSidebarLayout = ({ isCollapsed }) => {

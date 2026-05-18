@@ -1,4 +1,4 @@
-import { useCourseData, useEntitlementInfo, useIsMasquerading } from 'hooks';
+import { useCourseData, useEntitlementInfo, useIsMasquerading } from '@src/hooks';
 
 export const useActionDisabledState = (cardId) => {
   const courseData = useCourseData(cardId);

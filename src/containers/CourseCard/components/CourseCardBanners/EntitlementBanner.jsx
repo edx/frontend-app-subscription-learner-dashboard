@@ -1,13 +1,13 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
-import { useIntl } from '@edx/frontend-platform/i18n';
+import { useIntl } from '@openedx/frontend-base';
 import { Button, MailtoLink } from '@openedx/paragon';
 
-import { utilHooks, useCourseData, useEntitlementInfo } from 'hooks';
-import { useSelectSessionModal } from 'data/context';
-import Banner from 'components/Banner';
-import { useInitializeLearnerHome } from 'data/hooks';
+import { utilHooks, useCourseData, useEntitlementInfo } from '@src/hooks';
+import { useSelectSessionModal } from '@src/data/context';
+import Banner from '@src/components/Banner';
+import { useInitializeLearnerHome } from '@src/data/hooks';
 
 import messages from './messages';
 

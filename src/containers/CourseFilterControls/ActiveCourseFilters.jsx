@@ -1,9 +1,9 @@
 import React from 'react';
-import { useIntl } from '@edx/frontend-platform/i18n';
+import { useIntl } from '@openedx/frontend-base';
 
 import { Button, Chip } from '@openedx/paragon';
 import { CloseSmall } from '@openedx/paragon/icons';
-import { useFilters } from 'data/context';
+import { useFilters } from '@src/data/context';
 
 import messages from './messages';
 import './index.scss';

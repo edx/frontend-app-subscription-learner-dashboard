@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
-import track from 'tracking';
-import { useCourseData, useCourseTrackingEvent } from 'hooks';
+import { IntlProvider } from '@openedx/frontend-base';
+import track from '@src/tracking';
+import { useCourseData, useCourseTrackingEvent } from '@src/hooks';
 import useActionDisabledState from '../hooks';
 import BeginCourseButton from './BeginCourseButton';
 
-jest.mock('hooks', () => ({
+jest.mock('@src/hooks', () => ({
   useCourseData: jest.fn().mockReturnValue({
     enrollment: { mode: 'executive-education' },
     courseRun: { homeUrl: 'home-url' },
@@ -16,7 +16,7 @@ jest.mock('hooks', () => ({
   }),
 }));
 
-jest.mock('data/hooks', () => ({
+jest.mock('@src/data/hooks', () => ({
   useInitializeLearnerHome: jest.fn().mockReturnValue({
     data: {
       enterpriseDashboard: {
@@ -26,7 +26,7 @@ jest.mock('data/hooks', () => ({
   }),
 }));
 
-jest.mock('tracking', () => ({
+jest.mock('@src/tracking', () => ({
   course: {
     enterCourseClicked: jest.fn().mockName('segment.enterCourseClicked'),
   },

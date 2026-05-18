@@ -1,4 +1,4 @@
-import { defineMessages } from '@edx/frontend-platform/i18n';
+import { defineMessages } from '@openedx/frontend-base';
 
 const messages = defineMessages({
   auditAccessExpired: {
@@ -100,6 +100,11 @@ const messages = defineMessages({
     id: 'learner-dash.courseCard.banners.courseHasNotStarted',
     description: 'Course has not started message',
     defaultMessage: 'You can\'t access this course just yet because the course hasn\'t started yet. The course will start on {startDate}.',
+  },
+  redeem: {
+    id: 'learner-dash.courseCard.banners.redeem',
+    description: 'Redeem link text',
+    defaultMessage: 'Redeem',
   },
 });
 

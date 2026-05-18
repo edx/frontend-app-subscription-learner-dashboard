@@ -1,8 +1,8 @@
-import { useIntl } from '@edx/frontend-platform/i18n';
+import { useIntl } from '@openedx/frontend-base';
 
-import { keyStore } from 'utils';
-import { utilHooks, useCourseData } from 'hooks';
-import { useSelectSessionModal } from 'data/context';
+import { keyStore } from '@src/utils';
+import { utilHooks, useCourseData } from '@src/hooks';
+import { useSelectSessionModal } from '@src/data/context';
 import * as hooks from './hooks';
 import messages from './messages';
 
@@ -12,21 +12,21 @@ jest.mock('react', () => ({
 }));
 
 const updateSelectSessionModalMock = jest.fn().mockName('updateSelectSessionModal');
-jest.mock('data/context', () => ({
+jest.mock('@src/data/context', () => ({
   useSelectSessionModal: jest.fn(),
 }));
-jest.mock('hooks', () => ({
-  ...jest.requireActual('hooks'),
+jest.mock('@src/hooks', () => ({
+  ...jest.requireActual('@src/hooks'),
   useCourseData: jest.fn(),
   utilHooks: {
     useFormatDate: jest.fn(),
   },
 }));
 
-jest.mock('@edx/frontend-platform/i18n', () => {
-  const { formatMessage } = jest.requireActual('testUtils');
+jest.mock('@openedx/frontend-base', () => {
+  const { formatMessage } = jest.requireActual('@src/testUtils');
   return {
-    ...jest.requireActual('@edx/frontend-platform/i18n'),
+    ...jest.requireActual('@openedx/frontend-base'),
     useIntl: () => ({
       formatMessage,
     }),

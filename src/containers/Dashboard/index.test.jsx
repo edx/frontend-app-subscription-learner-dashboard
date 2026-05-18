@@ -1,16 +1,16 @@
 import { render, screen } from '@testing-library/react';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
-import { useSelectSessionModal } from 'data/context';
-import { useInitializeLearnerHome } from 'data/hooks';
+import { IntlProvider } from '@openedx/frontend-base';
+import { useSelectSessionModal } from '@src/data/context';
+import { useInitializeLearnerHome } from '@src/data/hooks';
 
 import hooks from './hooks';
 import Dashboard from '.';
 
-jest.mock('data/context', () => ({
+jest.mock('@src/data/context', () => ({
   useSelectSessionModal: jest.fn(),
 }));
 
-jest.mock('data/hooks', () => ({
+jest.mock('@src/data/hooks', () => ({
   useInitializeLearnerHome: jest.fn(),
 }));
 
@@ -19,10 +19,10 @@ jest.mock('./hooks', () => ({
   useDashboardMessages: jest.fn(),
 }));
 
-jest.mock('plugin-slots/DashboardModalSlot', () => jest.fn(() => <div>DashboardModalSlot</div>));
-jest.mock('containers/CoursesPanel', () => jest.fn(() => <div>CoursesPanel</div>));
+jest.mock('../../slots/DashboardModalSlot', () => jest.fn(() => <div>DashboardModalSlot</div>));
+jest.mock('@src/containers/CoursesPanel', () => jest.fn(() => <div>CoursesPanel</div>));
 jest.mock('./LoadingView', () => jest.fn(() => <div>LoadingView</div>));
-jest.mock('containers/SelectSessionModal', () => jest.fn(() => <div>SelectSessionModal</div>));
+jest.mock('@src/containers/SelectSessionModal', () => jest.fn(() => <div>SelectSessionModal</div>));
 jest.mock('./DashboardLayout', () => jest.fn(() => <div>DashboardLayout</div>));
 
 const pageTitle = 'test-page-title';
@@ -61,7 +61,7 @@ describe('Dashboard', () => {
     });
     describe('courses still loading', () => {
       it('should render LoadingView', () => {
-        createWrapper({ hasCourses: false });
+        createWrapper({ initIsPending: true });
         const loadingView = screen.getByText('LoadingView');
         expect(loadingView).toBeInTheDocument();
       });

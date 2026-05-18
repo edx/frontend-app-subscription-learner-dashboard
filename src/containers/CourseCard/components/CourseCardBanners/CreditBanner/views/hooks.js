@@ -1,8 +1,8 @@
 import React from 'react';
-import { AppContext } from '@edx/frontend-platform/react';
-import { StrictDict } from 'utils';
-import { useCourseData } from 'hooks';
-import { useCreateCreditRequest } from 'data/hooks';
+import { useAuthenticatedUser } from '@openedx/frontend-base';
+import { StrictDict } from '@src/utils';
+import { useCourseData } from '@src/hooks';
+import { useCreateCreditRequest } from '@src/data/hooks';
 
 import * as module from './hooks';
 
@@ -14,7 +14,7 @@ export const useCreditRequestData = (cardId) => {
   const [requestData, setRequestData] = module.state.creditRequestData(null);
   const courseData = useCourseData(cardId);
   const providerId = courseData?.credit?.providerId;
-  const { authenticatedUser: { username } } = React.useContext(AppContext);
+  const { username } = useAuthenticatedUser();
   const courseId = courseData?.courseRun?.courseId;
   const { mutate: createCreditMutation } = useCreateCreditRequest();
 

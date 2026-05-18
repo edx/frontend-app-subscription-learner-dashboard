@@ -1,16 +1,16 @@
 import { render, screen } from '@testing-library/react';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
-import { formatMessage } from 'testUtils';
-import { useFilters } from 'data/context';
+import { IntlProvider } from '@openedx/frontend-base';
+import { formatMessage } from '@src/testUtils';
+import { useFilters } from '@src/data/context';
 
-import { FilterKeys } from 'data/constants/app';
+import { FilterKeys } from '@src/data/constants/app';
 import userEvent from '@testing-library/user-event';
 import ActiveCourseFilters from './ActiveCourseFilters';
 import messages from './messages';
 
 const filters = Object.values(FilterKeys);
 
-jest.mock('data/context', () => ({
+jest.mock('@src/data/context', () => ({
   useFilters: jest.fn(),
 }));
 

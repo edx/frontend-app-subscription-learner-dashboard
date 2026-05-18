@@ -1,7 +1,4 @@
-import { getConfig } from '@edx/frontend-platform';
-import { StrictDict } from 'utils';
-
-export const routePath = `${getConfig().PUBLIC_PATH}:courseId`;
+import { StrictDict } from '../../utils';
 export const locationId = window.location.pathname.slice(1);
 
 export const SortKeys = StrictDict({
@@ -18,3 +15,5 @@ export const FilterKeys = StrictDict({
 });
 
 export const ListPageSize = 25;
+// TODO : Below URL is temporary and will be removed once the subscription renewal flow is implemented in the app.
+export const subscriptionRenewalURL = 'https://courses.edx.org/renew-subscription';

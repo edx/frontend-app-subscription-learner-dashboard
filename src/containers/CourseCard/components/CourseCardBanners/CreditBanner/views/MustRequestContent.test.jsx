@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
+import { IntlProvider } from '@openedx/frontend-base';
 import userEvent from '@testing-library/user-event';
-import { useCourseData, useIsMasquerading } from 'hooks';
+import { useCourseData, useIsMasquerading } from '@src/hooks';
 import messages from './messages';
 import hooks from './hooks';
 import MustRequestContent from './MustRequestContent';
@@ -10,7 +10,7 @@ jest.mock('./hooks', () => ({
   useCreditRequestData: jest.fn(),
 }));
 
-jest.mock('hooks', () => ({
+jest.mock('@src/hooks', () => ({
   useCourseData: jest.fn(),
   useIsMasquerading: jest.fn(),
 }));

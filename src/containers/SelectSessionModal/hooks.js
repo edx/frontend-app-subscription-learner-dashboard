@@ -1,14 +1,14 @@
 import React, { useMemo } from 'react';
 
-import { useIntl } from '@edx/frontend-platform/i18n';
+import { useIntl } from '@openedx/frontend-base';
 
-import { StrictDict } from 'utils';
+import { StrictDict } from '@src/utils';
 
-import track from 'tracking';
+import track from '@src/tracking';
 
-import { useCourseData } from 'hooks';
-import { useDeleteEntitlementEnrollment, useUpdateEntitlementEnrollment } from 'data/hooks';
-import { useSelectSessionModal } from 'data/context';
+import { useCourseData } from '@src/hooks';
+import { useDeleteEntitlementEnrollment, useUpdateEntitlementEnrollment } from '@src/data/hooks';
+import { useSelectSessionModal } from '@src/data/context';
 import { LEAVE_OPTION } from './constants';
 import messages from './messages';
 import * as module from './hooks';
@@ -40,10 +40,7 @@ export const useSelectSessionModalData = () => {
     isRefundable: courseData?.entitlement?.isRefundable || false,
   }), [courseData]);
   const { mutate: leaveEntitlement } = useDeleteEntitlementEnrollment();
-  const leaveEntitlementSession = () => leaveEntitlement({ uuid, isRefundable });
   const { mutate: switchEntitlementMutation } = useUpdateEntitlementEnrollment();
-  const switchEntitlementEnrollment = (selectedId) => switchEntitlementMutation({ uuid, courseId: selectedId });
-  const newEntitlementEnrollment = (selectedId) => switchEntitlementMutation({ uuid, courseId: selectedId });
 
   const [selectedSession, setSelectedSession] = module.state.selectedSession(courseId || null);
 
@@ -63,17 +60,17 @@ export const useSelectSessionModalData = () => {
 
   const handleSelection = ({ target: { value } }) => setSelectedSession(value);
   const handleSubmit = () => {
+    const onSuccess = () => closeSessionModal();
     if (selectedSession === LEAVE_OPTION) {
       trackLeaveSession();
-      leaveEntitlementSession();
+      leaveEntitlement({ uuid, isRefundable }, { onSuccess });
     } else if (isEnrolled) {
       trackSwitchSession();
-      switchEntitlementEnrollment(selectedSession);
+      switchEntitlementMutation({ uuid, courseId: selectedSession }, { onSuccess });
     } else {
       trackNewSession();
-      newEntitlementEnrollment(selectedSession);
+      switchEntitlementMutation({ uuid, courseId: selectedSession }, { onSuccess });
     }
-    closeSessionModal();
   };
 
   return {

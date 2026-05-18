@@ -1,15 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
-import { useCourseTrackingEvent, useCourseData } from 'hooks';
-import { baseAppUrl } from 'data/services/lms/urls';
+import { IntlProvider } from '@openedx/frontend-base';
+import { useCourseTrackingEvent, useCourseData } from '@src/hooks';
+import { baseAppUrl } from '@src/data/services/lms/urls';
 
-import track from 'tracking';
+import track from '@src/tracking';
 import useActionDisabledState from '../hooks';
 import ResumeButton from './ResumeButton';
 
 const authOrgId = 'auth-org-id';
-jest.mock('data/hooks', () => ({
+jest.mock('@src/data/hooks', () => ({
   useInitializeLearnerHome: jest.fn().mockReturnValue({
     data: {
       enterpriseDashboard: {
@@ -19,7 +19,7 @@ jest.mock('data/hooks', () => ({
   }),
 }));
 
-jest.mock('hooks', () => ({
+jest.mock('@src/hooks', () => ({
   useCourseData: jest.fn().mockReturnValue({
     enrollment: { mode: 'executive-education' },
     courseRun: { homeUrl: 'home-url' },
@@ -29,7 +29,7 @@ jest.mock('hooks', () => ({
   }),
 }));
 
-jest.mock('tracking', () => ({
+jest.mock('@src/tracking', () => ({
   course: {
     enterCourseClicked: jest.fn().mockName('segment.enterCourseClicked'),
   },
@@ -41,7 +41,7 @@ jest.mock('./ActionButton/hooks', () => jest.fn(() => false));
 
 useCourseData.mockReturnValue({
   enrollment: { mode: 'executive-education' },
-  courseRun: { resumeUrl: '/resume-url' },
+  courseRun: { resumeUrl: 'home-url' },
 });
 
 describe('ResumeButton', () => {
@@ -85,7 +85,7 @@ describe('ResumeButton', () => {
         expect(useCourseTrackingEvent).toHaveBeenCalledWith(
           track.course.enterCourseClicked,
           props.cardId,
-          baseAppUrl(`/resume-url?org_id=${authOrgId}`),
+          `${baseAppUrl('home-url')}?org_id=${authOrgId}`,
         );
       });
     });

@@ -1,22 +1,23 @@
 import { renderHook, act, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
-import * as api from 'data/services/lms/api';
-import { useCourseData } from 'hooks';
-import { AppContext } from '@edx/frontend-platform/react';
+import * as api from '@src/data/services/lms/api';
+import { useCourseData } from '@src/hooks';
+import { useAuthenticatedUser } from '@openedx/frontend-base';
 import * as hooks from './hooks';
 
-jest.mock('data/services/lms/api', () => ({
+jest.mock('@src/data/services/lms/api', () => ({
   createCreditRequest: jest.fn(),
 }));
 
-jest.mock('hooks', () => ({
+jest.mock('@src/hooks', () => ({
   useCourseData: jest.fn(),
 }));
 
-jest.mock('@edx/frontend-platform/logging', () => ({
-  ...jest.requireActual('@edx/frontend-platform/logging'),
+jest.mock('@openedx/frontend-base', () => ({
+  ...jest.requireActual('@openedx/frontend-base'),
   logError: jest.fn(),
+  useAuthenticatedUser: jest.fn(),
 }));
 
 const createWrapper = () => {
@@ -29,12 +30,7 @@ const createWrapper = () => {
 
   const wrapper = ({ children }: { children: React.ReactNode }) => (
     <QueryClientProvider client={queryClient}>
-      <AppContext.Provider value={{
-        authenticatedUser: { username: 'test-user' },
-      }}
-      >
-        {children}
-      </AppContext.Provider>
+      {children}
     </QueryClientProvider>
   );
   return wrapper;
@@ -45,6 +41,7 @@ describe('useCreditRequestData', () => {
 
   beforeEach(() => {
     wrapper = createWrapper();
+    (useAuthenticatedUser as jest.Mock).mockReturnValue({ username: 'test-user' });
     (useCourseData as jest.Mock).mockReturnValue({
       credit: { providerId: 'provider-123' },
       courseRun: { courseId: 'course-456' },

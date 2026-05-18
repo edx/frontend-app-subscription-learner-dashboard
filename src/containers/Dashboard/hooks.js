@@ -1,9 +1,9 @@
 import React from 'react';
 import { useWindowSize, breakpoints } from '@openedx/paragon';
-import { useIntl } from '@edx/frontend-platform/i18n';
-import { StrictDict } from 'utils';
+import { useIntl } from '@openedx/frontend-base';
+import { StrictDict } from '../../utils';
 
-import appMessages from 'messages';
+import appMessages from '../../messages';
 import * as module from './hooks';
 
 export const state = StrictDict({
@@ -13,8 +13,8 @@ export const state = StrictDict({
 export const useDashboardMessages = () => {
   const { formatMessage } = useIntl();
   return {
-    spinnerScreenReaderText: formatMessage(appMessages.loadingSR),
-    pageTitle: formatMessage(appMessages.pageTitle),
+    spinnerScreenReaderText: formatMessage(appMessages['learner-dash.loadingSR']),
+    pageTitle: formatMessage(appMessages['learner-dash.title']),
   };
 };
 

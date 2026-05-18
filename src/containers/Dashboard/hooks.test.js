@@ -1,9 +1,9 @@
-import { useIntl } from '@edx/frontend-platform/i18n';
+import { useIntl } from '@openedx/frontend-base';
 import { useWindowSize, breakpoints } from '@openedx/paragon';
 
-import { MockUseState } from 'testUtils';
+import { MockUseState } from '@src/testUtils';
 
-import appMessages from 'messages';
+import appMessages from '@src/messages';
 import * as hooks from './hooks';
 
 jest.mock('@openedx/paragon', () => ({
@@ -12,10 +12,10 @@ jest.mock('@openedx/paragon', () => ({
   breakpoints: {},
 }));
 
-jest.mock('@edx/frontend-platform/i18n', () => {
-  const { formatMessage } = jest.requireActual('testUtils');
+jest.mock('@openedx/frontend-base', () => {
+  const { formatMessage } = jest.requireActual('@src/testUtils');
   return {
-    ...jest.requireActual('@edx/frontend-platform/i18n'),
+    ...jest.requireActual('@openedx/frontend-base'),
     useIntl: () => ({
       formatMessage,
     }),
@@ -43,7 +43,9 @@ describe('CourseCard hooks', () => {
   });
 
   describe('useDashboardLayoutData', () => {
-    beforeEach(() => { state.mock(); });
+    beforeEach(() => {
+      state.mock();
+    });
     describe('behavior', () => {
       it('initializes sidebarShowing to default true value', () => {
         hooks.useDashboardLayoutData();
@@ -69,12 +71,12 @@ describe('CourseCard hooks', () => {
   describe('useDashboardMessages', () => {
     it('returns spinner screen reader text', () => {
       expect(hooks.useDashboardMessages().spinnerScreenReaderText).toEqual(
-        formatMessage(appMessages.loadingSR),
+        formatMessage(appMessages['learner-dash.loadingSR']),
       );
     });
     it('returns page title', () => {
       expect(hooks.useDashboardMessages().pageTitle).toEqual(
-        formatMessage(appMessages.pageTitle),
+        formatMessage(appMessages['learner-dash.title']),
       );
     });
   });

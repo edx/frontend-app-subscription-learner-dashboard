@@ -1,5 +1,4 @@
-/* eslint-disable quotes */
-import { defineMessages } from '@edx/frontend-platform/i18n';
+import { defineMessages } from '@openedx/frontend-base';
 
 const messages = defineMessages({
   header: {
@@ -10,7 +9,7 @@ const messages = defineMessages({
   description: {
     id: 'learner-dash.relatedPrograms.description',
     description: 'Description for related settings modal',
-    defaultMessage: 'Are you looking to expand your knowledge?  Enrolling in a Program lets you take a series of courses in the subject that you\'re interested in',
+    defaultMessage: `Are you looking to expand your knowledge?  Enrolling in a Program lets you take a series of courses in the subject that you're interested in`,
   },
 });
 

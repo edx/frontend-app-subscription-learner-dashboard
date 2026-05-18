@@ -1,25 +1,21 @@
-import { BackedDataProvider, useBackedData } from './BackedDataProvider';
+import type { ReactNode } from 'react';
 import { MasqueradeProvider, useMasquerade } from './MasqueradeProvider';
 import { FiltersProvider, useFilters } from './FiltersProvider';
 import { SelectSessionModalProvider, useSelectSessionModal } from './SelectSessionProvider';
 
-type ContextProvidersProps = {
-  children: React.ReactNode;
-};
+interface ContextProvidersProps {
+  children: ReactNode,
+}
 
 const ContextProviders = ({ children }: ContextProvidersProps) => (
-  <BackedDataProvider>
-    <MasqueradeProvider>
-      <FiltersProvider>
-        <SelectSessionModalProvider>
-          {children}
-        </SelectSessionModalProvider>
-      </FiltersProvider>
-    </MasqueradeProvider>
-  </BackedDataProvider>
+  <FiltersProvider>
+    <SelectSessionModalProvider>
+      {children}
+    </SelectSessionModalProvider>
+  </FiltersProvider>
 );
 
 export {
-  useBackedData, useMasquerade, useFilters, useSelectSessionModal,
+  MasqueradeProvider, useMasquerade, useFilters, useSelectSessionModal,
 };
 export default ContextProviders;

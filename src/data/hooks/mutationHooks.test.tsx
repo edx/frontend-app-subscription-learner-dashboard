@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { logError } from '@edx/frontend-platform/logging';
+import { logError } from '@openedx/frontend-base';
 import {
   useUnenrollFromCourse,
   useUpdateEntitlementEnrollment,
@@ -12,9 +12,12 @@ import {
 import * as api from '../services/lms/api';
 
 // Mock external dependencies
-jest.mock('@edx/frontend-platform/logging');
-jest.mock('data/context');
-jest.mock('data/services/lms/api');
+jest.mock('@openedx/frontend-base', () => ({
+  ...jest.requireActual('@openedx/frontend-base'),
+  logError: jest.fn(),
+}));
+jest.mock('@src/data/context');
+jest.mock('@src/data/services/lms/api');
 
 const mockLogError = logError as jest.MockedFunction<typeof logError>;
 
@@ -32,8 +35,7 @@ const createWrapper = () => {
     },
   });
 
-  // eslint-disable-next-line func-names
-  return function ({ children }: { children: React.ReactNode }) {
+  return function Wrapper({ children }: { children: React.ReactNode }) {
     return (
       <QueryClientProvider client={queryClient}>
         {children}
@@ -329,12 +331,10 @@ describe('mutationHooks', () => {
 
       for (const { hook, params, arg } of hooks) {
         invalidateQueriesSpy.mockClear();
-        // ts-ignore to handle varying params
-        // @ts-ignore
+        // @ts-expect-error handle varying params
         const { result } = renderHook(() => (arg ? hook(arg) : hook()), { wrapper });
 
-        // @ts-ignore
-        // eslint-disable-next-line no-await-in-loop
+        // @ts-expect-error handle varying mutateAsync params
         await result.current.mutateAsync(params);
 
         expect(invalidateQueriesSpy).toHaveBeenCalledWith({

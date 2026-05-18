@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useIntl } from '@edx/frontend-platform/i18n';
-import { baseAppUrl } from 'data/services/lms/urls';
+import { useIntl } from '@openedx/frontend-base';
+import { baseAppUrl } from '@src/data/services/lms/urls';
 
 import { Badge } from '@openedx/paragon';
 
-import track from 'tracking';
-import { useCourseData, useCourseTrackingEvent } from 'hooks';
-import verifiedRibbon from 'assets/verified-ribbon.png';
+import track from '@src/tracking';
+import { useCourseData, useCourseTrackingEvent } from '@src/hooks';
+import verifiedRibbon from '@src/assets/verified-ribbon.png';
 import useActionDisabledState from './hooks';
 
 import messages from '../messages';

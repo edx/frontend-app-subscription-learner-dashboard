@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { StrictDict } from 'utils';
-import { useUpdateEmailSettings } from 'data/hooks';
-import { useCourseData } from 'hooks';
+import { StrictDict } from '@src/utils';
+import { useUpdateEmailSettings } from '@src/data/hooks';
+import { useCourseData } from '@src/hooks';
 
 import * as module from './hooks';
 
@@ -21,8 +21,10 @@ export const useEmailData = ({
   const { mutate: updateEmailSettings } = useUpdateEmailSettings();
   const onToggle = () => setIsOptedOut(!isOptedOut);
   const save = () => {
-    updateEmailSettings({ courseId, enable: !isOptedOut });
-    closeModal();
+    updateEmailSettings(
+      { courseId, enable: !isOptedOut },
+      { onSuccess: () => closeModal() },
+    );
   };
 
   return {

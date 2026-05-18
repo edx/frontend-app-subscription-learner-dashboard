@@ -1,10 +1,10 @@
 import { renderHook } from '@testing-library/react';
-import { useMasquerade } from 'data/context';
-import { useInitializeLearnerHome } from 'data/hooks';
-import { useIsMasquerading } from 'hooks';
+import { useMasquerade } from '@src/data/context';
+import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useIsMasquerading } from '@src/hooks';
 
-jest.mock('data/context');
-jest.mock('data/hooks');
+jest.mock('@src/data/context');
+jest.mock('@src/data/hooks');
 
 const mockUseMasquerade = useMasquerade as jest.MockedFunction<typeof useMasquerade>;
 const mockUseInitializeLearnerHome = useInitializeLearnerHome as jest.MockedFunction<typeof useInitializeLearnerHome>;

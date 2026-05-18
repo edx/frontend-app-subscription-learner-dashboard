@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
-import { useCourseData } from 'hooks';
+import { IntlProvider } from '@openedx/frontend-base';
+import { useCourseData } from '@src/hooks';
 
 import ProviderLink from './ProviderLink';
 
-jest.mock('hooks', () => ({
+jest.mock('@src/hooks', () => ({
   useCourseData: jest.fn(),
 }));
 

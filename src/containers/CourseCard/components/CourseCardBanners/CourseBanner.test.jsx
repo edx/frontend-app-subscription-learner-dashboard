@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
+import { IntlProvider } from '@openedx/frontend-base';
 
-import { useCourseData } from 'hooks';
-import { formatMessage } from 'testUtils';
+import { useCourseData } from '@src/hooks';
+import { formatMessage } from '@src/testUtils';
 import { CourseBanner } from './CourseBanner';
 
 import messages from './messages';
 
-jest.mock('hooks', () => ({
+jest.mock('@src/hooks', () => ({
   useCourseData: jest.fn(),
   utilHooks: {
     useFormatDate: () => date => date,
@@ -50,7 +50,7 @@ const renderCourseBanner = (overrides = {}) => {
 };
 
 describe('CourseBanner', () => {
-  it('initializes data with course number from enrollment, course and course run data', () => {
+  it('calls useCourseData with the correct cardId', () => {
     renderCourseBanner();
     expect(useCourseData).toHaveBeenCalledWith(cardId);
   });

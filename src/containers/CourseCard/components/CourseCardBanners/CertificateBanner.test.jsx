@@ -1,19 +1,19 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
+import { IntlProvider } from '@openedx/frontend-base';
 
-import { useCourseData } from 'hooks';
-import { useInitializeLearnerHome } from 'data/hooks';
+import { useCourseData } from '@src/hooks';
+import { useInitializeLearnerHome } from '@src/data/hooks';
 import CertificateBanner from './CertificateBanner';
 
-jest.mock('hooks', () => ({
+jest.mock('@src/hooks', () => ({
   utilHooks: {
     useFormatDate: jest.fn(() => date => date),
   },
   useCourseData: jest.fn(),
 }));
 
-jest.mock('data/hooks', () => ({
+jest.mock('@src/data/hooks', () => ({
   useInitializeLearnerHome: jest.fn(),
 }));
 

@@ -1,4 +1,4 @@
-import { defineMessages } from '@edx/frontend-platform/i18n';
+import { defineMessages } from '@openedx/frontend-base';
 
 const messages = defineMessages({
   beginCourse: {
@@ -20,6 +20,16 @@ const messages = defineMessages({
     id: 'learner-dash.courseCard.actions.selectSession',
     description: 'Course card select-session button text',
     defaultMessage: 'Select Session',
+  },
+  subsVerifiedCourseText: {
+    id: 'subs.learner-dash.courseCard.actions.verifiedText',
+    description: 'Text for verified courses included in edx Unlimited',
+    defaultMessage: 'Verified with edX Unlimited',
+  },
+  subsIncludedCourseText: {
+    id: 'subs.learner-dash.courseCard.actions.includedText',
+    description: 'Text for unverified (audited) courses included in edx Unlimited',
+    defaultMessage: 'Included in edX Unlimited',
   },
 });
 

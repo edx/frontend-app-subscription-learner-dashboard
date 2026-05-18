@@ -1,6 +1,6 @@
 import React from 'react';
-import { useIntl } from '@edx/frontend-platform/i18n';
-import track from 'tracking';
+import { useIntl } from '@openedx/frontend-base';
+import track from '@src/tracking';
 import {
   Button,
   Form,
@@ -13,8 +13,8 @@ import {
 } from '@openedx/paragon';
 import { Close, Tune } from '@openedx/paragon/icons';
 
-import { useInitializeLearnerHome } from 'data/hooks';
-import { useFilters } from 'data/context';
+import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useFilters } from '@src/data/context';
 import FilterForm from './components/FilterForm';
 import SortForm from './components/SortForm';
 import messages from './messages';

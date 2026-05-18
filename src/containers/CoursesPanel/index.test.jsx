@@ -1,21 +1,23 @@
 import { render, screen } from '@testing-library/react';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
-import { useInitializeLearnerHome } from 'data/hooks';
-import { useFilters } from 'data/context';
-import * as dataTransformers from 'utils/dataTransformers';
-import messagesNoCourses from 'containers/CoursesPanel/NoCoursesView/messages';
+import { IntlProvider } from '@openedx/frontend-base';
+import { MemoryRouter } from 'react-router';
+import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useFilters } from '@src/data/context';
+import * as dataTransformers from '@src/utils/dataTransformers';
+import messagesNoCourses from '@src/containers/CoursesPanel/NoCoursesView/messages';
 import CoursesPanel from '.';
 import messages from './messages';
 
-jest.mock('data/hooks', () => ({
+jest.mock('@src/data/hooks', () => ({
   useInitializeLearnerHome: jest.fn(() => ({
     data: {
       courses: [{ id: 1 }, { id: 2 }],
+      coursesByCardId: { 'card-0': { id: 1, cardId: 'card-0' }, 'card-1': { id: 2, cardId: 'card-1' } },
     },
   })),
 }));
 
-jest.mock('data/context', () => ({
+jest.mock('@src/data/context', () => ({
   useFilters: jest.fn(() => ({
     filters: [],
     sortBy: 'enrolled',
@@ -24,27 +26,22 @@ jest.mock('data/context', () => ({
   })),
 }));
 
-jest.mock('containers/CourseCard', () => jest.fn(() => <div>CourseCard</div>));
-jest.mock('containers/CourseFilterControls', () => ({
-  ActiveCourseFilters: jest.fn(() => <div>ActiveCourseFilters</div>),
-  CourseFilterControls: jest.fn(() => <div>CourseFilterControls</div>),
-}));
+jest.mock('@src/containers/CourseCard', () => jest.fn(() => <div>CourseCard</div>));
 
-jest.mock('@openedx/frontend-plugin-framework', () => ({
-  PluginSlot: 'PluginSlot',
-}));
 
 describe('CoursesPanel', () => {
   const createWrapper = (courseListData) => {
-    useInitializeLearnerHome.mockReturnValue({ data: { courses: courseListData?.visibleList || [] } });
-    return render(<IntlProvider locale="en"><CoursesPanel /></IntlProvider>);
+    const visibleList = courseListData?.visibleList || [];
+    const coursesByCardId = Object.fromEntries(visibleList.map((c, i) => [`card-${i}`, { ...c, cardId: c.cardId || `card-${i}` }]));
+    useInitializeLearnerHome.mockReturnValue({ data: { courses: visibleList, coursesByCardId } });
+    return render(<MemoryRouter><IntlProvider locale="en"><CoursesPanel /></IntlProvider></MemoryRouter>);
   };
 
   describe('no courses', () => {
     it('should render no courses view slot', () => {
       createWrapper();
-      const imgNoCourses = screen.getByRole('img', { name: messagesNoCourses.bannerAlt.defaultMessage });
-      expect(imgNoCourses).toBeInTheDocument();
+      const placeholders = screen.getAllByText(messagesNoCourses.inProgressCoursesPrompt.defaultMessage);
+      expect(placeholders).toHaveLength(2);
       const courseCard = screen.queryByText('CourseCard');
       expect(courseCard).toBeNull();
     });
@@ -54,11 +51,7 @@ describe('CoursesPanel', () => {
       const visibleList = [{ cardId: 'foo' }, { cardId: 'bar' }, { cardId: 'baz' }];
       createWrapper({ visibleList });
       const courseCards = screen.getAllByText('CourseCard');
-      expect(courseCards.length).toEqual(visibleList.length);
-    });
-    it('displays course filter controls', () => {
-      createWrapper();
-      expect(screen.getByText('CourseFilterControls')).toBeInTheDocument();
+      expect(courseCards.length).toEqual(visibleList.length * 2);
     });
 
     it('displays course list slot when courses exist', () => {
@@ -74,7 +67,6 @@ describe('CoursesPanel', () => {
 
     beforeEach(() => {
       jest.clearAllMocks();
-      jest.spyOn(dataTransformers, 'getTransformedCourseDataList');
       jest.spyOn(dataTransformers, 'getVisibleList');
     });
 
@@ -86,7 +78,6 @@ describe('CoursesPanel', () => {
         setPageNumber: mockSetPageNumber,
       });
 
-      dataTransformers.getTransformedCourseDataList.mockReturnValue([{ id: 1 }, { id: 2 }]);
       dataTransformers.getVisibleList.mockReturnValue({
         visibleList: [{ id: 1 }],
         numPages: 2,
@@ -105,7 +96,6 @@ describe('CoursesPanel', () => {
         setPageNumber: mockSetPageNumber,
       });
 
-      dataTransformers.getTransformedCourseDataList.mockReturnValue([{ id: 1 }, { id: 2 }]);
       dataTransformers.getVisibleList.mockReturnValue({
         visibleList: [{ id: 1 }],
         numPages: 3,
@@ -124,7 +114,6 @@ describe('CoursesPanel', () => {
         setPageNumber: mockSetPageNumber,
       });
 
-      dataTransformers.getTransformedCourseDataList.mockReturnValue([]);
       dataTransformers.getVisibleList.mockReturnValue({
         visibleList: [],
         numPages: 0,
@@ -143,7 +132,6 @@ describe('CoursesPanel', () => {
         setPageNumber: mockSetPageNumber,
       });
 
-      dataTransformers.getTransformedCourseDataList.mockReturnValue([{ id: 1 }, { id: 2 }]);
       dataTransformers.getVisibleList.mockReturnValue({
         visibleList: [{ id: 1 }],
         numPages: 2,

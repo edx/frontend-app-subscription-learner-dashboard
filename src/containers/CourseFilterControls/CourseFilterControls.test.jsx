@@ -1,16 +1,16 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { formatMessage } from 'testUtils';
+import { formatMessage } from '@src/testUtils';
 import { breakpoints, useWindowSize } from '@openedx/paragon';
-import { IntlProvider } from '@edx/frontend-platform/i18n';
-import { FilterKeys, SortKeys } from 'data/constants/app';
-import { useInitializeLearnerHome } from 'data/hooks';
-import { useFilters } from 'data/context';
+import { IntlProvider } from '@openedx/frontend-base';
+import { FilterKeys, SortKeys } from '@src/data/constants/app';
+import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useFilters } from '@src/data/context';
 
 import userEvent from '@testing-library/user-event';
 import messages from './messages';
 import CourseFilterControls from './CourseFilterControls';
 
-jest.mock('data/hooks', () => ({
+jest.mock('@src/data/hooks', () => ({
   useInitializeLearnerHome: jest.fn().mockReturnValue({ data: { courses: [1, 2, 3] } }),
 }));
 
@@ -19,7 +19,7 @@ jest.mock('@openedx/paragon', () => ({
   useWindowSize: jest.fn(),
 }));
 
-jest.mock('tracking', () => ({
+jest.mock('@src/tracking', () => ({
   filter: {
     filterClicked: jest.fn().mockName('segment.filterClicked'),
     filterOptionSelected: jest.fn().mockName('segment.filterOptionSelected'),
@@ -28,7 +28,7 @@ jest.mock('tracking', () => ({
 
 const filters = Object.values(FilterKeys);
 
-jest.mock('data/context', () => ({
+jest.mock('@src/data/context', () => ({
   useFilters: jest.fn(),
 }));
 

@@ -1,13 +1,14 @@
 import { render, screen } from '@testing-library/react';
-import { useCourseData } from 'hooks';
+import { IntlProvider } from '@openedx/frontend-base';
+import { useCourseData } from '@src/hooks';
 import CourseCardActions from '.';
 
-jest.mock('hooks', () => ({
-  ...jest.requireActual('hooks'),
+jest.mock('@src/hooks', () => ({
+  ...jest.requireActual('@src/hooks'),
   useCourseData: jest.fn(),
 }));
 
-jest.mock('plugin-slots/CourseCardActionSlot', () => jest.fn(() => <div>CourseCardActionSlot</div>));
+jest.mock('@src/slots/CourseCardActionSlot', () => jest.fn(() => <div>CourseCardActionSlot</div>));
 jest.mock('./SelectSessionButton', () => jest.fn(() => <div>SelectSessionButton</div>));
 jest.mock('./ViewCourseButton', () => jest.fn(() => <div>ViewCourseButton</div>));
 jest.mock('./BeginCourseButton', () => jest.fn(() => <div>BeginCourseButton</div>));
@@ -29,7 +30,7 @@ describe('CourseCardActions', () => {
       entitlement: isEntitlement !== null ? { isEntitlement, isFulfilled } : null,
     });
   };
-  const renderComponent = () => render(<CourseCardActions {...props} />);
+  const renderComponent = () => render(<IntlProvider locale="en"><CourseCardActions {...props} /></IntlProvider>);
   describe('hooks', () => {
     it('initializes hooks', () => {
       mockHooks();

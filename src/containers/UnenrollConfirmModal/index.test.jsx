@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import { formatMessage } from 'testUtils';
+import { formatMessage } from '@src/testUtils';
 
-import { IntlProvider } from '@edx/frontend-platform/i18n';
-import { useInitializeLearnerHome } from 'data/hooks';
+import { IntlProvider } from '@openedx/frontend-base';
+import { useInitializeLearnerHome } from '@src/data/hooks';
 import { UnenrollConfirmModal } from '.';
 import * as hooks from './hooks';
 import messages from './components/messages';
@@ -13,7 +13,7 @@ jest.mock('./hooks', () => ({
   useUnenrollData: jest.fn(),
 }));
 
-jest.mock('data/hooks', () => ({
+jest.mock('@src/data/hooks', () => ({
   useInitializeLearnerHome: jest.fn(),
 }));
 

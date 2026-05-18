@@ -1,15 +1,15 @@
 import React, { useMemo } from 'react';
 
-import { useIntl } from '@edx/frontend-platform/i18n';
-import { useInitializeLearnerHome } from 'data/hooks';
+import { useIntl } from '@openedx/frontend-base';
+import { useInitializeLearnerHome } from '@src/data/hooks';
 import {
   CourseFilterControls,
-} from 'containers/CourseFilterControls';
-import CourseListSlot from 'plugin-slots/CourseListSlot';
-import NoCoursesViewSlot from 'plugin-slots/NoCoursesViewSlot';
-import { useFilters } from 'data/context';
+} from '../../containers/CourseFilterControls';
+import CourseListSlot from '../../slots/CourseListSlot';
+import NoCoursesViewSlot from '../../slots/NoCoursesViewSlot';
+import { useFilters } from '@src/data/context';
 
-import { getVisibleList, getTransformedCourseDataList } from 'utils/dataTransformers';
+import { getVisibleList } from '@src/utils/dataTransformers';
 
 import messages from './messages';
 
@@ -29,10 +29,9 @@ export const CoursesPanel = () => {
     filters, sortBy, pageNumber, setPageNumber,
   } = useFilters();
   const { visibleList, numPages } = useMemo(() => {
-    let transformedCourses = [];
-    if (data?.courses?.length) {
-      transformedCourses = getTransformedCourseDataList(data.courses);
-    }
+    const transformedCourses = data?.coursesByCardId
+      ? Object.values(data.coursesByCardId)
+      : [];
     return getVisibleList(
       transformedCourses,
       filters,
@@ -48,23 +47,32 @@ export const CoursesPanel = () => {
     }
   }, [numPages, pageNumber, setPageNumber]);
 
+  // TODO [TEMP]: Passing data twice and displaying the list twice, also fixed the corresponding test cases to reflect this.
+  // Reason: Requirements not finalized
+  // Action: Revisit after UX and data confirmation
   const courseListData = {
-    filterOptions: filters,
     setPageNumber,
     numPages,
     visibleList,
-    showFilters: filters.length > 0,
+    verifiedCourse: true,
+  };
+
+  const limitedCourseListData = {
+    ...courseListData,
+    verifiedCourse: false,
   };
 
   return (
     <div className="course-list-container">
       <div className="course-list-heading-container">
         <h2 className="course-list-title">{formatMessage(messages.myCourses)}</h2>
-        <div className="course-filter-controls-container">
-          <CourseFilterControls />
-        </div>
       </div>
       {hasCourses ? <CourseListSlot courseListData={courseListData} /> : <NoCoursesViewSlot />}
+
+      <div className="course-list-heading-container">
+        <h2 className="course-list-title text-gray-700">{formatMessage(messages.limitedCourse)}</h2>
+      </div>
+      {hasCourses ? <CourseListSlot courseListData={limitedCourseListData} /> : <NoCoursesViewSlot />}
     </div>
   );
 };

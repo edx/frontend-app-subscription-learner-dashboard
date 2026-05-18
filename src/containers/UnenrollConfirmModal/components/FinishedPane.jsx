@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useCourseData } from 'hooks';
-import { useIntl } from '@edx/frontend-platform/i18n';
+import { useCourseData } from '@src/hooks';
+import { useIntl } from '@openedx/frontend-base';
 import {
   ActionRow,
   Button,

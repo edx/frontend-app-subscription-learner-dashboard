@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 
-import { useIntl } from '@edx/frontend-platform/i18n';
+import { useIntl } from '@openedx/frontend-base';
 import { Dropdown, Icon, IconButton } from '@openedx/paragon';
 import { MoreVert } from '@openedx/paragon/icons';
 
-import EmailSettingsModal from 'containers/EmailSettingsModal';
-import UnenrollConfirmModal from 'containers/UnenrollConfirmModal';
-import { useCourseData, useIsMasquerading } from 'hooks';
+import EmailSettingsModal from '@src/containers/EmailSettingsModal';
+import UnenrollConfirmModal from '@src/containers/UnenrollConfirmModal';
+import { useCourseData, useIsMasquerading } from '@src/hooks';
 import SocialShareMenu from './SocialShareMenu';
 import {
   useEmailSettings,
