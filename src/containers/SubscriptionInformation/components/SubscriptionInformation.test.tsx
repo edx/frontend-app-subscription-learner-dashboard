@@ -1,37 +1,36 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { IntlProvider } from '@openedx/frontend-base';
 import { SubscriptionInformation } from './SubscriptionInformation';
 import { manageSubscriptionURL } from '@src/data/constants/app';
-
-jest.mock('@openedx/frontend-base', () => ({
-  useIntl: () => ({
-    formatMessage: (msg: { defaultMessage: string }, values?: Record<string, string>) => {
-      if (!values) return msg.defaultMessage;
-      return msg.defaultMessage.replace(
-        /\{(\w+)\}/g,
-        (_: string, key: string) => values[key] ?? `{${key}}`
-      );
-    },
-  }),
-  defineMessages: (msgs: Record<string, unknown>) => msgs,
-}));
+import messages from '../messages';
+import { formatMessage } from '@src/testUtils';
 
 jest.mock('@src/hooks', () => ({
+  useCourseData: jest.fn(),
   utilHooks: {
-    useFormatDate: () => (date: string) => date,
+    useFormatDate: () => date => date,
   },
 }));
+
+const renderComponent = () => {
+  return render(
+    <IntlProvider locale="en">
+      <SubscriptionInformation />
+    </IntlProvider>
+  );
+};
 
 describe('SubscriptionInformation', () => {
   describe('edX Logo', () => {
     it('renders the edX logo image', () => {
-      render(<SubscriptionInformation />);
+      renderComponent();
       const logo = screen.getByAltText('edX Logo');
       expect(logo).toBeInTheDocument();
     });
 
     it('renders the edX logo with the correct src', () => {
-      render(<SubscriptionInformation />);
+      renderComponent();
       const logo = screen.getByAltText('edX Logo');
       expect(logo).toHaveAttribute('src', 'https://www.edx.org/trademark-logos/edx-logo-elm.svg');
     });
@@ -39,12 +38,12 @@ describe('SubscriptionInformation', () => {
 
   describe('Subscription status alert', () => {
     it('renders the alert with "Subscription Status" heading', () => {
-      render(<SubscriptionInformation />);
-      expect(screen.getByText('Subscription Status')).toBeInTheDocument();
+      renderComponent();
+      expect(screen.getByText(formatMessage(messages.statusMessage))).toBeInTheDocument();
     });
 
     it('renders the alert with info variant class', () => {
-      render(<SubscriptionInformation />);
+      renderComponent();
       const alert = screen.getByRole('alert');
       expect(alert).toBeInTheDocument();
     });
@@ -52,26 +51,26 @@ describe('SubscriptionInformation', () => {
 
   describe('Manage my subscription button', () => {
     it('renders the "Manage my subscription" button', () => {
-      render(<SubscriptionInformation />);
+      renderComponent();
       const btn = screen.getByTestId('manage-button');
       expect(btn).toBeInTheDocument();
     });
 
     it('button has correct href pointing to manageSubscriptionURL', () => {
-      render(<SubscriptionInformation />);
+      renderComponent();
       const btn = screen.getByTestId('manage-button');
       expect(btn).toHaveAttribute('href', manageSubscriptionURL);
     });
 
     it('button opens in a new tab with correct attributes', () => {
-      render(<SubscriptionInformation />);
+      renderComponent();
       const btn = screen.getByTestId('manage-button');
       expect(btn).toHaveAttribute('target', '_blank');
       expect(btn).toHaveAttribute('rel', 'noopener noreferrer');
     });
 
     it('button is accessible as a link role', () => {
-      render(<SubscriptionInformation />);
+      renderComponent();
       const btn = screen.getByRole('link', { name: /manage my subscription/i });
       expect(btn).toBeInTheDocument();
     });
@@ -80,7 +79,7 @@ describe('SubscriptionInformation', () => {
   // --- Container ---
   describe('Container structure', () => {
     it('renders the subscription-information container', () => {
-      const { container } = render(<SubscriptionInformation />);
+      const { container } = renderComponent();
       expect(container.querySelector('.subscription-information')).toBeInTheDocument();
     });
 

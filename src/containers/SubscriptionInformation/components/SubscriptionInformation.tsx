@@ -26,9 +26,8 @@ export const SubscriptionInformation: FC = () => {
   const subscriptionActions = [
     <Button
       key="manage-subscription"
+      variant="outline-brand"
       data-testid="manage-button"
-      className="manage-button"
-      variant="primary"
       href={manageSubscriptionURL}
       target="_blank"
       rel="noopener noreferrer"
@@ -39,7 +38,7 @@ export const SubscriptionInformation: FC = () => {
   ];
 
   return (
-    <div className="container subscription-information" style={{ padding: '20px' }}>
+    <div className="container subscription-information p-3\.5">
       <Image
         className="mr-2"
         src="https://www.edx.org/trademark-logos/edx-logo-elm.svg"
@@ -48,9 +47,9 @@ export const SubscriptionInformation: FC = () => {
         width={40}
         height={60}
       />
-      {subscriptionInformationData.subscriptionStatus === 'cancelled' ? (
+      {subscriptionInformationData.subscriptionStatus === 'cancelled' && (
         <h3>{formatMessage(messages.cancelledMessage, { totalSavings: subscriptionInformationData.totalSavings })}</h3>
-      ) : null}
+      )}
       <p>
         {formatMessage(messages.coursesEnrollmentMessage, {
           numberOfCoursesEnrolled: subscriptionInformationData.numberOfCoursesEnrolled,
@@ -61,7 +60,7 @@ export const SubscriptionInformation: FC = () => {
         dismissible={false}
         show={true}
         actions={subscriptionActions}
-        className="subscription-status-alert"
+        className="subscription-status-alert bg-light-200"
       >
         <Alert.Heading>{formatMessage(messages.statusMessage)}</Alert.Heading>
         <p>
