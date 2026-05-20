@@ -6,7 +6,7 @@ const messages = defineMessages({
     defaultMessage: 'Programs',
     description: 'Label for Programs belonging to a user\'s active subscription',
   },
-  programsMessage: {
+  emptyProgramsMessage: {
     id: 'subs.programsMessage',
     defaultMessage: 'In-progress professional certificate programs will be found here.',
     description: 'Message shown in the Programs tab of the learner dashboard',
