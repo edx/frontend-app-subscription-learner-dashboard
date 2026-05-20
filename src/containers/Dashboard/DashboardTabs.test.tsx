@@ -46,6 +46,18 @@ jest.mock('@openedx/paragon', () => {
 
 const renderComponent = () => render(<IntlProvider locale="en"><DashboardTabs /></IntlProvider>);
 
+jest.mock('../ProgramsPanel', () => {
+  const MockProgramsPanel = () => (
+    <div data-testid="programs-list">
+      Programs Panel Content
+    </div>
+  );
+
+  MockProgramsPanel.displayName = 'MockProgramsPanel';
+
+  return MockProgramsPanel;
+});
+
 jest.mock('../../containers/CoursesPanel', () => {
   const MockCoursesPanel = () => (
     <div data-testid="courses-panel">
@@ -63,7 +75,7 @@ describe('DashboardTabs', () => {
     renderComponent();
 
     expect(screen.getByText('Courses')).toBeInTheDocument();
-    expect(screen.getAllByText('Programs')).toHaveLength(2);
+    expect(screen.getAllByText('Programs')).toHaveLength(1);
     expect(screen.getByText('History')).toBeInTheDocument();
   });
 

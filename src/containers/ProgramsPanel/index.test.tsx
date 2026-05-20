@@ -1,29 +1,36 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { IntlProvider } from '@openedx/frontend-base';
 import ProgramsPanel from '.';
+import { formatMessage } from '@src/testUtils';
 import messages from './messages';
 
-const renderComponent = () => render(<IntlProvider locale="en"><ProgramsPanel /></IntlProvider>);
+// const renderComponent = () => { return render(<IntlProvider locale="en"><ProgramsPanel /></IntlProvider>) };
+
+const renderComponent = (hasProgramsEnrollment = false) => {
+  jest.spyOn(React, 'useState').mockImplementation(() => [hasProgramsEnrollment, jest.fn()]);
+  return render(<IntlProvider locale="en"><ProgramsPanel /></IntlProvider>);
+};
 
 describe('ProgramsPanel', () => {
   it('renders the ProgramsPanel component', () => {
     renderComponent();
-
-    expect(screen.getByText(messages.myPrograms.defaultMessage)).toBeInTheDocument();
-    expect(screen.getByText(messages.programsMessage.defaultMessage)).toBeInTheDocument();
+    expect(screen.getByTestId('programs-list')).toBeInTheDocument();
   });
 
   it('displays the correct heading', () => {
     renderComponent();
-
-    const heading = screen.getByRole('heading', { level: 2 });
-    expect(heading).toHaveTextContent(messages.myPrograms.defaultMessage);
+    const heading = screen.getByRole('heading', { level: 3 });
+    expect(heading).toHaveTextContent(formatMessage(messages.myPrograms));
   });
 
-  it('displays the correct message', () => {
-    renderComponent();
+  it('renders NoProgramsView when hasProgramsEnrollment is false', () => {
+    renderComponent(false);
+    expect(screen.getByText('Find a program')).toBeInTheDocument();
+  });
 
-    const message = screen.getByText(messages.programsMessage.defaultMessage);
-    expect(message).toBeInTheDocument();
+  it('does not render NoProgramsView when hasProgramsEnrollment is true', () => {
+    renderComponent(true);
+    expect(screen.queryByText('Find a program')).not.toBeInTheDocument();
   });
 });
