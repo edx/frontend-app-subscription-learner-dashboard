@@ -3,6 +3,7 @@ import { CurrentAppProvider, PageWrap } from '@openedx/frontend-base';
 import { appId } from './constants';
 import ContextProviders from './data/context';
 import Dashboard from './containers/Dashboard';
+import { SubscriptionInformation } from './containers/SubscriptionInformation';
 
 import './style.scss';
 
@@ -11,6 +12,7 @@ const Main = () => (
     <ContextProviders>
       <PageWrap>
         <Dashboard />
+        <SubscriptionInformation />
       </PageWrap>
     </ContextProviders>
   </CurrentAppProvider>

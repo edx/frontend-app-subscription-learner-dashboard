@@ -1,0 +1,17 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Program dashboard custom icon">
+  <g stroke="#2C6E80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Outer dome -->
+    <path d="M6 24C6 13.5066 14.5066 5 25 5C35.4934 5 44 13.5066 44 24" />
+
+    <!-- Dome grid -->
+    <path d="M25 5V24" />
+    <path d="M12 24C12 16.268 17.8198 10 25 10C32.1802 10 38 16.268 38 24" />
+    <path d="M9 24C9 18.5702 11.3798 13.6581 15.269 10.3398" />
+    <path d="M41 24C41 18.5702 38.6202 13.6581 34.731 10.3398" />
+
+    <!-- Base line + support -->
+    <path d="M4 28H46" />
+    <path d="M17 33H33" />
+    <path d="M25 28V33" />
+  </g>
+</svg>
