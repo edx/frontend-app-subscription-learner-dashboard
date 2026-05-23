@@ -29,26 +29,26 @@ const messages = defineMessages({
   programProgressIncompleteText: {
     defaultMessage: 'Track and plan your progress through the {totalCoursesInProgram} courses in this program. To complete the program, you must earn a verified certificate for each course.',
     id: 'program.progress.incomplete.text',
-    description: 'text to diplay when a user has not completed all of the courses for a program',
+    description: 'text to display when a user has not completed all of the courses for a program',
   },
   programProgressCardEnrollment: {
+    defaultMessage: 'Enrolled: {enrollmentInfo}',
     id: 'program.progress.card.enrollment.text',
-    defaultMessage: 'Enrolled:',
     description: 'text to display on the progress card related to the enrollment date for the course',
   },
   programProgressCardCertificate: {
+    defaultMessage: '<bold>Certificate Status:</bold> {certificateStatus}',
     id: 'program.progress.card.certificate.text',
-    defaultMessage: 'Certificate Status:',
     description: 'text to display on the progress card related to the certificate status for the course',
   },
   programProgressCardResumeButton: {
-    id: 'program.progress.card.resume.button.text',
     defaultMessage: 'Resume course',
+    id: 'program.progress.card.resume.button.text',
     description: 'text to display on the progress card for the resume course button',
   },
   programProgressCardUpgradeButton: {
-    id: 'program.progress.card.upgrade.button.text',
     defaultMessage: 'Upgrade with your subscription',
+    id: 'program.progress.card.upgrade.button.text',
     description: 'text to display on the progress card for the upgrade button',
   },
 });
