@@ -31,6 +31,26 @@ const messages = defineMessages({
     id: 'program.progress.incomplete.text',
     description: 'text to diplay when a user has not completed all of the courses for a program',
   },
+  programProgressCardEnrollment: {
+    id: 'program.progress.card.enrollment.text',
+    defaultMessage: 'Enrolled:',
+    description: 'text to display on the progress card related to the enrollment date for the course',
+  },
+  programProgressCardCertificate: {
+    id: 'program.progress.card.certificate.text',
+    defaultMessage: 'Certificate Status:',
+    description: 'text to display on the progress card related to the certificate status for the course',
+  },
+  programProgressCardResumeButton: {
+    id: 'program.progress.card.resume.button.text',
+    defaultMessage: 'Resume course',
+    description: 'text to display on the progress card for the resume course button',
+  },
+  programProgressCardUpgradeButton: {
+    id: 'program.progress.card.upgrade.button.text',
+    defaultMessage: 'Upgrade with your subscription',
+    description: 'text to display on the progress card for the upgrade button',
+  },
 });
 
 export default messages;
