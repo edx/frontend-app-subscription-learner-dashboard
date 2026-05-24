@@ -9,6 +9,7 @@ import ProgramProgressHeader from './ProgramProgressHeader';
 import ProgramProgressInfo from './ProgramProgressInfo';
 
 import './index.scss';
+import { ProgramProgressTabs } from './ProgramProgressTabs';
 
 const ProgramProgress: React.FC = () => {
   const {
@@ -88,6 +89,8 @@ const ProgramProgress: React.FC = () => {
             />
           </Col>
         </Row>
+
+        <ProgramProgressTabs counts={{ inProgress: 1, remaining: 2, completed: 0, pathway: 0 }} />
       </Container>
     </>
   );
