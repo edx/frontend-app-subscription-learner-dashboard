@@ -73,7 +73,7 @@ export interface ProgramProgressContextValueType {
 }
 
 export interface ProgramProgressTabsProps {
-  type?: string,
+  type: string,
   counts: {
     inProgress: number,
     remaining: number,

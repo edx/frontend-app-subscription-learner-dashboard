@@ -28,7 +28,7 @@ export const ProgramProgressTabs: FC<ProgramProgressTabsProps> = ({ type, counts
       count: completed,
       panel: <span>Completed tab data will be available soon.</span>,
     },
-    ...(type === 'micromasters'
+    ...(type?.toLowerCase() === 'micromasters'
       ? [{
           key: 'pathway',
           title: formatMessage(messages.programProgressPathwayTab),

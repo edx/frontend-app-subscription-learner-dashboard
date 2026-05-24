@@ -31,21 +31,21 @@ describe('ProgramProgressTabs', () => {
     expect(screen.getByText('Completed (2)')).toBeInTheDocument();
   });
 
-  test('does NOT render pathway tab when type is not micromasters', () => {
+  test('does NOT render pathway tab when type is not MicroMasters', () => {
     renderComponent();
 
     expect(screen.queryByText(/Pathway/)).not.toBeInTheDocument();
   });
 
-  test('renders pathway tab when type is micromasters', () => {
-    renderComponent({ type: 'micromasters' });
+  test('renders pathway tab when type is MicroMasters', () => {
+    renderComponent({ type: 'MicroMasters' });
 
     expect(screen.getByText('Pathway (7)')).toBeInTheDocument();
   });
 
   test('renders pathway tab with 0 when value is undefined', () => {
     renderComponent({
-      type: 'micromasters',
+      type: 'MicroMasters',
       counts: {
         inProgress: 1,
         remaining: 2,
@@ -80,7 +80,7 @@ describe('ProgramProgressTabs', () => {
   test('switches to pathway tab when present', async () => {
     const user = userEvent.setup();
 
-    renderComponent({ type: 'micromasters' });
+    renderComponent({ type: 'MicroMasters' });
 
     const pathwayTab = screen.getByText('Pathway (7)');
     await user.click(pathwayTab);

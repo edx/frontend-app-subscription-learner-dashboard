@@ -71,6 +71,8 @@ const ProgramProgress: React.FC = () => {
     && !courseData.inProgress?.length
     && courseData.completed?.length;
 
+  const programType = programData?.type ?? '';
+
   return (
     <>
       <Helmet title={`${programData?.title}`} />
@@ -90,7 +92,7 @@ const ProgramProgress: React.FC = () => {
           </Col>
         </Row>
 
-        <ProgramProgressTabs counts={{ inProgress: 1, remaining: 2, completed: 0, pathway: 0 }} />
+        <ProgramProgressTabs counts={{ inProgress: 1, remaining: 2, completed: 0, pathway: 0 }} type={programType} />
       </Container>
     </>
   );

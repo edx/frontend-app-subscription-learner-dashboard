@@ -31,11 +31,14 @@ class ResizeObserverMock {
   disconnect() {}
 }
 
-global.ResizeObserver = ResizeObserverMock;
+if (!global.ResizeObserver) {
+   global.ResizeObserver = ResizeObserverMock;
+}
 
-global.IntersectionObserver = class {
-  observe() {}
-  unobserve() {}
-  disconnect() {}
-};
-
+if (!global.IntersectionObserver) {
+  global.IntersectionObserver = class {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  };
+}
