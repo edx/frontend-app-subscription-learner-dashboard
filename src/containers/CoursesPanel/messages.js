@@ -10,6 +10,11 @@ const messages = defineMessages({
     id: 'subs.limitedCourses',
     defaultMessage: 'Limited access courses',
     description: 'Label for subscription courses with limited access',
+  },
+  lastSession: {
+    id: 'subs.lastSession',
+    defaultMessage: 'Last session was Thursday, May 20, 2026.',
+    description: 'Label for subscription courses to show last session information',
   }
 });
 

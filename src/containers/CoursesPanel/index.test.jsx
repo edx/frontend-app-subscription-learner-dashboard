@@ -59,6 +59,8 @@ describe('CoursesPanel', () => {
       createWrapper({ visibleList });
       const heading = screen.getByText(messages.myCourses.defaultMessage);
       expect(heading).toBeInTheDocument();
+      const paragraph = screen.getByText(messages.lastSession.defaultMessage);
+      expect(paragraph).toBeInTheDocument();
     });
   });
 
