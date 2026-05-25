@@ -4,7 +4,6 @@ import { useIntl } from '@openedx/frontend-base';
 import { utilHooks } from '@src/hooks';
 import messages from '../messages';
 import { manageSubscriptionURL } from '@src/data/constants/app';
-import './subscriptionInformation.scss';
 
 // TODO: We can replace the below hardcoded subscriptionInformationData with the actual data from the API once we have the API ready.
 // For now, we can use this hardcoded data to test the SubscriptionInformation component.
