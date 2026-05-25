@@ -71,3 +71,15 @@ export interface ProgramProgressContextValueType {
   programProgressData: ProgramProgressData,
   setProgramProgressData: (data: ProgramProgressData) => void,
 }
+
+export interface ProgressCardProps {
+  progressCardData: ProgressCardData,
+  isLoading?: boolean,
+}
+
+export interface ProgressCardData {
+  id: string,
+  title: string,
+  enrollmentInfo: string,
+  certificateStatus: string,
+}
