@@ -13,7 +13,7 @@ const messages = defineMessages({
   },
   lastSession: {
     id: 'subs.lastSession',
-    defaultMessage: 'Last session was Thursday, May 20, 2026.',
+    defaultMessage: 'Last session was Thursday, May 20, 2026.', // This is a placeholder default message. The actual message should be dynamic based on the last session date received via api.
     description: 'Label for subscription courses to show last session information',
   }
 });
