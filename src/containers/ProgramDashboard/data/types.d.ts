@@ -88,3 +88,15 @@ export interface ProgramProgressTabItems {
   count?: number,
   panel: React.ReactNode,
 }
+
+export interface ProgressCardProps {
+  progressCardData: ProgressCardData,
+  isLoading?: boolean,
+}
+
+export interface ProgressCardData {
+  id: string,
+  title: string,
+  enrollmentInfo: string,
+  certificateStatus: string,
+}
