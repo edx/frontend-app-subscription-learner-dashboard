@@ -7,17 +7,17 @@ const messages = defineMessages({
     description: 'Label for Programs belonging to a user\'s active subscription',
   },
   emptyProgramsMessage: {
-    id: 'subs.programsMessage',
+    id: 'subs.emptyProgramsMessage',
     defaultMessage: 'In-progress professional certificate programs will be found here.',
     description: 'Message shown in the Programs tab of the learner dashboard',
   },
   explorePrograms: {
-    id: 'subs.programsMessage',
+    id: 'subs.explorePrograms',
     defaultMessage: 'Explore programs',
     description: 'Message shown in the explore programs button in the Programs tab of the learner dashboard',
   },
   exploreProgramsCTAMessage: {
-    id: 'subs.programsMessage',
+    id: 'subs.exploreProgramsCTAMessage',
     defaultMessage: 'Advance your learning by exploring a program curriculum.',
     description: 'Message shown in the explore programs button in the Programs tab of the learner dashboard',
   }

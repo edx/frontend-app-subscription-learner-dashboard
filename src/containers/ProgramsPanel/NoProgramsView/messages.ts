@@ -9,7 +9,7 @@ const messages = defineMessages({
   findProgramsButton: {
     id: 'Dashboard.NoProgramsView.findProgramsButton',
     defaultMessage: 'Find a program',
-    description: 'Button to find more courses',
+    description: 'Button to find more programs',
   }
 });
 

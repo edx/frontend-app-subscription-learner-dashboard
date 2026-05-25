@@ -5,14 +5,15 @@ import ProgramsPanel from '.';
 import { formatMessage } from '@src/testUtils';
 import messages from './messages';
 
-// const renderComponent = () => { return render(<IntlProvider locale="en"><ProgramsPanel /></IntlProvider>) };
-
 const renderComponent = (hasProgramsEnrollment = false) => {
   jest.spyOn(React, 'useState').mockImplementation(() => [hasProgramsEnrollment, jest.fn()]);
   return render(<IntlProvider locale="en"><ProgramsPanel /></IntlProvider>);
 };
 
 describe('ProgramsPanel', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
   it('renders the ProgramsPanel component', () => {
     renderComponent();
     expect(screen.getByTestId('programs-list')).toBeInTheDocument();
