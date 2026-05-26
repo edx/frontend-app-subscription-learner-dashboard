@@ -13,8 +13,8 @@ export const state = StrictDict({
 export const useDashboardMessages = () => {
   const { formatMessage } = useIntl();
   return {
-    spinnerScreenReaderText: formatMessage(appMessages['learner-dash.loadingSR']),
-    pageTitle: formatMessage(appMessages['learner-dash.title']),
+    spinnerScreenReaderText: formatMessage(appMessages['subs-dash.loadingSR']),
+    pageTitle: formatMessage(appMessages['subs-dash.title']),
   };
 };
 

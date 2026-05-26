@@ -3,14 +3,17 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useMasquerade } from '@src/data/context';
 import {
   useInitializeLearnerHome,
+  useProgramsListData,
 } from './index';
 import { learnerDashboardQueryKeys } from './queryKeys';
+import { fetchProgramsListData } from '../services/lms/api';
 import * as api from '../services/lms/api';
 
 // Mock external dependencies
 jest.mock('@openedx/frontend-base', () => ({
   ...jest.requireActual('@openedx/frontend-base'),
   logError: jest.fn(),
+  camelCaseObject: jest.fn((value) => value),
 }));
 jest.mock('@src/data/context');
 jest.mock('@src/data/services/lms/api');
@@ -217,6 +220,33 @@ describe('queryHooks', () => {
 
       // For masquerading, retryOnMount and refetchOnMount should be false
       expect(result.current.isRefetchError).toBe(false);
+    });
+  });
+
+  describe('useProgramsListData', () => {
+    it('calls fetchProgramsListData as the query function', async () => {
+      (fetchProgramsListData as jest.Mock).mockResolvedValue({});
+      renderHook(() => useProgramsListData(), { wrapper: createWrapper() });
+      await waitFor(() => expect(fetchProgramsListData).toHaveBeenCalled());
+    });
+
+    it('returns data on success', async () => {
+      const mockData = { results: [{ uuid: 'test-uuid' }] };
+      (fetchProgramsListData as jest.Mock).mockResolvedValue(mockData);
+
+      const { result } = renderHook(() => useProgramsListData(), { wrapper: createWrapper() });
+
+      await waitFor(() => expect(result.current.isSuccess).toBe(true));
+      expect(result.current.data).toEqual(mockData);
+    });
+
+    it('handles error state correctly', async () => {
+      (fetchProgramsListData as jest.Mock).mockRejectedValue(new Error('API Error'));
+
+      const { result } = renderHook(() => useProgramsListData(), { wrapper: createWrapper() });
+
+      await waitFor(() => expect(result.current.isError).toBe(true));
+      expect(result.current.error).toEqual(new Error('API Error'));
     });
   });
 });
