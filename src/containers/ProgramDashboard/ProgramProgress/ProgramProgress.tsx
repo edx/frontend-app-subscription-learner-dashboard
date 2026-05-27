@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 import { Col, Container, Row } from '@openedx/paragon';
+import { camelCaseObject } from '@openedx/frontend-base';
 
 import './index.scss';
 import { useProgramProgressData } from '@src/data/hooks/queryHooks';
@@ -12,7 +13,8 @@ const ProgramProgress: FC = () => {
   // Fetch UUID from route params
   const { uuid } = useParams() as { uuid: string };
 
-  const { data: programProgressData, isLoading, error } = useProgramProgressData(uuid);
+  const { data, isLoading, error } = useProgramProgressData(uuid);
+  const programProgressData = camelCaseObject(data);
 
   if (!uuid) {
     return <div>Invalid URL</div>;
@@ -26,15 +28,15 @@ const ProgramProgress: FC = () => {
     return <div>Error occurred</div>;
   }
 
-  const programData = programProgressData?.program_data;
-  const courseData = programProgressData?.course_data;
+  const programData = programProgressData?.programData;
+  const courseData = programProgressData?.courseData;
 
-  const totalCoursesInProgram = (courseData.not_started?.length || 0)
+  const totalCoursesInProgram = (courseData.notStarted?.length || 0)
     + (courseData.completed?.length || 0)
-    + (courseData.in_progress?.length || 0);
+    + (courseData.inProgress?.length || 0);
 
-  const allCoursesCompleted = !courseData.not_started?.length
-    && !courseData.in_progress?.length
+  const allCoursesCompleted = !courseData.notStarted?.length
+    && !courseData.inProgress?.length
     && courseData.completed?.length;
 
   return (
@@ -44,7 +46,7 @@ const ProgramProgress: FC = () => {
         <ProgramProgressHeader
           programTitle={programData?.title ?? ''}
           programType={programData?.type ?? ''}
-          authoringOrganizations={programData?.authoring_organizations}
+          authoringOrganizations={programData?.authoringOrganizations}
         />
         <Row>
           <Col sm={12} md={8}>

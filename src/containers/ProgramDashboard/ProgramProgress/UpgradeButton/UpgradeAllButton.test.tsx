@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import UpgradeAllButton from './UpgradeAllButton';
 import messages from './messages';
+import { useProgramProgressData } from '@src/data/hooks/queryHooks';
 
 const mockBuyButtonUrl = 'http://test-buy-url.com';
 const mockCurrency = 'USD';
@@ -11,21 +12,7 @@ const mockDiscountedPrice = 500.00;
 const mockListPrice = 800.00;
 
 jest.mock('@src/data/hooks/queryHooks', () => ({
-  useProgramProgressData: () => ({
-    data: {
-      urls: {
-        buyButtonUrl: mockBuyButtonUrl,
-      },
-      programData: {
-        discountData: {
-          currency: mockCurrency,
-          isDiscounted: true,
-          totalInclTaxExclDiscounts: mockListPrice,
-          totalInclTax: mockDiscountedPrice,
-        },
-      },
-    },
-  }),
+  useProgramProgressData: jest.fn(),
 }));
 
 const renderComponent = (): RenderResult => {
@@ -40,11 +27,30 @@ const renderComponent = (): RenderResult => {
   );
 };
 
+const mockedUseProgramProgressData
+  = useProgramProgressData as jest.MockedFunction<typeof useProgramProgressData>;
+
 describe('UpgradeAllButton', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
   it('renders the button with the correct text and link in the NOT discounted state', () => {
+    mockedUseProgramProgressData.mockReturnValue({
+      data: {
+        urls: {
+          buyButtonUrl: mockBuyButtonUrl,
+        },
+        programData: {
+          discountData: {
+            currency: mockCurrency,
+            isDiscounted: false,
+            totalInclTaxExclDiscounts: mockListPrice,
+            totalInclTax: mockListPrice,
+          },
+        },
+      },
+    } as any);
+
     renderComponent();
 
     const button = screen.getByTestId('upgrade-all-button');
@@ -54,9 +60,27 @@ describe('UpgradeAllButton', () => {
     expect(button).toHaveAttribute('href', mockBuyButtonUrl);
 
     expect(screen.getByText(`$${mockListPrice.toFixed(2)}`)).toBeInTheDocument();
+
+    expect(screen.queryByText(`$${mockDiscountedPrice.toFixed(2)}`)).not.toBeInTheDocument();
   });
 
   it('renders the button with the correct text and link in the discounted state', () => {
+    mockedUseProgramProgressData.mockReturnValue({
+      data: {
+        urls: {
+          buyButtonUrl: mockBuyButtonUrl,
+        },
+        programData: {
+          discountData: {
+            currency: mockCurrency,
+            isDiscounted: true,
+            totalInclTaxExclDiscounts: mockListPrice,
+            totalInclTax: mockDiscountedPrice,
+          },
+        },
+      },
+    } as any);
+
     renderComponent();
 
     const button = screen.getByTestId('upgrade-all-button');
