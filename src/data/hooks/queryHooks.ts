@@ -1,6 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useContext, useEffect } from 'react';
-import { camelCaseObject } from '@openedx/frontend-base';
 import { useMasquerade } from '@src/data/context';
 import GlobalDataContext from '@src/data/contexts/GlobalDataContext';
 import {
