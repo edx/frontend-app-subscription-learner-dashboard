@@ -71,12 +71,12 @@ describe('CourseCard hooks', () => {
   describe('useDashboardMessages', () => {
     it('returns spinner screen reader text', () => {
       expect(hooks.useDashboardMessages().spinnerScreenReaderText).toEqual(
-        formatMessage(appMessages['learner-dash.loadingSR']),
+        formatMessage(appMessages['subs-dash.loadingSR']),
       );
     });
     it('returns page title', () => {
       expect(hooks.useDashboardMessages().pageTitle).toEqual(
-        formatMessage(appMessages['learner-dash.title']),
+        formatMessage(appMessages['subs-dash.title']),
       );
     });
   });

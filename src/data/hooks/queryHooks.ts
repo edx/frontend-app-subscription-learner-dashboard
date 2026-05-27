@@ -4,7 +4,9 @@ import { useMasquerade } from '@src/data/context';
 import GlobalDataContext from '@src/data/contexts/GlobalDataContext';
 import {
   initializeList,
+  fetchProgramsListData,
 } from '@src/data/services/lms/api';
+import { ProgramData } from '@src/containers/ProgramDashboard/data/types';
 import { getTransformedCourseDataObject } from '@src/utils/dataTransformers';
 import { learnerDashboardQueryKeys } from './queryKeys';
 
@@ -53,6 +55,16 @@ const useInitializeLearnerHome = () => {
   return { ...query, data };
 };
 
+const useProgramsListData = () => {
+  return useQuery<ProgramData[]>({
+    queryKey: ['programsList'],
+    queryFn: fetchProgramsListData,
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
 export {
   useInitializeLearnerHome,
+  useProgramsListData,
 };
