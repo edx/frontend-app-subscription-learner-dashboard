@@ -66,6 +66,7 @@ export const CoursesPanel = () => {
     <div className="course-list-container">
       <div className="course-list-heading-container">
         <h2 className="course-list-title">{formatMessage(messages.myCourses)}</h2>
+        <p className="mb-4.5">{formatMessage(messages.lastSession)}</p>
       </div>
       {hasCourses ? <CourseListSlot courseListData={courseListData} /> : <NoCoursesViewSlot />}
 
