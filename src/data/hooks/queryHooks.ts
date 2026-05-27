@@ -7,6 +7,7 @@ import {
 } from '@src/data/services/lms/api';
 import { getTransformedCourseDataObject } from '@src/utils/dataTransformers';
 import { learnerDashboardQueryKeys } from './queryKeys';
+import { getProgramProgressData } from '@src/data/services/subs';
 
 const useInitializeLearnerHome = () => {
   const { masqueradeUser } = useMasquerade();
@@ -53,6 +54,17 @@ const useInitializeLearnerHome = () => {
   return { ...query, data };
 };
 
+const useProgramProgressData = (uuid: string) => {
+  return useQuery({
+    queryKey: ['programProgress', uuid],
+    queryFn: () => getProgramProgressData(uuid),
+    enabled: !!uuid,
+    staleTime: 1000 * 60 * 5, // 5 min caching
+    retry: 2,
+  });
+};
+
 export {
   useInitializeLearnerHome,
+  useProgramProgressData,
 };

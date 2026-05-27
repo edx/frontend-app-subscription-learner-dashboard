@@ -63,15 +63,6 @@ export interface ProgramProgressInfoProps {
   programTitle: string,
 }
 
-export interface ProgramProgressProviderProps {
-  children: import('react').ReactNode,
-}
-
-export interface ProgramProgressContextValueType {
-  programProgressData: ProgramProgressData,
-  setProgramProgressData: (data: ProgramProgressData) => void,
-}
-
 export interface ProgressCardProps {
   progressCardData: ProgressCardData,
   isLoading?: boolean,

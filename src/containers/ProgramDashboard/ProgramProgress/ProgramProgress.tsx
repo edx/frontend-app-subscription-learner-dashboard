@@ -1,73 +1,40 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 import { Col, Container, Row } from '@openedx/paragon';
-import { logError, camelCaseObject } from '@openedx/frontend-base';
-import { getProgramProgressData } from '../data/api';
-import { ProgramProgressContext, ProgramProgressContextValueType } from './ProgramProgressProvider';
+
+import './index.scss';
+import { useProgramProgressData } from '@src/data/hooks/queryHooks';
 import ProgramProgressHeader from './ProgramProgressHeader';
 import ProgramProgressInfo from './ProgramProgressInfo';
 
-import './index.scss';
-
-const ProgramProgress: React.FC = () => {
-  const {
-    programProgressData,
-    setProgramProgressData,
-  } = useContext<ProgramProgressContextValueType>(ProgramProgressContext);
-
-  const [programProgressEndpointError, setProgramProgressEndpointError] = useState<boolean>(false);
-  const hasProgramProgressData = !!(
-    programProgressData?.courseData
-    && programProgressData.programData
-    && programProgressData.urls
-  );
-
+const ProgramProgress: FC = () => {
   // Fetch UUID from route params
   const { uuid } = useParams() as { uuid: string };
 
-  useEffect(() => {
-    if (!uuid) {
-      return;
-    }
-
-    getProgramProgressData(uuid)
-      .then(responseData => {
-        setProgramProgressData(camelCaseObject(responseData.data));
-      })
-      .catch(err => {
-        logError(err);
-        setProgramProgressEndpointError(true);
-      });
-  }, [uuid, setProgramProgressData]);
-
-  if (programProgressEndpointError) {
-    return (
-      <div>Not found page</div>
-    );
-  }
+  const { data: programProgressData, isLoading, error } = useProgramProgressData(uuid);
 
   if (!uuid) {
-    return (
-      <div>Program uuid is missing.</div>
-    );
+    return <div>Invalid URL</div>;
   }
 
-  if (!hasProgramProgressData) {
-    return (
-      <div>Loading...</div>
-    );
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
 
-  const programData = programProgressData?.programData;
-  const courseData = programProgressData?.courseData;
+  if (error) {
+    return <div>Error occurred</div>;
+  }
 
-  const totalCoursesInProgram = (courseData.notStarted?.length || 0)
+  const programData = programProgressData?.program_data;
+  const courseData = programProgressData?.course_data;
+
+  const totalCoursesInProgram = (courseData.not_started?.length || 0)
     + (courseData.completed?.length || 0)
-    + (courseData.inProgress?.length || 0);
+    + (courseData.in_progress?.length || 0);
 
-  const allCoursesCompleted = !courseData.notStarted?.length
-    && !courseData.inProgress?.length
+  const allCoursesCompleted = !courseData.not_started?.length
+    && !courseData.in_progress?.length
     && courseData.completed?.length;
 
   return (
@@ -77,7 +44,7 @@ const ProgramProgress: React.FC = () => {
         <ProgramProgressHeader
           programTitle={programData?.title ?? ''}
           programType={programData?.type ?? ''}
-          authoringOrganizations={programData?.authoringOrganizations}
+          authoringOrganizations={programData?.authoring_organizations}
         />
         <Row>
           <Col sm={12} md={8}>

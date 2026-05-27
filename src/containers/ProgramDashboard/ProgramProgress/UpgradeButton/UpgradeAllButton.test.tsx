@@ -1,8 +1,8 @@
-import React from 'react';
 import { IntlProvider } from '@openedx/frontend-base';
 import { render, RenderResult, screen } from '@testing-library/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
 import UpgradeAllButton from './UpgradeAllButton';
-import { ProgramProgressContext } from '../ProgramProgressProvider';
 import messages from './messages';
 
 const mockBuyButtonUrl = 'http://test-buy-url.com';
@@ -10,52 +10,42 @@ const mockCurrency = 'USD';
 const mockDiscountedPrice = 500.00;
 const mockListPrice = 800.00;
 
-const defaultContextValue = {
-  programProgressData: {
-    urls: {
-      programListingUrl: undefined,
-      trackSelectionUrl: undefined,
-      commerceApiUrl: undefined,
-      buyButtonUrl: mockBuyButtonUrl,
-      programRecordUrl: undefined,
+jest.mock('@src/data/hooks/queryHooks', () => ({
+  useProgramProgressData: () => ({
+    data: {
+      urls: {
+        buyButtonUrl: mockBuyButtonUrl,
+      },
+      programData: {
+        discountData: {
+          currency: mockCurrency,
+          isDiscounted: true,
+          totalInclTaxExclDiscounts: mockListPrice,
+          totalInclTax: mockDiscountedPrice,
+        },
+      },
     },
-    programData: {
-      discountData: null,
-    },
-    courseData: {},
-  },
-  setProgramProgressData: () => {},
-};
+  }),
+}));
 
-const renderComponent = (contextValue): RenderResult => render(
-  <IntlProvider locale="en">
-    <ProgramProgressContext.Provider value={contextValue}>
-      <UpgradeAllButton />
-    </ProgramProgressContext.Provider>
-  </IntlProvider>,
-);
+const renderComponent = (): RenderResult => {
+  const queryClient = new QueryClient();
+
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <IntlProvider locale="en">
+        <UpgradeAllButton />
+      </IntlProvider>
+    </QueryClientProvider>
+  );
+};
 
 describe('UpgradeAllButton', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
   it('renders the button with the correct text and link in the NOT discounted state', () => {
-    const contextValue = {
-      ...defaultContextValue,
-      programProgressData: {
-        ...defaultContextValue.programProgressData,
-        programData: {
-          discountData: {
-            currency: mockCurrency,
-            isDiscounted: false,
-            totalInclTaxExclDiscounts: mockListPrice,
-            totalInclTax: mockListPrice,
-          },
-        },
-      },
-    };
-
-    renderComponent(contextValue);
+    renderComponent();
 
     const button = screen.getByTestId('upgrade-all-button');
 
@@ -67,22 +57,7 @@ describe('UpgradeAllButton', () => {
   });
 
   it('renders the button with the correct text and link in the discounted state', () => {
-    const contextValue = {
-      ...defaultContextValue,
-      programProgressData: {
-        ...defaultContextValue.programProgressData,
-        programData: {
-          discountData: {
-            currency: mockCurrency,
-            isDiscounted: true,
-            totalInclTaxExclDiscounts: mockListPrice,
-            totalInclTax: mockDiscountedPrice,
-          },
-        },
-      },
-    };
-
-    renderComponent(contextValue);
+    renderComponent();
 
     const button = screen.getByTestId('upgrade-all-button');
 
