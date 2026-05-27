@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button } from '@openedx/paragon';
-import { FormattedNumber, useIntl } from '@openedx/frontend-base';
+import { FormattedNumber, useIntl, camelCaseObject } from '@openedx/frontend-base';
 
 import { useProgramProgressData } from '@src/data/hooks/queryHooks';
 import './index.scss';
@@ -10,7 +10,9 @@ import messages from './messages';
 const UpgradeAllButton: FC = () => {
   const { uuid } = useParams() as { uuid: string };
 
-  const { data: programProgressData } = useProgramProgressData(uuid);
+  const { data } = useProgramProgressData(uuid);
+  const programProgressData = camelCaseObject(data);
+
   const { formatMessage } = useIntl();
   const { urls } = programProgressData;
 
