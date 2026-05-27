@@ -60,7 +60,6 @@ const useProgramsListData = () => {
   return useQuery<ProgramData[]>({
     queryKey: ['programsList'],
     queryFn: fetchProgramsListData,
-    select: (data) => camelCaseObject(data) as ProgramData[],
     retry: false,
     refetchOnWindowFocus: false,
   });

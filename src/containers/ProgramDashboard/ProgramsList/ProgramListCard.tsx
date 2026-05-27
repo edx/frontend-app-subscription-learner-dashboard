@@ -55,7 +55,7 @@ const ProgramListCard: React.FC<ProgramCardProps> = ({
       <Card.ImageCap
         src={getBannerImageURL() || programCardFallbackImage}
         srcAlt={`program card image for ${program.title}`}
-        logoSrc={getOrgImageUrl() || 'https://www.edx.org/images/logos/edx-logo-elm.svg'}
+        logoSrc={getOrgImageUrl()}
         logoAlt={program.authoringOrganizations && program.authoringOrganizations[0]?.key}
         className="banner-image"
       />

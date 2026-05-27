@@ -18,7 +18,7 @@ const messages = defineMessages({
   },
   progressCategoryBubblesInProgress: {
     id: 'dashboard.programs.program.listing.card.inProgress.courses.count',
-    defaultMessage: 'In progress',
+    defaultMessage: 'In Progress',
     description: 'Label for in progress courses count on program card',
   },
   progressCategoryBubblesSuccess: {

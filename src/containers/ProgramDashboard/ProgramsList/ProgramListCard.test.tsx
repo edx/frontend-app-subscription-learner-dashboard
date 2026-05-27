@@ -69,7 +69,7 @@ describe('ProgramListCard', () => {
     const logoImageNode = screen.getByAltText(mockBaseProgram.authoringOrganizations[0].key);
     expect(logoImageNode).toHaveAttribute('src', mockBaseProgram.authoringOrganizations[0].logoImageUrl);
     expect(screen.getByText(mockBaseProgram.progress.inProgress)).toBeInTheDocument();
-    expect(screen.getByText('In progress')).toBeInTheDocument();
+    expect(screen.getByText('In Progress')).toBeInTheDocument();
     expect(screen.getByText(mockBaseProgram.progress.completed)).toBeInTheDocument();
     expect(screen.getByText('Completed')).toBeInTheDocument();
     expect(screen.getByText(mockBaseProgram.progress.notStarted)).toBeInTheDocument();
@@ -82,10 +82,10 @@ describe('ProgramListCard', () => {
     expect(screen.getByText(aggregatedOrganizations)).toBeInTheDocument();
   });
 
-  it('renders fallback logo when more than one organization', () => {
+  it('doesnt render logo of organizations when more than one', () => {
     const { queryByAltText } = renderComponent(mockMultipleOrgProgram);
     const logoImageNode = queryByAltText(mockMultipleOrgProgram.authoringOrganizations[0].key);
-    expect(logoImageNode).toHaveAttribute('src', 'https://www.edx.org/images/logos/edx-logo-elm.svg');
+    expect(logoImageNode).toBeNull();
   });
 
   it('each card links using the program uuid', () => {
