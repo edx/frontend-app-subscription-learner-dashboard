@@ -52,7 +52,7 @@ export const ProgramProgressTabs: FC<ProgramProgressTabsProps> = ({ type, counts
       mountOnEnter
     >
       {tabsData.map(tab => (
-        <Tab eventKey={tab.key} key={tab.key} title={`${tab.title} ${tab.count !== undefined ? `(${tab.count})` : ''}`}>
+        <Tab eventKey={tab.key} key={tab.key} title={tab.count !== undefined ? `${tab.title} (${tab.count})` : tab.title}>
           {tab.panel}
         </Tab>
       ))}

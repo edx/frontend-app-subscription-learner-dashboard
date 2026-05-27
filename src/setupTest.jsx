@@ -32,7 +32,7 @@ class ResizeObserverMock {
 }
 
 if (!global.ResizeObserver) {
-   global.ResizeObserver = ResizeObserverMock;
+  global.ResizeObserver = ResizeObserverMock;
 }
 
 if (!global.IntersectionObserver) {
