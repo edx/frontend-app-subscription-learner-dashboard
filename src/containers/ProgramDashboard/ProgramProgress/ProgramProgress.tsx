@@ -92,7 +92,10 @@ const ProgramProgress: React.FC = () => {
           </Col>
         </Row>
 
-        <ProgramProgressTabs counts={{ inProgress: 1, remaining: 2, completed: 0, pathway: 0 }} type={programType} />
+        {/* TODO [TEMP]: Replace the below course count with actual count. For now, returning hardcoded data.
+          Action: Revisit when data is being made dynamic.
+        */}
+        <ProgramProgressTabs counts={{ inProgress: 1, remaining: 2, completed: 0 }} type={programType} />
       </Container>
     </>
   );

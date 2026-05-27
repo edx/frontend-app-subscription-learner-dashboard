@@ -6,7 +6,7 @@ import { ProgramProgressTabsProps, ProgramProgressTabItems } from '../../data/ty
 import messages from '../messages';
 
 export const ProgramProgressTabs: FC<ProgramProgressTabsProps> = ({ type, counts }) => {
-  const { inProgress, remaining, completed, pathway } = counts;
+  const { inProgress, remaining, completed } = counts;
   const { formatMessage } = useIntl();
 
   const tabsData: ProgramProgressTabItems[] = [
@@ -14,7 +14,7 @@ export const ProgramProgressTabs: FC<ProgramProgressTabsProps> = ({ type, counts
       key: 'in-progress',
       title: formatMessage(messages.programProgressInProgressTab),
       count: inProgress,
-      panel: <span>In Progress tab data will be available soon.</span>,
+      panel: <span>In progress tab data will be available soon.</span>,
     },
     {
       key: 'remaining',
@@ -30,10 +30,9 @@ export const ProgramProgressTabs: FC<ProgramProgressTabsProps> = ({ type, counts
     },
     ...(type?.toLowerCase() === 'micromasters'
       ? [{
-          key: 'pathway',
-          title: formatMessage(messages.programProgressPathwayTab),
-          count: pathway ?? 0,
-          panel: <span>Pathway tab data will be available soon.</span>,
+          key: 'pathways',
+          title: formatMessage(messages.programProgressPathwaysTab),
+          panel: <span>Pathways tab data will be available soon.</span>,
         }]
       : []),
   ];
@@ -53,7 +52,7 @@ export const ProgramProgressTabs: FC<ProgramProgressTabsProps> = ({ type, counts
       mountOnEnter
     >
       {tabsData.map(tab => (
-        <Tab eventKey={tab.key} key={tab.key} title={`${tab.title} (${tab.count})`}>
+        <Tab eventKey={tab.key} key={tab.key} title={`${tab.title} ${tab.count !== undefined ? `(${tab.count})` : ''}`}>
           {tab.panel}
         </Tab>
       ))}
