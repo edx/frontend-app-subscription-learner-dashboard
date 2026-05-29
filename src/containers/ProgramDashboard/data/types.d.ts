@@ -72,6 +72,23 @@ export interface ProgramProgressContextValueType {
   setProgramProgressData: (data: ProgramProgressData) => void,
 }
 
+export interface ProgramProgressTabsProps {
+  type: string,
+  counts: {
+    inProgress: number,
+    remaining: number,
+    completed: number,
+    pathway?: number,
+  },
+};
+
+export interface ProgramProgressTabItems {
+  key: string,
+  title: string,
+  count?: number,
+  panel: React.ReactNode,
+}
+
 export interface ProgressCardProps {
   progressCardData: ProgressCardData,
   isLoading?: boolean,

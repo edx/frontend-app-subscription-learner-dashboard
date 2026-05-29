@@ -9,6 +9,7 @@ import ProgramProgressHeader from './ProgramProgressHeader';
 import ProgramProgressInfo from './ProgramProgressInfo';
 
 import './index.scss';
+import { ProgramProgressTabs } from './ProgramProgressTabs';
 
 const ProgramProgress: React.FC = () => {
   const {
@@ -70,6 +71,8 @@ const ProgramProgress: React.FC = () => {
     && !courseData.inProgress?.length
     && courseData.completed?.length;
 
+  const programType = programData?.type ?? '';
+
   return (
     <>
       <Helmet title={`${programData?.title}`} />
@@ -88,6 +91,11 @@ const ProgramProgress: React.FC = () => {
             />
           </Col>
         </Row>
+
+        {/* TODO [TEMP]: Replace the below course count with actual count. For now, returning hardcoded data.
+          Action: Revisit when data is being made dynamic.
+        */}
+        <ProgramProgressTabs counts={{ inProgress: 1, remaining: 2, completed: 0 }} type={programType} />
       </Container>
     </>
   );
