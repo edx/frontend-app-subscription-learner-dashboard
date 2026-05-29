@@ -51,6 +51,26 @@ const messages = defineMessages({
     id: 'program.progress.card.upgrade.button.text',
     description: 'text to display on the progress card for the upgrade button',
   },
+  programProgressInProgressTab: {
+    defaultMessage: 'In progress',
+    id: 'program.progress.in.progress.tab',
+    description: 'Label for the "In progress" tab on the program progress page, which lists courses that the user has started but not yet completed.',
+  },
+  programProgressRemainingTab: {
+    defaultMessage: 'Remaining',
+    id: 'program.progress.remaining.tab',
+    description: 'Label for the "Remaining" tab on the program progress page, which lists courses that the user has not yet started.',
+  },
+  programProgressCompletedTab: {
+    defaultMessage: 'Completed',
+    id: 'program.progress.completed.tab',
+    description: 'Label for the "Completed" tab on the program progress page, which lists courses that the user has completed.',
+  },
+  programProgressPathwaysTab: {
+    defaultMessage: 'Pathways',
+    id: 'program.progress.pathways.tab',
+    description: 'Label for the "Pathways" tab on the program progress page, which gives details of how the program can be used to further the learners education. This tab is only shown for MicroMasters programs.',
+  },
 });
 
 export default messages;

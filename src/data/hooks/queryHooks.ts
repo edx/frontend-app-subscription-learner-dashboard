@@ -4,7 +4,9 @@ import { useMasquerade } from '@src/data/context';
 import GlobalDataContext from '@src/data/contexts/GlobalDataContext';
 import {
   initializeList,
+  fetchProgramsListData,
 } from '@src/data/services/lms/api';
+import { ProgramData, ProgramProgressData } from '@src/containers/ProgramDashboard/data/types';
 import { getTransformedCourseDataObject } from '@src/utils/dataTransformers';
 import { learnerDashboardQueryKeys } from './queryKeys';
 import { getProgramProgressData } from '@src/data/services/subs';
@@ -54,8 +56,17 @@ const useInitializeLearnerHome = () => {
   return { ...query, data };
 };
 
+const useProgramsListData = () => {
+  return useQuery<ProgramData[]>({
+    queryKey: ['programsList'],
+    queryFn: fetchProgramsListData,
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
 const useProgramProgressData = (uuid: string) => {
-  return useQuery({
+  return useQuery<ProgramProgressData>({
     queryKey: ['programProgress', uuid],
     queryFn: () => getProgramProgressData(uuid),
     enabled: !!uuid,
@@ -67,4 +78,5 @@ const useProgramProgressData = (uuid: string) => {
 export {
   useInitializeLearnerHome,
   useProgramProgressData,
+  useProgramsListData,
 };

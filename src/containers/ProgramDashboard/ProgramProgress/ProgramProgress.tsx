@@ -5,9 +5,10 @@ import { Col, Container, Row } from '@openedx/paragon';
 import { camelCaseObject } from '@openedx/frontend-base';
 
 import './index.scss';
-import { useProgramProgressData } from '@src/data/hooks/queryHooks';
+import { useProgramProgressData } from '@src/data/hooks';
 import ProgramProgressHeader from './ProgramProgressHeader';
 import ProgramProgressInfo from './ProgramProgressInfo';
+import { ProgramProgressTabs } from './ProgramProgressTabs';
 
 const ProgramProgress: FC = () => {
   // Fetch UUID from route params
@@ -39,6 +40,8 @@ const ProgramProgress: FC = () => {
     && !courseData.inProgress?.length
     && courseData.completed?.length;
 
+  const programType = programData?.type ?? '';
+
   return (
     <>
       <Helmet title={`${programData?.title}`} />
@@ -57,6 +60,11 @@ const ProgramProgress: FC = () => {
             />
           </Col>
         </Row>
+
+        {/* TODO [TEMP]: Replace the below course count with actual count. For now, returning hardcoded data.
+          Action: Revisit when data is being made dynamic.
+        */}
+        <ProgramProgressTabs counts={{ inProgress: 1, remaining: 2, completed: 0 }} type={programType} />
       </Container>
     </>
   );

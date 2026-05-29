@@ -1,0 +1,21 @@
+// The current Truncate component in Paragon is deprecated and soon to be removed
+// See https://github.com/openedx/paragon/issues/3311 for developments on this issue
+
+.truncate-text-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.truncate-text-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.banner-image > .pgn__card-logo-cap {
+  width: 12rem;
+  height: 4.7rem;
+}

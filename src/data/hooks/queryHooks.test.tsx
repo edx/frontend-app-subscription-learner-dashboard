@@ -3,17 +3,23 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useMasquerade } from '@src/data/context';
 import {
   useInitializeLearnerHome,
-} from './index';
+  useProgramsListData,
+  useProgramProgressData
+} from './';
 import { learnerDashboardQueryKeys } from './queryKeys';
+import { fetchProgramsListData } from '../services/lms/api';
 import * as api from '../services/lms/api';
+import { getProgramProgressData } from '../services/subs';
 
 // Mock external dependencies
 jest.mock('@openedx/frontend-base', () => ({
   ...jest.requireActual('@openedx/frontend-base'),
   logError: jest.fn(),
+  camelCaseObject: jest.fn((value) => value),
 }));
 jest.mock('@src/data/context');
 jest.mock('@src/data/services/lms/api');
+jest.mock('@src/data/services/subs')
 jest.mock('@src/utils/dataTransformers', () => ({
   getTransformedCourseDataObject: jest.fn((courses) => {
     const result = {};
@@ -217,6 +223,117 @@ describe('queryHooks', () => {
 
       // For masquerading, retryOnMount and refetchOnMount should be false
       expect(result.current.isRefetchError).toBe(false);
+    });
+  });
+
+  describe('useProgramsListData', () => {
+    it('calls fetchProgramsListData as the query function', async () => {
+      (fetchProgramsListData as jest.Mock).mockResolvedValue({});
+      renderHook(() => useProgramsListData(), { wrapper: createWrapper() });
+      await waitFor(() => expect(fetchProgramsListData).toHaveBeenCalled());
+    });
+
+    it('returns data on success', async () => {
+      const mockData = { results: [{ uuid: 'test-uuid' }] };
+      (fetchProgramsListData as jest.Mock).mockResolvedValue(mockData);
+
+      const { result } = renderHook(() => useProgramsListData(), { wrapper: createWrapper() });
+
+      await waitFor(() => expect(result.current.isSuccess).toBe(true));
+      expect(result.current.data).toEqual(mockData);
+    });
+
+    it('handles error state correctly', async () => {
+      (fetchProgramsListData as jest.Mock).mockRejectedValue(new Error('API Error'));
+
+      const { result } = renderHook(() => useProgramsListData(), { wrapper: createWrapper() });
+
+      await waitFor(() => expect(result.current.isError).toBe(true));
+      expect(result.current.error).toEqual(new Error('API Error'));
+    });
+  });
+
+  describe('useProgramProgressData', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('should fetch program progress data when uuid is provided', async () => {
+      const mockUuid = 'test-uuid';
+      const mockData = { progress: 75, completed: true };
+
+      (getProgramProgressData as jest.Mock).mockResolvedValue(mockData);
+
+      const { result } = renderHook(() => useProgramProgressData(mockUuid), {
+        wrapper: createWrapper(),
+      });
+
+      await waitFor(() => {
+        expect(result.current.isSuccess).toBe(true);
+      });
+
+      expect(getProgramProgressData).toHaveBeenCalledWith(mockUuid);
+      expect(result.current.data).toEqual(mockData);
+    });
+
+    it('should not run query when uuid is not provided', async () => {
+      renderHook(() => useProgramProgressData(''), {
+        wrapper: createWrapper(),
+      });
+
+      expect(getProgramProgressData).not.toHaveBeenCalled();
+    });
+
+    it('should handle error state correctly', async () => {
+      const mockUuid = 'test-uuid';
+      const error = new Error('API Error');
+
+      (getProgramProgressData as jest.Mock).mockRejectedValue(error);
+
+      const { result } = renderHook(() => useProgramProgressData(mockUuid), {
+        wrapper: createWrapper(),
+      });
+
+      await waitFor(() => {
+        expect(result.current.isError).toBe(true);
+      });
+
+      expect(getProgramProgressData).toHaveBeenCalledWith(mockUuid);
+      expect(result.current.error).toEqual(error);
+    });
+
+    it('should retry failed requests up to 2 times', async () => {
+      const mockUuid = 'test-uuid';
+      const error = new Error('Server Error');
+
+      (getProgramProgressData as jest.Mock).mockRejectedValue(error);
+
+      const { result } = renderHook(() => useProgramProgressData(mockUuid), {
+        wrapper: createWrapper(),
+      });
+
+      await waitFor(() => {
+        expect(result.current.isError).toBe(true);
+      });
+
+      expect(getProgramProgressData).toHaveBeenCalledTimes(3);
+    });
+
+    it('should use correct query key', async () => {
+      const mockUuid = 'test-uuid';
+      const mockData = { progress: 50 };
+
+      (getProgramProgressData as jest.Mock).mockResolvedValue(mockData);
+
+      const { result } = renderHook(() => useProgramProgressData(mockUuid), {
+        wrapper: createWrapper(),
+      });
+
+      await waitFor(() => {
+        expect(result.current.isSuccess).toBe(true);
+      });
+
+      expect(result.current.data).toEqual(mockData);
     });
   });
 });

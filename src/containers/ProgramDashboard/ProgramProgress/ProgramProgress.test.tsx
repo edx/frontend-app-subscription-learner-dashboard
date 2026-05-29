@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { IntlProvider } from '@openedx/frontend-base';
 
 import ProgramProgress from './ProgramProgress';
 import { useProgramProgressData } from '@src/data/hooks/queryHooks';
@@ -34,7 +35,7 @@ const renderComponent = (route = '/program/test-uuid') => {
     <QueryClientProvider client={queryClient}>
       <MemoryRouter initialEntries={[route]}>
         <Routes>
-          <Route path="/program/:uuid" element={<ProgramProgress />} />
+          <Route path="/program/:uuid" element={<IntlProvider locale="en"><ProgramProgress /></IntlProvider>} />
         </Routes>
       </MemoryRouter>
     </QueryClientProvider>
