@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import { Tabs, Tab } from '@openedx/paragon';
-import CoursesPanel from '../../containers/CoursesPanel';
+import CoursesPanel from '../CoursesPanel';
+import ProgramsPanel from '../ProgramsPanel';
 
 const DashboardTabs = () => {
   // Defining the tabs here
@@ -13,7 +14,7 @@ const DashboardTabs = () => {
     {
       key: 'programs',
       title: 'Programs',
-      panel: <span>Programs tab will be available soon.</span>,
+      panel: <ProgramsPanel />,
     },
     {
       key: 'history',
