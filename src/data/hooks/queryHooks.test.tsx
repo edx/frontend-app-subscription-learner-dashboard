@@ -19,7 +19,7 @@ jest.mock('@openedx/frontend-base', () => ({
 }));
 jest.mock('@src/data/context');
 jest.mock('@src/data/services/lms/api');
-jest.mock('@src/data/services/subs')
+jest.mock('@src/data/services/subs');
 jest.mock('@src/utils/dataTransformers', () => ({
   getTransformedCourseDataObject: jest.fn((courses) => {
     const result = {};
