@@ -1,3 +1,6 @@
+import { getAuthenticatedHttpClient } from '@openedx/frontend-base';
+import { programProgressUrl } from './urls';
+
 export const fetchRecommendedCourses = async () => {
   /* TODO [TEMP]: Replace with actual API call to fetch recommended courses data. For now, returning hardcoded data to simulate the API response. Also, built the test case for the same.
       Reason: The API endpoint is not yet available and the data structure is still being finalized.
@@ -53,6 +56,16 @@ export const fetchRecommendedCourses = async () => {
     return finalData;
   } catch (error) {
     console.error('Error fetching cards data:', error);
+    throw error;
+  }
+};
+
+export const getProgramProgressData = async (uuid: string) => {
+  try {
+    const { data } = await getAuthenticatedHttpClient().get(programProgressUrl(uuid));
+    return data;
+  } catch (error) {
+    console.error('Error fetching program progress data:', error);
     throw error;
   }
 };

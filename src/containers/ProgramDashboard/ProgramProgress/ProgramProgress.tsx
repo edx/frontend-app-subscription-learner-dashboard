@@ -1,63 +1,32 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 import { Col, Container, Row } from '@openedx/paragon';
-import { logError, camelCaseObject } from '@openedx/frontend-base';
-import { getProgramProgressData } from '../data/api';
-import { ProgramProgressContext, ProgramProgressContextValueType } from './ProgramProgressProvider';
-import ProgramProgressHeader from './ProgramProgressHeader';
-import ProgramProgressInfo from './ProgramProgressInfo';
+import { camelCaseObject } from '@openedx/frontend-base';
 
 import './index.scss';
+import { useProgramProgressData } from '@src/data/hooks';
+import ProgramProgressHeader from './ProgramProgressHeader';
+import ProgramProgressInfo from './ProgramProgressInfo';
 import { ProgramProgressTabs } from './ProgramProgressTabs';
 
-const ProgramProgress: React.FC = () => {
-  const {
-    programProgressData,
-    setProgramProgressData,
-  } = useContext<ProgramProgressContextValueType>(ProgramProgressContext);
-
-  const [programProgressEndpointError, setProgramProgressEndpointError] = useState<boolean>(false);
-  const hasProgramProgressData = !!(
-    programProgressData?.courseData
-    && programProgressData.programData
-    && programProgressData.urls
-  );
-
+const ProgramProgress: FC = () => {
   // Fetch UUID from route params
   const { uuid } = useParams() as { uuid: string };
 
-  useEffect(() => {
-    if (!uuid) {
-      return;
-    }
-
-    getProgramProgressData(uuid)
-      .then(responseData => {
-        setProgramProgressData(camelCaseObject(responseData.data));
-      })
-      .catch(err => {
-        logError(err);
-        setProgramProgressEndpointError(true);
-      });
-  }, [uuid, setProgramProgressData]);
-
-  if (programProgressEndpointError) {
-    return (
-      <div>Not found page</div>
-    );
-  }
+  const { data, isLoading, error } = useProgramProgressData(uuid);
+  const programProgressData = camelCaseObject(data);
 
   if (!uuid) {
-    return (
-      <div>Program uuid is missing.</div>
-    );
+    return <div>Invalid URL</div>;
   }
 
-  if (!hasProgramProgressData) {
-    return (
-      <div>Loading...</div>
-    );
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error occurred</div>;
   }
 
   const programData = programProgressData?.programData;

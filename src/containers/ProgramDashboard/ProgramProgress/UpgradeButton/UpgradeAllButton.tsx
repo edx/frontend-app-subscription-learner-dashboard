@@ -1,13 +1,19 @@
-import React, { useContext } from 'react';
+import { FC } from 'react';
+import { useParams } from 'react-router-dom';
 import { Button } from '@openedx/paragon';
-import { FormattedNumber, useIntl } from '@openedx/frontend-base';
-import messages from './messages';
-import './index.scss';
-import { ProgramProgressContext, ProgramProgressContextValueType } from '../ProgramProgressProvider';
+import { FormattedNumber, useIntl, camelCaseObject } from '@openedx/frontend-base';
 
-const UpgradeAllButton: React.FC = () => {
+import { useProgramProgressData } from '@src/data/hooks/queryHooks';
+import './index.scss';
+import messages from './messages';
+
+const UpgradeAllButton: FC = () => {
+  const { uuid } = useParams() as { uuid: string };
+
+  const { data } = useProgramProgressData(uuid);
+  const programProgressData = camelCaseObject(data);
+
   const { formatMessage } = useIntl();
-  const { programProgressData } = useContext<ProgramProgressContextValueType>(ProgramProgressContext);
   const { urls } = programProgressData;
 
   const getAllRemainingCoursesPrice = () => {

@@ -1,49 +1,45 @@
-import React from 'react';
 import { IntlProvider } from '@openedx/frontend-base';
 import { render, RenderResult, screen } from '@testing-library/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
 import UpgradeAllButton from './UpgradeAllButton';
-import { ProgramProgressContext } from '../ProgramProgressProvider';
 import messages from './messages';
+import { useProgramProgressData } from '@src/data/hooks/queryHooks';
 
 const mockBuyButtonUrl = 'http://test-buy-url.com';
 const mockCurrency = 'USD';
 const mockDiscountedPrice = 500.00;
 const mockListPrice = 800.00;
 
-const defaultContextValue = {
-  programProgressData: {
-    urls: {
-      programListingUrl: undefined,
-      trackSelectionUrl: undefined,
-      commerceApiUrl: undefined,
-      buyButtonUrl: mockBuyButtonUrl,
-      programRecordUrl: undefined,
-    },
-    programData: {
-      discountData: null,
-    },
-    courseData: {},
-  },
-  setProgramProgressData: () => {},
+jest.mock('@src/data/hooks/queryHooks', () => ({
+  useProgramProgressData: jest.fn(),
+}));
+
+const renderComponent = (): RenderResult => {
+  const queryClient = new QueryClient();
+
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <IntlProvider locale="en">
+        <UpgradeAllButton />
+      </IntlProvider>
+    </QueryClientProvider>
+  );
 };
 
-const renderComponent = (contextValue): RenderResult => render(
-  <IntlProvider locale="en">
-    <ProgramProgressContext.Provider value={contextValue}>
-      <UpgradeAllButton />
-    </ProgramProgressContext.Provider>
-  </IntlProvider>,
-);
+const mockedUseProgramProgressData
+  = useProgramProgressData as jest.MockedFunction<typeof useProgramProgressData>;
 
 describe('UpgradeAllButton', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
   it('renders the button with the correct text and link in the NOT discounted state', () => {
-    const contextValue = {
-      ...defaultContextValue,
-      programProgressData: {
-        ...defaultContextValue.programProgressData,
+    mockedUseProgramProgressData.mockReturnValue({
+      data: {
+        urls: {
+          buyButtonUrl: mockBuyButtonUrl,
+        },
         programData: {
           discountData: {
             currency: mockCurrency,
@@ -53,9 +49,9 @@ describe('UpgradeAllButton', () => {
           },
         },
       },
-    };
+    } as any);
 
-    renderComponent(contextValue);
+    renderComponent();
 
     const button = screen.getByTestId('upgrade-all-button');
 
@@ -64,13 +60,16 @@ describe('UpgradeAllButton', () => {
     expect(button).toHaveAttribute('href', mockBuyButtonUrl);
 
     expect(screen.getByText(`$${mockListPrice.toFixed(2)}`)).toBeInTheDocument();
+
+    expect(screen.queryByText(`$${mockDiscountedPrice.toFixed(2)}`)).not.toBeInTheDocument();
   });
 
   it('renders the button with the correct text and link in the discounted state', () => {
-    const contextValue = {
-      ...defaultContextValue,
-      programProgressData: {
-        ...defaultContextValue.programProgressData,
+    mockedUseProgramProgressData.mockReturnValue({
+      data: {
+        urls: {
+          buyButtonUrl: mockBuyButtonUrl,
+        },
         programData: {
           discountData: {
             currency: mockCurrency,
@@ -80,9 +79,9 @@ describe('UpgradeAllButton', () => {
           },
         },
       },
-    };
+    } as any);
 
-    renderComponent(contextValue);
+    renderComponent();
 
     const button = screen.getByTestId('upgrade-all-button');
 

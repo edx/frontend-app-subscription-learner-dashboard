@@ -1,1 +1,1 @@
-export { fetchRecommendedCourses } from './api';
+export { fetchRecommendedCourses, getProgramProgressData } from './api';
