@@ -83,11 +83,17 @@ export interface ProgramProgressTabItems {
 export interface ProgressCardProps {
   progressCardData: ProgressCardData,
   isLoading?: boolean,
+  tabType?: string,
 }
 
 export interface ProgressCardData {
   id: string,
   title: string,
-  enrollmentInfo: string,
   certificateStatus: string,
+  courseRuns?: CourseRunData[],
+}
+
+export interface CourseRunData {
+  pacingType: string,
+  start: string,
 }

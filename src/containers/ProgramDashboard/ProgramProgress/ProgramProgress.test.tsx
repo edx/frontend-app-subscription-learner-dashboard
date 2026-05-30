@@ -4,10 +4,10 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { IntlProvider } from '@openedx/frontend-base';
 
 import ProgramProgress from './ProgramProgress';
-import { useProgramProgressData } from '@src/data/hooks/queryHooks';
+import { useProgressData } from '@src/hooks';
 
-jest.mock('@src/data/hooks/queryHooks', () => ({
-  useProgramProgressData: jest.fn(),
+jest.mock('@src/hooks', () => ({
+  useProgressData: jest.fn(),
 }));
 
 jest.mock('./ProgramProgressHeader', () => {
@@ -48,10 +48,10 @@ describe('ProgramProgress', () => {
   });
 
   it('renders loading state', () => {
-    (useProgramProgressData as jest.Mock).mockReturnValue({
-      data: null,
+    (useProgressData as jest.Mock).mockReturnValue({
+      programProgressData: {},
       isLoading: true,
-      error: null,
+      error: false,
     });
 
     renderComponent();
@@ -60,8 +60,8 @@ describe('ProgramProgress', () => {
   });
 
   it('renders error state', () => {
-    (useProgramProgressData as jest.Mock).mockReturnValue({
-      data: null,
+    (useProgressData as jest.Mock).mockReturnValue({
+      programProgressData: {},
       isLoading: false,
       error: true,
     });
@@ -84,20 +84,20 @@ describe('ProgramProgress', () => {
       </QueryClientProvider>
     );
 
-    expect(screen.getByText('Invalid URL')).toBeInTheDocument();
+    expect(screen.getByText('Error occurred')).toBeInTheDocument();
   });
 
   it('renders program data correctly', () => {
-    (useProgramProgressData as jest.Mock).mockReturnValue({
-      data: {
-        program_data: {
+    (useProgressData as jest.Mock).mockReturnValue({
+      programProgressData: {
+        programData: {
           title: 'Test Program',
           type: 'MicroMasters',
-          authoring_organizations: ['Org1'],
+          authoringOrganizations: ['Org1'],
         },
-        course_data: {
-          not_started: [{ id: 1 }],
-          in_progress: [{ id: 2 }],
+        courseData: {
+          notStarted: [{ id: 1 }],
+          inProgress: [{ id: 2 }],
           completed: [{ id: 3 }],
         },
       },
@@ -114,14 +114,14 @@ describe('ProgramProgress', () => {
   });
 
   it('detects all courses completed correctly', () => {
-    (useProgramProgressData as jest.Mock).mockReturnValue({
-      data: {
-        program_data: {
+    (useProgressData as jest.Mock).mockReturnValue({
+      programProgressData: {
+        programData: {
           title: 'Completed Program',
           type: 'XSeries',
           authoring_organizations: [],
         },
-        course_data: {
+        courseData: {
           not_started: [],
           in_progress: [],
           completed: [{ id: 1 }, { id: 2 }],

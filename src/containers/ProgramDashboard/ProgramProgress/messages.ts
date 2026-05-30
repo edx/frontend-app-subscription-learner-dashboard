@@ -32,7 +32,7 @@ const messages = defineMessages({
     description: 'text to display when a user has not completed all of the courses for a program',
   },
   programProgressCardEnrollment: {
-    defaultMessage: 'Enrolled: {enrollmentInfo}',
+    defaultMessage: '{enrollmentInfo}',
     id: 'program.progress.card.enrollment.text',
     description: 'text to display on the progress card related to the enrollment date for the course',
   },
@@ -45,6 +45,11 @@ const messages = defineMessages({
     defaultMessage: 'Resume course',
     id: 'program.progress.card.resume.button.text',
     description: 'text to display on the progress card for the resume course button',
+  },
+  programProgressCardViewCourseDetailButton: {
+    defaultMessage: 'View course details',
+    id: 'program.progress.card.view.course.detail.button.text',
+    description: 'text to display on the progress card for the view course details button',
   },
   programProgressCardUpgradeButton: {
     defaultMessage: 'Upgrade with your subscription',
@@ -70,6 +75,11 @@ const messages = defineMessages({
     defaultMessage: 'Pathways',
     id: 'program.progress.pathways.tab',
     description: 'Label for the "Pathways" tab on the program progress page, which gives details of how the program can be used to further the learners education. This tab is only shown for MicroMasters programs.',
+  },
+  programProgressRemainingTabNoCourse: {
+    defaultMessage: "You have enrolled in all this program's courses.",
+    id: 'program.progress.remaining.tab.no.course',
+    description: 'Text to display on the Remaining tab of the program progress page when there is no course remaining for the user',
   },
 });
 

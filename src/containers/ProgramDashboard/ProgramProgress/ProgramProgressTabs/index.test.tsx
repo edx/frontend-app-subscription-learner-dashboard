@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { IntlProvider } from '@openedx/frontend-base';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { ProgramProgressTabs } from './';
 
@@ -14,12 +15,17 @@ const defaultProps = {
   },
 };
 
-const renderComponent = (props = {}) =>
-  render(
-    <IntlProvider locale="en">
-      <ProgramProgressTabs {...defaultProps} {...props} />
-    </IntlProvider>
+const renderComponent = (props = {}) => {
+  const queryClient = new QueryClient();
+
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <IntlProvider locale="en">
+        <ProgramProgressTabs {...defaultProps} {...props} />
+      </IntlProvider>
+    </QueryClientProvider>
   );
+};
 
 describe('ProgramProgressTabs', () => {
   test('renders all default tabs with counts', () => {
