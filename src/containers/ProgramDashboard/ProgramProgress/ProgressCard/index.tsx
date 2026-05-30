@@ -37,7 +37,7 @@ export const ProgressCard: FC<ProgressCardProps> = ({ progressCardData, isLoadin
   }
 
   return (
-    <Card className="progress-card" data-testid="progress-card" isLoading={isLoading}>
+    <Card className="progress-card mb-3" data-testid="progress-card" isLoading={isLoading}>
       <Card.Section className="pt-3 pb-2 px-4">
         <Row>
           <Col xs={12}>
