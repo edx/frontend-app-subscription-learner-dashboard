@@ -22,7 +22,7 @@ export const ProgressCard: FC<ProgressCardProps> = ({ progressCardData, isLoadin
   let enrollmentInfo = tabType !== 'remaining' ? 'Enrolled :' : '';
 
   if (formattedPacing) {
-    enrollmentInfo += ` (${formattedPacing})`;
+    enrollmentInfo += `${enrollmentInfo ? ' ' : ''}(${formattedPacing})`;
   }
 
   // add start date if exists

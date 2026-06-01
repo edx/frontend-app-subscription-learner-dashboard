@@ -14,7 +14,7 @@ export const RemainingTabData: FC = () => {
 
   return (
     <div>
-      <h5>Remaining Courses</h5>
+      <h5>{formatMessage(messages.programProgressRemainingCourse)}</h5>
       {remainingData.length > 0 ? (
         remainingData.map((course) => (
           <ProgressCard key={course.id} progressCardData={course} isLoading={isLoading} tabType="remaining" />

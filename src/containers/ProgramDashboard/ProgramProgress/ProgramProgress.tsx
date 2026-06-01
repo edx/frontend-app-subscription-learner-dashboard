@@ -11,7 +11,7 @@ import { ProgramProgressTabs } from './ProgramProgressTabs';
 const ProgramProgress: FC = () => {
   const { programProgressData, isLoading, error } = useProgressData();
 
-  if (!programProgressData) {
+  if (programProgressData === null) {
     return <div>Invalid URL</div>;
   }
 

@@ -52,6 +52,14 @@ describe('useProgressData', () => {
   it('should return error when uuid is missing', () => {
     (useParams as jest.Mock).mockReturnValue({ uuid: '' });
 
+    (useProgramProgressData as jest.Mock).mockReturnValue({
+      data: null,
+      isLoading: false,
+      error: null,
+    });
+
+    (camelCaseObject as jest.Mock).mockReturnValue(null);
+
     const { result } = renderHook(() => useProgressData());
 
     expect(result.current).toEqual({
