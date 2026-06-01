@@ -76,6 +76,11 @@ const messages = defineMessages({
     id: 'program.progress.pathways.tab',
     description: 'Label for the "Pathways" tab on the program progress page, which gives details of how the program can be used to further the learners education. This tab is only shown for MicroMasters programs.',
   },
+  programProgressRemainingCourse: {
+    defaultMessage: 'Remaining Courses',
+    id: 'program.progress.remaining.course',
+    description: 'Header text to be displayed inside the Remaining tab of the program progress page.',
+  },
   programProgressRemainingTabNoCourse: {
     defaultMessage: "You have enrolled in all this program's courses.",
     id: 'program.progress.remaining.tab.no.course',

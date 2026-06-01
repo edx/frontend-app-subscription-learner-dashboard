@@ -27,25 +27,13 @@ describe('RemainingTabData', () => {
     jest.clearAllMocks();
   });
 
-  it('renders error state', () => {
-    (useProgressData as jest.Mock).mockReturnValue({
-      programProgressData: null,
-      isLoading: false,
-      error: 'API error',
-    });
-
-    renderComponent();
-
-    expect(screen.getByText('Error occurred')).toBeInTheDocument();
-  });
-
   it('renders list of remaining courses', () => {
     (useProgressData as jest.Mock).mockReturnValue({
       programProgressData: {
         courseData: {
           notStarted: [
-            { title: 'First Course' },
-            { title: 'Second Course' },
+            { id: 'course-1', title: 'First Course', certificateStatus: '' },
+            { id: 'course-2', title: 'Second Course', certificateStatus: '' },
           ],
         },
       },
@@ -93,7 +81,7 @@ describe('RemainingTabData', () => {
     (useProgressData as jest.Mock).mockReturnValue({
       programProgressData: {
         courseData: {
-          notStarted: [{ title: 'First Course' }],
+          notStarted: [{ id: 'course-1', title: 'First Course', certificateStatus: '' }],
         },
       },
       isLoading: true,

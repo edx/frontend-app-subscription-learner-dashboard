@@ -6,6 +6,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { ProgramProgressTabs } from './';
 
+jest.mock('../RemainingTabData', () => ({
+  RemainingTabData: () => <div data-testid="remaining-tab-data" />,
+}));
+
 const defaultProps = {
   type: 'default',
   counts: {

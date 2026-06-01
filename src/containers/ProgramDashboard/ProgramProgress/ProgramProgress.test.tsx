@@ -74,6 +74,12 @@ describe('ProgramProgress', () => {
   it('renders invalid URL when uuid is missing', () => {
     const queryClient = new QueryClient();
 
+    (useProgressData as jest.Mock).mockReturnValue({
+      programProgressData: null,
+      isLoading: false,
+      error: null,
+    });
+
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter initialEntries={['/program/']}>
@@ -84,7 +90,7 @@ describe('ProgramProgress', () => {
       </QueryClientProvider>
     );
 
-    expect(screen.getByText('Error occurred')).toBeInTheDocument();
+    expect(screen.getByText('Invalid URL')).toBeInTheDocument();
   });
 
   it('renders program data correctly', () => {
@@ -119,11 +125,11 @@ describe('ProgramProgress', () => {
         programData: {
           title: 'Completed Program',
           type: 'XSeries',
-          authoring_organizations: [],
+          authoringOrganizations: [],
         },
         courseData: {
-          not_started: [],
-          in_progress: [],
+          notStarted: [],
+          inProgress: [],
           completed: [{ id: 1 }, { id: 2 }],
         },
       },

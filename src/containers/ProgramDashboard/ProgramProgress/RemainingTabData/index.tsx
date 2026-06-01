@@ -6,15 +6,11 @@ import { ProgressCard } from '../ProgressCard';
 import messages from '../messages';
 
 export const RemainingTabData: FC = () => {
-  const { programProgressData, isLoading, error } = useProgressData();
+  const { programProgressData, isLoading } = useProgressData();
   const { formatMessage } = useIntl();
 
   const courseData = programProgressData?.courseData;
   const remainingData = courseData?.notStarted || [];
-
-  if (error) {
-    return <div>Error occurred</div>;
-  }
 
   return (
     <div>
