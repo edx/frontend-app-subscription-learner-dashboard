@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { IntlProvider } from '@openedx/frontend-base';
 import DashboardTabs from './DashboardTabs';
 
 interface TabsProps {
@@ -43,6 +44,20 @@ jest.mock('@openedx/paragon', () => {
   };
 });
 
+const renderComponent = () => render(<IntlProvider locale="en"><DashboardTabs /></IntlProvider>);
+
+jest.mock('../ProgramsPanel', () => {
+  const MockProgramsPanel = () => (
+    <div data-testid="programs-list">
+      Programs Panel Content
+    </div>
+  );
+
+  MockProgramsPanel.displayName = 'MockProgramsPanel';
+
+  return MockProgramsPanel;
+});
+
 jest.mock('../../containers/CoursesPanel', () => {
   const MockCoursesPanel = () => (
     <div data-testid="courses-panel">
@@ -57,31 +72,31 @@ jest.mock('../../containers/CoursesPanel', () => {
 
 describe('DashboardTabs', () => {
   it('renders all tab titles', () => {
-    render(<DashboardTabs />);
+    renderComponent();
 
     expect(screen.getByText('Courses')).toBeInTheDocument();
-    expect(screen.getByText('Programs')).toBeInTheDocument();
+    expect(screen.getAllByText('Programs')).toHaveLength(1);
     expect(screen.getByText('History')).toBeInTheDocument();
   });
 
   it('Courses tab is active by default and shows CoursesPanel', () => {
-    render(<DashboardTabs />);
+    renderComponent();
 
     expect(screen.getByTestId('courses-panel')).toBeInTheDocument();
   });
 
   it('switches to Programs tab on click', () => {
-    render(<DashboardTabs />);
+    renderComponent();
 
-    fireEvent.click(screen.getByText('Programs'));
+    fireEvent.click(screen.getAllByText('Programs')[0]);
 
     expect(
-      screen.getByText('Programs tab will be available soon.')
+      screen.getByTestId('programs-list')
     ).toBeInTheDocument();
   });
 
   it('switches to History tab on click', () => {
-    render(<DashboardTabs />);
+    renderComponent();
 
     fireEvent.click(screen.getByText('History'));
 
