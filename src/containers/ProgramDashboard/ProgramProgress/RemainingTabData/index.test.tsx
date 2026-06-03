@@ -62,7 +62,7 @@ describe('RemainingTabData', () => {
 
     renderComponent();
 
-    expect(screen.getByText("You have enrolled in all this program's courses.")).toBeInTheDocument();
+    expect(screen.getByText("You have enrolled in all of this program's courses.")).toBeInTheDocument();
   });
 
   it('renders empty state when courseData is missing', () => {
@@ -74,7 +74,7 @@ describe('RemainingTabData', () => {
 
     renderComponent();
 
-    expect(screen.getByText("You have enrolled in all this program's courses.")).toBeInTheDocument();
+    expect(screen.getByText("You have enrolled in all of this program's courses.")).toBeInTheDocument();
   });
 
   it('passes isLoading to ProgressCard', () => {
