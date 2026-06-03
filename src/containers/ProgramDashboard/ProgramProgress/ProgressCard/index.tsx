@@ -13,7 +13,12 @@ export const ProgressCard: FC<ProgressCardProps> = ({ progressCardData, isLoadin
 
   const [{ pacingType = '', start = '' } = {}] = Array.isArray(courseRuns) ? courseRuns : [];
 
-  // format pacing type safely
+  /*
+    - Formatting pacing type safely
+    - replace underscores with spaces
+    - capitalize first letter of each word
+    - example: 'self_paced' -> 'Self Paced'
+  */
   const formattedPacing = pacingType
     ? pacingType.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
     : '';
