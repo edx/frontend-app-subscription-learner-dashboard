@@ -82,7 +82,7 @@ const messages = defineMessages({
     description: 'Header text to be displayed inside the Remaining tab of the program progress page.',
   },
   programProgressRemainingTabNoCourse: {
-    defaultMessage: "You have enrolled in all this program's courses.",
+    defaultMessage: "You have enrolled in all of this program's courses.",
     id: 'program.progress.remaining.tab.no.course',
     description: 'Text to display on the Remaining tab of the program progress page when there is no course remaining for the user',
   },

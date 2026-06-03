@@ -38,7 +38,9 @@ export const ProgressCard: FC<ProgressCardProps> = ({ progressCardData, isLoadin
       year: 'numeric'
     });
 
-    enrollmentInfo = `${enrollmentInfo} Started ${startDate}`;
+    enrollmentInfo = enrollmentInfo
+      ? `${enrollmentInfo} Started ${startDate}`
+      : `Started ${startDate}`;
   }
 
   return (
