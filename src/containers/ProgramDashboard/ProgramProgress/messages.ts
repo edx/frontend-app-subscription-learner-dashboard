@@ -52,7 +52,7 @@ const messages = defineMessages({
     description: 'text to display on the progress card for the upgrade button',
   },
   programProgressCardEnrollText: {
-    defaultMessage: 'Enrolled :',
+    defaultMessage: 'Enrolled:',
     id: 'program.progress.card.enroll.text',
     description: 'text to display on the progress card for the enrolled status of the course',
   },
