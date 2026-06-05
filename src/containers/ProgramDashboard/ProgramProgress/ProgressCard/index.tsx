@@ -50,7 +50,7 @@ export const ProgressCard: FC<ProgressCardProps> = ({ progressCardData, isLoadin
           <Col xs={12}>
             <h4 className="mb-1 font-weight-bold">{title}</h4>
             <div className="text-muted">
-              {formatMessage(messages.programProgressCardEnrollment, { enrollmentInfo })}
+              {enrollmentInfo}
             </div>
           </Col>
           <ProgressCardActions />

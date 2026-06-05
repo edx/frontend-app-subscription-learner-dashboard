@@ -24,7 +24,9 @@ describe('ProgressCardActions', () => {
     (useProgressData as jest.Mock).mockReturnValue({
       programProgressData: {
         courseData: {
-          notStarted: [1, 2, 3],
+          notStarted: [
+            { title: 'Test Course', certificateStatus: 'Not Started', courseRuns: [{ pacingType: 'self-paced', start: '2024-01-01' }] },
+          ],
         },
       },
     });

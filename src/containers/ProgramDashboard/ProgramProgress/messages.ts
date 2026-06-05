@@ -31,11 +31,6 @@ const messages = defineMessages({
     id: 'program.progress.incomplete.text',
     description: 'text to display when a user has not completed all of the courses for a program',
   },
-  programProgressCardEnrollment: {
-    defaultMessage: '{enrollmentInfo}',
-    id: 'program.progress.card.enrollment.text',
-    description: 'text to display on the progress card related to the enrollment date for the course',
-  },
   programProgressCardCertificate: {
     defaultMessage: '<bold>Certificate Status:</bold> {certificateStatus}',
     id: 'program.progress.card.certificate.text',
