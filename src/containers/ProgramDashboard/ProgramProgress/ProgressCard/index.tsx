@@ -24,7 +24,7 @@ export const ProgressCard: FC<ProgressCardProps> = ({ progressCardData, isLoadin
     : '';
 
   // base string
-  let enrollmentInfo = tabType !== 'remaining' ? 'Enrolled :' : '';
+  let enrollmentInfo = tabType !== 'remaining' ? formatMessage(messages.programProgressCardEnrollText) : '';
 
   if (formattedPacing) {
     enrollmentInfo += `${enrollmentInfo ? ' ' : ''}(${formattedPacing})`;
@@ -39,8 +39,8 @@ export const ProgressCard: FC<ProgressCardProps> = ({ progressCardData, isLoadin
     });
 
     enrollmentInfo = enrollmentInfo
-      ? `${enrollmentInfo} Started ${startDate}`
-      : `Started ${startDate}`;
+      ? `${enrollmentInfo} ${formatMessage(messages.programProgressCardStartText)} ${startDate}`
+      : `${formatMessage(messages.programProgressCardStartText)} ${startDate}`;
   }
 
   return (

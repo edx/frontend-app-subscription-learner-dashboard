@@ -51,6 +51,16 @@ const messages = defineMessages({
     id: 'program.progress.card.upgrade.button.text',
     description: 'text to display on the progress card for the upgrade button',
   },
+  programProgressCardEnrollText: {
+    defaultMessage: 'Enrolled :',
+    id: 'program.progress.card.enroll.text',
+    description: 'text to display on the progress card for the enrolled status of the course',
+  },
+  programProgressCardStartText: {
+    defaultMessage: 'Started',
+    id: 'program.progress.card.start.text',
+    description: 'text to display on the progress card for the start date of the course',
+  },
   programProgressInProgressTab: {
     defaultMessage: 'In progress',
     id: 'program.progress.in.progress.tab',
