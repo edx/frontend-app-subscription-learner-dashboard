@@ -31,11 +31,6 @@ const messages = defineMessages({
     id: 'program.progress.incomplete.text',
     description: 'text to display when a user has not completed all of the courses for a program',
   },
-  programProgressCardEnrollment: {
-    defaultMessage: 'Enrolled: {enrollmentInfo}',
-    id: 'program.progress.card.enrollment.text',
-    description: 'text to display on the progress card related to the enrollment date for the course',
-  },
   programProgressCardCertificate: {
     defaultMessage: '<bold>Certificate Status:</bold> {certificateStatus}',
     id: 'program.progress.card.certificate.text',
@@ -46,10 +41,25 @@ const messages = defineMessages({
     id: 'program.progress.card.resume.button.text',
     description: 'text to display on the progress card for the resume course button',
   },
+  programProgressCardViewCourseDetailButton: {
+    defaultMessage: 'View course details',
+    id: 'program.progress.card.view.course.detail.button.text',
+    description: 'text to display on the progress card for the view course details button',
+  },
   programProgressCardUpgradeButton: {
     defaultMessage: 'Upgrade with your subscription',
     id: 'program.progress.card.upgrade.button.text',
     description: 'text to display on the progress card for the upgrade button',
+  },
+  programProgressCardEnrollText: {
+    defaultMessage: 'Enrolled:',
+    id: 'program.progress.card.enroll.text',
+    description: 'text to display on the progress card for the enrolled status of the course',
+  },
+  programProgressCardStartText: {
+    defaultMessage: 'Started',
+    id: 'program.progress.card.start.text',
+    description: 'text to display on the progress card for the start date of the course',
   },
   programProgressInProgressTab: {
     defaultMessage: 'In progress',
@@ -70,6 +80,16 @@ const messages = defineMessages({
     defaultMessage: 'Pathways',
     id: 'program.progress.pathways.tab',
     description: 'Label for the "Pathways" tab on the program progress page, which gives details of how the program can be used to further the learners education. This tab is only shown for MicroMasters programs.',
+  },
+  programProgressRemainingCourse: {
+    defaultMessage: 'Remaining Courses',
+    id: 'program.progress.remaining.course',
+    description: 'Header text to be displayed inside the Remaining tab of the program progress page.',
+  },
+  programProgressRemainingTabNoCourse: {
+    defaultMessage: "You have enrolled in all of this program's courses.",
+    id: 'program.progress.remaining.tab.no.course',
+    description: 'Text to display on the Remaining tab of the program progress page when there is no course remaining for the user',
   },
 });
 

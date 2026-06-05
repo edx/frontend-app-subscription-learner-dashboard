@@ -4,6 +4,7 @@ import { useIntl } from '@openedx/frontend-base';
 
 import { ProgramProgressTabsProps, ProgramProgressTabItems } from '../../data/types';
 import messages from '../messages';
+import { RemainingTabData } from '../RemainingTabData';
 
 export const ProgramProgressTabs: FC<ProgramProgressTabsProps> = ({ type, counts }) => {
   const { inProgress, remaining, completed } = counts;
@@ -20,7 +21,7 @@ export const ProgramProgressTabs: FC<ProgramProgressTabsProps> = ({ type, counts
       key: 'remaining',
       title: formatMessage(messages.programProgressRemainingTab),
       count: remaining,
-      panel: <span>Remaining tab data will be available soon.</span>,
+      panel: <RemainingTabData />,
     },
     {
       key: 'completed',

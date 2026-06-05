@@ -1,23 +1,17 @@
 import { FC } from 'react';
 import { Helmet } from 'react-helmet';
-import { useParams } from 'react-router-dom';
 import { Col, Container, Row } from '@openedx/paragon';
-import { camelCaseObject } from '@openedx/frontend-base';
 
 import './index.scss';
-import { useProgramProgressData } from '@src/data/hooks';
+import { useProgressData } from '@src/hooks';
 import ProgramProgressHeader from './ProgramProgressHeader';
 import ProgramProgressInfo from './ProgramProgressInfo';
 import { ProgramProgressTabs } from './ProgramProgressTabs';
 
 const ProgramProgress: FC = () => {
-  // Fetch UUID from route params
-  const { uuid } = useParams() as { uuid: string };
+  const { programProgressData, isLoading, error } = useProgressData();
 
-  const { data, isLoading, error } = useProgramProgressData(uuid);
-  const programProgressData = camelCaseObject(data);
-
-  if (!uuid) {
+  if (programProgressData === null) {
     return <div>Invalid URL</div>;
   }
 
@@ -41,6 +35,9 @@ const ProgramProgress: FC = () => {
     && courseData.completed?.length;
 
   const programType = programData?.type ?? '';
+  const inProgressCourseCount = courseData?.inProgress?.length || 0;
+  const remainingCourseCount = courseData?.notStarted?.length || 0;
+  const completedCourseCount = courseData?.completed?.length || 0;
 
   return (
     <>
@@ -58,13 +55,9 @@ const ProgramProgress: FC = () => {
               totalCoursesInProgram={totalCoursesInProgram}
               programTitle={programData?.title ?? ''}
             />
+            <ProgramProgressTabs counts={{ inProgress: inProgressCourseCount, remaining: remainingCourseCount, completed: completedCourseCount }} type={programType} />
           </Col>
         </Row>
-
-        {/* TODO [TEMP]: Replace the below course count with actual count. For now, returning hardcoded data.
-          Action: Revisit when data is being made dynamic.
-        */}
-        <ProgramProgressTabs counts={{ inProgress: 1, remaining: 2, completed: 0 }} type={programType} />
       </Container>
     </>
   );
