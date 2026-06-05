@@ -1,12 +1,22 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { IntlProvider } from '@openedx/frontend-base';
 import ProgramsPanel from '.';
 import { formatMessage } from '@src/testUtils';
 import messages from './messages';
+import { useProgramsListData } from '@src/data/hooks/queryHooks';
+
+jest.mock('@src/data/hooks/queryHooks', () => ({
+  useProgramsListData: jest.fn(),
+}));
+
+jest.mock('../ProgramDashboard', () => ({
+  ProgramsList: () => <div data-testid="programs-dashboard-list" />,
+}));
 
 const renderComponent = (hasProgramsEnrollment = false) => {
-  jest.spyOn(React, 'useState').mockImplementation(() => [hasProgramsEnrollment, jest.fn()]);
+  (useProgramsListData as jest.Mock).mockReturnValue({
+    data: hasProgramsEnrollment ? [{ uuid: 'program-1' }] : [],
+  });
   return render(<IntlProvider locale="en"><ProgramsPanel /></IntlProvider>);
 };
 
@@ -27,11 +37,11 @@ describe('ProgramsPanel', () => {
 
   it('renders NoProgramsView when hasProgramsEnrollment is false', () => {
     renderComponent(false);
-    expect(screen.getByText('Find a program')).toBeInTheDocument();
+    expect(screen.getByText(formatMessage(messages.emptyProgramsMessage))).toBeInTheDocument();
   });
 
   it('does not render NoProgramsView when hasProgramsEnrollment is true', () => {
     renderComponent(true);
-    expect(screen.queryByText('Find a program')).not.toBeInTheDocument();
+    expect(screen.queryByText(formatMessage(messages.emptyProgramsMessage))).not.toBeInTheDocument();
   });
 });
