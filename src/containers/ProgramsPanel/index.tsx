@@ -5,7 +5,6 @@ import NoProgramsView from './NoProgramsView';
 import { ProgramsList } from './ProgramDashboard';
 import { useProgramsListData } from '@src/data/hooks';
 
-
 export const ProgramsPanel: FC = () => {
   const { formatMessage } = useIntl();
   const {
