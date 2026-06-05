@@ -43,7 +43,7 @@ describe('ProgressCard', () => {
     renderComponent();
 
     expect(
-      screen.getByText(/Enrolled : \(Self Paced\) Started Feb 3, 2025/i)
+      screen.getByText(/Enrolled: \(Self Paced\) Started Feb 3, 2025/i)
     ).toBeInTheDocument();
   });
 
