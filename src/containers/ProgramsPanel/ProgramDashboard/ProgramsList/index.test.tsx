@@ -51,11 +51,6 @@ describe('ProgramsList', () => {
 
   const renderComponent = () => render(<ProgramsList />);
 
-  it('renders header text', () => {
-    renderComponent();
-    expect(screen.getByText(messages.programsListHeaderText.defaultMessage)).toBeInTheDocument();
-  });
-
   it('fetches program data on mount', () => {
     renderComponent();
     expect(useProgramsListData).toHaveBeenCalledTimes(1);

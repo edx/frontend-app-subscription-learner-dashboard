@@ -6,7 +6,7 @@ import {
   initializeList,
   fetchProgramsListData,
 } from '@src/data/services/lms/api';
-import { ProgramData, ProgramProgressData } from '@src/containers/ProgramDashboard/data/types';
+import { ProgramData, ProgramProgressData } from '@src/containers/ProgramsPanel/ProgramDashboard/data/types';
 import { getTransformedCourseDataObject } from '@src/utils/dataTransformers';
 import { learnerDashboardQueryKeys } from './queryKeys';
 import { getProgramProgressData } from '@src/data/services/subs';

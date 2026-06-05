@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { IntlProvider } from '@openedx/frontend-base';
 
-import { ProgramProgressTabs } from './';
+import { ProgramProgressTabs } from '.';
 
 const defaultProps = {
   type: 'default',

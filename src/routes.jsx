@@ -21,7 +21,7 @@ const routes = [
       role: 'org.openedx.frontend.role.programProgress'
     },
     async lazy () {
-      const module = await import('./containers/ProgramDashboard/ProgramProgress/index');
+      const module = await import('./containers/ProgramsPanel/ProgramDashboard/ProgramProgress/index');
       return { Component: module.default };
     },
   }

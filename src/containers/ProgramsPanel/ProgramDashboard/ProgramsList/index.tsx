@@ -3,7 +3,7 @@ import {
   Alert, CardGrid, Col, Container, Row, Spinner,
 } from '@openedx/paragon';
 import { useIntl, logError, getSiteConfig } from '@openedx/frontend-base';
-import appMessages from '../../../messages';
+import appMessages from '../../../../messages';
 import ProgramListCard from './ProgramListCard';
 import messages from './messages';
 
@@ -70,9 +70,6 @@ const ProgramsList: React.FC = () => {
 
   return (
     <Container size="lg">
-      <h3>
-        {formatMessage(messages.programsListHeaderText)}
-      </h3>
       <p>
         {formatMessage(messages.programsListDescriptionText)}
       </p>
