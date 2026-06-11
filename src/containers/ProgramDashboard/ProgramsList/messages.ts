@@ -1,11 +1,6 @@
 import { defineMessages } from '@openedx/frontend-base';
 
 const messages = defineMessages({
-  programsListHeaderText: {
-    defaultMessage: 'Programs',
-    id: 'programs.list.header.text',
-    description: 'Header text for the programs list',
-  },
   programsListDescriptionText: {
     defaultMessage: 'When you enroll in a course associated with a program — professional certificate or MicroMasters — the program will be displayed here',
     id: 'programs.list.description.text',

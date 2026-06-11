@@ -70,9 +70,6 @@ const ProgramsList: React.FC = () => {
 
   return (
     <Container size="lg">
-      <h3>
-        {formatMessage(messages.programsListHeaderText)}
-      </h3>
       <p>
         {formatMessage(messages.programsListDescriptionText)}
       </p>
