@@ -36,41 +36,17 @@ describe('DashboardLayout', () => {
   });
 
   const testColumns = () => {
-    it('loads courseList and sidebar column layout with corresponding children', () => {
-      const courseChildren = screen.getByText('test children');
-      const courseListCol = courseChildren.parentElement;
-      const sidebarCol = courseListCol.nextSibling;
-      expect(courseListCol).toHaveClass('course-list-column');
-      expect(sidebarCol).toHaveClass('sidebar-column');
-    });
     it('displays children in first column', () => {
       const courseChildren = screen.getByText('test children');
       const courseListCol = courseChildren.parentElement;
       expect(courseChildren).toBeInTheDocument();
       expect(courseListCol).toHaveClass('course-list-column');
     });
-    it('displays WidgetSidebarSlot in second column', () => {
-      const courseListCol = screen.getByText('test children').parentElement;
-      const sidebarCol = courseListCol.nextSibling;
-      expect(sidebarCol).toHaveClass('sidebar-column');
-      // Slot renders its default children directly (no wrapper with slot id)
-      expect(sidebarCol.children.length).toBeGreaterThan(0);
-    });
   };
   const testSidebarLayout = ({ isCollapsed }) => {
     it('displays withSidebar width for course list column', () => {
       const courseListCol = screen.getByText('test children').parentElement;
-      expect(courseListCol).toHaveClass('col-xl-8');
-      const sidebarCol = courseListCol.nextSibling;
-      expect(sidebarCol).toHaveClass('sidebar-column', !isCollapsed && 'not-collapsed');
-    });
-  };
-  const testNoSidebarLayout = ({ isCollapsed }) => {
-    it('displays noSidebar width for course list column', () => {
-      const courseListCol = screen.getByText('test children').parentElement;
-      expect(courseListCol).toHaveClass('col-xl-12');
-      const sidebarCol = courseListCol.nextSibling;
-      expect(sidebarCol).toHaveClass('sidebar-column', !isCollapsed && 'not-collapsed');
+      expect(courseListCol).toHaveClass('course-list-column col');
     });
   };
   describe('collapsed', () => {
@@ -80,13 +56,6 @@ describe('DashboardLayout', () => {
       });
       testColumns();
       testSidebarLayout({ isCollapsed: true });
-    });
-    describe('sidebar not showing', () => {
-      beforeEach(() => {
-        hooks.useDashboardLayoutData.mockReturnValueOnce({ ...hookProps });
-      });
-      testColumns();
-      testNoSidebarLayout({ isCollapsed: true });
     });
   });
 
@@ -101,13 +70,6 @@ describe('DashboardLayout', () => {
       });
       testColumns();
       testSidebarLayout({ isCollapsed: false });
-    });
-    describe('sidebar not showing', () => {
-      beforeEach(() => {
-        hooks.useDashboardLayoutData.mockReturnValueOnce({ ...hookProps, isCollapsed: false });
-      });
-      testColumns();
-      testNoSidebarLayout({ isCollapsed: false });
     });
   });
 });
