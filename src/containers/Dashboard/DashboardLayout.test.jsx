@@ -43,7 +43,7 @@ describe('DashboardLayout', () => {
       expect(courseListCol).toHaveClass('course-list-column');
     });
   };
-  const testSidebarLayout = ({ isCollapsed }) => {
+  const testSidebarLayout = () => {
     it('displays withSidebar width for course list column', () => {
       const courseListCol = screen.getByText('test children').parentElement;
       expect(courseListCol).toHaveClass('course-list-column col');
@@ -55,7 +55,7 @@ describe('DashboardLayout', () => {
         hooks.useDashboardLayoutData.mockReturnValueOnce({ ...hookProps, sidebarShowing: true });
       });
       testColumns();
-      testSidebarLayout({ isCollapsed: true });
+      testSidebarLayout();
     });
   });
 
@@ -69,7 +69,7 @@ describe('DashboardLayout', () => {
         });
       });
       testColumns();
-      testSidebarLayout({ isCollapsed: false });
+      testSidebarLayout();
     });
   });
 });
