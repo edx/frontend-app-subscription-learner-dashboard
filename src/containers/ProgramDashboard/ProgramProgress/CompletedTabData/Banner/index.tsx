@@ -24,8 +24,8 @@ export const Banner: FC = () => {
         <Row className="mt-3">
           <Col xs={12} className="d-flex justify-content-end">
             {/**
-                         * TODO: The buttons shown here do not do anything at the moment but are meant to link to the help center and the walled garden page respectively.
-                         * ACTION ITEM: Add the correct link to the ViewCourseDetailButton component once the URL is available.
+                         * TODO: The buttons shown here do not do anything at the moment but are meant to link to the help center and the program records page respectively.
+                         * ACTION ITEM: Wire these buttons to the Help Center and Program Records URLs once they are available.
                          */}
             <Button variant="outline-primary" className="mr-2 d-flex align-items-center">
               {formatMessage(messages.programProgressCompletedBannerHelpCenterButton)}
