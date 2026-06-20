@@ -9,7 +9,7 @@ import '@openedx/brand-openedx/dist/light.min.css';
 const siteConfig: SiteConfig = {
   siteId: 'learner-dashboard-dev',
   siteName: 'Learner Dashboard Dev',
-  baseUrl: 'http://localhost:1996',
+  baseUrl: 'http://localhost:5000',
   lmsBaseUrl: 'http://localhost:18000',
   loginUrl: 'http://localhost:18000/login',
   logoutUrl: 'http://localhost:18000/logout',
@@ -23,15 +23,15 @@ const siteConfig: SiteConfig = {
   ],
   externalRoutes: [
     {
-      role: 'org.openedx.frontend.role.profile',
+      role: 'org.edx.frontend.subs.role.profile',
       url: 'http://localhost:1995/profile/'
     },
     {
-      role: 'org.openedx.frontend.role.account',
+      role: 'org.edx.frontend.subs.role.account',
       url: 'http://localhost:1997/account/'
     },
     {
-      role: 'org.openedx.frontend.role.logout',
+      role: 'org.edx.frontend.subs.role.logout',
       url: 'http://localhost:18000/logout'
     },
   ],

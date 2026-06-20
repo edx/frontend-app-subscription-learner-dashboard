@@ -4,41 +4,45 @@ import { useIntl } from '@openedx/frontend-base';
 
 import { ProgressCard } from '../ProgressCard';
 import messages from '../messages';
+import { Banner } from './Banner';
 
-export const RemainingTabData: FC = () => {
+export const CompletedTabData: FC = () => {
   const { programProgressData, isLoading } = useProgressData();
   const { formatMessage } = useIntl();
 
   const courseData = programProgressData?.courseData;
-  const remainingData = courseData?.notStarted || [];
+  const completedData = courseData?.completed || [];
 
   const buildProgressCard = () => (
-    remainingData.map((course) => {
+    completedData.map((course) => {
       const courseRuns = course.courseRuns || [];
-      const [{ pacingType = '', start = '', end = '', courseUrl = '' } = {}] = Array.isArray(courseRuns) ? courseRuns : [];
+      const [{ pacingType = '', start = '', end = '', certificateUrl = '', courseUrl = '' } = {}] = Array.isArray(courseRuns) ? courseRuns : [];
 
       const progressCardData = {
         title: course.title,
         start: start,
         end: end || '',
         pacingType: pacingType,
+        certificateUrl: certificateUrl || '',
         courseUrl: courseUrl || '',
       };
 
       return (
-        <ProgressCard key={course.id} progressCardData={progressCardData} isLoading={isLoading} tabType={formatMessage(messages.programProgressRemainingTab).toLowerCase()} />
+        <ProgressCard key={course.id} progressCardData={progressCardData} isLoading={isLoading} tabType={formatMessage(messages.programProgressCompletedTab).toLowerCase()} />
       );
     })
   );
 
   return (
     <div>
-      <h5>{formatMessage(messages.programProgressRemainingCourse)}</h5>
-      {remainingData.length > 0 ? (
+      <h5>{formatMessage(messages.programProgressCompletedCourse)}</h5>
+      {completedData.length > 0 ? (
         buildProgressCard()
       ) : (
-        <p>{formatMessage(messages.programProgressRemainingTabNoCourse)}</p>
+        <p>{formatMessage(messages.programProgressCompletedTabNoCourse)}</p>
       )}
+
+      <Banner />
     </div>
   );
 };
