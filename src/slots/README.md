@@ -5,4 +5,3 @@
 * [`org.openedx.frontend.slot.learnerDashboard.courseList.v1`](./CourseListSlot/)
 * [`org.openedx.frontend.slot.learnerDashboard.dashboardModal.v1`](./DashboardModalSlot)
 * [`org.openedx.frontend.slot.learnerDashboard.noCoursesView.v1`](./NoCoursesViewSlot/)
-* [`org.openedx.frontend.slot.learnerDashboard.widgetSidebar.v1`](./WidgetSidebarSlot/)
