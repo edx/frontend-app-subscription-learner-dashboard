@@ -3,7 +3,7 @@ import { useIntl } from '@openedx/frontend-base';
 
 import { useRecentlyViewedCoursesAndProgramsData } from '@src/hooks/useRecentlyViewedCoursesAndProgramsData';
 import messages from './messages';
-import NoRecentlyViewedCourse from './NoRecentlyViewedCourse';
+import NoRecentlyViewedItems from './NoRecentlyViewedItems';
 import RecentlyViewedCourseProgram from './RecentlyViewedCourseProgram';
 
 export const RecentlyViewedPanel: FC = () => {
@@ -28,7 +28,7 @@ export const RecentlyViewedPanel: FC = () => {
           isLoading={isLoading}
         />
       ) : (
-        <NoRecentlyViewedCourse />
+        <NoRecentlyViewedItems />
       )}
     </div>
   );

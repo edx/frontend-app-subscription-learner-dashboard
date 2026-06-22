@@ -3,7 +3,7 @@ import { useIntl } from '@openedx/frontend-base';
 
 import messages from './messages';
 
-const NoRecentlyViewedCourse: FC = () => {
+const NoRecentlyViewedItems: FC = () => {
   const { formatMessage } = useIntl();
 
   return (
@@ -13,4 +13,4 @@ const NoRecentlyViewedCourse: FC = () => {
   );
 };
 
-export default NoRecentlyViewedCourse;
+export default NoRecentlyViewedItems;
