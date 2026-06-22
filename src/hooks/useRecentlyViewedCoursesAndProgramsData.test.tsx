@@ -52,7 +52,7 @@ describe('useRecentlyViewedCoursesAndProgramsData', () => {
   });
 
   it('should be in loading state initially', () => {
-    mockedFetchRecentlyViewedCoursesAndPrograms.mockResolvedValue([]);
+    mockedFetchRecentlyViewedCoursesAndPrograms.mockImplementation(() => new Promise(() => {}));
 
     const { result } = renderHook(() => useRecentlyViewedCoursesAndProgramsData(), {
       wrapper: createWrapper(),
