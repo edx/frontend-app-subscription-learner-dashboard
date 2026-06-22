@@ -1,12 +1,7 @@
 import { FC } from 'react';
 
 import { ProductCard } from '../../ProductCard';
-import { ProductCardItem } from '../../ProductCard/data/types';
-
-interface RecentlyViewedCourseProgramProps {
-  items: ProductCardItem[],
-  isLoading: boolean,
-}
+import { RecentlyViewedCourseProgramProps } from './data/types';
 
 export const RecentlyViewedCourseProgram: FC<RecentlyViewedCourseProgramProps> = ({ items, isLoading }) => {
   return (
