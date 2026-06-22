@@ -10,7 +10,7 @@ interface RecentlyViewedCourseProgramProps {
 
 export const RecentlyViewedCourseProgram: FC<RecentlyViewedCourseProgramProps> = ({ items, isLoading }) => {
   return (
-    <div data-testid="recently-viewed-course-cards">
+    <div data-testid="recently-viewed-items">
       <div className="row g-3 flex-nowrap flex-md-wrap overflow-auto">
         {items.map((item) => (
           <div key={item.id} className="col-12 col-md-6 col-xl-3 d-flex mb-2">

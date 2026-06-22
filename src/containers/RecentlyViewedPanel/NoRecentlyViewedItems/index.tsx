@@ -7,7 +7,7 @@ const NoRecentlyViewedItems: FC = () => {
   const { formatMessage } = useIntl();
 
   return (
-    <div data-testid="no-recently-viewed-course">
+    <div data-testid="no-recently-viewed-items">
       <p className="mb-0">{formatMessage(messages.recentlyViewedEmptyState)}</p>
     </div>
   );

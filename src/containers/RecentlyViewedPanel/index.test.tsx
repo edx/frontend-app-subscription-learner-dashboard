@@ -54,15 +54,30 @@ describe('RecentlyViewedPanel', () => {
     expect(screen.getAllByTestId('product-card')).toHaveLength(2);
   });
 
-  it('renders empty state when no data exists', () => {
+  it('renders error alert when data fetching fails', () => {
     mockHook.mockReturnValue({
       data: [],
       isLoading: false,
+      isError: true,
     });
 
     renderComponent();
 
-    expect(screen.getByTestId('no-recently-viewed-course')).toBeInTheDocument();
+    expect(screen.getByTestId('recently-viewed-error')).toBeInTheDocument();
+    expect(screen.queryByTestId('recently-viewed-items')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('no-recently-viewed-items')).not.toBeInTheDocument();
+  });
+
+  it('renders empty state when no data exists', () => {
+    mockHook.mockReturnValue({
+      data: [],
+      isLoading: false,
+      isError: false,
+    });
+
+    renderComponent();
+
+    expect(screen.getByTestId('no-recently-viewed-items')).toBeInTheDocument();
     expect(screen.queryByTestId('product-card')).not.toBeInTheDocument();
   });
 });
