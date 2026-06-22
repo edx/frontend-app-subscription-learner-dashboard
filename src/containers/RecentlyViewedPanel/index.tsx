@@ -22,7 +22,7 @@ export const RecentlyViewedPanel: FC = () => {
       <div className="recently-viewed-heading-container mb-4">
         <h2>{formatMessage(messages.recentlyViewedHeader)}</h2>
       </div>
-      {hasRecentlyViewedData ? (
+      {(isLoading || hasRecentlyViewedData) ? (
         <RecentlyViewedCourseProgram
           items={recentlyViewedCoursesAndProgramsData}
           isLoading={isLoading}
