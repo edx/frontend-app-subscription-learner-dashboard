@@ -57,12 +57,14 @@ export const ProgressCard: FC<ProgressCardProps> = ({ progressCardData, isLoadin
           <Row className="pt-3 pb-2 px-2 border-top border-2 border-muted mb-2 align-items-center">
             <Col xs={12} className="d-flex justify-content-between align-items-center px-0">
               <span className="text-start">
-                {formatMessage(messages.programProgressCardCompletedCertificateText, {
-                  certificateDate: (end ? dateFormatter(formatDate, end, 'short') : ''),
-                })}
+                {end && (
+                  formatMessage(messages.programProgressCardCompletedCertificateText, {
+                    certificateDate: (end ? dateFormatter(formatDate, end, 'short') : ''),
+                  })
+                )}
               </span>
 
-              <ProgressCardButton variant="brand" to={certificateUrl || '#'} buttonText={formatMessage(messages.programProgressCardCompletedCertificateButton)} />
+              <ProgressCardButton variant="brand" to={certificateUrl || ''} buttonText={formatMessage(messages.programProgressCardCompletedCertificateButton)} />
             </Col>
           </Row>
         )}

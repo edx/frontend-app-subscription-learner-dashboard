@@ -6,8 +6,16 @@ import { ProgressCardButtonProps } from '../../data/types';
 
 export const ProgressCardButton: FC<ProgressCardButtonProps> = ({ variant, to, buttonText }) => {
   return (
-    <Button variant={variant} to={to} as={Link}>
-      {buttonText}
-    </Button>
+    to
+      ? (
+          <Button variant={variant} as={Link} to={to}>
+            {buttonText}
+          </Button>
+        )
+      : (
+          <Button variant={variant}>
+            {buttonText}
+          </Button>
+        )
   );
 };

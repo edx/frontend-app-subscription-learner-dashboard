@@ -93,7 +93,7 @@ describe('ProgressCard', () => {
     renderComponent({ tabType: 'remaining' });
 
     expect(
-      screen.queryByText(/Completed on/i)
+      screen.queryByText(/You earned the certificate on/i)
     ).not.toBeInTheDocument();
   });
 });
