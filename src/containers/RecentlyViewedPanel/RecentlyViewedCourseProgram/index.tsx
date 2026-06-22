@@ -3,10 +3,10 @@ import { FC } from 'react';
 import { ProductCard } from '../../ProductCard';
 import { ProductCardItem } from '../../ProductCard/data/types';
 
-type RecentlyViewedCourseProgramProps = {
-  items: ProductCardItem[];
-  isLoading: boolean;
-};
+interface RecentlyViewedCourseProgramProps {
+  items: ProductCardItem[],
+  isLoading: boolean,
+}
 
 export const RecentlyViewedCourseProgram: FC<RecentlyViewedCourseProgramProps> = ({ items, isLoading }) => {
   return (

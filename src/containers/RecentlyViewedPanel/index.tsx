@@ -11,7 +11,7 @@ export const RecentlyViewedPanel: FC = () => {
   const {
     data: recentlyViewedCoursesAndProgramsData = [],
     isLoading,
-    } = useRecentlyViewedCoursesAndProgramsData();
+  } = useRecentlyViewedCoursesAndProgramsData();
   const hasRecentlyViewedData = useMemo(
     () => recentlyViewedCoursesAndProgramsData.length > 0,
     [recentlyViewedCoursesAndProgramsData]

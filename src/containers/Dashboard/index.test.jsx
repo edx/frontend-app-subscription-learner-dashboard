@@ -24,7 +24,7 @@ jest.mock('@src/containers/CoursesPanel', () => jest.fn(() => <div>CoursesPanel<
 jest.mock('@src/containers/RecentlyViewedPanel', () => jest.fn(() => <div>RecentlyViewedPanel</div>));
 jest.mock('./LoadingView', () => jest.fn(() => <div>LoadingView</div>));
 jest.mock('@src/containers/SelectSessionModal', () => jest.fn(() => <div>SelectSessionModal</div>));
-jest.mock('./DashboardLayout', () => jest.fn(({ children }) => <div>{children}</div>));
+jest.mock('./DashboardLayout', () => jest.fn(({ children }) => <div>DashboardLayout{children}</div>));
 
 const pageTitle = 'test-page-title';
 
