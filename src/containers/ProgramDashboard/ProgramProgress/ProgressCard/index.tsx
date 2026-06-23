@@ -64,7 +64,7 @@ export const ProgressCard: FC<ProgressCardProps> = ({ progressCardData, isLoadin
                 )}
               </span>
 
-              <ProgressCardButton variant="brand" to={certificateUrl || ''} buttonText={formatMessage(messages.programProgressCardCompletedCertificateButton)} />
+              <ProgressCardButton variant="brand" redirectUrl={certificateUrl || ''} buttonText={formatMessage(messages.programProgressCardCompletedCertificateButton)} />
             </Col>
           </Row>
         )}

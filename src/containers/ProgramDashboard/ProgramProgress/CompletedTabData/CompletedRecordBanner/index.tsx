@@ -6,7 +6,7 @@ import { OpenInNew } from '@openedx/paragon/icons';
 import messages from '../../messages';
 import './index.scss';
 
-export const Banner: FC = () => {
+export const CompletedRecordBanner: FC = () => {
   const { formatMessage } = useIntl();
 
   return (
@@ -24,9 +24,9 @@ export const Banner: FC = () => {
         <Row className="mt-3">
           <Col xs={12} className="d-flex justify-content-end">
             {/**
-                         * TODO: The buttons shown here do not do anything at the moment but are meant to link to the help center and the program records page respectively.
-                         * ACTION ITEM: Wire these buttons to the Help Center and Program Records URLs once they are available.
-                         */}
+             * TODO: The buttons shown here do not do anything at the moment but are meant to link to the help center and the program records page respectively.
+             * ACTION ITEM: Wire these buttons to the Help Center and Program Records URLs once they are available.
+            */}
             <Button variant="outline-primary" className="mr-2 d-flex align-items-center">
               {formatMessage(messages.programProgressCompletedBannerHelpCenterButton)}
               <Icon src={OpenInNew} className="ml-1" />

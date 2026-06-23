@@ -102,6 +102,6 @@ export interface ProgressCardActionsProps {
 
 export interface ProgressCardButtonProps {
   variant: 'outline-primary' | 'brand' | 'primary',
-  to: string,
+  redirectUrl: string,
   buttonText: string,
 }

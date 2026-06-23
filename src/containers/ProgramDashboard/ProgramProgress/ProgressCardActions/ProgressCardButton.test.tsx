@@ -5,7 +5,7 @@ import { ProgressCardButton } from './ProgressCardButton';
 
 const renderComponent = (props = {}) => render(
   <MemoryRouter>
-    <ProgressCardButton variant="primary" to="/course" buttonText="View Course" {...props} />
+    <ProgressCardButton variant="primary" redirectUrl="/course" buttonText="View Course" {...props} />
   </MemoryRouter>
 );
 
@@ -25,7 +25,7 @@ describe('ProgressCardButton', () => {
   });
 
   test('applies correct variant class', () => {
-    renderComponent({ variant: 'outline-primary', to: '/test', buttonText: 'Test Button' });
+    renderComponent({ variant: 'outline-primary', redirectUrl: '/test', buttonText: 'Test Button' });
 
     const button = screen.getByRole('link', { name: /test button/i });
 

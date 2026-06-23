@@ -2,10 +2,10 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { IntlProvider } from '@openedx/frontend-base';
 
-import { Banner } from './';
+import { CompletedRecordBanner } from './';
 
-describe('Banner Component', () => {
-  const renderWithIntl = () => render(<IntlProvider locale="en"><Banner /></IntlProvider>);
+describe('CompletedRecordBanner Component', () => {
+  const renderWithIntl = () => render(<IntlProvider locale="en"><CompletedRecordBanner /></IntlProvider>);
 
   test('renders content', () => {
     renderWithIntl();

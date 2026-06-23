@@ -20,8 +20,8 @@ jest.mock('../ProgressCard', () => ({
 }));
 
 // Mock Banner
-jest.mock('./Banner', () => ({
-  Banner: () => <div data-testid="banner" />,
+jest.mock('./CompletedRecordBanner', () => ({
+  CompletedRecordBanner: () => <div data-testid="banner" />,
 }));
 
 const renderComponent = () => render(<IntlProvider locale="en"><CompletedTabData /></IntlProvider>);

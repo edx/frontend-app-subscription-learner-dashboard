@@ -4,7 +4,7 @@ import { useIntl } from '@openedx/frontend-base';
 
 import { ProgressCard } from '../ProgressCard';
 import messages from '../messages';
-import { Banner } from './Banner';
+import { CompletedRecordBanner } from './CompletedRecordBanner';
 
 export const CompletedTabData: FC = () => {
   const { programProgressData, isLoading } = useProgressData();
@@ -42,7 +42,7 @@ export const CompletedTabData: FC = () => {
         <p>{formatMessage(messages.programProgressCompletedTabNoCourse)}</p>
       )}
 
-      <Banner />
+      <CompletedRecordBanner />
     </div>
   );
 };

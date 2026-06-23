@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 
 import { ProgressCardButtonProps } from '../../data/types';
 
-export const ProgressCardButton: FC<ProgressCardButtonProps> = ({ variant, to, buttonText }) => {
+export const ProgressCardButton: FC<ProgressCardButtonProps> = ({ variant, redirectUrl, buttonText }) => {
   return (
-    to
+    redirectUrl
       ? (
-          <Button variant={variant} as={Link} to={to}>
+          <Button variant={variant} as={Link} to={redirectUrl}>
             {buttonText}
           </Button>
         )
