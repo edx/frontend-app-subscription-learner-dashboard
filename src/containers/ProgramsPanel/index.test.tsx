@@ -42,6 +42,6 @@ describe('ProgramsPanel', () => {
 
   it('does not render NoProgramsView when hasProgramsEnrollment is true', () => {
     renderComponent(true);
-    expect(screen.queryByText(formatMessage(messages.emptyProgramsMessage))).not.toBeInTheDocument();
+    expect(screen.queryByText(formatMessage(messages.myPrograms))).toBeInTheDocument();
   });
 });

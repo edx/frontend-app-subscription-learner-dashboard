@@ -1,35 +1,22 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
-  Alert, CardGrid, Col, Container, Row, Spinner,
+  Alert, CardGrid, Col, Row, Spinner,
 } from '@openedx/paragon';
-import { useIntl, logError, getSiteConfig } from '@openedx/frontend-base';
+import { useIntl, getSiteConfig } from '@openedx/frontend-base';
 import appMessages from '../../../messages';
 import ProgramListCard from './ProgramListCard';
 import messages from './messages';
+import { ProgramList } from '../data/types';
 
 import './index.scss';
-import { useProgramsListData } from '@src/data/hooks';
 
-const ProgramsList: React.FC = () => {
+const ProgramsList: React.FC<ProgramList> = ({ programsData, isLoading, errorState }) => {
   const { formatMessage } = useIntl();
-
-  const {
-    data: programsData = [],
-    isLoading,
-    isError: errorState,
-    error,
-  } = useProgramsListData();
-
-  useEffect(() => {
-    if (error) {
-      logError(error);
-    }
-  }, [error]);
 
   const renderPrograms = () => {
     if (isLoading) {
       return (
-        <Col sm={12} className="d-flex justify-content-center py-4">
+        <Col sm={12} className="d-flex justify-content-center py-4 hello">
           <Spinner animation="border" screenReaderText={formatMessage(appMessages['subs-dash.loadingSR'])} />
         </Col>
       );
@@ -69,14 +56,14 @@ const ProgramsList: React.FC = () => {
   };
 
   return (
-    <Container size="lg">
+    <div>
       <p>
         {formatMessage(messages.programsListDescriptionText)}
       </p>
       <Row className="py-3">
         {errorState ? renderFailureAlert() : renderPrograms()}
       </Row>
-    </Container>
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
 import { getAuthenticatedHttpClient } from '@openedx/frontend-base';
-import { programProgressUrl } from './urls';
+import { programProgressUrl, programsApiUrl } from './urls';
 
 const optimizedData = (data: string, size: number) => (data.length > size ? `${data.slice(0, size)}...` : data);
 
@@ -120,6 +120,16 @@ export const fetchRecentlyViewedCoursesAndPrograms = async () => {
 export const getProgramProgressData = async (uuid: string) => {
   try {
     const { data } = await getAuthenticatedHttpClient().get(programProgressUrl(uuid));
+    return data;
+  } catch (error) {
+    console.error('Error fetching program progress data:', error);
+    throw error;
+  }
+};
+
+export const getProgramsListData = async () => {
+  try {
+    const { data } = await getAuthenticatedHttpClient().get(programsApiUrl());
     return data;
   } catch (error) {
     console.error('Error fetching program progress data:', error);
