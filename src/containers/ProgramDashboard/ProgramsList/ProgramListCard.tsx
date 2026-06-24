@@ -49,7 +49,7 @@ const ProgramListCard: React.FC<ProgramCardProps> = ({
       className="program-list-card mb-4 mr-4"
       isClickable
       as={Link}
-      to={`/program-progress/${program.uuid}`}
+      to={`/subscription-program-progress/${program.uuid}`}
       data-testid="program-list-card"
     >
       <Card.ImageCap
