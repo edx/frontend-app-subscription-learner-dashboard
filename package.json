@@ -22,7 +22,7 @@
   "scripts": {
     "build": "make build",
     "clean": "make clean",
-    "dev": "PORT=1996 PUBLIC_PATH=/learner-dashboard openedx dev",
+    "dev": "PORT=5000 PUBLIC_PATH=/subscription-learner-dashboard openedx dev",
     "i18n_extract": "openedx formatjs extract",
     "lint": "openedx lint .",
     "lint:fix": "openedx lint --fix .",

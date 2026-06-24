@@ -31,20 +31,25 @@ const messages = defineMessages({
     id: 'program.progress.incomplete.text',
     description: 'text to display when a user has not completed all of the courses for a program',
   },
-  programProgressCardCertificate: {
-    defaultMessage: '<bold>Certificate Status:</bold> {certificateStatus}',
-    id: 'program.progress.card.certificate.text',
-    description: 'text to display on the progress card related to the certificate status for the course',
+  programProgressCardCompletedCertificateText: {
+    defaultMessage: 'You earned the certificate on {certificateDate}',
+    id: 'program.progress.card.completed.certificate.text',
+    description: 'text to display on the progress card completed tab related to the certificate status for the course',
   },
-  programProgressCardResumeButton: {
-    defaultMessage: 'Resume course',
-    id: 'program.progress.card.resume.button.text',
-    description: 'text to display on the progress card for the resume course button',
+  programProgressCardCompletedCertificateButton: {
+    defaultMessage: 'View certificate',
+    id: 'program.progress.card.completed.certificate.button.text',
+    description: 'text to display on the progress card on certificate button for completed courses',
   },
   programProgressCardViewCourseDetailButton: {
     defaultMessage: 'View course details',
     id: 'program.progress.card.view.course.detail.button.text',
     description: 'text to display on the progress card for the view course details button',
+  },
+  programProgressCardResumeCourseButton: {
+    defaultMessage: 'Resume course',
+    id: 'program.progress.card.resume.course.button.text',
+    description: 'text to display on the progress card for the resume course button',
   },
   programProgressCardUpgradeButton: {
     defaultMessage: 'Upgrade with your subscription',
@@ -91,6 +96,36 @@ const messages = defineMessages({
     id: 'program.progress.remaining.tab.no.course',
     description: 'Text to display on the Remaining tab of the program progress page when there is no course remaining for the user',
   },
+  programProgressCompletedCourse: {
+    defaultMessage: 'Completed courses',
+    id: 'program.progress.completed.course',
+    description: 'Header text to be displayed inside the Completed tab of the program progress page.',
+  },
+  programProgressCompletedTabNoCourse: {
+    defaultMessage: 'As you complete courses, you will see them listed here.',
+    id: 'program.progress.completed.tab.no.course',
+    description: 'Text to display on the Completed tab of the program progress page when no course is completed for the user',
+  },
+  programProgressCompletedBannerTitle: {
+    defaultMessage: 'Earning a program record',
+    id: 'program.progress.completed.banner.title',
+    description: 'Title text for the banner displayed on the Completed tab of the program progress page.',
+  },
+  programProgressCompletedBannerDescription: {
+    defaultMessage: 'Once you meet all course and program requirements, you will receive a program record and your professional certificate.',
+    id: 'program.progress.completed.banner.description',
+    description: 'Description text for the banner displayed on the Completed tab of the program progress page.',
+  },
+  programProgressCompletedBannerHelpCenterButton: {
+    defaultMessage: 'Help center',
+    id: 'program.progress.completed.banner.help.center.button',
+    description: 'Text for the Help Center button displayed on the banner in the Completed tab of the program progress page.',
+  },
+  programProgressCompletedBannerMyProgramRecordsButton: {
+    defaultMessage: 'My program records',
+    id: 'program.progress.completed.banner.my.program.records.button',
+    description: 'Text for the My Program Records button displayed on the banner in the Completed tab of the program progress page.',
+  }
 });
 
 export default messages;
