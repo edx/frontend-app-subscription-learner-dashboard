@@ -3,7 +3,7 @@ import { authenticatedLoader } from '@openedx/frontend-base';
 const routes = [
   {
     id: 'org.edx.frontend.route.subsLearnerDashboard.main',
-    path: '/subscription/learner-dashboard',
+    path: '/subscription-learner-dashboard',
     loader: authenticatedLoader,
     handle: {
       role: 'org.edx.frontend.subs.role.dashboard'
@@ -15,7 +15,7 @@ const routes = [
   },
   {
     id: 'org.edx.frontend.route.subsLearnerDashboard.programProgress',
-    path: '/subscription/program-progress/:uuid',
+    path: '/subscription-program-progress/:uuid',
     loader: authenticatedLoader,
     handle: {
       role: 'org.edx.frontend.subs.role.programProgress'

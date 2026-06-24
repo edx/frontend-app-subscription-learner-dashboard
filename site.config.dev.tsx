@@ -23,15 +23,15 @@ const siteConfig: SiteConfig = {
   ],
   externalRoutes: [
     {
-      role: 'org.edx.frontend.subs.role.profile',
+      role: 'org.openedx.frontend.role.profile',
       url: 'http://localhost:1995/profile/'
     },
     {
-      role: 'org.edx.frontend.subs.role.account',
+      role: 'org.openedx.frontend.role.account',
       url: 'http://localhost:1997/account/'
     },
     {
-      role: 'org.edx.frontend.subs.role.logout',
+      role: 'org.openedx.frontend.role.logout',
       url: 'http://localhost:18000/logout'
     },
   ],
