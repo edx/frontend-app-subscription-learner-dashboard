@@ -15,7 +15,9 @@ jest.mock('../ProgramDashboard', () => ({
 
 const renderComponent = (hasProgramsEnrollment = false) => {
   (useProgramsListData as jest.Mock).mockReturnValue({
-    data: hasProgramsEnrollment ? [{ uuid: 'program-1' }] : [],
+    data: {
+      programs: hasProgramsEnrollment ? [{ uuid: 'program-1' }] : [],
+    },
   });
   return render(<IntlProvider locale="en"><ProgramsPanel /></IntlProvider>);
 };
@@ -42,6 +44,6 @@ describe('ProgramsPanel', () => {
 
   it('does not render NoProgramsView when hasProgramsEnrollment is true', () => {
     renderComponent(true);
-    expect(screen.queryByText(formatMessage(messages.myPrograms))).toBeInTheDocument();
+    expect(screen.queryByText(formatMessage(messages.emptyProgramsMessage))).not.toBeInTheDocument();
   });
 });
