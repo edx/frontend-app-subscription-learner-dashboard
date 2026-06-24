@@ -41,11 +41,6 @@ const messages = defineMessages({
     id: 'program.progress.card.completed.certificate.button.text',
     description: 'text to display on the progress card on certificate button for completed courses',
   },
-  programProgressCardResumeButton: {
-    defaultMessage: 'Resume course',
-    id: 'program.progress.card.resume.button.text',
-    description: 'text to display on the progress card for the resume course button',
-  },
   programProgressCardViewCourseDetailButton: {
     defaultMessage: 'View course details',
     id: 'program.progress.card.view.course.detail.button.text',
