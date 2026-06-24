@@ -16,7 +16,7 @@ const ProgramsList: React.FC<ProgramList> = ({ programsData, isLoading, errorSta
   const renderPrograms = () => {
     if (isLoading) {
       return (
-        <Col sm={12} className="d-flex justify-content-center py-4 hello">
+        <Col sm={12} className="d-flex justify-content-center py-4">
           <Spinner animation="border" screenReaderText={formatMessage(appMessages['subs-dash.loadingSR'])} />
         </Col>
       );

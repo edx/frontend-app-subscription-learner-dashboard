@@ -132,7 +132,7 @@ export const getProgramsListData = async () => {
     const { data } = await getAuthenticatedHttpClient().get(programsApiUrl());
     return data;
   } catch (error) {
-    console.error('Error fetching program progress data:', error);
+    console.error('Error fetching program list data:', error);
     throw error;
   }
 };
