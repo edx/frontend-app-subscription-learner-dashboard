@@ -1,6 +1,7 @@
 import { EnvironmentTypes, SiteConfig, footerApp, headerApp, shellApp } from '@openedx/frontend-base';
 
 import { learnerDashboardApp } from './src';
+import Unlimited from './src/assets/Unlimited.svg'
 
 import '@openedx/frontend-base/shell/style';
 import '@openedx/brand-openedx/dist/core.min.css';
@@ -13,6 +14,7 @@ const siteConfig: SiteConfig = {
   lmsBaseUrl: 'http://localhost:18000',
   loginUrl: 'http://localhost:18000/login',
   logoutUrl: 'http://localhost:18000/logout',
+  headerLogoImageUrl: Unlimited,
 
   environment: EnvironmentTypes.DEVELOPMENT,
   apps: [
