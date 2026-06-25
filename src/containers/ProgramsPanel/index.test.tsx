@@ -18,6 +18,17 @@ const renderComponent = (hasProgramsEnrollment = false) => {
     data: {
       programs: hasProgramsEnrollment ? [{ uuid: 'program-1' }] : [],
     },
+    isLoading: false,
+    isError: false,
+  });
+  return render(<IntlProvider locale="en"><ProgramsPanel /></IntlProvider>);
+};
+
+const renderComponentWithState = ({ programs = [], isLoading = false, isError = false } = {}) => {
+  (useProgramsListData as jest.Mock).mockReturnValue({
+    data: { programs },
+    isLoading,
+    isError,
   });
   return render(<IntlProvider locale="en"><ProgramsPanel /></IntlProvider>);
 };
@@ -45,5 +56,17 @@ describe('ProgramsPanel', () => {
   it('does not render NoProgramsView when hasProgramsEnrollment is true', () => {
     renderComponent(true);
     expect(screen.queryByText(formatMessage(messages.emptyProgramsMessage))).not.toBeInTheDocument();
+  });
+
+  it('does not render NoProgramsView while programs are loading', () => {
+    renderComponentWithState({ programs: [], isLoading: true, isError: false });
+    expect(screen.queryByText(formatMessage(messages.emptyProgramsMessage))).not.toBeInTheDocument();
+    expect(screen.getByTestId('programs-dashboard-list')).toBeInTheDocument();
+  });
+
+  it('does not render NoProgramsView when programs request errors', () => {
+    renderComponentWithState({ programs: [], isLoading: false, isError: true });
+    expect(screen.queryByText(formatMessage(messages.emptyProgramsMessage))).not.toBeInTheDocument();
+    expect(screen.getByTestId('programs-dashboard-list')).toBeInTheDocument();
   });
 });

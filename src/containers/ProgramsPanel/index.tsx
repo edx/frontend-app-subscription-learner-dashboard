@@ -10,6 +10,7 @@ export const ProgramsPanel: FC = () => {
   const { data, isLoading, isError: errorState } = useProgramsListData();
   const programsData = useMemo(() => camelCaseObject(data?.programs) ?? [], [data?.programs]);
   const hasProgramsEnrollment = programsData.length > 0;
+  const shouldRenderNoProgramsView = !isLoading && !errorState && !hasProgramsEnrollment;
 
   return (
     <>
@@ -17,7 +18,9 @@ export const ProgramsPanel: FC = () => {
         <div className="d-flex flex-row justify-content-between text-center">
           <h3 className="programs-list-title mb-3">{formatMessage(messages.myPrograms)}</h3>
         </div>
-        {!hasProgramsEnrollment ? <NoProgramsView /> : <ProgramsList programsData={programsData} isLoading={isLoading} errorState={errorState} />}
+        {shouldRenderNoProgramsView
+          ? <NoProgramsView />
+          : <ProgramsList programsData={programsData} isLoading={isLoading} errorState={errorState} />}
       </div>
     </>
   );
