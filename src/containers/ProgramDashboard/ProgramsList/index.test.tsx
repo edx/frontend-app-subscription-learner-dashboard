@@ -1,11 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import ProgramsList from '.';
-import { useProgramsListData } from '@src/data/hooks';
 import ProgramListCard from './ProgramListCard';
-
-jest.mock('@src/data/hooks', () => ({
-  useProgramsListData: jest.fn(),
-}));
 
 jest.mock('@openedx/frontend-base', () => ({
   defineMessages: (msgs: Record<string, unknown>) => msgs,
@@ -110,12 +105,6 @@ const mockApiData = {
 describe('ProgramsList', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    // useProgramsListData is a synchronous hook — use mockReturnValue, NOT mockResolvedValue
-    (useProgramsListData as jest.Mock).mockReturnValue({
-      programsData: mockApiData.programs,
-      isLoading: false,
-      isError: false,
-    });
   });
 
   const renderComponent = () => render(
@@ -154,5 +143,30 @@ describe('ProgramsList', () => {
       expect.objectContaining({ program: mockApiData.programs[1] }),
       {},
     );
+  });
+
+  it('renders the error alert when errorState is true', () => {
+    render(
+      <ProgramsList
+        programsData={[]}
+        isLoading={false}
+        errorState={true}
+      />,
+    );
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+    expect(screen.queryAllByTestId('program-list-card')).toHaveLength(0);
+  });
+
+  it('renders nothing if loading is finished and no data found', () => {
+    const renderComponent = () => render(
+      <ProgramsList
+        programsData={[]}
+        isLoading={false}
+        errorState={false}
+      />
+    );
+    renderComponent();
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    expect(screen.queryAllByTestId('program-list-card')).toHaveLength(0);
   });
 });

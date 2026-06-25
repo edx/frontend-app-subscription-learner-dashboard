@@ -233,7 +233,7 @@ describe('queryHooks', () => {
     });
 
     it('returns data on success', async () => {
-      const mockData = { results: [{ uuid: 'test-uuid' }] };
+      const mockData = { programs: [{ uuid: 'test-uuid' }], isMasquerading: false };
       (getProgramsListData as jest.Mock).mockResolvedValue(mockData);
 
       const { result } = renderHook(() => useProgramsListData(), { wrapper: createWrapper() });
@@ -243,12 +243,13 @@ describe('queryHooks', () => {
     });
 
     it('handles error state correctly', async () => {
-      (getProgramsListData as jest.Mock).mockRejectedValue(new Error('API Error'));
+      const mockError = new Error('API Error');
+      (getProgramsListData as jest.Mock).mockRejectedValue(mockError);
 
       const { result } = renderHook(() => useProgramsListData(), { wrapper: createWrapper() });
 
       await waitFor(() => expect(result.current.isError).toBe(true));
-      expect(result.current.error).toEqual(new Error('API Error'));
+      expect(result.current.error).toBe(mockError);
     });
   });
 
