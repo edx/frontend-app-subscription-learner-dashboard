@@ -1,7 +1,7 @@
 import { EnvironmentTypes, SiteConfig, footerApp, headerApp, shellApp } from '@openedx/frontend-base';
 
 import { learnerDashboardApp } from './src';
-import Unlimited from './src/assets/Unlimited.svg'
+import Unlimited from './src/assets/Unlimited.svg';
 
 import '@openedx/frontend-base/shell/style';
 import '@openedx/brand-openedx/dist/core.min.css';
