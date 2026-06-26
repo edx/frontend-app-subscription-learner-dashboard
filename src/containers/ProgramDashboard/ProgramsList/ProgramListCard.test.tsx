@@ -91,7 +91,7 @@ describe('ProgramListCard', () => {
   it('each card links using the program uuid', () => {
     const { getByTestId } = renderComponent();
     const programCard = getByTestId('program-list-card');
-    expect(programCard).toHaveAttribute('to', `/program-progress/${mockBaseProgram.uuid}`);
+    expect(programCard).toHaveAttribute('to', `/subscription-program-progress/${mockBaseProgram.uuid}`);
   });
 
   it.each([{
