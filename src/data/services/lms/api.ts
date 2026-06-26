@@ -82,12 +82,6 @@ const sendConfirmEmail = async (sendEmailUrl: string) => {
   return response;
 };
 
-const fetchProgramsListData = async () => {
-  const url = urls.programsApiUrl();
-  const { data } = await getAuthenticatedHttpClient().get(url);
-  return data;
-};
-
 export {
   initializeList,
   unenrollFromCourse,
@@ -98,5 +92,4 @@ export {
   logShare,
   createCreditRequest,
   sendConfirmEmail,
-  fetchProgramsListData,
 };

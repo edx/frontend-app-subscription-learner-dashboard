@@ -7,9 +7,8 @@ import {
   useProgramProgressData
 } from './';
 import { learnerDashboardQueryKeys } from './queryKeys';
-import { fetchProgramsListData } from '../services/lms/api';
 import * as api from '../services/lms/api';
-import { getProgramProgressData } from '../services/subs';
+import { getProgramProgressData, getProgramsListData } from '../services/subs';
 
 // Mock external dependencies
 jest.mock('@openedx/frontend-base', () => ({
@@ -227,15 +226,15 @@ describe('queryHooks', () => {
   });
 
   describe('useProgramsListData', () => {
-    it('calls fetchProgramsListData as the query function', async () => {
-      (fetchProgramsListData as jest.Mock).mockResolvedValue({});
+    it('calls getProgramsListData as the query function', async () => {
+      (getProgramsListData as jest.Mock).mockResolvedValue({});
       renderHook(() => useProgramsListData(), { wrapper: createWrapper() });
-      await waitFor(() => expect(fetchProgramsListData).toHaveBeenCalled());
+      await waitFor(() => expect(getProgramsListData).toHaveBeenCalled());
     });
 
     it('returns data on success', async () => {
-      const mockData = { results: [{ uuid: 'test-uuid' }] };
-      (fetchProgramsListData as jest.Mock).mockResolvedValue(mockData);
+      const mockData = { programs: [{ uuid: 'test-uuid' }], isMasquerading: false };
+      (getProgramsListData as jest.Mock).mockResolvedValue(mockData);
 
       const { result } = renderHook(() => useProgramsListData(), { wrapper: createWrapper() });
 
@@ -244,12 +243,13 @@ describe('queryHooks', () => {
     });
 
     it('handles error state correctly', async () => {
-      (fetchProgramsListData as jest.Mock).mockRejectedValue(new Error('API Error'));
+      const mockError = new Error('API Error');
+      (getProgramsListData as jest.Mock).mockRejectedValue(mockError);
 
       const { result } = renderHook(() => useProgramsListData(), { wrapper: createWrapper() });
 
       await waitFor(() => expect(result.current.isError).toBe(true));
-      expect(result.current.error).toEqual(new Error('API Error'));
+      expect(result.current.error).toBe(mockError);
     });
   });
 
