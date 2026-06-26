@@ -8,6 +8,7 @@ import DiscoverLinkMenuItem from './DiscoverLinkMenuItem';
 import ProgramsLinkMenuItem from './ProgramsLinkMenuItem';
 import SupportLinkMenuItem from './SupportLinkMenuItem';
 import OrderHistoryLinkMenuItem from './OrderHistoryLinkMenuItem';
+import messages from '@src/messages';
 
 const app: App = {
   appId: 'org.openedx.frontend.app.learnerDashboard.header',
@@ -79,6 +80,66 @@ const app: App = {
       condition: {
         callback: () => getAppConfig(appId).ORDER_HISTORY_URL ? true : false,
       }
+    },
+    {
+      slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
+      id: 'org.openedx.frontend.widget.header.desktopAuthenticatedMenuAccount.v1',
+      op: WidgetOperationTypes.PREPEND,
+      element: (
+        <LinkMenuItem
+          label={messages['header.user.menu.orderHistory']}
+          role="org.openedx.frontend.role.account"
+          variant="dropdownItem"
+        />
+      )
+    },
+    {
+      slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
+      id: 'org.openedx.frontend.widget.header.desktopAuthenticatedMenuAccount.v1',
+      op: WidgetOperationTypes.PREPEND,
+      element: (
+        <LinkMenuItem
+          label={messages['header.user.menu.help']}
+          role="org.openedx.frontend.role.account"
+          variant="dropdownItem"
+        />
+      )
+    },
+    {
+      slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
+      id: 'org.openedx.frontend.widget.header.desktopAuthenticatedMenuAccount.v1',
+      op: WidgetOperationTypes.PREPEND,
+      element: (
+        <LinkMenuItem
+          label={messages['header.user.menu.myCourses']}
+          role="org.openedx.frontend.role.account"
+          variant="dropdownItem"
+        />
+      )
+    },
+    {
+      slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
+      id: 'org.openedx.frontend.widget.header.desktopAuthenticatedMenuAccount.v1',
+      op: WidgetOperationTypes.PREPEND,
+      element: (
+        <LinkMenuItem
+          label={messages['header.user.menu.dashboard']}
+          role="org.openedx.frontend.role.account"
+          variant="dropdownItem"
+        />
+      )
+    },
+    {
+      slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
+      id: 'org.openedx.frontend.widget.header.desktopAuthenticatedMenuAccount.v1',
+      op: WidgetOperationTypes.PREPEND,
+      element: (
+        <LinkMenuItem
+          label={messages['header.user.menu.lastCourse']}
+          role="org.openedx.frontend.role.account"
+          variant="dropdownItem"
+        />
+      )
     },
   ]
 };
