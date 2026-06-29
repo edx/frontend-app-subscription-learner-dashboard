@@ -12,6 +12,13 @@ const defaultProps = {
   allCoursesCompleted: true,
   totalCoursesInProgram: 3,
   programTitle: 'Test Professional Certificate',
+  discountData: {
+    total_incl_tax_excl_discounts: 756.0,
+    total_incl_tax: 680.4,
+    currency: 'USD',
+    is_discounted: true,
+    discount_value: 75.60000000000002
+  },
 };
 
 const renderComponent = (props = {}): RenderResult => render(

@@ -6,7 +6,7 @@ import messages from './messages';
 import { UpgradeAllButton } from './UpgradeButton';
 
 const ProgramProgressInfo: React.FC<ProgramProgressInfoProps> = ({
-  allCoursesCompleted, totalCoursesInProgram, programTitle,
+  allCoursesCompleted, totalCoursesInProgram, programTitle, discountData
 }) => {
   const { formatMessage } = useIntl();
   return (
@@ -24,7 +24,9 @@ const ProgramProgressInfo: React.FC<ProgramProgressInfoProps> = ({
               <p className="program-journey-text" data-testid="program-incomplete-info-text">
                 {formatMessage(messages.programProgressIncompleteText, { totalCoursesInProgram })}
               </p>
-              <UpgradeAllButton />
+              {discountData && (
+                <UpgradeAllButton />
+              )}
             </>
           )}
     </div>
