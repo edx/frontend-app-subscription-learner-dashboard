@@ -22,6 +22,7 @@ export interface ProgramData {
   },
   authoringOrganizations?: AuthoringOrganization[],
   progress: Progress,
+  discountData: any,
 }
 
 export interface ImageData {
@@ -73,6 +74,7 @@ export interface ProgramProgressInfoProps {
   allCoursesCompleted: boolean,
   totalCoursesInProgram: number,
   programTitle: string,
+  discountData: any,
 }
 
 export interface ProgramProgressTabsProps {

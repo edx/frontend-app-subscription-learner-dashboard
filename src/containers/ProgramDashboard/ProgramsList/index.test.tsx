@@ -62,7 +62,8 @@ const mockApiData = {
         inProgress: 2,
         notStarted: 1,
         allUnenrolled: false
-      }
+      },
+      discountData: {}
     },
     {
       uuid: '222-bbb',
@@ -97,7 +98,8 @@ const mockApiData = {
         inProgress: 2,
         notStarted: 0,
         allUnenrolled: false
-      }
+      },
+      discountData: {}
     }
   ]
 };
