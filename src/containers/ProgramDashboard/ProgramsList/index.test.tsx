@@ -1,13 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { logError } from '@openedx/frontend-base';
 import ProgramsList from '.';
-import { useProgramsListData } from '@src/data/hooks';
 import ProgramListCard from './ProgramListCard';
-import messages from './messages';
-
-jest.mock('@src/data/hooks', () => ({
-  useProgramsListData: jest.fn(),
-}));
 
 jest.mock('@openedx/frontend-base', () => ({
   defineMessages: (msgs: Record<string, unknown>) => msgs,
@@ -33,35 +26,105 @@ jest.mock('./ProgramListCard', () => jest.fn(({ program }) => (
   <div data-testid="program-list-card">{program.title}</div>
 )));
 
-const mockApiData = [
-  { uuid: '111-aaa', title: 'Data Science Program' },
-  { uuid: '222-bbb', title: 'UX Design Program' },
-];
+const mockApiData = {
+  isMasquerading: false,
+  programs: [
+    {
+      uuid: '111-aaa',
+      title: 'API Testing Program',
+      type: 'Professional Certificate',
+      bannerImage: {
+        large: {
+          url: 'http://localhost:18381/media/media/programs/banner_images/4d3d9489-25b8-4f91-9cbd-8a1369ae2efd-cb0f532f85c8.large.jpg',
+          width: 1440,
+          height: 480
+        },
+        medium: {
+          url: 'http://localhost:18381/media/media/programs/banner_images/4d3d9489-25b8-4f91-9cbd-8a1369ae2efd-cb0f532f85c8.medium.jpg',
+          width: 726,
+          height: 242
+        },
+        small: {
+          url: 'http://localhost:18381/media/media/programs/banner_images/4d3d9489-25b8-4f91-9cbd-8a1369ae2efd-cb0f532f85c8.small.jpg',
+          width: 435,
+          height: 145
+        },
+        xSmall: {
+          url: 'http://localhost:18381/media/media/programs/banner_images/4d3d9489-25b8-4f91-9cbd-8a1369ae2efd-cb0f532f85c8.x-small.jpg',
+          width: 348,
+          height: 116
+        }
+      },
+      authoringOrganizations: [],
+      progress: {
+        uuid: '111-aaa',
+        completed: 0,
+        inProgress: 2,
+        notStarted: 1,
+        allUnenrolled: false
+      },
+      discountData: {}
+    },
+    {
+      uuid: '222-bbb',
+      title: 'Test Program',
+      type: 'Professional Certificate',
+      bannerImage: {
+        large: {
+          url: 'http://localhost:18381/media/media/programs/banner_images/dd0ce43f-5f73-48e8-830a-3a2fe288d9a7-dfbb7213b5db.large.jpg',
+          width: 1440,
+          height: 480
+        },
+        medium: {
+          url: 'http://localhost:18381/media/media/programs/banner_images/dd0ce43f-5f73-48e8-830a-3a2fe288d9a7-dfbb7213b5db.medium.jpg',
+          width: 726,
+          height: 242
+        },
+        small: {
+          url: 'http://localhost:18381/media/media/programs/banner_images/dd0ce43f-5f73-48e8-830a-3a2fe288d9a7-dfbb7213b5db.small.jpg',
+          width: 435,
+          height: 145
+        },
+        xSmall: {
+          url: 'http://localhost:18381/media/media/programs/banner_images/dd0ce43f-5f73-48e8-830a-3a2fe288d9a7-dfbb7213b5db.x-small.jpg',
+          width: 348,
+          height: 116
+        }
+      },
+      authoringOrganizations: [],
+      progress: {
+        uuid: '222-bbb',
+        completed: 0,
+        inProgress: 2,
+        notStarted: 0,
+        allUnenrolled: false
+      },
+      discountData: {}
+    }
+  ]
+};
 
 describe('ProgramsList', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    // useProgramsListData is a synchronous hook — use mockReturnValue, NOT mockResolvedValue
-    (useProgramsListData as jest.Mock).mockReturnValue({
-      data: mockApiData,
-      isLoading: false,
-      isError: false,
-    });
   });
 
-  const renderComponent = () => render(<ProgramsList />);
-
-  it('fetches program data on mount', () => {
-    renderComponent();
-    expect(useProgramsListData).toHaveBeenCalledTimes(1);
-  });
+  const renderComponent = () => render(
+    <ProgramsList
+      programsData={mockApiData.programs}
+      isLoading={false}
+      errorState={false}
+    />
+  );
 
   it('renders a loading spinner while data is being fetched', () => {
-    (useProgramsListData as jest.Mock).mockReturnValue({
-      data: undefined,
-      isLoading: true,
-      isError: false,
-    });
+    const renderComponent = () => render(
+      <ProgramsList
+        programsData={[]}
+        isLoading={true}
+        errorState={false}
+      />
+    );
     renderComponent();
     expect(screen.getByRole('status')).toBeInTheDocument();
     expect(screen.queryAllByTestId('program-list-card')).toHaveLength(0);
@@ -75,38 +138,37 @@ describe('ProgramsList', () => {
     });
 
     expect(ProgramListCard).toHaveBeenCalledWith(
-      expect.objectContaining({ program: mockApiData[0] }),
+      expect.objectContaining({ program: mockApiData.programs[0] }),
       {},
     );
     expect(ProgramListCard).toHaveBeenCalledWith(
-      expect.objectContaining({ program: mockApiData[1] }),
+      expect.objectContaining({ program: mockApiData.programs[1] }),
       {},
     );
   });
 
-  it('logs an error and renders the failure alert (with contact link) when the API request fails', async () => {
-    const testError = new Error('Failed to fetch program enrollments');
-    (useProgramsListData as jest.Mock).mockReturnValue({
-      data: undefined,
-      isLoading: false,
-      isError: true,
-      error: testError,
-    });
+  it('renders the error alert when errorState is true', () => {
+    render(
+      <ProgramsList
+        programsData={[]}
+        isLoading={false}
+        errorState={true}
+      />,
+    );
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+    expect(screen.queryAllByTestId('program-list-card')).toHaveLength(0);
+  });
+
+  it('renders nothing if loading is finished and no data found', () => {
+    const renderComponent = () => render(
+      <ProgramsList
+        programsData={[]}
+        isLoading={false}
+        errorState={false}
+      />
+    );
     renderComponent();
-
-    await waitFor(() => {
-      expect(logError).toHaveBeenCalledWith(testError);
-    });
-
-    // Alert text content renders
-    expect(screen.getByText(messages.errorLoadingProgramEnrollments.defaultMessage)).toBeInTheDocument();
-
-    // Alert.Link renders with the correct contact-support href
-    const contactLink = screen.getByRole('link', { name: 'http://test-lms/contact' });
-    expect(contactLink).toBeInTheDocument();
-    expect(contactLink).toHaveAttribute('href', 'http://test-lms/contact');
-
-    // No program cards should be present
+    expect(screen.queryByRole('status')).not.toBeInTheDocument();
     expect(screen.queryAllByTestId('program-list-card')).toHaveLength(0);
   });
 });

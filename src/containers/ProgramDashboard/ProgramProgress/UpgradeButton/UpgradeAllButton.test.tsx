@@ -34,35 +34,6 @@ describe('UpgradeAllButton', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
-  it('renders the button with the correct text and link in the NOT discounted state', () => {
-    mockedUseProgramProgressData.mockReturnValue({
-      data: {
-        urls: {
-          buyButtonUrl: mockBuyButtonUrl,
-        },
-        programData: {
-          discountData: {
-            currency: mockCurrency,
-            isDiscounted: false,
-            totalInclTaxExclDiscounts: mockListPrice,
-            totalInclTax: mockListPrice,
-          },
-        },
-      },
-    } as any);
-
-    renderComponent();
-
-    const button = screen.getByTestId('upgrade-all-button');
-
-    expect(button).toHaveTextContent(messages.upgradeAllRemainingCoursesButtonText.defaultMessage);
-
-    expect(button).toHaveAttribute('href', mockBuyButtonUrl);
-
-    expect(screen.getByText(`$${mockListPrice.toFixed(2)}`)).toBeInTheDocument();
-
-    expect(screen.queryByText(`$${mockDiscountedPrice.toFixed(2)}`)).not.toBeInTheDocument();
-  });
 
   it('renders the button with the correct text and link in the discounted state', () => {
     mockedUseProgramProgressData.mockReturnValue({

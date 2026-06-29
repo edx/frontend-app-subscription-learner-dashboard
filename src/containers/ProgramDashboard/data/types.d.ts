@@ -1,4 +1,15 @@
 // Program List types
+export interface ProgramListData {
+  programs: ProgramData[],
+  isMasquerading: boolean,
+}
+
+export interface ProgramList {
+  programsData: ProgramData[],
+  isLoading: boolean,
+  errorState: boolean,
+}
+
 export interface ProgramData {
   uuid: string,
   title: string,
@@ -32,6 +43,8 @@ export interface Progress {
   inProgress: number,
   notStarted: number,
   completed: number,
+  uuid?: string,
+  allUnenrolled?: boolean,
 }
 
 export interface ProgramCardProps {
@@ -61,6 +74,7 @@ export interface ProgramProgressInfoProps {
   allCoursesCompleted: boolean,
   totalCoursesInProgram: number,
   programTitle: string,
+  discountData: any,
 }
 
 export interface ProgramProgressTabsProps {
