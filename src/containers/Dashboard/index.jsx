@@ -5,6 +5,7 @@ import { useInitializeLearnerHome } from '@src/data/hooks';
 import SelectSessionModal from '../../containers/SelectSessionModal';
 import DashboardTabs from './DashboardTabs';
 import DashboardModalSlot from '../../slots/DashboardModalSlot';
+import RecentlyViewedPanel from '../RecentlyViewedPanel';
 
 import LoadingView from './LoadingView';
 import DashboardLayout from './DashboardLayout';
@@ -41,6 +42,7 @@ export const Dashboard = () => {
                   <SubscriptionBanner />
                   <DashboardTitle />
                   <DashboardTabs />
+                  <RecentlyViewedPanel />
                 </DashboardLayout>
               )}
           </div>

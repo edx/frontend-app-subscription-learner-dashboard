@@ -21,40 +21,27 @@ const UpgradeAllButton: FC = () => {
       return null;
     }
     const { discountData } = programProgressData.programData;
+    if (!discountData) {
+      return null;
+    }
 
-    if (discountData) {
-      const {
-        currency,
-        isDiscounted,
-        totalInclTaxExclDiscounts,
-        totalInclTax,
-      } = discountData;
+    const {
+      currency,
+      totalInclTaxExclDiscounts,
+      totalInclTax,
+    } = discountData;
 
-      if (isDiscounted) {
-        return (
-          <>
-            <span className="list-price">
-              <FormattedNumber
-                value={totalInclTaxExclDiscounts}
-                style="currency"
-                currency={currency}
-                maximumFractionDigits={2}
-                minimumFractionDigits={2}
-              />
-            </span>
-            <span>
-              <FormattedNumber
-                value={totalInclTax}
-                style="currency"
-                currency={currency}
-                maximumFractionDigits={2}
-                minimumFractionDigits={2}
-              />
-            </span>
-          </>
-        );
-      }
-      return (
+    return (
+      <>
+        <span className="list-price">
+          <FormattedNumber
+            value={totalInclTaxExclDiscounts}
+            style="currency"
+            currency={currency}
+            maximumFractionDigits={2}
+            minimumFractionDigits={2}
+          />
+        </span>
         <span>
           <FormattedNumber
             value={totalInclTax}
@@ -64,9 +51,8 @@ const UpgradeAllButton: FC = () => {
             minimumFractionDigits={2}
           />
         </span>
-      );
-    }
-    return null;
+      </>
+    );
   };
 
   return (
