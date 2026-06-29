@@ -24,7 +24,7 @@ const ProgramProgressInfo: React.FC<ProgramProgressInfoProps> = ({
               <p className="program-journey-text" data-testid="program-incomplete-info-text">
                 {formatMessage(messages.programProgressIncompleteText, { totalCoursesInProgram })}
               </p>
-              {discountData && (
+              {discountData?.currency && typeof discountData?.totalInclTax === 'number' && typeof discountData?.totalInclTaxExclDiscounts === 'number' && (
                 <UpgradeAllButton />
               )}
             </>

@@ -21,6 +21,9 @@ const UpgradeAllButton: FC = () => {
       return null;
     }
     const { discountData } = programProgressData.programData;
+    if (!discountData) {
+      return null;
+    }
 
     const {
       currency,

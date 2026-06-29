@@ -5,7 +5,7 @@ import ProgramProgressInfo from './ProgramProgressInfo';
 import messages from './messages';
 
 jest.mock('./UpgradeButton', () => ({
-  UpgradeAllButton: 'UpgradeAllButton',
+  UpgradeAllButton: () => <div data-testid="upgrade-all-button" />,
 }));
 
 const defaultProps = {
@@ -13,11 +13,11 @@ const defaultProps = {
   totalCoursesInProgram: 3,
   programTitle: 'Test Professional Certificate',
   discountData: {
-    total_incl_tax_excl_discounts: 756.0,
-    total_incl_tax: 680.4,
+    totalInclTaxExclDiscounts: 756.0,
+    totalInclTax: 680.4,
     currency: 'USD',
-    is_discounted: true,
-    discount_value: 75.60000000000002
+    isDiscounted: true,
+    discountValue: 75.60000000000002
   },
 };
 
@@ -47,5 +47,29 @@ describe('ProramProgressInfo', () => {
 
     expect(screen.getByText(messages.programProgressIncompleteHeader.defaultMessage)).toBeInTheDocument();
     expect(screen.getByTestId('program-incomplete-info-text')).toBeInTheDocument();
+  });
+
+  it('renders UpgradeAllButton when discount data includes required pricing fields', () => {
+    renderComponent({
+      ...defaultProps,
+      allCoursesCompleted: false,
+      discountData: {
+        currency: 'USD',
+        totalInclTaxExclDiscounts: 756.0,
+        totalInclTax: 680.4,
+      },
+    });
+
+    expect(screen.getByTestId('upgrade-all-button')).toBeInTheDocument();
+  });
+
+  it('does not render UpgradeAllButton when discount data is an empty object', () => {
+    renderComponent({
+      ...defaultProps,
+      allCoursesCompleted: false,
+      discountData: {},
+    });
+
+    expect(screen.queryByTestId('upgrade-all-button')).not.toBeInTheDocument();
   });
 });
