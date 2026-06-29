@@ -34,7 +34,7 @@ const messages = defineMessages({
   'header.user.menu.help': {
     id: 'header.user.menu.help',
     defaultMessage: 'Help',
-    description: 'Link to the Help',
+    description: 'Link to the Help ',
   },
 });
 
