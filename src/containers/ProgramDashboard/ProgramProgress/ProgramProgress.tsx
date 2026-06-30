@@ -38,6 +38,7 @@ const ProgramProgress: FC = () => {
   const inProgressCourseCount = courseData?.inProgress?.length || 0;
   const remainingCourseCount = courseData?.notStarted?.length || 0;
   const completedCourseCount = courseData?.completed?.length || 0;
+  const discountData = programData?.discountData;
 
   return (
     <>
@@ -54,6 +55,7 @@ const ProgramProgress: FC = () => {
               allCoursesCompleted={allCoursesCompleted}
               totalCoursesInProgram={totalCoursesInProgram}
               programTitle={programData?.title ?? ''}
+              discountData={discountData}
             />
             <ProgramProgressTabs counts={{ inProgress: inProgressCourseCount, remaining: remainingCourseCount, completed: completedCourseCount }} type={programType} />
           </Col>

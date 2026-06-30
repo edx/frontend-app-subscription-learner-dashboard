@@ -3,7 +3,6 @@ import { App, LinkMenuItem, WidgetOperationTypes, getAppConfig } from '@openedx/
 import { appId } from '../../constants';
 
 import ConfirmEmailBanner from './ConfirmEmailBanner';
-import MasqueradeBar from './MasqueradeBar';
 import CoursesLink from './CoursesLink';
 import DiscoverLinkMenuItem from './DiscoverLinkMenuItem';
 import ProgramsLinkMenuItem from './ProgramsLinkMenuItem';
@@ -80,12 +79,6 @@ const app: App = {
       condition: {
         callback: () => getAppConfig(appId).ORDER_HISTORY_URL ? true : false,
       }
-    },
-    {
-      slotId: 'org.openedx.frontend.slot.header.main.v1',
-      id: 'org.openedx.frontend.widget.learnerDashboard.headerMasqueradeBar.v1',
-      op: WidgetOperationTypes.APPEND,
-      component: MasqueradeBar,
     },
   ]
 };

@@ -21,11 +21,12 @@ jest.mock('./hooks', () => ({
 
 jest.mock('../../slots/DashboardModalSlot', () => jest.fn(() => <div>DashboardModalSlot</div>));
 jest.mock('@src/containers/CoursesPanel', () => jest.fn(() => <div>CoursesPanel</div>));
-jest.mock('./LoadingView', () => jest.fn(() => <div>LoadingView</div>));
+jest.mock('../RecentlyViewedPanel', () => jest.fn(() => <div>RecentlyViewedPanel</div>));
 jest.mock('@src/containers/SelectSessionModal', () => jest.fn(() => <div>SelectSessionModal</div>));
-jest.mock('./DashboardLayout', () => jest.fn(() => <div>DashboardLayout</div>));
+jest.mock('./DashboardLayout', () => jest.fn(({ children }) => <div>DashboardLayout{children}</div>));
 
 const pageTitle = 'test-page-title';
+const spinnerScreenReaderText = 'test-spinner-screen-reader-text';
 
 describe('Dashboard', () => {
   const createWrapper = (props = {}) => {
@@ -34,7 +35,10 @@ describe('Dashboard', () => {
       initIsPending = true,
       showSelectSessionModal = true,
     } = props;
-    hooks.useDashboardMessages.mockReturnValue({ pageTitle });
+    hooks.useDashboardMessages.mockReturnValue({
+      pageTitle,
+      spinnerScreenReaderText,
+    });
     const dataMocked = { data: hasCourses ? { courses: [1, 2] } : { courses: [] }, isPending: initIsPending };
     useInitializeLearnerHome.mockReturnValue(dataMocked);
     useSelectSessionModal.mockReturnValue({ selectSessionModal: showSelectSessionModal ? { cardId: 1 } : null });
@@ -62,7 +66,7 @@ describe('Dashboard', () => {
     describe('courses still loading', () => {
       it('should render LoadingView', () => {
         createWrapper({ initIsPending: true });
-        const loadingView = screen.getByText('LoadingView');
+        const loadingView = screen.getByRole('status');
         expect(loadingView).toBeInTheDocument();
       });
     });
@@ -71,6 +75,11 @@ describe('Dashboard', () => {
         createWrapper({ initIsPending: false });
         const dashboardLayout = screen.getByText('DashboardLayout');
         expect(dashboardLayout).toBeInTheDocument();
+      });
+      it('should render RecentlyViewedPanel', () => {
+        createWrapper({ initIsPending: false });
+        const recentlyViewedPanel = screen.getByText('RecentlyViewedPanel');
+        expect(recentlyViewedPanel).toBeInTheDocument();
       });
     });
   });
