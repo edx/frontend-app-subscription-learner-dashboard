@@ -1,30 +1,40 @@
 import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { IntlProvider } from '@openedx/frontend-base';
-import { RemainingTabData } from './';
-import messages from '../messages';
 
+import { RemainingTabData } from './';
+import { useProgressData } from '@src/hooks';
+
+// Mock hook
 jest.mock('@src/hooks', () => ({
   useProgressData: jest.fn(),
 }));
 
-import { useProgressData } from '@src/hooks';
+// Mock ProgressCard (important)
+jest.mock('../ProgressCard', () => ({
+  ProgressCard: ({ progressCardData }: any) => (
+    <div data-testid="progress-card">
+      {progressCardData.title}
+    </div>
+  ),
+}));
 
-const renderComponent = () =>
-  render(
-    <IntlProvider
-      locale="en"
-      messages={{
-        [messages.programProgressRemainingTabNoCourse.id]:
-          messages.programProgressRemainingTabNoCourse.defaultMessage,
-      }}
-    >
-      <RemainingTabData />
-    </IntlProvider>
-  );
+const renderComponent = () => render(<IntlProvider locale="en"><RemainingTabData /></IntlProvider>);
 
 describe('RemainingTabData', () => {
-  beforeEach(() => {
+  afterEach(() => {
     jest.clearAllMocks();
+  });
+
+  it('renders heading', () => {
+    (useProgressData as jest.Mock).mockReturnValue({
+      programProgressData: {},
+      isLoading: false,
+    });
+
+    renderComponent();
+
+    expect(screen.getByText('Remaining Courses')).toBeInTheDocument();
   });
 
   it('renders list of remaining courses', () => {
@@ -32,8 +42,8 @@ describe('RemainingTabData', () => {
       programProgressData: {
         courseData: {
           notStarted: [
-            { id: 'course-1', title: 'First Course', certificateStatus: '' },
-            { id: 'course-2', title: 'Second Course', certificateStatus: '' },
+            { title: 'First Course' },
+            { title: 'Second Course' },
           ],
         },
       },
@@ -81,7 +91,7 @@ describe('RemainingTabData', () => {
     (useProgressData as jest.Mock).mockReturnValue({
       programProgressData: {
         courseData: {
-          notStarted: [{ id: 'course-1', title: 'First Course', certificateStatus: '' }],
+          notStarted: [{ title: 'First Course' }],
         },
       },
       isLoading: true,
