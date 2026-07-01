@@ -88,7 +88,7 @@ const app: App = {
       element: (
         <LinkMenuItem
           label={messages['header.user.menu.orderHistory'].defaultMessage}
-          role="org.openedx.frontend.role.account"
+          url='/order-history'
           variant="dropdownItem"
         />
       )
@@ -100,7 +100,7 @@ const app: App = {
       element: (
         <LinkMenuItem
           label={messages['header.user.menu.help'].defaultMessage}
-          role="org.openedx.frontend.role.account"
+          url='/help'
           variant="dropdownItem"
         />
       )
@@ -112,7 +112,7 @@ const app: App = {
       element: (
         <LinkMenuItem
           label={messages['header.user.menu.myCourses'].defaultMessage}
-          role="org.openedx.frontend.role.account"
+          url='/my-courses'
           variant="dropdownItem"
         />
       )
@@ -124,7 +124,7 @@ const app: App = {
       element: (
         <LinkMenuItem
           label={messages['header.user.menu.dashboard'].defaultMessage}
-          role="org.openedx.frontend.role.account"
+          url='/subscription-learner-dashboard'
           variant="dropdownItem"
         />
       )
@@ -136,7 +136,7 @@ const app: App = {
       element: (
         <LinkMenuItem
           label={messages['header.user.menu.lastCourse'].defaultMessage}
-          role="org.openedx.frontend.role.account"
+          url='/last-course'
           variant="dropdownItem"
         />
       )
