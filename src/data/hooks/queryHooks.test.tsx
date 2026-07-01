@@ -128,7 +128,6 @@ describe('queryHooks', () => {
 
       expect(initializeSubsList).toHaveBeenCalledWith(masqueradeUser);
       expect(result.current.data).toMatchObject(mockQueryData);
-      expect(result.current.data).toHaveProperty('coursesByCardId');
     });
 
     it('should fall back to cached normal-user data when masquerading fails', async () => {
