@@ -18,7 +18,6 @@ const useInitializeSubsDashboard = () => {
       const data = await initializeSubsList(masqueradeUser);
       return {
         ...data,
-        coursesByCardId: getTransformedCourseDataObject(data?.subscriptionCourses || []),
       };
     },
     staleTime: 5 * 60 * 1000, // 5 minutes — dashboard data rarely changes while viewing
