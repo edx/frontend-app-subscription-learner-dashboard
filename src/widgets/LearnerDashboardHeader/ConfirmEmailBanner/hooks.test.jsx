@@ -1,12 +1,12 @@
 import { renderHook, act } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useInitializeSubsDashboard } from '@src/data/hooks';
 import * as api from '@src/data/services/lms/api';
 import * as hooks from './hooks';
 
 jest.mock('@src/data/hooks', () => ({
   ...jest.requireActual('@src/data/hooks'),
-  useInitializeLearnerHome: jest.fn(),
+  useInitializeSubsDashboard: jest.fn(),
 }));
 
 jest.mock('@src/data/services/lms/api', () => ({
@@ -33,7 +33,7 @@ describe('ConfirmEmailBanner hooks', () => {
 
   describe('useEmailConfirmationData', () => {
     it('show page banner on unverified email', () => {
-      useInitializeLearnerHome.mockReturnValue({ data: { emailConfirmation: { ...emailConfirmation } } });
+      useInitializeSubsDashboard.mockReturnValue({ data: { emailConfirmation: { ...emailConfirmation } } });
 
       const { result } = renderHook(() => hooks.useConfirmEmailBannerData(), {
         wrapper: createWrapper(),
@@ -43,7 +43,7 @@ describe('ConfirmEmailBanner hooks', () => {
     });
 
     it('hide page banner on verified email', () => {
-      useInitializeLearnerHome.mockReturnValue({ data: { emailConfirmation: { isNeeded: false } } });
+      useInitializeSubsDashboard.mockReturnValue({ data: { emailConfirmation: { isNeeded: false } } });
 
       const { result } = renderHook(() => hooks.useConfirmEmailBannerData(), {
         wrapper: createWrapper(),
@@ -55,7 +55,7 @@ describe('ConfirmEmailBanner hooks', () => {
 
   describe('behavior', () => {
     beforeEach(() => {
-      useInitializeLearnerHome.mockReturnValue({ data: { emailConfirmation: { ...emailConfirmation } } });
+      useInitializeSubsDashboard.mockReturnValue({ data: { emailConfirmation: { ...emailConfirmation } } });
     });
 
     it('closePageBanner', () => {

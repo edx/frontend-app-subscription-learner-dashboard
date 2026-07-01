@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import { useSelectSessionModal } from '@src/data/context';
-import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useInitializeSubsCourseDashboard } from '@src/data/hooks';
 import SelectSessionModal from '../../containers/SelectSessionModal';
 import DashboardTabs from './DashboardTabs';
 import DashboardModalSlot from '../../slots/DashboardModalSlot';
@@ -16,12 +16,12 @@ import { SubscriptionBanner } from '../SubscriptionBanner';
 import { DashboardTitle } from './DashboardTitle';
 
 export const Dashboard = () => {
-  const { data, isPending } = useInitializeLearnerHome();
+  const { data, isPending } = useInitializeSubsCourseDashboard();
   const { pageTitle } = hooks.useDashboardMessages();
   const { selectSessionModal } = useSelectSessionModal();
   const showSelectSessionModal = selectSessionModal.cardId !== null;
 
-  const hasCourses = useMemo(() => data?.courses?.length > 0, [data]);
+  const hasCourses = useMemo(() => data?.subscriptionCourses?.length > 0, [data]);
 
   return (
     <div id="learnerdashboardroot">

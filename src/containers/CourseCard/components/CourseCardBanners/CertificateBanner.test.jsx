@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { IntlProvider } from '@openedx/frontend-base';
 
 import { useCourseData } from '@src/hooks';
-import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useInitializeSubsDashboard } from '@src/data/hooks';
 import CertificateBanner from './CertificateBanner';
 
 jest.mock('@src/hooks', () => ({
@@ -14,7 +14,7 @@ jest.mock('@src/hooks', () => ({
 }));
 
 jest.mock('@src/data/hooks', () => ({
-  useInitializeLearnerHome: jest.fn(),
+  useInitializeSubsDashboard: jest.fn(),
 }));
 
 const defaultCertificate = {
@@ -61,7 +61,7 @@ describe('CertificateBanner', () => {
       },
     });
     const lernearData = { data: { platformSettings: { ...defaultPlatformSettings, ...platformSettings } } };
-    useInitializeLearnerHome.mockReturnValue(lernearData);
+    useInitializeSubsDashboard.mockReturnValue(lernearData);
     return render(<IntlProvider locale="en"><CertificateBanner {...props} /></IntlProvider>);
   };
   beforeEach(() => {
@@ -254,7 +254,7 @@ describe('CertificateBanner', () => {
   it('should use default values when courseData is empty or undefined', () => {
     useCourseData.mockReturnValue({});
     const lernearData = { data: { platformSettings: { supportEmail } } };
-    useInitializeLearnerHome.mockReturnValue(lernearData);
+    useInitializeSubsDashboard.mockReturnValue(lernearData);
     render(<IntlProvider locale="en"><CertificateBanner cardId="test-card" /></IntlProvider>);
 
     const mockedUseMemo = jest.spyOn(React, 'useMemo');

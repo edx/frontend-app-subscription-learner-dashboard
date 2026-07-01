@@ -13,7 +13,7 @@ jest.mock('react', () => ({
 }));
 
 jest.mock('@src/data/hooks', () => ({
-  useInitializeLearnerHome: jest.fn().mockReturnValue({
+  useInitializeSubsDashboard: jest.fn().mockReturnValue({
     data: {
       platformSettings: {
         supportEmail: 'test-support-email',

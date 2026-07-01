@@ -2,7 +2,7 @@ import track from '@src/tracking';
 import { useCourseData, useCourseTrackingEvent } from '@src/hooks';
 import { useState } from 'react';
 import { StrictDict } from '@src/utils';
-import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useInitializeSubsDashboard } from '@src/data/hooks';
 
 export const state = StrictDict({
   isUnenrollConfirmVisible: (val) => useState(val), // eslint-disable-line
@@ -40,7 +40,7 @@ export const useHandleToggleDropdown = (cardId) => {
 };
 
 export const useCardSocialSettingsData = (cardId) => {
-  const { data: learnerHomeData } = useInitializeLearnerHome();
+  const { data: learnerHomeData } = useInitializeSubsDashboard();
   const courseData = useCourseData(cardId);
   const socialShareSettings = learnerHomeData?.socialShareSettings;
   const { socialShareUrl } = courseData?.course || {};

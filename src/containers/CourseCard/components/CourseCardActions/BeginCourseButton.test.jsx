@@ -17,7 +17,7 @@ jest.mock('@src/hooks', () => ({
 }));
 
 jest.mock('@src/data/hooks', () => ({
-  useInitializeLearnerHome: jest.fn().mockReturnValue({
+  useInitializeSubsDashboard: jest.fn().mockReturnValue({
     data: {
       enterpriseDashboard: {
         authOrgId: 'test-org-id',
