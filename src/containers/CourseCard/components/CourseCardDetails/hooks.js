@@ -12,7 +12,7 @@ export const useAccessMessage = ({ cardId }) => {
   if (!courseData?.courseRun) {
     return null;
   }
-  
+
   const { courseRun, enrollment } = courseData || {};
   const formatDate = utilHooks.useFormatDate();
   if (!courseRun.isStarted) {
