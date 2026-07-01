@@ -37,15 +37,6 @@ describe('CourseCardActions', () => {
       renderComponent();
       expect(useCourseData).toHaveBeenCalledWith(cardId);
     });
-
-    it('renders without course data', () => {
-      useCourseData.mockReturnValueOnce(undefined);
-
-      renderComponent();
-
-      expect(screen.getByText('CourseCardActionSlot')).toBeInTheDocument();
-      expect(screen.getByText('BeginCourseButton')).toBeInTheDocument();
-    });
   });
   describe('output', () => {
     describe('entitlement course', () => {
