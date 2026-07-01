@@ -88,7 +88,7 @@ const app: App = {
       element: (
         <LinkMenuItem
           label={messages['header.user.menu.orderHistory'].defaultMessage}
-          url='/order-history'
+          url="/order-history"
           variant="dropdownItem"
         />
       )
@@ -100,7 +100,7 @@ const app: App = {
       element: (
         <LinkMenuItem
           label={messages['header.user.menu.help'].defaultMessage}
-          url='/help'
+          url="/help"
           variant="dropdownItem"
         />
       )
@@ -112,7 +112,7 @@ const app: App = {
       element: (
         <LinkMenuItem
           label={messages['header.user.menu.myCourses'].defaultMessage}
-          url='/my-courses'
+          url="/my-courses"
           variant="dropdownItem"
         />
       )
@@ -124,7 +124,7 @@ const app: App = {
       element: (
         <LinkMenuItem
           label={messages['header.user.menu.dashboard'].defaultMessage}
-          url='/subscription-learner-dashboard'
+          url="/subscription-learner-dashboard"
           variant="dropdownItem"
         />
       )
@@ -136,7 +136,7 @@ const app: App = {
       element: (
         <LinkMenuItem
           label={messages['header.user.menu.lastCourse'].defaultMessage}
-          url='/last-course'
+          url="/last-course"
           variant="dropdownItem"
         />
       )
