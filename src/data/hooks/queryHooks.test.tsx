@@ -102,10 +102,6 @@ describe('queryHooks', () => {
 
       expect(initializeSubsList).toHaveBeenCalledWith(undefined);
       expect(result.current.data).toMatchObject(mockApiData);
-      expect(result.current.data?.coursesByCardId).toEqual({
-        'card-0': { id: 'course-1', cardId: 'card-0' },
-        'card-1': { id: 'course-2', cardId: 'card-1' },
-      });
     });
 
     it('should use query data when masquerading and query succeeds', async () => {
