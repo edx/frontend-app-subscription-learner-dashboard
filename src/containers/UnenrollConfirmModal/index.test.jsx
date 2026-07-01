@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { formatMessage } from '@src/testUtils';
 
 import { IntlProvider } from '@openedx/frontend-base';
-import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useInitializeSubsDashboard, useInitializeSubsCourseDashboard } from '@src/data/hooks';
 import { UnenrollConfirmModal } from '.';
 import * as hooks from './hooks';
 import messages from './components/messages';
@@ -10,15 +10,33 @@ import messages from './components/messages';
 jest.mock('./hooks', () => ({
   __esModule: true,
   modalStates: jest.requireActual('./hooks').modalStates,
-  useUnenrollData: jest.fn(),
+  useUnenrollData: jest.fn(() => ({
+    confirm: jest.fn(),
+    reason: {},
+    close: jest.fn(),
+    closeAndRefresh: jest.fn(),
+    modalState: 'confirm',
+  })),
 }));
 
 jest.mock('@src/data/hooks', () => ({
-  useInitializeLearnerHome: jest.fn(),
+  useInitializeSubsDashboard: jest.fn(),
+  useInitializeSubsCourseDashboard: jest.fn(),
 }));
 
 const mockRefreshList = jest.fn();
-useInitializeLearnerHome.mockReturnValue({ refetch: mockRefreshList });
+useInitializeSubsDashboard.mockReturnValue({ refetch: mockRefreshList });
+useInitializeSubsCourseDashboard.mockReturnValue({
+  data: {
+    coursesByCardId: {
+      cardId: {
+        courseRun: {
+          courseId: 'test-course-id',
+        },
+      },
+    },
+  },
+});
 
 describe('UnenrollConfirmModal component', () => {
   const hookProps = {
@@ -39,12 +57,12 @@ describe('UnenrollConfirmModal component', () => {
   };
   it('hooks called with closeModal and cardId', () => {
     hooks.useUnenrollData.mockReturnValueOnce(hookProps);
-    render(<IntlProvider><UnenrollConfirmModal {...props} /></IntlProvider>);
+    render(<IntlProvider locale="en"><UnenrollConfirmModal {...props} /></IntlProvider>);
     expect(hooks.useUnenrollData).toHaveBeenCalledWith({ closeModal, cardId });
   });
   it('modalStates.confirm display correct component and to have class shadow', () => {
     hooks.useUnenrollData.mockReturnValueOnce(hookProps);
-    render(<IntlProvider><UnenrollConfirmModal {...props} /></IntlProvider>);
+    render(<IntlProvider locale="en"><UnenrollConfirmModal {...props} /></IntlProvider>);
     const confirmHeader = screen.getByText(formatMessage(messages.confirmHeader));
     expect(confirmHeader).toBeInTheDocument();
     const dialogContainer = screen.getByRole('dialog').firstElementChild;
@@ -52,7 +70,7 @@ describe('UnenrollConfirmModal component', () => {
   });
   it('modalStates.finished, reason given, display correct component', () => {
     hooks.useUnenrollData.mockReturnValueOnce({ ...hookProps, modalState: hooks.modalStates.finished });
-    render(<IntlProvider><UnenrollConfirmModal {...props} /></IntlProvider>);
+    render(<IntlProvider locale="en"><UnenrollConfirmModal {...props} /></IntlProvider>);
     const finishHeading = screen.getByText(formatMessage(messages.finishHeading));
     expect(finishHeading).toBeInTheDocument();
     const finishMsg = screen.getByText((text) => text.includes('You have been unenrolled from the course'));
@@ -63,7 +81,7 @@ describe('UnenrollConfirmModal component', () => {
       ...hookProps,
       modalState: hooks.modalStates.finished,
     });
-    render(<IntlProvider><UnenrollConfirmModal {...props} /></IntlProvider>);
+    render(<IntlProvider locale="en"><UnenrollConfirmModal {...props} /></IntlProvider>);
     const finishHeading = screen.getByText(formatMessage(messages.finishHeading));
     expect(finishHeading).toBeInTheDocument();
     const okButton = screen.queryByText((text) => text.includes('Ok'));
@@ -73,7 +91,7 @@ describe('UnenrollConfirmModal component', () => {
   });
   it('modalStates.reason, should display correct component with no shadow', () => {
     hooks.useUnenrollData.mockReturnValueOnce({ ...hookProps, modalState: hooks.modalStates.reason });
-    render(<IntlProvider><UnenrollConfirmModal {...props} /></IntlProvider>);
+    render(<IntlProvider locale="en"><UnenrollConfirmModal {...props} /></IntlProvider>);
     const reasonHeading = screen.getByText(formatMessage(messages.reasonHeading));
     expect(reasonHeading).toBeInTheDocument();
     const dialogContainer = screen.getByRole('dialog').firstElementChild;

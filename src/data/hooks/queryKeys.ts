@@ -3,7 +3,8 @@ const BASE_KEY = ['learner-dashboard'] as const;
 export const learnerDashboardQueryKeys = {
   all: BASE_KEY,
   initializeBase: () => [...BASE_KEY, 'initialize'] as const,
-  initialize: (masqueradedUser?: string | null) => [...BASE_KEY, 'initialize', masqueradedUser] as const,
+  initializeSubsDashboard: (masqueradedUser?: string | null) => [...BASE_KEY, 'initialize', 'learner-home', masqueradedUser] as const,
+  initializeSubsCourseDashboard: (masqueradedUser?: string | null) => [...BASE_KEY, 'initialize', 'subs-course-dashboard', masqueradedUser] as const,
 };
 
 export const learnerDashboardMutationKeys = {

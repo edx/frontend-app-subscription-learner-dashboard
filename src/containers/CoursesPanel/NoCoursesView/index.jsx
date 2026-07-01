@@ -5,11 +5,11 @@ import { Button } from '@openedx/paragon';
 import { Search } from '@openedx/paragon/icons';
 import { baseAppUrl } from '@src/data/services/lms/urls';
 
-import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useInitializeSubsDashboard } from '@src/data/hooks';
 
 export const NoCoursesView = () => {
   const { formatMessage } = useIntl();
-  const { data: learnerData } = useInitializeLearnerHome();
+  const { data: learnerData } = useInitializeSubsDashboard();
   const courseSearchUrl = learnerData?.platformSettings?.courseSearchUrl || '';
 
   return (

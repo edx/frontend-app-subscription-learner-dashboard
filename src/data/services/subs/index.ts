@@ -3,4 +3,6 @@ export {
   fetchRecentlyViewedCoursesAndPrograms,
   getProgramProgressData,
   getProgramsListData,
+  initializeCourseList,
+  initializeSubsList,
 } from './api';

@@ -1,13 +1,13 @@
 import { renderHook } from '@testing-library/react';
 import { useMasquerade } from '@src/data/context';
-import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useInitializeSubsDashboard } from '@src/data/hooks';
 import { useIsMasquerading } from '@src/hooks';
 
 jest.mock('@src/data/context');
 jest.mock('@src/data/hooks');
 
 const mockUseMasquerade = useMasquerade as jest.MockedFunction<typeof useMasquerade>;
-const mockUseInitializeLearnerHome = useInitializeLearnerHome as jest.MockedFunction<typeof useInitializeLearnerHome>;
+const mockUseInitializeSubsDashboard = useInitializeSubsDashboard as jest.MockedFunction<typeof useInitializeSubsDashboard>;
 
 describe('useIsMasquerading', () => {
   beforeEach(() => {
@@ -21,7 +21,7 @@ describe('useIsMasquerading', () => {
         setMasqueradeUser: jest.fn(),
       });
 
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: {},
         isError: false,
         isLoading: false,
@@ -39,7 +39,7 @@ describe('useIsMasquerading', () => {
         setMasqueradeUser: jest.fn(),
       });
 
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: {},
         isError: false,
         isLoading: false,
@@ -57,7 +57,7 @@ describe('useIsMasquerading', () => {
         setMasqueradeUser: jest.fn(),
       });
 
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: undefined,
         isError: false,
         isLoading: true,
@@ -75,7 +75,7 @@ describe('useIsMasquerading', () => {
         setMasqueradeUser: jest.fn(),
       });
 
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: { courses: [] },
         isError: false,
         isLoading: false,
@@ -95,7 +95,7 @@ describe('useIsMasquerading', () => {
         setMasqueradeUser: jest.fn(),
       });
 
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: {},
         isError: false,
         isLoading: false,
@@ -113,7 +113,7 @@ describe('useIsMasquerading', () => {
         setMasqueradeUser: jest.fn(),
       });
 
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: {},
         isError: false,
         isLoading: false,
@@ -131,7 +131,7 @@ describe('useIsMasquerading', () => {
         setMasqueradeUser: jest.fn(),
       });
 
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: {},
         isError: false,
         isLoading: false,
@@ -149,7 +149,7 @@ describe('useIsMasquerading', () => {
         setMasqueradeUser: jest.fn(),
       });
 
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: {},
         isError: false,
         isLoading: false,
@@ -169,7 +169,7 @@ describe('useIsMasquerading', () => {
         setMasqueradeUser: jest.fn(),
       });
 
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: undefined,
         isError: true,
         isLoading: false,
@@ -187,7 +187,7 @@ describe('useIsMasquerading', () => {
         setMasqueradeUser: jest.fn(),
       });
 
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: undefined,
         isError: true,
         isLoading: false,
@@ -205,7 +205,7 @@ describe('useIsMasquerading', () => {
         setMasqueradeUser: jest.fn(),
       });
 
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: undefined,
         isError: true,
         isLoading: false,
@@ -225,7 +225,7 @@ describe('useIsMasquerading', () => {
         setMasqueradeUser: jest.fn(),
       });
 
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: undefined,
         isError: true,
         isLoading: false,
@@ -243,7 +243,7 @@ describe('useIsMasquerading', () => {
         setMasqueradeUser: jest.fn(),
       });
 
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: undefined,
         isError: true,
         isLoading: false,
@@ -261,7 +261,7 @@ describe('useIsMasquerading', () => {
         setMasqueradeUser: jest.fn(),
       });
 
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: undefined,
         isError: true,
         isLoading: false,
@@ -282,7 +282,7 @@ describe('useIsMasquerading', () => {
         setMasqueradeUser: jest.fn(),
       });
 
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: {},
         isError: false,
         isLoading: false,
@@ -308,7 +308,7 @@ describe('useIsMasquerading', () => {
       });
 
       const { result, rerender } = renderHook(() => useIsMasquerading());
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: {},
         isError: false,
         isLoading: false,
@@ -317,7 +317,7 @@ describe('useIsMasquerading', () => {
 
       rerender();
       expect(result.current).toBe(true);
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: undefined,
         isError: true,
         isLoading: false,
@@ -342,7 +342,7 @@ describe('useIsMasquerading', () => {
           setMasqueradeUser: jest.fn(),
         });
 
-        mockUseInitializeLearnerHome.mockReturnValue({
+        mockUseInitializeSubsDashboard.mockReturnValue({
           data: isError ? undefined : {},
           isError,
           isLoading: false,
@@ -364,7 +364,7 @@ describe('useIsMasquerading', () => {
         masqueradeUser: undefined,
         setMasqueradeUser: jest.fn(),
       });
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: {},
         isError: false,
         isLoading: false,
@@ -377,7 +377,7 @@ describe('useIsMasquerading', () => {
         masqueradeUser: 'student123',
         setMasqueradeUser: jest.fn(),
       });
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: undefined,
         isError: false,
         isLoading: true,
@@ -386,7 +386,7 @@ describe('useIsMasquerading', () => {
 
       rerender();
       expect(result.current).toBe(true);
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: { courses: ['course1', 'course2'] },
         isError: false,
         isLoading: false,
@@ -395,7 +395,7 @@ describe('useIsMasquerading', () => {
 
       rerender();
       expect(result.current).toBe(true);
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: undefined,
         isError: true,
         isLoading: false,
@@ -408,7 +408,7 @@ describe('useIsMasquerading', () => {
         masqueradeUser: undefined,
         setMasqueradeUser: jest.fn(),
       });
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsDashboard.mockReturnValue({
         data: {},
         isError: false,
         isLoading: false,
@@ -435,7 +435,7 @@ describe('useIsMasquerading', () => {
           setMasqueradeUser: jest.fn(),
         });
 
-        mockUseInitializeLearnerHome.mockReturnValue({
+        mockUseInitializeSubsDashboard.mockReturnValue({
           data: {},
           isError: false,
           isLoading: false,

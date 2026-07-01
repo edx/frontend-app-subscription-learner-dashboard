@@ -8,6 +8,11 @@ import messages from './messages';
 export const useAccessMessage = ({ cardId }) => {
   const { formatMessage } = useIntl();
   const courseData = useCourseData(cardId);
+
+  if (!courseData?.courseRun) {
+    return null;
+  }
+
   const { courseRun, enrollment } = courseData || {};
   const formatDate = utilHooks.useFormatDate();
   if (!courseRun.isStarted) {

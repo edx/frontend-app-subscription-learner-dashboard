@@ -3,7 +3,7 @@ import { formatMessage } from '@src/testUtils';
 import { breakpoints, useWindowSize } from '@openedx/paragon';
 import { IntlProvider } from '@openedx/frontend-base';
 import { FilterKeys, SortKeys } from '@src/data/constants/app';
-import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useInitializeSubsCourseDashboard } from '@src/data/hooks';
 import { useFilters } from '@src/data/context';
 
 import userEvent from '@testing-library/user-event';
@@ -11,7 +11,7 @@ import messages from './messages';
 import CourseFilterControls from './CourseFilterControls';
 
 jest.mock('@src/data/hooks', () => ({
-  useInitializeLearnerHome: jest.fn().mockReturnValue({ data: { courses: [1, 2, 3] } }),
+  useInitializeSubsCourseDashboard: jest.fn().mockReturnValue({ data: { subscriptionCourses: [1, 2, 3] } }),
 }));
 
 jest.mock('@openedx/paragon', () => ({
@@ -72,7 +72,7 @@ describe('CourseFilterControls', () => {
   });
   describe('no courses', () => {
     it('should have button disabled', () => {
-      useInitializeLearnerHome.mockReturnValue({ data: { courses: [] } });
+      useInitializeSubsCourseDashboard.mockReturnValue({ data: { subscriptionCourses: [] } });
       useWindowSize.mockReturnValue({ width: breakpoints.small.minWidth });
       render(<IntlProvider locale="en"><CourseFilterControls /></IntlProvider>);
       const button = screen.getByRole('button', { name: formatMessage(messages.refine) });
@@ -82,7 +82,7 @@ describe('CourseFilterControls', () => {
   });
   describe('with courses', () => {
     it('should have button enabled', () => {
-      useInitializeLearnerHome.mockReturnValue({ data: { courses: [1, 2, 3] } });
+      useInitializeSubsCourseDashboard.mockReturnValue({ data: { subscriptionCourses: [1, 2, 3] } });
       useWindowSize.mockReturnValue({ width: breakpoints.small.minWidth });
       render(<IntlProvider locale="en"><CourseFilterControls /></IntlProvider>);
       const button = screen.getByRole('button', { name: formatMessage(messages.refine) });
@@ -91,7 +91,7 @@ describe('CourseFilterControls', () => {
     });
     it('should call setSortBy on sort change', async () => {
       const user = userEvent.setup();
-      useInitializeLearnerHome.mockReturnValue({ data: { courses: [1, 2, 3] } });
+      useInitializeSubsCourseDashboard.mockReturnValue({ data: { subscriptionCourses: [1, 2, 3] } });
       useWindowSize.mockReturnValue({ width: breakpoints.small.minWidth });
       render(<IntlProvider locale="en"><CourseFilterControls /></IntlProvider>);
       const filtersButton = screen.getByRole('button', { name: 'Refine' });
@@ -113,7 +113,7 @@ describe('CourseFilterControls', () => {
         setSortBy: jest.fn().mockName('setSortBy'),
         addFilter: addFilterMock,
       });
-      useInitializeLearnerHome.mockReturnValue({ data: { courses: [1, 2, 3] } });
+      useInitializeSubsCourseDashboard.mockReturnValue({ data: { subscriptionCourses: [1, 2, 3] } });
       useWindowSize.mockReturnValue({ width: breakpoints.small.minWidth });
       render(<IntlProvider locale="en"><CourseFilterControls /></IntlProvider>);
       const filtersButton = screen.getByRole('button', { name: 'Refine' });
@@ -135,7 +135,7 @@ describe('CourseFilterControls', () => {
         setSortBy: jest.fn().mockName('setSortBy'),
         addFilter: addFilterMock,
       });
-      useInitializeLearnerHome.mockReturnValue({ data: { courses: [1, 2, 3] } });
+      useInitializeSubsCourseDashboard.mockReturnValue({ data: { subscriptionCourses: [1, 2, 3] } });
       useWindowSize.mockReturnValue({ width: breakpoints.small.minWidth });
       render(<IntlProvider locale="en"><CourseFilterControls /></IntlProvider>);
       const filtersButton = screen.getByRole('button', { name: 'Refine' });

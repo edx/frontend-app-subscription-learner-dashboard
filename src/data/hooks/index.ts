@@ -1,4 +1,4 @@
-import { useInitializeLearnerHome, useProgramsListData, useProgramProgressData } from './queryHooks';
+import { useInitializeSubsDashboard, useProgramsListData, useProgramProgressData, useInitializeSubsCourseDashboard } from './queryHooks';
 import {
   useUnenrollFromCourse,
   useUpdateEntitlementEnrollment,
@@ -9,7 +9,7 @@ import {
 } from './mutationHooks';
 
 export {
-  useInitializeLearnerHome,
+  useInitializeSubsDashboard,
   useUnenrollFromCourse,
   useUpdateEntitlementEnrollment,
   useDeleteEntitlementEnrollment,
@@ -18,4 +18,5 @@ export {
   useSendConfirmEmail,
   useProgramsListData,
   useProgramProgressData,
+  useInitializeSubsCourseDashboard,
 };

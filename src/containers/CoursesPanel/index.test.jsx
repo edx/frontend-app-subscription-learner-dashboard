@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { IntlProvider } from '@openedx/frontend-base';
 import { MemoryRouter } from 'react-router';
-import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useInitializeSubsCourseDashboard } from '@src/data/hooks';
 import { useFilters } from '@src/data/context';
 import * as dataTransformers from '@src/utils/dataTransformers';
 import messagesNoCourses from '@src/containers/CoursesPanel/NoCoursesView/messages';
@@ -9,10 +9,17 @@ import CoursesPanel from '.';
 import messages from './messages';
 
 jest.mock('@src/data/hooks', () => ({
-  useInitializeLearnerHome: jest.fn(() => ({
+  useInitializeSubsCourseDashboard: jest.fn(() => ({
     data: {
-      courses: [{ id: 1 }, { id: 2 }],
+      subscriptionCourses: [{ id: 1 }, { id: 2 }],
       coursesByCardId: { 'card-0': { id: 1, cardId: 'card-0' }, 'card-1': { id: 2, cardId: 'card-1' } },
+    },
+  })),
+  useInitializeSubsDashboard: jest.fn(() => ({
+    data: {
+      platformSettings: {
+        courseSearchUrl: 'http://example.com/search',
+      },
     },
   })),
 }));
@@ -33,7 +40,7 @@ describe('CoursesPanel', () => {
   const createWrapper = (courseListData) => {
     const visibleList = courseListData?.visibleList || [];
     const coursesByCardId = Object.fromEntries(visibleList.map((c, i) => [`card-${i}`, { ...c, cardId: c.cardId || `card-${i}` }]));
-    useInitializeLearnerHome.mockReturnValue({ data: { courses: visibleList, coursesByCardId } });
+    useInitializeSubsCourseDashboard.mockReturnValue({ data: { subscriptionCourses: visibleList, coursesByCardId } });
     return render(<MemoryRouter><IntlProvider locale="en"><CoursesPanel /></IntlProvider></MemoryRouter>);
   };
 

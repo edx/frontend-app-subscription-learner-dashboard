@@ -9,7 +9,7 @@ import messages from './messages';
 const courseSearchUrl = '/course-search-url';
 
 jest.mock('@src/data/hooks', () => ({
-  useInitializeLearnerHome: jest.fn(() => ({
+  useInitializeSubsDashboard: jest.fn(() => ({
     data: {
       platformSettings: {
         courseSearchUrl,

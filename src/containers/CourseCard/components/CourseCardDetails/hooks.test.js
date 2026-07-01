@@ -118,6 +118,14 @@ describe('CourseCardDetails hooks', () => {
       expect(useCourseData).toHaveBeenCalledWith(cardId);
     });
 
+    it('returns null when course data is unavailable', () => {
+      useCourseData.mockReturnValue(undefined);
+
+      out = hooks.useAccessMessage({ cardId });
+
+      expect(out).toBeNull();
+    });
+
     describe('if not started yet', () => {
       it('returns accessExpired message with accessExpirationDate', () => {
         runHook({

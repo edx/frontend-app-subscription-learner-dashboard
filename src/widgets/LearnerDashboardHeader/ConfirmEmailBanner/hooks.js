@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import { useInitializeLearnerHome, useSendConfirmEmail } from '@src/data/hooks';
+import { useInitializeSubsDashboard, useSendConfirmEmail } from '@src/data/hooks';
 
 export const useConfirmEmailBannerData = () => {
-  const { data: learnerData } = useInitializeLearnerHome();
+  const { data: learnerData } = useInitializeSubsDashboard();
   const isNeeded = learnerData?.emailConfirmation?.isNeeded || false;
   const sendEmailUrl = learnerData?.emailConfirmation?.sendEmailUrl || '';
   const { mutate: sendConfirmEmail } = useSendConfirmEmail(sendEmailUrl);
