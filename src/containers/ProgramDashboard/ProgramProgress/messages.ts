@@ -142,7 +142,7 @@ const messages = defineMessages({
     description: 'First content paragraph shown under the program progress circle',
   },
   programProgressCertificateContentTwo: {
-    defaultMessage: 'This program is valued at {price} for non-subscribers.',
+    defaultMessage: "This program is valued at '{'{price}'}' for non-subscribers.",
     id: 'program.progress.certificate.content.two',
     description: 'Second content paragraph shown under the program progress circle',
   },

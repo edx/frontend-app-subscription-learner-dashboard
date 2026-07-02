@@ -26,7 +26,7 @@ export const ProgramProgressSidebar: FC<ProgramProgressSidebarProps> = ({
           {formatMessage(messages.programProgressCertificateContentOne)}
         </p>
         <p>
-          {formatMessage(messages.programProgressCertificateContentTwo, { price: `{${formattedPrice}}` })}
+          {formatMessage(messages.programProgressCertificateContentTwo, { price: formattedPrice })}
         </p>
       </div>
     </div>
