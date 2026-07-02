@@ -119,3 +119,21 @@ export interface ProgressCardButtonProps {
   redirectUrl: string,
   buttonText: string,
 }
+
+export interface ProgramProgressSidebarProps {
+  inProgress: number,
+  remaining: number,
+  completed: number,
+}
+
+export interface ProgramProgressCircleProps {
+  inProgress: number,
+  remaining: number,
+  completed: number,
+}
+
+export interface CircleSegmentProps {
+  total: number,
+  index: number,
+  classList: string,
+};
