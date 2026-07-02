@@ -48,6 +48,6 @@ describe('ProgramProgressSidebar', () => {
       formatMessage(messages.programProgressCertificateLabel),
     );
     expect(screen.getByText(formatMessage(messages.programProgressCertificateContentOne))).toBeInTheDocument();
-    expect(screen.getByText(/This program is valued at\s*\(\$896\.10\)\s*for non-subscribers/i)).toBeInTheDocument();
+    expect(screen.getByText('This program is valued at {$896.10} for non-subscribers.')).toBeInTheDocument();
   });
 });

@@ -141,17 +141,11 @@ const messages = defineMessages({
     id: 'program.progress.certificate.content.one',
     description: 'First content paragraph shown under the program progress circle',
   },
-  programProgressCertificateContentTwoFirst: {
-    defaultMessage: 'This program is valued at ',
-    id: 'program.progress.certificate.content.two.first',
-    description: 'Second content paragraph first half shown under the program progress circle',
-
+  programProgressCertificateContentTwo: {
+    defaultMessage: 'This program is valued at {price} for non-subscribers.',
+    id: 'program.progress.certificate.content.two',
+    description: 'Second content paragraph shown under the program progress circle',
   },
-  programProgressCertificateContentTwoSecond: {
-    defaultMessage: ' for non-subscribers',
-    id: 'program.progress.certificate.content.two.second',
-    description: 'Second content paragraph second half shown under the program progress circle',
-  }
 });
 
 export default messages;

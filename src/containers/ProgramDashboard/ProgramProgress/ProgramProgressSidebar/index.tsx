@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useIntl } from '@openedx/frontend-base';
-import messages from '../../../ProgramDashboard/ProgramProgress/messages';
+import messages from '../messages';
 import { ProgramProgressSidebarProps } from '../../data/types';
 import ProgramProgressCircle from './ProgramProgressCircle';
 import './index.scss';
@@ -9,7 +9,8 @@ export const ProgramProgressSidebar: FC<ProgramProgressSidebarProps> = ({
   inProgress, remaining, completed
 }) => {
   const { formatMessage } = useIntl();
-  console.log('inProgress, remaining, completed', inProgress, remaining, completed);
+  // TODO: Replace hard-coded price with API value when integrated
+  const formattedPrice = '$896.10';
 
   return (
     <div
@@ -25,14 +26,9 @@ export const ProgramProgressSidebar: FC<ProgramProgressSidebarProps> = ({
           {formatMessage(messages.programProgressCertificateContentOne)}
         </p>
         <p>
-          {formatMessage(messages.programProgressCertificateContentTwoFirst)} ($896.10) {formatMessage(messages.programProgressCertificateContentTwoSecond)}
-          {/* TODO: Update the above price when integrating api */}
+          {formatMessage(messages.programProgressCertificateContentTwo, { price: `{${formattedPrice}}` })}
         </p>
       </div>
     </div>
   );
 };
-
-const ProgramProgressSideBar = ProgramProgressSidebar;
-
-export default ProgramProgressSideBar;

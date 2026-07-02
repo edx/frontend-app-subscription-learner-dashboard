@@ -2,7 +2,7 @@ import { ProgramProgressCircleProps, CircleSegmentProps } from '../../data/types
 import { FC } from 'react';
 import { PROGRAM_PROGRESS_CIRCLE_MAP } from '../../data/constants';
 import { useIntl } from '@openedx/frontend-base';
-import messages from '../../../ProgramDashboard/ProgramProgress/messages';
+import messages from '../messages';
 
 const {
   X_AXIS, Y_AXIS, CIRCLE_RADIUS, CIRCLE_DEGREES, STROKE_WIDTH,
@@ -16,7 +16,7 @@ const CircleSegment = ({
   // Remove strokeWidth to show a gap between the segments
   let dashArray = segmentDash - STROKE_WIDTH;
   const segmentDegrees = CIRCLE_DEGREES + (index * degreeInc);
-  const offset = 100 - ((1 / total) * 100);
+  const offset = segmentDash - ((1 / total) * segmentDash);
   // Want the incomplete segments to have no gaps
   if (classList === 'incomplete' && (index + 1) < total) {
     dashArray = segmentDash;
