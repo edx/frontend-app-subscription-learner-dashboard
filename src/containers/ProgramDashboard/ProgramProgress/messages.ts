@@ -125,6 +125,32 @@ const messages = defineMessages({
     defaultMessage: 'My program records',
     id: 'program.progress.completed.banner.my.program.records.button',
     description: 'Text for the My Program Records button displayed on the banner in the Completed tab of the program progress page.',
+  },
+  programProgressEarnedCertificates: {
+    defaultMessage: 'Earned Certificates',
+    id: 'program.progress.earned.certificates',
+    description: 'Label shown in the program progress circle',
+  },
+  programProgressCertificateLabel: {
+    defaultMessage: 'Program Certificate Progress',
+    id: 'program.progress.certificate.program.progress',
+    description: 'Label shown under the program progress circle',
+  },
+  programProgressCertificateContentOne: {
+    defaultMessage: 'Earn a professional certificate when you meet requirements for all courses in the series.',
+    id: 'program.progress.certificate.content.one',
+    description: 'First content paragraph shown under the program progress circle',
+  },
+  programProgressCertificateContentTwoFirst: {
+    defaultMessage: 'This program is valued at ',
+    id: 'program.progress.certificate.content.two.first',
+    description: 'Second content paragraph first half shown under the program progress circle',
+
+  },
+  programProgressCertificateContentTwoSecond: {
+    defaultMessage: ' for non-subscribers',
+    id: 'program.progress.certificate.content.two.second',
+    description: 'Second content paragraph second half shown under the program progress circle',
   }
 });
 
