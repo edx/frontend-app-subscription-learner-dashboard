@@ -82,6 +82,18 @@ const app: App = {
       }
     },
     {
+      slotId: 'org.openedx.frontend.slot.header.desktopRight.v1',
+      id: 'org.edx.frontend.widget.subsLearnerDashboard.headerDashboard.v1',
+      op: WidgetOperationTypes.PREPEND,
+      element: (
+        <LinkMenuItem
+          label="Dashboard"
+          url="/subscription-learner-dashboard"
+          variant="navLink"
+        />
+      )
+    },
+    {
       slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
       id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuOrderHistory.v1',
       op: WidgetOperationTypes.PREPEND,

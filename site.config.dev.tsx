@@ -25,6 +25,10 @@ const siteConfig: SiteConfig = {
   ],
   externalRoutes: [
     {
+      role: 'org.openedx.frontend.role.profile',
+      url: 'http://localhost:1995/profile/'
+    },
+    {
       role: 'org.openedx.frontend.role.account',
       url: 'http://localhost:1997/account/'
     },
