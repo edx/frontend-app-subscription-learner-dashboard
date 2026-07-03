@@ -33,6 +33,10 @@ const siteConfig: SiteConfig = {
       url: 'http://localhost:1997/account/'
     },
     {
+      role: 'org.openedx.frontend.role.help',
+      url: 'https://help.edx.org/edxlearner/s/?language=en_US'
+    },
+    {
       role: 'org.openedx.frontend.role.logout',
       url: 'http://localhost:18000/logout'
     },

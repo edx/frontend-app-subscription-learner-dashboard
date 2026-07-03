@@ -88,7 +88,7 @@ const app: App = {
       element: (
         <LinkMenuItem
           label="Dashboard"
-          url="/subscription-learner-dashboard"
+          url="/"
           variant="navLink"
         />
       )
@@ -112,7 +112,7 @@ const app: App = {
       element: (
         <LinkMenuItem
           label={messages['header.user.menu.help'].defaultMessage}
-          url="/help"
+          role="org.openedx.frontend.role.help"
           variant="dropdownItem"
         />
       )
@@ -131,12 +131,12 @@ const app: App = {
     },
     {
       slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
-      id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuDashboard.v1',
+      id: 'org.openedx.frontend.widget.header.user.menu.manageSubscription.v1',
       op: WidgetOperationTypes.PREPEND,
       element: (
         <LinkMenuItem
-          label={messages['header.user.menu.dashboard'].defaultMessage}
-          url="/subscription-learner-dashboard"
+          label={messages['header.user.menu.manageSubscription'].defaultMessage}
+          url="/subscription-manage"
           variant="dropdownItem"
         />
       )
