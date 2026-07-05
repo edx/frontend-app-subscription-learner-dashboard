@@ -10,6 +10,7 @@ export const DashboardContent: FC = () => (
 
     <Col xs={12} lg={4} className="mt-4">
       <div className="dashboard-sidebar">
+        {/* Temporary Content added, will be replaced with actual sidebar content */}
         <h2>Sidebar</h2>
         <p>This is the sidebar content.</p>
       </div>
