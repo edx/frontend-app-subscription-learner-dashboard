@@ -3,7 +3,7 @@ import { defineMessages } from '@openedx/frontend-base';
 const messages = defineMessages({
   myCourses: {
     id: 'dashboard.mycourses',
-    defaultMessage: 'Courses',
+    defaultMessage: 'My courses',
     description: 'Label for courses belonging to a user\'s active subscription',
   },
   limitedCourse: {
