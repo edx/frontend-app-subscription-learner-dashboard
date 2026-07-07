@@ -37,7 +37,7 @@ const siteConfig: SiteConfig = {
       url: 'https://help.edx.org/edxlearner/s/?language=en_US'
     },
     {
-      role: 'org.openedx.frontend.role.logout',
+      role: 'org.openedx.frontend.role.signOut',
       url: 'http://localhost:18000/logout'
     },
   ],

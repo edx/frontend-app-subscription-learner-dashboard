@@ -31,6 +31,11 @@ const messages = defineMessages({
     defaultMessage: 'Manage my subscription',
     description: 'Link to the Manage my subscription',
   },
+  'header.user.menu.signOut': {
+    id: 'header.user.menu.signOut',
+    defaultMessage: 'Sign out',
+    description: 'Link to the Sign out',
+  },
 });
 
 export default messages;

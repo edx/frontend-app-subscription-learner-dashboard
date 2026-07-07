@@ -95,8 +95,20 @@ const app: App = {
     },
     {
       slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
+      id: 'org.openedx.frontend.widget.header.user.menu.manageSubscription.v1',
+      op: WidgetOperationTypes.APPEND,
+      element: (
+        <LinkMenuItem
+          label={messages['header.user.menu.manageSubscription'].defaultMessage}
+          url="/subscription-manage"
+          variant="dropdownItem"
+        />
+      )
+    },
+    {
+      slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
       id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuHelp.v1',
-      op: WidgetOperationTypes.PREPEND,
+      op: WidgetOperationTypes.APPEND,
       element: (
         <LinkMenuItem
           label={messages['header.user.menu.help'].defaultMessage}
@@ -107,12 +119,12 @@ const app: App = {
     },
     {
       slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
-      id: 'org.openedx.frontend.widget.header.user.menu.manageSubscription.v1',
-      op: WidgetOperationTypes.PREPEND,
+      id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuHelp.v1',
+      op: WidgetOperationTypes.APPEND,
       element: (
         <LinkMenuItem
-          label={messages['header.user.menu.manageSubscription'].defaultMessage}
-          url="/subscription-manage"
+          label={messages['header.user.menu.signOut'].defaultMessage}
+          role="org.openedx.frontend.role.signOut"
           variant="dropdownItem"
         />
       )
