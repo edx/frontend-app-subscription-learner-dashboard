@@ -16,15 +16,10 @@ const messages = defineMessages({
     defaultMessage: 'Resume your last course',
     description: 'Link to resume last course',
   },
-  'header.user.menu.myCourses': {
-    id: 'header.user.menu.myCourses',
-    defaultMessage: 'My courses',
-    description: 'Link to the My Courses',
-  },
-  'header.user.menu.orderHistory': {
-    id: 'header.user.menu.orderHistory',
-    defaultMessage: 'Order History',
-    description: 'Link to the Order History',
+  'header.user.menu.dashboard': {
+    id: 'header.user.menu.dashboard',
+    defaultMessage: 'Dashboard',
+    description: 'Link to the Dashboard',
   },
   'header.user.menu.help': {
     id: 'header.user.menu.help',

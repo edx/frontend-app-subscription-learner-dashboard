@@ -95,18 +95,6 @@ const app: App = {
     },
     {
       slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
-      id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuOrderHistory.v1',
-      op: WidgetOperationTypes.PREPEND,
-      element: (
-        <LinkMenuItem
-          label={messages['header.user.menu.orderHistory'].defaultMessage}
-          url="/order-history"
-          variant="dropdownItem"
-        />
-      )
-    },
-    {
-      slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
       id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuHelp.v1',
       op: WidgetOperationTypes.PREPEND,
       element: (
@@ -119,24 +107,24 @@ const app: App = {
     },
     {
       slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
-      id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuMyCourses.v1',
-      op: WidgetOperationTypes.PREPEND,
-      element: (
-        <LinkMenuItem
-          label={messages['header.user.menu.myCourses'].defaultMessage}
-          url="/my-courses"
-          variant="dropdownItem"
-        />
-      )
-    },
-    {
-      slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
       id: 'org.openedx.frontend.widget.header.user.menu.manageSubscription.v1',
       op: WidgetOperationTypes.PREPEND,
       element: (
         <LinkMenuItem
           label={messages['header.user.menu.manageSubscription'].defaultMessage}
           url="/subscription-manage"
+          variant="dropdownItem"
+        />
+      )
+    },
+    {
+      slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
+      id: 'org.openedx.frontend.widget.learnerDashboard.dashboard.v1',
+      op: WidgetOperationTypes.PREPEND,
+      element: (
+        <LinkMenuItem
+          label={messages['header.user.menu.dashboard'].defaultMessage}
+          url="/"
           variant="dropdownItem"
         />
       )
