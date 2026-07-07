@@ -97,17 +97,43 @@ export interface ProgramProgressTabItems {
 export interface ProgressCardProps {
   progressCardData: ProgressCardData,
   isLoading?: boolean,
-  tabType?: string,
+  tabType: string,
 }
 
 export interface ProgressCardData {
-  id: string,
   title: string,
-  certificateStatus: string,
-  courseRuns?: CourseRunData[],
-}
-
-export interface CourseRunData {
   pacingType: string,
   start: string,
+  end?: string,
+  certificateUrl?: string,
+  courseUrl?: string,
 }
+
+export interface ProgressCardActionsProps {
+  tabType: string,
+  redirectUrl?: string,
+}
+
+export interface ProgressCardButtonProps {
+  variant: 'outline-primary' | 'brand' | 'primary',
+  redirectUrl: string,
+  buttonText: string,
+}
+
+export interface ProgramProgressSidebarProps {
+  inProgress: number,
+  remaining: number,
+  completed: number,
+}
+
+export interface ProgramProgressCircleProps {
+  inProgress: number,
+  remaining: number,
+  completed: number,
+}
+
+export interface CircleSegmentProps {
+  total: number,
+  index: number,
+  classList: string,
+};

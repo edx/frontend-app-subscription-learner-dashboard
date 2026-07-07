@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { useIntl } from '@openedx/frontend-base';
-import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useInitializeSubsCourseDashboard } from '@src/data/hooks';
 import {
   CourseFilterControls,
 } from '../../containers/CourseFilterControls';
@@ -22,8 +22,8 @@ import './index.scss';
 */
 export const CoursesPanel = () => {
   const { formatMessage } = useIntl();
-  const { data } = useInitializeLearnerHome();
-  const hasCourses = useMemo(() => data?.courses?.length > 0, [data]);
+  const { data } = useInitializeSubsCourseDashboard();
+  const hasCourses = useMemo(() => data?.subscriptionCourses?.length > 0, [data]);
 
   const {
     filters, sortBy, pageNumber, setPageNumber,
@@ -51,6 +51,7 @@ export const CoursesPanel = () => {
   // Reason: Requirements not finalized
   // Action: Revisit after UX and data confirmation
   const courseListData = {
+    showFilters: true,
     setPageNumber,
     numPages,
     visibleList,

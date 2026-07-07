@@ -28,6 +28,16 @@ jest.mock('./ProgramProgressInfo', () => {
   return MockProgramProgressInfo;
 });
 
+jest.mock('./ProgramProgressSidebar', () => {
+  const MockProgramProgressSidebar = (props: any) => (
+    <div data-testid="sidebar">
+      Sidebar - inProgress: {props.inProgress}, remaining: {props.remaining}, completed: {props.completed}
+    </div>
+  );
+
+  return { ProgramProgressSidebar: MockProgramProgressSidebar };
+});
+
 const renderComponent = (route = '/program/test-uuid') => {
   const queryClient = new QueryClient();
 
@@ -117,6 +127,7 @@ describe('ProgramProgress', () => {
 
     // total courses = 3
     expect(screen.getByTestId('info')).toHaveTextContent('Info - 3');
+    expect(screen.getByTestId('sidebar')).toHaveTextContent('Sidebar - inProgress: 1, remaining: 1, completed: 1');
   });
 
   it('detects all courses completed correctly', () => {
@@ -140,5 +151,6 @@ describe('ProgramProgress', () => {
     renderComponent();
 
     expect(screen.getByTestId('info')).toHaveTextContent('Info - 2');
+    expect(screen.getByTestId('sidebar')).toHaveTextContent('Sidebar - inProgress: 0, remaining: 0, completed: 2');
   });
 });

@@ -6,7 +6,7 @@ import hooks from './hooks';
 import DashboardLayout from './DashboardLayout';
 
 jest.mock('@src/data/hooks', () => ({
-  useInitializeLearnerHome: jest.fn().mockReturnValue({
+  useInitializeSubsDashboard: jest.fn().mockReturnValue({
     data: {
       platformSettings: {
         courseSearchUrl: '/courses',

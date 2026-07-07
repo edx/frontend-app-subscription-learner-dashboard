@@ -10,7 +10,7 @@ import ResumeButton from './ResumeButton';
 
 const authOrgId = 'auth-org-id';
 jest.mock('@src/data/hooks', () => ({
-  useInitializeLearnerHome: jest.fn().mockReturnValue({
+  useInitializeSubsDashboard: jest.fn().mockReturnValue({
     data: {
       enterpriseDashboard: {
         authOrgId,

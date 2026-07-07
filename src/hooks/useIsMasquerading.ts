@@ -1,9 +1,9 @@
 import { useMasquerade } from '@src/data/context';
-import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useInitializeSubsDashboard } from '@src/data/hooks';
 
 const useIsMasquerading = () => {
   const { masqueradeUser } = useMasquerade();
-  const { isError } = useInitializeLearnerHome();
+  const { isError } = useInitializeSubsDashboard();
   return !!masqueradeUser && !isError;
 };
 

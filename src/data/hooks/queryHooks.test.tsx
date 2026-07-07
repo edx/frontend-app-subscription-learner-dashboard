@@ -2,13 +2,18 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useMasquerade } from '@src/data/context';
 import {
-  useInitializeLearnerHome,
+  useInitializeSubsDashboard,
+  useInitializeSubsCourseDashboard,
   useProgramsListData,
   useProgramProgressData
 } from './';
 import { learnerDashboardQueryKeys } from './queryKeys';
-import * as api from '../services/lms/api';
-import { getProgramProgressData, getProgramsListData } from '../services/subs';
+import {
+  getProgramProgressData,
+  getProgramsListData,
+  initializeCourseList,
+  initializeSubsList,
+} from '../services/subs';
 
 // Mock external dependencies
 jest.mock('@openedx/frontend-base', () => ({
@@ -17,7 +22,6 @@ jest.mock('@openedx/frontend-base', () => ({
   camelCaseObject: jest.fn((value) => value),
 }));
 jest.mock('@src/data/context');
-jest.mock('@src/data/services/lms/api');
 jest.mock('@src/data/services/subs');
 jest.mock('@src/utils/dataTransformers', () => ({
   getTransformedCourseDataObject: jest.fn((courses) => {
@@ -69,9 +73,10 @@ describe('queryHooks', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
-  describe('useInitializeLearnerHome', () => {
-    const mockQueryData = { courses: ['query-course'], user: 'query-user' };
-    const mockNormalUserData = { courses: ['normal-course'], user: 'normal-user', coursesByCardId: {} };
+
+  describe('useInitializeSubsDashboard', () => {
+    const mockQueryData = { subscriptionCourses: ['query-course'], user: 'query-user' };
+    const mockNormalUserData = { subscriptionCourses: ['normal-course'], user: 'normal-user', coursesByCardId: {} };
 
     it('should fetch and return data with coursesByCardId for normal user', async () => {
       mockUseMasquerade.mockReturnValue({
@@ -81,13 +86,13 @@ describe('queryHooks', () => {
         },
       });
       const mockApiData = {
-        courses: [{ id: 'course-1' }, { id: 'course-2' }],
+        subscriptionCourses: [{ id: 'course-1' }, { id: 'course-2' }],
         emailConfirmation: { isNeeded: false },
         platformSettings: { supportEmail: 'test@example.com' },
       };
-      (api.initializeList as jest.Mock).mockResolvedValue(mockApiData);
+      (initializeSubsList as jest.Mock).mockResolvedValue(mockApiData);
 
-      const { result } = renderHook(() => useInitializeLearnerHome(), {
+      const { result } = renderHook(() => useInitializeSubsDashboard(), {
         wrapper: createWrapper(),
       });
 
@@ -95,12 +100,8 @@ describe('queryHooks', () => {
         expect(result.current.isSuccess).toBe(true);
       });
 
-      expect(api.initializeList).toHaveBeenCalledWith(undefined);
+      expect(initializeSubsList).toHaveBeenCalledWith(undefined);
       expect(result.current.data).toMatchObject(mockApiData);
-      expect(result.current.data?.coursesByCardId).toEqual({
-        'card-0': { id: 'course-1', cardId: 'card-0' },
-        'card-1': { id: 'course-2', cardId: 'card-1' },
-      });
     });
 
     it('should use query data when masquerading and query succeeds', async () => {
@@ -111,9 +112,9 @@ describe('queryHooks', () => {
           throw new Error('Function not implemented.');
         },
       });
-      (api.initializeList as jest.Mock).mockResolvedValue(mockQueryData);
+      (initializeSubsList as jest.Mock).mockResolvedValue(mockQueryData);
 
-      const { result } = renderHook(() => useInitializeLearnerHome(), {
+      const { result } = renderHook(() => useInitializeSubsDashboard(), {
         wrapper: createWrapper(),
       });
 
@@ -121,9 +122,8 @@ describe('queryHooks', () => {
         expect(result.current.isSuccess).toBe(true);
       });
 
-      expect(api.initializeList).toHaveBeenCalledWith(masqueradeUser);
+      expect(initializeSubsList).toHaveBeenCalledWith(masqueradeUser);
       expect(result.current.data).toMatchObject(mockQueryData);
-      expect(result.current.data).toHaveProperty('coursesByCardId');
     });
 
     it('should fall back to cached normal-user data when masquerading fails', async () => {
@@ -136,7 +136,7 @@ describe('queryHooks', () => {
       });
       const error: any = new Error('API Error');
       error.response = { status: 403 };
-      (api.initializeList as jest.Mock).mockRejectedValue(error);
+      (initializeSubsList as jest.Mock).mockRejectedValue(error);
 
       // Don't use gcTime: 0 here — we need the seeded cache entry to persist
       // for the fallback lookup via queryClient.getQueryData()
@@ -144,11 +144,11 @@ describe('queryHooks', () => {
         defaultOptions: { queries: { retry: false, retryDelay: 0 }, mutations: { retry: false } },
       });
       queryClient.setQueryData(
-        learnerDashboardQueryKeys.initialize(undefined),
+        learnerDashboardQueryKeys.initializeSubsDashboard(undefined),
         mockNormalUserData,
       );
 
-      const { result } = renderHook(() => useInitializeLearnerHome(), {
+      const { result } = renderHook(() => useInitializeSubsDashboard(), {
         wrapper: createWrapper(queryClient),
       });
 
@@ -156,7 +156,7 @@ describe('queryHooks', () => {
         expect(result.current.isError).toBe(true);
       });
 
-      expect(api.initializeList).toHaveBeenCalledWith(masqueradeUser);
+      expect(initializeSubsList).toHaveBeenCalledWith(masqueradeUser);
       expect(result.current.data).toEqual(mockNormalUserData);
     });
 
@@ -169,9 +169,9 @@ describe('queryHooks', () => {
       });
       const error: any = new Error('Forbidden');
       error.response = { status: 403 };
-      (api.initializeList as jest.Mock).mockRejectedValue(error);
+      (initializeSubsList as jest.Mock).mockRejectedValue(error);
 
-      const { result } = renderHook(() => useInitializeLearnerHome(), {
+      const { result } = renderHook(() => useInitializeSubsDashboard(), {
         wrapper: createWrapper(),
       });
 
@@ -180,7 +180,7 @@ describe('queryHooks', () => {
       });
 
       // 4xx errors should not be retried — only 1 call
-      expect(api.initializeList).toHaveBeenCalledTimes(1);
+      expect(initializeSubsList).toHaveBeenCalledTimes(1);
     });
 
     it('should retry on 5xx errors up to 3 times', async () => {
@@ -192,9 +192,9 @@ describe('queryHooks', () => {
       });
       const error: any = new Error('Server Error');
       error.response = { status: 500 };
-      (api.initializeList as jest.Mock).mockRejectedValue(error);
+      (initializeSubsList as jest.Mock).mockRejectedValue(error);
 
-      const { result } = renderHook(() => useInitializeLearnerHome(), {
+      const { result } = renderHook(() => useInitializeSubsDashboard(), {
         wrapper: createWrapper(),
       });
 
@@ -203,7 +203,7 @@ describe('queryHooks', () => {
       });
 
       // 1 initial + 3 retries = 4 total calls
-      expect(api.initializeList).toHaveBeenCalledTimes(4);
+      expect(initializeSubsList).toHaveBeenCalledTimes(4);
     });
 
     it('should have correct query configuration for masquerading', async () => {
@@ -214,14 +214,72 @@ describe('queryHooks', () => {
           throw new Error('Function not implemented.');
         },
       });
-      (api.initializeList as jest.Mock).mockResolvedValue(mockQueryData);
+      (initializeSubsList as jest.Mock).mockResolvedValue(mockQueryData);
 
-      const { result } = renderHook(() => useInitializeLearnerHome(), {
+      const { result } = renderHook(() => useInitializeSubsDashboard(), {
         wrapper: createWrapper(),
       });
 
       // For masquerading, retryOnMount and refetchOnMount should be false
       expect(result.current.isRefetchError).toBe(false);
+    });
+  });
+
+  describe('useInitializeSubsCourseDashboard', () => {
+    it('uses its own query key and fetch function', async () => {
+      mockUseMasquerade.mockReturnValue({
+        masqueradeUser: undefined,
+        setMasqueradeUser(): void {
+          throw new Error('Function not implemented.');
+        },
+      });
+      const mockApiData = {
+        subscriptionCourses: [{ id: 'course-1' }],
+      };
+      (initializeCourseList as jest.Mock).mockResolvedValue(mockApiData);
+
+      const { result } = renderHook(() => useInitializeSubsCourseDashboard(), {
+        wrapper: createWrapper(),
+      });
+
+      await waitFor(() => {
+        expect(result.current.isSuccess).toBe(true);
+      });
+
+      expect(initializeCourseList).toHaveBeenCalledWith(undefined);
+      expect(result.current.data).toMatchObject(mockApiData);
+    });
+
+    it('falls back to its own cached normal-user data when masquerading fails', async () => {
+      const masqueradeUser = 'test-user';
+      mockUseMasquerade.mockReturnValue({
+        masqueradeUser,
+        setMasqueradeUser(): void {
+          throw new Error('Function not implemented.');
+        },
+      });
+      const error: any = new Error('API Error');
+      error.response = { status: 403 };
+      (initializeCourseList as jest.Mock).mockRejectedValue(error);
+
+      const queryClient = new QueryClient({
+        defaultOptions: { queries: { retry: false, retryDelay: 0 }, mutations: { retry: false } },
+      });
+      const mockNormalUserData = { subscriptionCourses: ['normal-course'], coursesByCardId: {} };
+      queryClient.setQueryData(
+        learnerDashboardQueryKeys.initializeSubsCourseDashboard(undefined),
+        mockNormalUserData,
+      );
+
+      const { result } = renderHook(() => useInitializeSubsCourseDashboard(), {
+        wrapper: createWrapper(queryClient),
+      });
+
+      await waitFor(() => {
+        expect(result.current.isError).toBe(true);
+      });
+
+      expect(result.current.data).toEqual(mockNormalUserData);
     });
   });
 

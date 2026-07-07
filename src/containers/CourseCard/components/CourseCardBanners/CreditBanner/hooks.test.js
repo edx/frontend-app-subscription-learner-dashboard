@@ -1,6 +1,6 @@
 import { keyStore } from '@src/utils';
 import { useCourseData } from '@src/hooks';
-import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useInitializeSubsDashboard } from '@src/data/hooks';
 
 import ApprovedContent from './views/ApprovedContent';
 import EligibleContent from './views/EligibleContent';
@@ -20,7 +20,7 @@ jest.mock('@src/hooks', () => ({
 }));
 
 jest.mock('@src/data/hooks', () => ({
-  useInitializeLearnerHome: jest.fn(),
+  useInitializeSubsDashboard: jest.fn(),
 }));
 
 jest.mock('./views/ApprovedContent', () => 'ApprovedContent');
@@ -48,12 +48,12 @@ const loadHook = (creditData = {}) => {
 
 describe('useCreditBannerData hook', () => {
   beforeEach(() => {
-    useInitializeLearnerHome.mockReturnValue({ data: { platformSettings: { supportEmail } } });
+    useInitializeSubsDashboard.mockReturnValue({ data: { platformSettings: { supportEmail } } });
   });
   it('loads card credit data with cardID and loads platform settings data', () => {
     loadHook({ isEligible: false });
     expect(useCourseData).toHaveBeenCalledWith(cardId);
-    expect(useInitializeLearnerHome).toHaveBeenCalledWith();
+    expect(useInitializeSubsDashboard).toHaveBeenCalledWith();
   });
   describe('non-credit-eligible learner', () => {
     it('returns null if the learner is not credit eligible', () => {

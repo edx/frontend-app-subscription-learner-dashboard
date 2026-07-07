@@ -7,6 +7,7 @@ import { useProgressData } from '@src/hooks';
 import ProgramProgressHeader from './ProgramProgressHeader';
 import ProgramProgressInfo from './ProgramProgressInfo';
 import { ProgramProgressTabs } from './ProgramProgressTabs';
+import { ProgramProgressSidebar } from './ProgramProgressSidebar';
 
 const ProgramProgress: FC = () => {
   const { programProgressData, isLoading, error } = useProgressData();
@@ -58,6 +59,14 @@ const ProgramProgress: FC = () => {
               discountData={discountData}
             />
             <ProgramProgressTabs counts={{ inProgress: inProgressCourseCount, remaining: remainingCourseCount, completed: completedCourseCount }} type={programType} />
+          </Col>
+
+          <Col sm={12} md={4}>
+            <ProgramProgressSidebar
+              inProgress={inProgressCourseCount}
+              remaining={remainingCourseCount}
+              completed={completedCourseCount}
+            />
           </Col>
         </Row>
       </Container>

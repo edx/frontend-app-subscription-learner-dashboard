@@ -7,7 +7,7 @@ import { CheckCircle } from '@openedx/paragon/icons';
 import { useIntl } from '@openedx/frontend-base';
 import { baseAppUrl } from '@src/data/services/lms/urls';
 
-import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useInitializeSubsDashboard } from '@src/data/hooks';
 import { utilHooks, useCourseData } from '@src/hooks';
 import Banner from '@src/components/Banner';
 
@@ -16,7 +16,7 @@ import messages from './messages';
 const { useFormatDate } = utilHooks;
 
 export const CertificateBanner = ({ cardId }) => {
-  const { data: learnerHomeData } = useInitializeLearnerHome();
+  const { data: learnerHomeData } = useInitializeSubsDashboard();
   const courseData = useCourseData(cardId);
   const {
     certificate = {},
