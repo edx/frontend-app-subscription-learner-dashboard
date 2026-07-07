@@ -29,12 +29,12 @@ const messages = defineMessages({
   'header.user.menu.manageSubscription': {
     id: 'header.user.menu.manageSubscription',
     defaultMessage: 'Manage my subscription',
-    description: 'Link to the Manage my subscription',
+    description: 'Link to manage subscription'
   },
   'header.user.menu.signOut': {
     id: 'header.user.menu.signOut',
     defaultMessage: 'Sign out',
-    description: 'Link to the Sign out',
+    description: 'Link to sign out',
   },
 });
 

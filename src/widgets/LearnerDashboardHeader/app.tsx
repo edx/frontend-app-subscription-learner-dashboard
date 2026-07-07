@@ -87,7 +87,7 @@ const app: App = {
       op: WidgetOperationTypes.PREPEND,
       element: (
         <LinkMenuItem
-          label="Dashboard"
+          label={messages['header.user.menu.dashboard'].defaultMessage}
           url="/"
           variant="navLink"
         />
@@ -119,7 +119,7 @@ const app: App = {
     },
     {
       slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
-      id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuHelp.v1',
+      id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuSignOut.v1',
       op: WidgetOperationTypes.APPEND,
       element: (
         <LinkMenuItem
