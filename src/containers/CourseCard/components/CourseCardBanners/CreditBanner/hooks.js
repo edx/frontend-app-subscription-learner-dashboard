@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useInitializeSubsDashboard } from '@src/data/hooks';
 import { StrictDict } from '@src/utils';
 
 import { useCourseData } from '@src/hooks';
@@ -18,7 +18,7 @@ export const statusComponents = StrictDict({
 
 export const useCreditBannerData = (cardId) => {
   const courseData = useCourseData(cardId);
-  const { data: learnerHomeData } = useInitializeLearnerHome();
+  const { data: learnerHomeData } = useInitializeSubsDashboard();
   const supportEmail = useMemo(
     () => (learnerHomeData?.platformSettings?.supportEmail),
     [learnerHomeData],

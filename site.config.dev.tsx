@@ -10,7 +10,7 @@ import '@openedx/brand-openedx/dist/light.min.css';
 const siteConfig: SiteConfig = {
   siteId: 'learner-dashboard-dev',
   siteName: 'Learner Dashboard Dev',
-  baseUrl: 'http://localhost:1996',
+  baseUrl: 'http://localhost:5000',
   lmsBaseUrl: 'http://localhost:18000',
   loginUrl: 'http://localhost:18000/login',
   logoutUrl: 'http://localhost:18000/logout',

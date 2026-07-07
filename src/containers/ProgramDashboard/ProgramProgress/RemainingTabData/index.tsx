@@ -12,13 +12,30 @@ export const RemainingTabData: FC = () => {
   const courseData = programProgressData?.courseData;
   const remainingData = courseData?.notStarted || [];
 
+  const buildProgressCard = () => (
+    remainingData.map((course) => {
+      const courseRuns = course.courseRuns || [];
+      const [{ pacingType = '', start = '', end = '', courseUrl = '' } = {}] = Array.isArray(courseRuns) ? courseRuns : [];
+
+      const progressCardData = {
+        title: course.title,
+        start: start,
+        end: end || '',
+        pacingType: pacingType,
+        courseUrl: courseUrl || '',
+      };
+
+      return (
+        <ProgressCard key={course.id} progressCardData={progressCardData} isLoading={isLoading} tabType={formatMessage(messages.programProgressRemainingTab).toLowerCase()} />
+      );
+    })
+  );
+
   return (
     <div>
       <h5>{formatMessage(messages.programProgressRemainingCourse)}</h5>
       {remainingData.length > 0 ? (
-        remainingData.map((course) => (
-          <ProgressCard key={course.id} progressCardData={course} isLoading={isLoading} tabType="remaining" />
-        ))
+        buildProgressCard()
       ) : (
         <p>{formatMessage(messages.programProgressRemainingTabNoCourse)}</p>
       )}

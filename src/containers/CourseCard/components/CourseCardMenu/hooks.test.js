@@ -1,12 +1,12 @@
 import { useCourseData, useCourseTrackingEvent } from '@src/hooks';
-import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useInitializeSubsDashboard } from '@src/data/hooks';
 import track from '@src/tracking';
 import { MockUseState } from '@src/testUtils';
 
 import * as hooks from './hooks';
 
 jest.mock('@src/data/hooks', () => ({
-  useInitializeLearnerHome: jest.fn(),
+  useInitializeSubsDashboard: jest.fn(),
 }));
 
 jest.mock('@src/hooks', () => ({
@@ -92,7 +92,7 @@ describe('CourseCardMenu hooks', () => {
 
   describe('useOptionVisibility', () => {
     const mockHooks = (returnVals = {}) => {
-      useInitializeLearnerHome.mockReturnValue({
+      useInitializeSubsDashboard.mockReturnValue({
         data: {
           socialShareSettings: {
             facebook: { isEnabled: !!returnVals.facebook?.isEnabled },

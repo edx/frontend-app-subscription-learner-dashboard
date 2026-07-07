@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { useIntl } from '@openedx/frontend-base';
 
 import { useMasquerade } from '../../../data/context';
-import { useInitializeLearnerHome } from '../../../data/hooks';
+import { useInitializeSubsDashboard } from '../../../data/hooks';
 
 import messages from './messages';
 
@@ -14,7 +14,7 @@ export const useMasqueradeBarData = ({
   const { masqueradeUser, setMasqueradeUser } = useMasquerade();
   const {
     isError, error, isPending,
-  } = useInitializeLearnerHome();
+  } = useInitializeSubsDashboard();
 
   const handleMasqueradeInputChange = (e) => setMasqueradeInput(e.target.value);
   const handleClearMasquerade = () => {

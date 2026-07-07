@@ -13,7 +13,7 @@ import {
 } from '@openedx/paragon';
 import { Close, Tune } from '@openedx/paragon/icons';
 
-import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useInitializeSubsCourseDashboard } from '@src/data/hooks';
 import { useFilters } from '@src/data/context';
 import FilterForm from './components/FilterForm';
 import SortForm from './components/SortForm';
@@ -25,8 +25,8 @@ export const CourseFilterControls = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [targetRef, setTargetRef] = React.useState(null);
   const { formatMessage } = useIntl();
-  const { data } = useInitializeLearnerHome();
-  const hasCourses = React.useMemo(() => data?.courses?.length > 0, [data]);
+  const { data } = useInitializeSubsCourseDashboard();
+  const hasCourses = React.useMemo(() => data?.subscriptionCourses?.length > 0, [data]);
   const {
     filters, sortBy, setSortBy, addFilter, removeFilter,
   } = useFilters();

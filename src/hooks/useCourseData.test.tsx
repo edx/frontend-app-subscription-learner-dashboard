@@ -1,10 +1,10 @@
 import { renderHook } from '@testing-library/react';
-import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useInitializeSubsCourseDashboard } from '@src/data/hooks';
 import useCourseData from './useCourseData';
 
 jest.mock('@src/data/hooks');
 
-const mockUseInitializeLearnerHome = useInitializeLearnerHome as jest.MockedFunction<typeof useInitializeLearnerHome>;
+const mockUseInitializeSubsCourseDashboard = useInitializeSubsCourseDashboard as jest.MockedFunction<typeof useInitializeSubsCourseDashboard>;
 
 describe('useCourseData', () => {
   beforeEach(() => {
@@ -34,7 +34,7 @@ describe('useCourseData', () => {
 
   describe('successful data retrieval', () => {
     beforeEach(() => {
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsCourseDashboard.mockReturnValue({
         data: { courses: [], coursesByCardId: mockCoursesByCardId },
         isLoading: false,
         isError: false,
@@ -60,7 +60,7 @@ describe('useCourseData', () => {
 
   describe('no data scenarios', () => {
     it('should handle undefined data gracefully', () => {
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsCourseDashboard.mockReturnValue({
         data: undefined,
         isLoading: false,
         isError: false,
@@ -72,7 +72,7 @@ describe('useCourseData', () => {
     });
 
     it('should handle null data gracefully', () => {
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsCourseDashboard.mockReturnValue({
         data: null,
         isLoading: false,
         isError: false,
@@ -84,7 +84,7 @@ describe('useCourseData', () => {
     });
 
     it('should handle missing coursesByCardId property', () => {
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsCourseDashboard.mockReturnValue({
         data: { courses: [] },
         isLoading: false,
         isError: false,
@@ -98,7 +98,7 @@ describe('useCourseData', () => {
 
   describe('loading and error states', () => {
     it('should handle loading state', () => {
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsCourseDashboard.mockReturnValue({
         data: undefined,
         isLoading: true,
         isError: false,
@@ -110,7 +110,7 @@ describe('useCourseData', () => {
     });
 
     it('should handle error state', () => {
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsCourseDashboard.mockReturnValue({
         data: undefined,
         isLoading: false,
         isError: true,
@@ -124,7 +124,7 @@ describe('useCourseData', () => {
 
   describe('edge cases', () => {
     beforeEach(() => {
-      mockUseInitializeLearnerHome.mockReturnValue({
+      mockUseInitializeSubsCourseDashboard.mockReturnValue({
         data: { courses: [], coursesByCardId: mockCoursesByCardId },
         isLoading: false,
         isError: false,

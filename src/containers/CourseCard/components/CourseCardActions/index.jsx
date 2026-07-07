@@ -16,9 +16,9 @@ import messages from './messages';
 export const CourseCardActions = ({ cardId, verifiedCourse }) => {
   const cardData = useCourseData(cardId);
   const { formatMessage } = useIntl();
-  const hasStarted = cardData.enrollment.hasStarted || false;
+  const hasStarted = cardData?.enrollment?.hasStarted || false;
   const { isEntitlement, isFulfilled } = useEntitlementInfo(cardData);
-  const isArchived = cardData.courseRun.isArchived || false;
+  const isArchived = cardData?.courseRun?.isArchived || false;
 
   return (
     <Row className="align-items-center mt-3">

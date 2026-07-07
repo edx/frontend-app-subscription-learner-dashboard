@@ -1,7 +1,7 @@
-import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useInitializeSubsCourseDashboard } from '@src/data/hooks';
 
 const useCourseData = (cardId: string) => {
-  const { data } = useInitializeLearnerHome();
+  const { data } = useInitializeSubsCourseDashboard();
   return data?.coursesByCardId?.[cardId];
 };
 

@@ -7,13 +7,13 @@ import { Button, MailtoLink } from '@openedx/paragon';
 import { utilHooks, useCourseData, useEntitlementInfo } from '@src/hooks';
 import { useSelectSessionModal } from '@src/data/context';
 import Banner from '@src/components/Banner';
-import { useInitializeLearnerHome } from '@src/data/hooks';
+import { useInitializeSubsDashboard } from '@src/data/hooks';
 
 import messages from './messages';
 
 export const EntitlementBanner = ({ cardId }) => {
   const { formatMessage } = useIntl();
-  const { data: learnerHomeData } = useInitializeLearnerHome();
+  const { data: learnerHomeData } = useInitializeSubsDashboard();
   const courseData = useCourseData(cardId);
 
   const {

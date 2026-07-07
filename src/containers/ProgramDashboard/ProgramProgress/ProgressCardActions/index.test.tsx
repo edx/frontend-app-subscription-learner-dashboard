@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { IntlProvider } from '@openedx/frontend-base';
+import { MemoryRouter } from 'react-router-dom';
 
 import { ProgressCardActions } from './';
 import { useProgressData } from '@src/hooks';
@@ -8,11 +9,13 @@ jest.mock('@src/hooks', () => ({
   useProgressData: jest.fn(),
 }));
 
-const renderComponent = () =>
+const renderComponent = (tabType: string, redirectUrl?: string) =>
   render(
-    <IntlProvider locale="en">
-      <ProgressCardActions />
-    </IntlProvider>
+    <MemoryRouter>
+      <IntlProvider locale="en">
+        <ProgressCardActions tabType={tabType} redirectUrl={redirectUrl} />
+      </IntlProvider>
+    </MemoryRouter>
   );
 
 describe('ProgressCardActions', () => {
@@ -20,21 +23,23 @@ describe('ProgressCardActions', () => {
     jest.clearAllMocks();
   });
 
-  it('renders ViewCourseDetailButton when remainingCourseCount > 0', () => {
+  it('renders "View course details" link when remaining courses exist', () => {
     (useProgressData as jest.Mock).mockReturnValue({
       programProgressData: {
         courseData: {
-          notStarted: [
-            { title: 'Test Course', certificateStatus: 'Not Started', courseRuns: [{ pacingType: 'self-paced', start: '2024-01-01' }] },
-          ],
+          notStarted: [{ title: 'Course 1' }],
         },
       },
     });
 
-    renderComponent();
+    renderComponent('remaining', '/course');
 
-    expect(screen.getByRole('button')).toBeInTheDocument();
-    expect(screen.getByText('View course details')).toBeInTheDocument();
+    const link = screen.getByRole('link', {
+      name: /view course details/i,
+    });
+
+    expect(link).toBeInTheDocument();
+    expect(link).toHaveAttribute('href', '/course');
   });
 
   it('does NOT render button when remainingCourseCount is 0', () => {
@@ -46,8 +51,43 @@ describe('ProgressCardActions', () => {
       },
     });
 
-    renderComponent();
+    renderComponent('remaining');
 
-    expect(screen.queryByRole('button')).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('link', { name: /view course details/i })
+    ).not.toBeInTheDocument();
+  });
+
+  it('renders "Resume course" link when completed courses exist', () => {
+    (useProgressData as jest.Mock).mockReturnValue({
+      programProgressData: {
+        courseData: {
+          completed: [{ title: 'Course 1' }],
+        },
+      },
+    });
+
+    renderComponent('completed', '/resume');
+
+    const button = screen.getByRole('link', { name: /resume course/i });
+
+    expect(button).toBeInTheDocument();
+    expect(button).toHaveAttribute('href', '/resume');
+  });
+
+  it('does NOT render resume button when count is 0', () => {
+    (useProgressData as jest.Mock).mockReturnValue({
+      programProgressData: {
+        courseData: {
+          completed: [],
+        },
+      },
+    });
+
+    renderComponent('completed');
+
+    expect(
+      screen.queryByRole('link', { name: /resume course/i })
+    ).not.toBeInTheDocument();
   });
 });
