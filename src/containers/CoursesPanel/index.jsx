@@ -2,9 +2,6 @@ import React, { useMemo } from 'react';
 
 import { useIntl } from '@openedx/frontend-base';
 import { useInitializeSubsCourseDashboard } from '@src/data/hooks';
-import {
-  CourseFilterControls,
-} from '../../containers/CourseFilterControls';
 import CourseListSlot from '../../slots/CourseListSlot';
 import NoCoursesViewSlot from '../../slots/NoCoursesViewSlot';
 import { useFilters } from '@src/data/context';
@@ -16,7 +13,7 @@ import messages from './messages';
 import './index.scss';
 
 /**
- * Renders the list of CourseCards, as well as the controls (CourseFilterControls) for modifying the list.
+ * Renders the list of CourseCards
  * Also houses the NoCoursesView to display if the user hasn't enrolled in any courses.
  * @returns List of courses as CourseCards or empty state
 */
@@ -47,20 +44,12 @@ export const CoursesPanel = () => {
     }
   }, [numPages, pageNumber, setPageNumber]);
 
-  // TODO [TEMP]: Passing data twice and displaying the list twice, also fixed the corresponding test cases to reflect this.
-  // Reason: Requirements not finalized
-  // Action: Revisit after UX and data confirmation
   const courseListData = {
     showFilters: true,
     setPageNumber,
     numPages,
     visibleList,
     verifiedCourse: true,
-  };
-
-  const limitedCourseListData = {
-    ...courseListData,
-    verifiedCourse: false,
   };
 
   return (
@@ -70,11 +59,6 @@ export const CoursesPanel = () => {
         <p className="mb-4.5">{formatMessage(messages.lastSession)}</p>
       </div>
       {hasCourses ? <CourseListSlot courseListData={courseListData} /> : <NoCoursesViewSlot />}
-
-      <div className="course-list-heading-container">
-        <h2 className="course-list-title text-gray-700">{formatMessage(messages.limitedCourse)}</h2>
-      </div>
-      {hasCourses ? <CourseListSlot courseListData={limitedCourseListData} /> : <NoCoursesViewSlot />}
     </div>
   );
 };

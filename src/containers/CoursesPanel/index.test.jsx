@@ -48,7 +48,7 @@ describe('CoursesPanel', () => {
     it('should render no courses view slot', () => {
       createWrapper();
       const placeholders = screen.getAllByText(messagesNoCourses.inProgressCoursesPrompt.defaultMessage);
-      expect(placeholders).toHaveLength(2);
+      expect(placeholders).toHaveLength(1);
       const courseCard = screen.queryByText('CourseCard');
       expect(courseCard).toBeNull();
     });
@@ -58,7 +58,7 @@ describe('CoursesPanel', () => {
       const visibleList = [{ cardId: 'foo' }, { cardId: 'bar' }, { cardId: 'baz' }];
       createWrapper({ visibleList });
       const courseCards = screen.getAllByText('CourseCard');
-      expect(courseCards.length).toEqual(visibleList.length * 2);
+      expect(courseCards.length).toEqual(visibleList.length);
     });
 
     it('displays course list slot when courses exist', () => {
