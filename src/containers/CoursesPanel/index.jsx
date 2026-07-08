@@ -44,9 +44,6 @@ export const CoursesPanel = () => {
     }
   }, [numPages, pageNumber, setPageNumber]);
 
-  // TODO [TEMP]: Passing data twice and displaying the list twice, also fixed the corresponding test cases to reflect this.
-  // Reason: Requirements not finalized
-  // Action: Revisit after UX and data confirmation
   const courseListData = {
     showFilters: true,
     setPageNumber,
