@@ -13,7 +13,7 @@ import ResumeButton from './ResumeButton';
 import ViewCourseButton from './ViewCourseButton';
 import messages from './messages';
 
-export const CourseCardActions = ({ cardId, verifiedCourse }) => {
+export const CourseCardActions = ({ cardId, verifiedCourse, isHistoryTab }) => {
   const cardData = useCourseData(cardId);
   const { formatMessage } = useIntl();
   const hasStarted = cardData?.enrollment?.hasStarted || false;
@@ -27,18 +27,21 @@ export const CourseCardActions = ({ cardId, verifiedCourse }) => {
                 Reason: Development before backend connection
                 Action: Revisit after backend connection and finalize badge types and conditions for each type
             */}
-            {verifiedCourse ? (
+            {verifiedCourse && !isHistoryTab ? (
                 <Badge variant="success" className="px-3 py-2">
                     {formatMessage(messages.subsVerifiedCourseText)}
                 </Badge>
             ) : (
-                <span className="small text-info">
-                    {formatMessage(messages.subsIncludedCourseText)}
-                </span>
+                !isHistoryTab && (
+                  <span className="small text-info">
+                      {formatMessage(messages.subsIncludedCourseText)}
+                  </span>
+                )
             )}
         </Col>
 
         <Col xs={12} className="d-flex justify-content-end" sm={6}>
+        {!isHistoryTab && (
             <ActionRow data-test-id="CourseCardActions">
               <CourseCardActionSlot cardId={cardId} />
               {isEntitlement && (isFulfilled
@@ -53,6 +56,7 @@ export const CourseCardActions = ({ cardId, verifiedCourse }) => {
                 : <BeginCourseButton cardId={cardId} />
               )}
             </ActionRow>
+          )}
         </Col>
     </Row>
     
@@ -61,6 +65,7 @@ export const CourseCardActions = ({ cardId, verifiedCourse }) => {
 CourseCardActions.propTypes = {
   cardId: PropTypes.string.isRequired,
   verifiedCourse: PropTypes.bool,
+  isHistoryTab: PropTypes.bool,
 };
 
 export default CourseCardActions;
