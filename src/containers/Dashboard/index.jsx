@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { useSelectSessionModal } from '@src/data/context';
 import { useInitializeSubsCourseDashboard } from '@src/data/hooks';
 import SelectSessionModal from '../../containers/SelectSessionModal';
-import DashboardTabs from './DashboardTabs';
+import { DashboardContent } from './DashboardContent';
 import DashboardModalSlot from '../../slots/DashboardModalSlot';
 import RecentlyViewedPanel from '../RecentlyViewedPanel';
 
@@ -41,7 +41,7 @@ export const Dashboard = () => {
                 <DashboardLayout>
                   <SubscriptionBanner />
                   <DashboardTitle />
-                  <DashboardTabs />
+                  <DashboardContent />
                   <RecentlyViewedPanel />
                 </DashboardLayout>
               )}
