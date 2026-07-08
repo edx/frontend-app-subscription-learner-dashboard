@@ -13,7 +13,7 @@ import messages from './messages';
 import './index.scss';
 
 /**
- * Renders the list of CourseCards, as well as the controls (CourseFilterControls) for modifying the list.
+ * Renders the list of CourseCards
  * Also houses the NoCoursesView to display if the user hasn't enrolled in any courses.
  * @returns List of courses as CourseCards or empty state
 */
