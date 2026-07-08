@@ -2,9 +2,6 @@ import React, { useMemo } from 'react';
 
 import { useIntl } from '@openedx/frontend-base';
 import { useInitializeSubsCourseDashboard } from '@src/data/hooks';
-import {
-  CourseFilterControls,
-} from '../../containers/CourseFilterControls';
 import CourseListSlot from '../../slots/CourseListSlot';
 import NoCoursesViewSlot from '../../slots/NoCoursesViewSlot';
 import { useFilters } from '@src/data/context';
@@ -58,11 +55,6 @@ export const CoursesPanel = () => {
     verifiedCourse: true,
   };
 
-  const limitedCourseListData = {
-    ...courseListData,
-    verifiedCourse: false,
-  };
-
   return (
     <div className="course-list-container">
       <div className="course-list-heading-container">
@@ -70,11 +62,6 @@ export const CoursesPanel = () => {
         <p className="mb-4.5">{formatMessage(messages.lastSession)}</p>
       </div>
       {hasCourses ? <CourseListSlot courseListData={courseListData} /> : <NoCoursesViewSlot />}
-
-      <div className="course-list-heading-container">
-        <h2 className="course-list-title text-gray-700">{formatMessage(messages.limitedCourse)}</h2>
-      </div>
-      {hasCourses ? <CourseListSlot courseListData={limitedCourseListData} /> : <NoCoursesViewSlot />}
     </div>
   );
 };
