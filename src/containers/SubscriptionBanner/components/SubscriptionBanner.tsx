@@ -13,9 +13,9 @@ import { subscriptionRenewalURL } from '@src/data/constants/app';
 const subscriptionBannerData = {
   isSubscribed: true,
   subscriptionStatus: 'trial', // can be 'active', 'cancelled', 'expired'
-  subscriptionStartDate: '05/22/26',
-  subscriptionEndDate: '05/22/27',
-  subscriptionRenewalDate: '07/12/26',
+  subscriptionStartDate: '2026-05-22',
+  subscriptionEndDate: '2026-07-22',
+  subscriptionRenewalDate: '2026-07-22',
   subscriptionRenewalPrice: '$36',
 };
 
@@ -42,7 +42,7 @@ export const SubscriptionBanner: FC = () => {
       case 'trial':
         setBannerVariant('success');
         setBannerTitle(formatMessage(messages.activeTrialSubscriptionTitle, {
-          daysLeft: Math.ceil((new Date(subscriptionBannerData.subscriptionRenewalDate).getTime() - new Date().getTime()) / (1000 * 3600 * 24)),
+          daysLeft: Math.max(0, Math.ceil((Date.parse(subscriptionBannerData.subscriptionRenewalDate) - Date.now()) / 86400000)) || 0,
         }));
         setBannerBody(formatMessage(messages.activeTrialSubscriptionBody, {
           subscriptionStartDate: formatDate(subscriptionBannerData.subscriptionStartDate),
@@ -91,10 +91,10 @@ export const SubscriptionBanner: FC = () => {
   }, [formatMessage]);
 
   return (
-    <div className=".mt-3\.5 mt-4.5 mb-4.5">
+    <div className="mt-4.5 mb-4.5">
       <Alert
         variant={bannerVariant}
-        icon={subscriptionBannerData.subscriptionStatus === 'cancelled' ? Info : subscriptionBannerData.subscriptionStatus === 'trial' ? '' : CheckCircle}
+        icon={subscriptionBannerData.subscriptionStatus === 'cancelled' ? Info : subscriptionBannerData.subscriptionStatus === 'trial' ? undefined : CheckCircle}
         dismissible
         closeLabel="Dismiss"
         show={showPageBanner}

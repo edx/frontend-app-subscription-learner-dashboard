@@ -34,6 +34,18 @@ jest.mock('@src/hooks', () => ({
 }));
 
 describe('SubscriptionBanner', () => {
+  test('renders trial heading with 0 days when daysLeft calculation is NaN', () => {
+    const parseSpy = jest.spyOn(Date, 'parse').mockReturnValue(Number.NaN);
+
+    render(<SubscriptionBanner />);
+
+    const trialTitle = screen.getByText(/your edx subscription trial expires in 0 days\./i);
+    expect(trialTitle).toBeInTheDocument();
+    expect(trialTitle.textContent).not.toContain('{daysLeft}');
+
+    parseSpy.mockRestore();
+  });
+
   // --- Renew Button ---
   { /* TODO [TEMP]: Removing test cases related to Renew button as there is no dynamic data to determine the subscription status and render the button accordingly.
       Reason: Development before backend connection
