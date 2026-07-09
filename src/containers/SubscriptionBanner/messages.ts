@@ -1,5 +1,6 @@
 import { defineMessages } from '@openedx/frontend-base';
 
+// TODO: Update the messages as per new designs once we have the designs ready for the other subscription types than 'trial'.
 const messages = defineMessages({
   activeSubscriptionTitle: {
     id: 'learner-dash.subscriptionBaner.banners.activeSubscriptionTitle',
@@ -14,7 +15,7 @@ const messages = defineMessages({
   activeTrialSubscriptionTitle: {
     id: 'learner-dash.subscriptionBaner.banners.activeTrialSubscriptionTitle',
     description: 'Message to learners with an active trial subscription',
-    defaultMessage: 'Your subscription free trial is active',
+    defaultMessage: 'Your edX subscription trial expires {daysLeft} days',
   },
   activeTrialSubscriptionBody: {
     id: 'learner-dash.subscriptionBaner.banners.activeTrialSubscriptionBody',

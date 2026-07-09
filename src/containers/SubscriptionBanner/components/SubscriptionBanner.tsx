@@ -13,12 +13,13 @@ import { subscriptionRenewalURL } from '@src/data/constants/app';
 const subscriptionBannerData = {
   isSubscribed: true,
   subscriptionStatus: 'trial', // can be 'active', 'cancelled', 'expired'
-  subscriptionStartDate: '05/22/25',
-  subscriptionEndDate: '05/22/26',
-  subscriptionRenewalDate: '05/22/26',
+  subscriptionStartDate: '05/22/26',
+  subscriptionEndDate: '05/22/27',
+  subscriptionRenewalDate: '07/12/26',
   subscriptionRenewalPrice: '$36',
 };
 
+// TODO: Also update as per new designs once we have the designs ready for the other subscription types than 'trial'.
 export const SubscriptionBanner: FC = () => {
   const { formatMessage } = useIntl();
   const [showPageBanner, setShowPageBanner] = useState<boolean>(true);
@@ -40,7 +41,9 @@ export const SubscriptionBanner: FC = () => {
         break;
       case 'trial':
         setBannerVariant('success');
-        setBannerTitle(formatMessage(messages.activeTrialSubscriptionTitle));
+        setBannerTitle(formatMessage(messages.activeTrialSubscriptionTitle, {
+          daysLeft: Math.ceil((new Date(subscriptionBannerData.subscriptionRenewalDate).getTime() - new Date().getTime()) / (1000 * 3600 * 24)),
+        }));
         setBannerBody(formatMessage(messages.activeTrialSubscriptionBody, {
           subscriptionStartDate: formatDate(subscriptionBannerData.subscriptionStartDate),
           subscriptionRenewalDate: formatDate(subscriptionBannerData.subscriptionRenewalDate),
@@ -91,7 +94,7 @@ export const SubscriptionBanner: FC = () => {
     <div className=".mt-3\.5">
       <Alert
         variant={bannerVariant}
-        icon={subscriptionBannerData.subscriptionStatus === 'cancelled' ? Info : CheckCircle}
+        icon={subscriptionBannerData.subscriptionStatus === 'cancelled' ? Info : subscriptionBannerData.subscriptionStatus === 'trial' ? '' : CheckCircle}
         dismissible
         closeLabel="Dismiss"
         show={showPageBanner}
