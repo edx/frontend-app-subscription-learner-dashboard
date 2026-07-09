@@ -23,7 +23,7 @@ export const CourseCardDetails = ({ cardId, isHistoryTab = false }) => {
   } = useCardDetailsData({ cardId });
 
   const showAuditTrackBadge = isHistoryTab && isAuditAccessExpired;
-  const showDefaultAccessMessage = !(isEntitlement && !isFulfilled) && accessMessage && !isAuditAccessExpired;
+  const showDefaultAccessMessage = !(isEntitlement && !isFulfilled) && accessMessage;
 
   let renderedAccessMessage = null;
 

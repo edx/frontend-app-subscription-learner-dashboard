@@ -6,7 +6,7 @@ import { useInitializeSubsCourseDashboard } from '@src/data/hooks';
 import CourseListSlot from '../../slots/CourseListSlot';
 import { useFilters } from '@src/data/context';
 
-import { getTransformedCourseDataObject, getVisibleList } from '@src/utils/dataTransformers';
+import { getVisibleList } from '@src/utils/dataTransformers';
 
 import messages from './messages';
 
@@ -16,18 +16,11 @@ export const HistoryPanel = () => {
   const targetAuditAccessExpired = true;
 
   const historyCourses = useMemo(() => {
-    const combinedCourses = [
-      ...(data?.subscriptionCourses || []).map(course => ({
-        ...course,
-        isFromNonUpgradeableCourses: false,
-      })),
-      ...(data?.nonUpgradeableCourses || []).map(course => ({
-        ...course,
-        isFromNonUpgradeableCourses: true,
-      })),
-    ];
+    const transformedCourses = data?.coursesByCardId
+      ? Object.values(data.coursesByCardId) as any[]
+      : [];
 
-    return combinedCourses.filter(
+    return transformedCourses.filter(
       course => course?.enrollment?.isAuditAccessExpired === targetAuditAccessExpired,
     );
   }, [data, targetAuditAccessExpired]);
@@ -37,9 +30,8 @@ export const HistoryPanel = () => {
     filters, sortBy, pageNumber, setPageNumber,
   } = useFilters();
   const { visibleList, numPages } = useMemo(() => {
-    const transformedCourses = Object.values(getTransformedCourseDataObject(historyCourses));
     return getVisibleList(
-      transformedCourses,
+      historyCourses,
       filters,
       sortBy,
       pageNumber,

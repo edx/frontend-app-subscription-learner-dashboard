@@ -250,6 +250,41 @@ describe('queryHooks', () => {
       expect(result.current.data).toMatchObject(mockApiData);
     });
 
+    it('builds coursesByCardId from both subscription and non-upgradeable courses', async () => {
+      mockUseMasquerade.mockReturnValue({
+        masqueradeUser: undefined,
+        setMasqueradeUser(): void {
+          throw new Error('Function not implemented.');
+        },
+      });
+      const mockApiData = {
+        subscriptionCourses: [{ id: 'course-1' }],
+        nonUpgradeableCourses: [{ id: 'course-2' }],
+      };
+      (initializeCourseList as jest.Mock).mockResolvedValue(mockApiData);
+
+      const { result } = renderHook(() => useInitializeSubsCourseDashboard(), {
+        wrapper: createWrapper(),
+      });
+
+      await waitFor(() => {
+        expect(result.current.isSuccess).toBe(true);
+      });
+
+      expect(result.current.data?.coursesByCardId).toEqual({
+        'card-0': {
+          id: 'course-1',
+          cardId: 'card-0',
+          isFromNonUpgradeableCourses: false,
+        },
+        'card-1': {
+          id: 'course-2',
+          cardId: 'card-1',
+          isFromNonUpgradeableCourses: true,
+        },
+      });
+    });
+
     it('falls back to its own cached normal-user data when masquerading fails', async () => {
       const masqueradeUser = 'test-user';
       mockUseMasquerade.mockReturnValue({

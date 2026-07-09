@@ -12,8 +12,8 @@ export const CourseCardBanners = ({ cardId, verifiedCourse, isHistoryTab }) => {
 
   const isAuditAccessExpired = courseData?.enrollment?.isAuditAccessExpired || false;
   const isFromNonUpgradeableCourses = courseData?.isFromNonUpgradeableCourses || false;
-  const upgradeUrl = courseData?.courseRun?.marketingUrl || '';
-  const showHistoryUpgradeBanner = isHistoryTab && isAuditAccessExpired && !isFromNonUpgradeableCourses;
+  const upgradeUrl = courseData?.courseRun?.marketingUrl ?? '';
+  const showHistoryUpgradeBanner = isHistoryTab && isAuditAccessExpired && !isFromNonUpgradeableCourses && !!upgradeUrl;
 
   return (
     <div className="course-card-banners" data-testid="CourseCardBanners">

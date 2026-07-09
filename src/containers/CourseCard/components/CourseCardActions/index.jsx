@@ -42,7 +42,7 @@ export const CourseCardActions = ({ cardId, verifiedCourse, isHistoryTab }) => {
 
         <Col xs={12} className="d-flex justify-content-end" sm={6}>
         {!isHistoryTab && (
-            <ActionRow data-test-id="CourseCardActions">
+            <ActionRow data-testid="CourseCardActions">
               <CourseCardActionSlot cardId={cardId} />
               {isEntitlement && (isFulfilled
                 ? <ViewCourseButton cardId={cardId} />

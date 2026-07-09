@@ -4,7 +4,7 @@ const messages = defineMessages({
   myCourseHistory: {
     id: 'dashboard.myCourseHistory',
     defaultMessage: 'Course history',
-    description: 'Label for courses belonging to a user\'s active subscription',
+    description: 'Label for courses in a user\'s course history',
   },
 });
 

@@ -20,7 +20,7 @@ const DashboardTabs = () => {
     {
       key: 'history',
       title: 'History',
-      panel: <span><HistoryPanel /></span>,
+      panel: <HistoryPanel />,
     },
   ]), []);
 
