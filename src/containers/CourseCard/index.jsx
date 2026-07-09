@@ -13,7 +13,8 @@ import CourseCardBanners from './components/CourseCardBanners';
 
 export const CourseCard = ({
   cardId,
-  verifiedCourse
+  verifiedCourse,
+  isHistoryTab,
 }) => {
   const isCollapsed = useIsCollapsed();
   const orientation = isCollapsed ? 'vertical' : 'horizontal';
@@ -28,12 +29,19 @@ export const CourseCard = ({
                 actions={<CourseCardMenu cardId={cardId} />}
               />
               <Card.Section className="pt-0">
-                <CourseCardDetails cardId={cardId} />
-                <CourseCardActions cardId={cardId} verifiedCourse={verifiedCourse} />
+                <CourseCardDetails
+                  cardId={cardId}
+                  isHistoryTab={isHistoryTab}
+                />
+                <CourseCardActions cardId={cardId} verifiedCourse={verifiedCourse} isHistoryTab={isHistoryTab}/>
               </Card.Section>
             </Card.Body>
           </div>
-          <CourseCardBanners cardId={cardId} verifiedCourse={verifiedCourse} />
+          <CourseCardBanners
+            cardId={cardId}
+            verifiedCourse={verifiedCourse}
+            isHistoryTab={isHistoryTab}
+          />
         </div>
       </Card>
     </div>
@@ -42,6 +50,7 @@ export const CourseCard = ({
 CourseCard.propTypes = {
   cardId: PropTypes.string.isRequired,
   verifiedCourse: PropTypes.bool,
+  isHistoryTab: PropTypes.bool,
 };
 
 export default CourseCard;

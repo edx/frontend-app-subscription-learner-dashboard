@@ -7,6 +7,17 @@ import { getTransformedCourseDataObject } from '@src/utils/dataTransformers';
 import { learnerDashboardQueryKeys } from './queryKeys';
 import { getProgramProgressData, getProgramsListData, initializeCourseList, initializeSubsList } from '@src/data/services/subs';
 
+const getCombinedCourses = (data) => ([
+  ...(data?.subscriptionCourses || []).map(course => ({
+    ...course,
+    isFromNonUpgradeableCourses: false,
+  })),
+  ...(data?.nonUpgradeableCourses || []).map(course => ({
+    ...course,
+    isFromNonUpgradeableCourses: true,
+  })),
+]);
+
 const useInitializeSubsDashboard = () => {
   const { masqueradeUser } = useMasquerade();
   const queryClient = useQueryClient();
@@ -59,9 +70,10 @@ const useInitializeSubsCourseDashboard = () => {
     queryKey: learnerDashboardQueryKeys.initializeSubsCourseDashboard(masqueradeUser),
     queryFn: async () => {
       const data = await initializeCourseList(masqueradeUser);
+      const combinedCourses = getCombinedCourses(data);
       return {
         ...data,
-        coursesByCardId: getTransformedCourseDataObject(data?.subscriptionCourses || []),
+        coursesByCardId: getTransformedCourseDataObject(combinedCourses),
       };
     },
     staleTime: 5 * 60 * 1000, // 5 minutes — dashboard data rarely changes while viewing

@@ -36,6 +36,21 @@ const messages = defineMessages({
     description: 'Button for trigger change or leave session for entitlement course',
     defaultMessage: 'Change or leave session',
   },
+  auditTrackBadge: {
+    id: 'learner-dash.courseCard.CourseCardDetails.auditTrackBadge',
+    description: 'Label for audit track on course card',
+    defaultMessage: 'Audit track',
+  },
+  auditAccessExpired: {
+    id: 'learner-dash.courseCard.CourseCardDetails.auditAccessExpired',
+    description: 'Short access expired message for audited course',
+    defaultMessage: 'Access expired.',
+  },
+  auditAccessExpiredNotIncluded: {
+    id: 'learner-dash.courseCard.CourseCardDetails.auditAccessExpiredNotIncluded',
+    description: 'Access expired message for non-upgradeable audited course',
+    defaultMessage: 'Access expired. This course is not included in your subscription.',
+  },
 });
 
 export default messages;
