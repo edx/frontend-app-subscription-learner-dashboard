@@ -91,7 +91,7 @@ export const SubscriptionBanner: FC = () => {
   }, [formatMessage]);
 
   return (
-    <div className=".mt-3\.5">
+    <div className=".mt-3\.5 mt-4.5 mb-4.5">
       <Alert
         variant={bannerVariant}
         icon={subscriptionBannerData.subscriptionStatus === 'cancelled' ? Info : subscriptionBannerData.subscriptionStatus === 'trial' ? '' : CheckCircle}
