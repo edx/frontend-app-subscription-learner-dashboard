@@ -29,6 +29,8 @@ export const SubscriptionBanner: FC = () => {
   const formatDate = utilHooks.useFormatDate();
 
   useEffect(() => {
+    const trialDaysLeft = Math.max(0, Math.ceil((Date.parse(subscriptionBannerData.subscriptionEndDate) - Date.now()) / 86400000)) || 0;
+
     switch (subscriptionBannerData.subscriptionStatus) {
       case 'active':
         setBannerVariant('success');
@@ -41,9 +43,15 @@ export const SubscriptionBanner: FC = () => {
         break;
       case 'trial':
         setBannerVariant('success');
-        setBannerTitle(formatMessage(messages.activeTrialSubscriptionTitle, {
-          daysLeft: Math.max(0, Math.ceil((Date.parse(subscriptionBannerData.subscriptionRenewalDate) - Date.now()) / 86400000)) || 0,
-        }));
+        if (trialDaysLeft === 0) {
+          setBannerTitle(formatMessage(messages.activeTrialSubscriptionTitleToday));
+        } else if (trialDaysLeft === 1) {
+          setBannerTitle(formatMessage(messages.activeTrialSubscriptionTitleTomorrow));
+        } else {
+          setBannerTitle(formatMessage(messages.activeTrialSubscriptionTitle, {
+            daysLeft: trialDaysLeft,
+          }));
+        }
         setBannerBody(formatMessage(messages.activeTrialSubscriptionBody, {
           subscriptionStartDate: formatDate(subscriptionBannerData.subscriptionStartDate),
           subscriptionRenewalDate: formatDate(subscriptionBannerData.subscriptionRenewalDate),

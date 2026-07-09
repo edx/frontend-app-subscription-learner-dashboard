@@ -34,16 +34,42 @@ jest.mock('@src/hooks', () => ({
 }));
 
 describe('SubscriptionBanner', () => {
-  test('renders trial heading with 0 days when daysLeft calculation is NaN', () => {
+  const DAY_IN_MS = 24 * 60 * 60 * 1000;
+
+  test('renders trial heading with "expires today" when daysLeft calculation is NaN', () => {
     const parseSpy = jest.spyOn(Date, 'parse').mockReturnValue(Number.NaN);
 
     render(<SubscriptionBanner />);
 
-    const trialTitle = screen.getByText(/your edx subscription trial expires in 0 days\./i);
+    const trialTitle = screen.getByText(/your edx subscription trial expires today\./i);
     expect(trialTitle).toBeInTheDocument();
     expect(trialTitle.textContent).not.toContain('{daysLeft}');
 
     parseSpy.mockRestore();
+  });
+
+  test('renders trial heading with "expires today" when renewal date is today', () => {
+    const parseSpy = jest.spyOn(Date, 'parse').mockReturnValue(DAY_IN_MS);
+    const nowSpy = jest.spyOn(Date, 'now').mockReturnValue(DAY_IN_MS);
+
+    render(<SubscriptionBanner />);
+
+    expect(screen.getByText(/your edx subscription trial expires today\./i)).toBeInTheDocument();
+
+    parseSpy.mockRestore();
+    nowSpy.mockRestore();
+  });
+
+  test('renders trial heading with "expires tomorrow" when renewal date is tomorrow', () => {
+    const parseSpy = jest.spyOn(Date, 'parse').mockReturnValue(2 * DAY_IN_MS);
+    const nowSpy = jest.spyOn(Date, 'now').mockReturnValue(DAY_IN_MS);
+
+    render(<SubscriptionBanner />);
+
+    expect(screen.getByText(/your edx subscription trial expires tomorrow\./i)).toBeInTheDocument();
+
+    parseSpy.mockRestore();
+    nowSpy.mockRestore();
   });
 
   // --- Renew Button ---

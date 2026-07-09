@@ -17,6 +17,16 @@ const messages = defineMessages({
     description: 'Message to learners with an active trial subscription',
     defaultMessage: 'Your edX subscription trial expires in {daysLeft} days.',
   },
+  activeTrialSubscriptionTitleToday: {
+    id: 'learner-dash.subscriptionBaner.banners.activeTrialSubscriptionTitleToday',
+    description: 'Message to learners with a trial subscription expiring today',
+    defaultMessage: 'Your edX subscription trial expires today.',
+  },
+  activeTrialSubscriptionTitleTomorrow: {
+    id: 'learner-dash.subscriptionBaner.banners.activeTrialSubscriptionTitleTomorrow',
+    description: 'Message to learners with a trial subscription expiring tomorrow',
+    defaultMessage: 'Your edX subscription trial expires tomorrow.',
+  },
   activeTrialSubscriptionBody: {
     id: 'learner-dash.subscriptionBaner.banners.activeTrialSubscriptionBody',
     description: 'Message to learners with an active trial subscription',
