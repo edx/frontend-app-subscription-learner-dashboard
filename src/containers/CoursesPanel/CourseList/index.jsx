@@ -7,7 +7,7 @@ import { useIsCollapsed } from './hooks';
 
 export const CourseList = ({ courseListData }) => {
   const {
-    setPageNumber, numPages, visibleList, verifiedCourse,
+    setPageNumber, numPages, visibleList, verifiedCourse, isHistoryTab,
   } = courseListData;
 
   const isCollapsed = useIsCollapsed();
@@ -15,7 +15,12 @@ export const CourseList = ({ courseListData }) => {
     <>
       <div className="d-flex flex-column flex-grow-1">
         {visibleList.map(({ cardId }) => (
-          <CourseCard key={cardId} cardId={cardId} verifiedCourse={verifiedCourse} />
+          <CourseCard
+            key={cardId}
+            cardId={cardId}
+            verifiedCourse={verifiedCourse}
+            isHistoryTab={isHistoryTab}
+          />
         ))}
         {numPages > 1 && (
           <Pagination
@@ -37,6 +42,7 @@ export const courseListDataShape = PropTypes.shape({
   numPages: PropTypes.number.isRequired,
   setPageNumber: PropTypes.func.isRequired,
   verifiedCourse: PropTypes.bool,
+  isHistoryTab: PropTypes.bool,
 });
 
 CourseList.propTypes = {

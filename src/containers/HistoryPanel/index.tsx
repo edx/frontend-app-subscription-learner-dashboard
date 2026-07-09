@@ -2,42 +2,42 @@ import React, { useMemo } from 'react';
 
 import { useIntl } from '@openedx/frontend-base';
 import { useInitializeSubsCourseDashboard } from '@src/data/hooks';
+
 import CourseListSlot from '../../slots/CourseListSlot';
-import NoCoursesViewSlot from '../../slots/NoCoursesViewSlot';
 import { useFilters } from '@src/data/context';
 
 import { getVisibleList } from '@src/utils/dataTransformers';
 
 import messages from './messages';
 
-import './index.scss';
-
-/**
- * Renders the list of CourseCards
- * Also houses the NoCoursesView to display if the user hasn't enrolled in any courses.
- * @returns List of courses as CourseCards or empty state
-*/
-export const CoursesPanel = () => {
+export const HistoryPanel = () => {
   const { formatMessage } = useIntl();
   const { data } = useInitializeSubsCourseDashboard();
-  const hasCourses = useMemo(() => data?.subscriptionCourses?.length > 0, [data]);
+  const targetAuditAccessExpired = true;
+
+  const historyCourses = useMemo(() => {
+    const transformedCourses = data?.coursesByCardId
+      ? Object.values(data.coursesByCardId) as any[]
+      : [];
+
+    return transformedCourses.filter(
+      course => course?.enrollment?.isAuditAccessExpired === targetAuditAccessExpired,
+    );
+  }, [data, targetAuditAccessExpired]);
+  const hasCourses = useMemo(() => historyCourses.length > 0, [historyCourses]);
 
   const {
     filters, sortBy, pageNumber, setPageNumber,
   } = useFilters();
   const { visibleList, numPages } = useMemo(() => {
-    const transformedCourses = data?.coursesByCardId
-      ? Object.values(data.coursesByCardId)
-      : [];
     return getVisibleList(
-      transformedCourses,
+      historyCourses,
       filters,
       sortBy,
       pageNumber,
     );
-  }, [data, filters, sortBy, pageNumber]);
+  }, [historyCourses, filters, sortBy, pageNumber]);
 
-  // Clamp page number when filtered/mutated list shrinks
   React.useEffect(() => {
     if (numPages > 0 && pageNumber > numPages) {
       setPageNumber(1);
@@ -50,19 +50,19 @@ export const CoursesPanel = () => {
     numPages,
     visibleList,
     verifiedCourse: true,
+    isHistoryTab: true,
   };
 
   return (
     <div className="course-list-container">
       <div className="course-list-heading-container">
-        <h2 className="course-list-title">{formatMessage(messages.myCourses)}</h2>
-        <p className="mb-4.5">{formatMessage(messages.lastSession)}</p>
+        <h2 className="course-list-title">{formatMessage(messages.myCourseHistory)}</h2>
       </div>
-      {hasCourses ? <CourseListSlot courseListData={courseListData} /> : <NoCoursesViewSlot />}
+      {hasCourses && <CourseListSlot courseListData={courseListData} />}
     </div>
   );
 };
 
-CoursesPanel.propTypes = {};
+HistoryPanel.propTypes = {};
 
-export default CoursesPanel;
+export default HistoryPanel;

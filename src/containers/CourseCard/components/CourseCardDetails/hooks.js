@@ -51,6 +51,8 @@ export const useCardDetailsData = ({ cardId }) => {
   const courseData = useCourseData(cardId);
   const providerName = courseData?.courseProvider?.name;
   const courseNumber = courseData?.course?.courseNumber;
+  const isAuditAccessExpired = courseData?.enrollment?.isAuditAccessExpired || false;
+  const isFromNonUpgradeableCourses = courseData?.isFromNonUpgradeableCourses || false;
   const {
     isEntitlement,
     isFulfilled,
@@ -64,6 +66,8 @@ export const useCardDetailsData = ({ cardId }) => {
     isEntitlement,
     isFulfilled,
     canChange,
+    isAuditAccessExpired,
+    isFromNonUpgradeableCourses,
     openSessionModal: () => updateSelectSessionModal(cardId),
     courseNumber,
     changeOrLeaveSessionMessage: formatMessage(messages.changeOrLeaveSessionButton),

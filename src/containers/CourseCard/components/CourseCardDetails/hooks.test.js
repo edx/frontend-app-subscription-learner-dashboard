@@ -67,6 +67,7 @@ describe('CourseCardDetails hooks', () => {
         courseProvider: { ...providerData, ...provider },
         course: { courseNumber },
         courseRun: {},
+        enrollment: {},
         entitlement: { ...entitlementData, ...entitlement },
       });
       useSelectSessionModal.mockReturnValue({ updateSelectSessionModal: updateSelectSessionModalMock });
@@ -89,6 +90,9 @@ describe('CourseCardDetails hooks', () => {
     it('calls updateSelectSessionModal when openSessionModal is called', () => {
       out.openSessionModal();
       expect(updateSelectSessionModalMock).toHaveBeenCalledWith(cardId);
+    });
+    it('forwards audit flags with safe defaults', () => {
+      expect(out.isAuditAccessExpired).toBe(false);
     });
   });
 

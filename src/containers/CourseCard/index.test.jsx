@@ -27,15 +27,15 @@ const cardId = 'test-card-id';
 describe('CourseCard component', () => {
   it('collapsed', () => {
     hooks.useIsCollapsed.mockReturnValueOnce(true);
-    render(<IntlProvider locale="en"><CourseCard cardId={cardId} /></IntlProvider>);
+    render(<IntlProvider locale="en"><CourseCard cardId={cardId} verifiedCourse /></IntlProvider>);
   });
   it('not collapsed', () => {
     hooks.useIsCollapsed.mockReturnValueOnce(false);
-    render(<IntlProvider locale="en"><CourseCard cardId={cardId} /></IntlProvider>);
+    render(<IntlProvider locale="en"><CourseCard cardId={cardId} verifiedCourse /></IntlProvider>);
   });
   it('renders courseCard child components', () => {
     hooks.useIsCollapsed.mockReturnValueOnce(false);
-    render(<IntlProvider locale="en"><CourseCard cardId={cardId} /></IntlProvider>);
+    render(<IntlProvider locale="en"><CourseCard cardId={cardId} verifiedCourse /></IntlProvider>);
     namesMockComponents.map((courseCardName) => {
       const courseCardComponent = screen.getByText(courseCardName);
       return expect(courseCardComponent).toBeInTheDocument();

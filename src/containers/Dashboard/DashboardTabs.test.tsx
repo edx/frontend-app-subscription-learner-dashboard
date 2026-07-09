@@ -70,6 +70,18 @@ jest.mock('../../containers/CoursesPanel', () => {
   return MockCoursesPanel;
 });
 
+jest.mock('../HistoryPanel', () => {
+  const MockHistoryPanel = () => (
+    <div data-testid="history-panel">
+      History Panel Content
+    </div>
+  );
+
+  MockHistoryPanel.displayName = 'MockHistoryPanel';
+
+  return MockHistoryPanel;
+});
+
 describe('DashboardTabs', () => {
   it('renders all tab titles', () => {
     renderComponent();
@@ -101,7 +113,7 @@ describe('DashboardTabs', () => {
     fireEvent.click(screen.getByText('History'));
 
     expect(
-      screen.getByText('History tab will be available soon.')
+      screen.getByTestId('history-panel')
     ).toBeInTheDocument();
   });
 });

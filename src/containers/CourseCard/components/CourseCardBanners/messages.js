@@ -106,6 +106,16 @@ const messages = defineMessages({
     description: 'Redeem link text',
     defaultMessage: 'Redeem',
   },
+  subscriptionUpgradeBannerText: {
+    id: 'learner-dash.courseCard.banners.subscriptionUpgradeBannerText',
+    description: 'Banner text for subscription courses where audit access has expired',
+    defaultMessage: 'This course is included in your subscription. Upgrade to get full course access.',
+  },
+  upgradeAction: {
+    id: 'learner-dash.courseCard.banners.upgradeAction',
+    description: 'Upgrade button text for subscription upgrade banner',
+    defaultMessage: 'Upgrade',
+  },
 });
 
 export default messages;
