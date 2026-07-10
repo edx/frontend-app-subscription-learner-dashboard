@@ -14,5 +14,3 @@ export const PROGRAM_PROGRESS_CIRCLE_MAP = {
   CIRCLE_DEGREES: 180,
   STROKE_WIDTH: 1.2,
 };
-
-export const DAY_IN_MS = 24 * 60 * 60 * 1000;

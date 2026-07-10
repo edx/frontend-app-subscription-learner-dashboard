@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { SubscriptionBanner } from './SubscriptionBanner';
-import { DAY_IN_MS } from '@src/containers/ProgramDashboard/data/constants';
 
 jest.mock('react-intl', () => ({
   ...jest.requireActual('react-intl'),
@@ -35,6 +34,8 @@ jest.mock('@src/hooks', () => ({
 }));
 
 describe('SubscriptionBanner', () => {
+  const DAY_IN_MS = 24 * 60 * 60 * 1000;
+
   afterEach(() => {
     jest.restoreAllMocks();
   });
@@ -70,6 +71,18 @@ describe('SubscriptionBanner', () => {
     render(<SubscriptionBanner />);
 
     expect(screen.getByText(/your edx subscription trial expires tomorrow\./i)).toBeInTheDocument();
+
+    parseSpy.mockRestore();
+    nowSpy.mockRestore();
+  });
+
+  test('renders trial heading with interpolated days when trial end date is more than one day away', () => {
+    const parseSpy = jest.spyOn(Date, 'parse').mockReturnValue(4 * DAY_IN_MS);
+    const nowSpy = jest.spyOn(Date, 'now').mockReturnValue(DAY_IN_MS);
+
+    render(<SubscriptionBanner />);
+
+    expect(screen.getByText(/your edx subscription trial expires in 3 days\./i)).toBeInTheDocument();
 
     parseSpy.mockRestore();
     nowSpy.mockRestore();

@@ -5,7 +5,6 @@ import { useIntl } from '@openedx/frontend-base';
 import { utilHooks } from '@src/hooks';
 import messages from '../messages';
 import { subscriptionRenewalURL } from '@src/data/constants/app';
-import { DAY_IN_MS } from '@src/containers/ProgramDashboard/data/constants';
 
 // TODO: We can replace the below hardcoded subscriptionBannerData with the actual data from the API once we have the API ready.
 // For now, we can use this hardcoded data to test the SubscriptionBanner component.
@@ -31,6 +30,7 @@ export const SubscriptionBanner: FC = () => {
 
   useEffect(() => {
     // const trialDaysLeft = Math.max(0, Math.ceil((Date.parse(subscriptionBannerData.subscriptionEndDate) - Date.now()) / 86400000)) || 0;
+    const DAY_IN_MS = 24 * 60 * 60 * 1000;
     const trialEndMs = Date.parse(subscriptionBannerData.subscriptionEndDate);
     const trialDaysLeft = Number.isFinite(trialEndMs)
       ? Math.max(0, Math.ceil((trialEndMs - Date.now()) / DAY_IN_MS))
