@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { SubscriptionBanner } from './SubscriptionBanner';
+import { DAY_IN_MS } from '@src/containers/ProgramDashboard/data/constants';
 
 jest.mock('react-intl', () => ({
   ...jest.requireActual('react-intl'),
@@ -34,7 +35,9 @@ jest.mock('@src/hooks', () => ({
 }));
 
 describe('SubscriptionBanner', () => {
-  const DAY_IN_MS = 24 * 60 * 60 * 1000;
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
 
   test('renders trial heading with "expires today" when daysLeft calculation is NaN', () => {
     const parseSpy = jest.spyOn(Date, 'parse').mockReturnValue(Number.NaN);
@@ -48,7 +51,7 @@ describe('SubscriptionBanner', () => {
     parseSpy.mockRestore();
   });
 
-  test('renders trial heading with "expires today" when renewal date is today', () => {
+  test('renders trial heading with "expires today" when trial end date is today', () => {
     const parseSpy = jest.spyOn(Date, 'parse').mockReturnValue(DAY_IN_MS);
     const nowSpy = jest.spyOn(Date, 'now').mockReturnValue(DAY_IN_MS);
 
@@ -60,7 +63,7 @@ describe('SubscriptionBanner', () => {
     nowSpy.mockRestore();
   });
 
-  test('renders trial heading with "expires tomorrow" when renewal date is tomorrow', () => {
+  test('renders trial heading with "expires tomorrow" when trial end date is tomorrow', () => {
     const parseSpy = jest.spyOn(Date, 'parse').mockReturnValue(2 * DAY_IN_MS);
     const nowSpy = jest.spyOn(Date, 'now').mockReturnValue(DAY_IN_MS);
 
