@@ -2,6 +2,7 @@ import { FC, useEffect, useState, useMemo } from 'react';
 import { Alert, Icon, Button, Variant } from '@openedx/paragon';
 import { CheckCircle, Info, OpenInNew } from '@openedx/paragon/icons';
 import { useIntl } from '@openedx/frontend-base';
+import moment from 'moment';
 import { utilHooks } from '@src/hooks';
 import messages from '../messages';
 import { subscriptionRenewalURL } from '@src/data/constants/app';
@@ -29,11 +30,10 @@ export const SubscriptionBanner: FC = () => {
   const formatDate = utilHooks.useFormatDate();
 
   useEffect(() => {
-    // const trialDaysLeft = Math.max(0, Math.ceil((Date.parse(subscriptionBannerData.subscriptionEndDate) - Date.now()) / 86400000)) || 0;
-    const DAY_IN_MS = 24 * 60 * 60 * 1000;
-    const trialEndMs = Date.parse(subscriptionBannerData.subscriptionEndDate);
-    const trialDaysLeft = Number.isFinite(trialEndMs)
-      ? Math.max(0, Math.ceil((trialEndMs - Date.now()) / DAY_IN_MS))
+    const trialEndDate = moment(subscriptionBannerData.subscriptionEndDate).startOf('day');
+    const today = moment().startOf('day');
+    const trialDaysLeft = trialEndDate.isValid()
+      ? Math.max(0, trialEndDate.diff(today, 'days'))
       : 0;
 
     switch (subscriptionBannerData.subscriptionStatus) {
