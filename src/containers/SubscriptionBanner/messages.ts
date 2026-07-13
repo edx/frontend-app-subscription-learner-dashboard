@@ -30,16 +30,16 @@ const messages = defineMessages({
   activeTrialSubscriptionBody: {
     id: 'learner-dash.subscriptionBanner.banners.activeTrialSubscriptionBody',
     description: 'Message to learners with an active trial subscription',
-    defaultMessage: 'Your subscription will renew on {subscriptionRenewalDate}.',
+    defaultMessage: 'Your subscription will renew on {subscriptionEndDate}.',
   },
   cancelledSubscriptionTitle: {
     id: 'learner-dash.subscriptionBanner.banners.cancelledSubscriptionTitle',
-    description: 'Message to learners with an cancelled subscription',
+    description: 'Message to learners with a cancelled subscription',
     defaultMessage: 'Your subscription is cancelled',
   },
   cancelledSubscriptionBody: {
     id: 'learner-dash.subscriptionBanner.banners.cancelledSubscriptionBody',
-    description: 'Message to learners with an cancelled subscription',
+    description: 'Message to learners with a cancelled subscription',
     defaultMessage: 'Your subscription expired on {subscriptionEndDate}. Renew now to continue enjoying your courses without interruption.',
   },
   renewSubscriptionButton: {

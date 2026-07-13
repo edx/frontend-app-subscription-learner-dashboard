@@ -59,7 +59,7 @@ export const SubscriptionBanner: FC = () => {
         }
         setBannerBody(formatMessage(messages.activeTrialSubscriptionBody, {
           subscriptionStartDate: formatDate(subscriptionBannerData.subscriptionStartDate),
-          subscriptionRenewalDate: formatDate(subscriptionBannerData.subscriptionRenewalDate),
+          subscriptionEndDate: formatDate(subscriptionBannerData.subscriptionEndDate),
           subscriptionRenewalPrice: subscriptionBannerData.subscriptionRenewalPrice,
         }));
         break;
