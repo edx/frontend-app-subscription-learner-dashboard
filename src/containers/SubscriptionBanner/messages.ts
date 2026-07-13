@@ -1,6 +1,6 @@
 import { defineMessages } from '@openedx/frontend-base';
 
-// TODO: Update the messages as per new designs once we have the designs ready for the other subscription types than 'trial'.
+// TODO: Update the messages as per new designs once we have the designs ready for subscription types other than 'trial'.
 const messages = defineMessages({
   activeSubscriptionTitle: {
     id: 'learner-dash.subscriptionBanner.banners.activeSubscriptionTitle',

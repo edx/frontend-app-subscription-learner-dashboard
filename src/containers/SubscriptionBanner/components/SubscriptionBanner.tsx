@@ -58,9 +58,7 @@ export const SubscriptionBanner: FC = () => {
           }));
         }
         setBannerBody(formatMessage(messages.activeTrialSubscriptionBody, {
-          subscriptionStartDate: formatDate(subscriptionBannerData.subscriptionStartDate),
           subscriptionEndDate: formatDate(subscriptionBannerData.subscriptionEndDate),
-          subscriptionRenewalPrice: subscriptionBannerData.subscriptionRenewalPrice,
         }));
         break;
       case 'cancelled':
