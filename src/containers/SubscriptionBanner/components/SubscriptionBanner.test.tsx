@@ -41,26 +41,14 @@ describe('SubscriptionBanner', () => {
     jest.restoreAllMocks();
   });
 
-  test('renders trial heading with "expires today" when daysLeft calculation is NaN', () => {
-    const nowSpy = jest.spyOn(moment, 'now').mockReturnValue(getStartOfDayMs('2026-07-22'));
+  test('renders trial heading with "expires today" when trial end date is today', () => {
+    jest.spyOn(moment, 'now').mockReturnValue(getStartOfDayMs('2026-07-22'));
 
     render(<SubscriptionBanner />);
 
     const trialTitle = screen.getByText(/your edx subscription trial expires today\./i);
     expect(trialTitle).toBeInTheDocument();
     expect(trialTitle.textContent).not.toContain('{daysLeft}');
-
-    nowSpy.mockRestore();
-  });
-
-  test('renders trial heading with "expires today" when trial end date is today', () => {
-    const nowSpy = jest.spyOn(moment, 'now').mockReturnValue(getStartOfDayMs('2026-07-22'));
-
-    render(<SubscriptionBanner />);
-
-    expect(screen.getByText(/your edx subscription trial expires today\./i)).toBeInTheDocument();
-
-    nowSpy.mockRestore();
   });
 
   test('renders trial heading with "expires tomorrow" when trial end date is tomorrow', () => {

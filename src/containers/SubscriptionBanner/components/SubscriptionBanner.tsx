@@ -103,11 +103,13 @@ export const SubscriptionBanner: FC = () => {
     }
   }, [formatMessage]);
 
-  const bannerIcon = subscriptionBannerData.subscriptionStatus === 'cancelled'
-    ? Info
-    : subscriptionBannerData.subscriptionStatus === 'trial'
-      ? undefined
-      : CheckCircle;
+  const subscriptionStatusIcons: Record<string, typeof Info | undefined> = {
+    trial: undefined,
+    cancelled: Info,
+    active: CheckCircle,
+  };
+
+  const bannerIcon = subscriptionStatusIcons[subscriptionBannerData.subscriptionStatus] ?? undefined;
 
   return (
     <div className="mt-4.5 mb-4.5">
