@@ -3,33 +3,39 @@ import '@testing-library/jest-dom';
 import { IntlProvider } from '@openedx/frontend-base';
 
 import { useRecentlyViewedCoursesAndProgramsData } from '@src/hooks/useRecentlyViewedCoursesAndProgramsData';
+import { useAlgoliaSearch } from '@src/utils/algoliaUtils';
 import { RecentlyViewedPanel } from './index';
 
 jest.mock('@src/hooks/useRecentlyViewedCoursesAndProgramsData', () => ({
   useRecentlyViewedCoursesAndProgramsData: jest.fn(),
 }));
 
+jest.mock('@src/utils/algoliaUtils', () => ({
+  useAlgoliaSearch: jest.fn(),
+}));
+
 describe('RecentlyViewedPanel', () => {
   const mockHook = useRecentlyViewedCoursesAndProgramsData as jest.Mock;
+  const mockUseAlgoliaSearch = useAlgoliaSearch as jest.Mock;
 
   const mockData = [
     {
-      id: 1,
+      objectID: '1',
       title: 'Course 1',
-      body: 'Body 1',
+      primary_description: 'Body 1',
       url: 'https://example.com/course-1.png',
       footerLabel: 'Course',
-      isProgram: false,
+      product: 'Course',
       tagText: '',
       thumbnail: '',
     },
     {
-      id: 2,
+      objectID: '2',
       title: 'Program 1',
-      body: 'Body 2',
+      primary_description: 'Body 2',
       url: 'https://example.com/course-2.png',
       footerLabel: 'Program',
-      isProgram: true,
+      product: 'Program',
       tagText: 'Professional Certificate',
       thumbnail: '',
     },
@@ -37,6 +43,7 @@ describe('RecentlyViewedPanel', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
+    mockUseAlgoliaSearch.mockReturnValue([null]);
   });
 
   const renderComponent = () => render(<IntlProvider locale="en"><RecentlyViewedPanel /></IntlProvider>);
