@@ -1,12 +1,13 @@
 export interface ProductCardItem {
-  id: string | number,
+  objectID: string | number,
   title: string,
-  body: string,
+  primary_description: string,
   isProgram?: boolean,
   tagText?: string,
   url: string,
   thumbnail?: string,
   footerLabel: string,
+  product: string,
 }
 
 export interface ProductCardProps {

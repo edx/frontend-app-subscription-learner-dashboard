@@ -21,12 +21,12 @@ beforeAll(() => {
 
 describe('ProductCard', () => {
   const baseMockData = {
-    id: 1,
+    objectID: '1',
     title: 'Test Card',
-    body: 'Test Body Content',
+    primary_description: 'Test Body Content',
     url: 'https://via.placeholder.com/150',
     thumbnail: 'https://via.placeholder.com/50',
-    isProgram: true,
+    product: 'Program',
     tagText: 'New',
     footerLabel: 'Test Category',
   };
@@ -61,17 +61,24 @@ describe('ProductCard', () => {
       expect(screen.getByText('Test Body Content')).toBeInTheDocument();
       expect(screen.getByText('Test Category')).toBeInTheDocument();
     });
+
+    it('strips html tags from description text', () => {
+      renderComponent({ primary_description: '<p>This is <strong>plain</strong> text</p>' });
+
+      expect(screen.getByText('This is plain text')).toBeInTheDocument();
+      expect(screen.queryByText('<p>This is <strong>plain</strong> text</p>')).not.toBeInTheDocument();
+    });
   });
 
   describe('Badge Rendering', () => {
-    it('renders badge when isProgram is true and tagText exists', () => {
+    it('renders badge when product is Program and tagText exists', () => {
       renderComponent();
 
       expect(screen.getByText('New')).toBeInTheDocument();
     });
 
-    it('does not render badge when isProgram is false', () => {
-      renderComponent({ isProgram: false });
+    it('does not render badge when product is Course', () => {
+      renderComponent({ product: 'Course' });
 
       expect(screen.queryByText('New')).not.toBeInTheDocument();
     });
@@ -93,31 +100,25 @@ describe('ProductCard', () => {
     it('renders main image with correct alt text', () => {
       renderComponent();
 
-      expect(
-        screen.getByRole('img', { name: 'Test Card main-image' })
-      ).toBeInTheDocument();
+      expect(screen.getByAltText('Test Card main-image')).toBeInTheDocument();
     });
 
     it('renders thumbnail image when provided', () => {
       renderComponent();
 
-      expect(
-        screen.getByRole('img', { name: 'Test Card thumbnail-image' })
-      ).toBeInTheDocument();
+      expect(screen.getByAltText('Test Card thumbnail-image')).toBeInTheDocument();
     });
 
     it('does not break if thumbnail is missing', () => {
       renderComponent({ thumbnail: '' });
 
-      expect(
-        screen.getByRole('img', { name: 'Test Card main-image' })
-      ).toBeInTheDocument();
+      expect(screen.getByAltText('Test Card main-image')).toBeInTheDocument();
     });
   });
 
   describe('Loading State', () => {
     it('renders without crashing when loading', () => {
-      render(<ProductCard item={baseMockData} isLoading={true} />);
+      render(<ProductCard item={baseMockData} isLoading />);
 
       expect(screen.getByTestId('product-card')).toBeInTheDocument();
     });

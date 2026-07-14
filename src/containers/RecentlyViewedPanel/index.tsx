@@ -3,17 +3,19 @@ import { Alert } from '@openedx/paragon';
 import { useIntl } from '@openedx/frontend-base';
 
 import { useRecentlyViewedCoursesAndProgramsData } from '@src/hooks/useRecentlyViewedCoursesAndProgramsData';
+import { useAlgoliaSearch } from '@src/utils/algoliaUtils';
 import messages from './messages';
 import NoRecentlyViewedItems from './NoRecentlyViewedItems';
 import RecentlyViewedCourseProgram from './RecentlyViewedCourseProgram';
 
 export const RecentlyViewedPanel: FC = () => {
   const { formatMessage } = useIntl();
+  const [searchClient] = useAlgoliaSearch();
   const {
     data: recentlyViewedCoursesAndProgramsData = [],
     isError,
     isLoading,
-  } = useRecentlyViewedCoursesAndProgramsData();
+  } = useRecentlyViewedCoursesAndProgramsData(searchClient, true);
   const hasRecentlyViewedData = useMemo(
     () => recentlyViewedCoursesAndProgramsData.length > 0,
     [recentlyViewedCoursesAndProgramsData]
