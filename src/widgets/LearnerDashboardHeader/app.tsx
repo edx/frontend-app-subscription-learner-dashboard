@@ -1,6 +1,6 @@
 import { App, LinkMenuItem, WidgetOperationTypes, getAppConfig } from '@openedx/frontend-base';
 
-import { appId } from '../../constants';
+import { appId, subscriptionHelpRole, subscriptionSignoutRole } from '../../constants';
 
 import ConfirmEmailBanner from './ConfirmEmailBanner';
 import CoursesLink from './CoursesLink';
@@ -83,19 +83,19 @@ const app: App = {
     },
     {
       slotId: 'org.openedx.frontend.slot.header.desktopRight.v1',
-      id: 'org.edx.frontend.widget.subsLearnerDashboard.headerDashboard.v1',
+      id: 'org.edx.frontend.widget.learnerHome.headerLinkDashboard.v1',
       op: WidgetOperationTypes.PREPEND,
       element: (
         <LinkMenuItem
           label={messages['header.user.menu.dashboard'].defaultMessage}
-          url="/"
+          url="/subscription-learner-dashboard"
           variant="navLink"
         />
       )
     },
     {
       slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
-      id: 'org.openedx.frontend.widget.header.user.menu.manageSubscription.v1',
+      id: 'org.edx.frontend.widget.header.user.menu.manageSubscription.v1',
       op: WidgetOperationTypes.APPEND,
       element: (
         <LinkMenuItem
@@ -107,36 +107,36 @@ const app: App = {
     },
     {
       slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
-      id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuHelp.v1',
+      id: 'org.edx.frontend.widget.learnerDashboard.headerAuthenticatedMenuHelp.v1',
       op: WidgetOperationTypes.APPEND,
       element: (
         <LinkMenuItem
           label={messages['header.user.menu.help'].defaultMessage}
-          role="org.openedx.frontend.role.help"
+          role={subscriptionHelpRole}
           variant="dropdownItem"
         />
       )
     },
     {
       slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
-      id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuSignOut.v1',
+      id: 'org.edx.frontend.widget.learnerDashboard.headerAuthenticatedMenuSignOut.v1',
       op: WidgetOperationTypes.APPEND,
       element: (
         <LinkMenuItem
           label={messages['header.user.menu.signOut'].defaultMessage}
-          role="org.openedx.frontend.role.signOut"
+          role={subscriptionSignoutRole}
           variant="dropdownItem"
         />
       )
     },
     {
       slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
-      id: 'org.openedx.frontend.widget.learnerDashboard.dashboard.v1',
+      id: 'org.edx.frontend.widget.learnerDashboard.dashboard.v1',
       op: WidgetOperationTypes.PREPEND,
       element: (
         <LinkMenuItem
           label={messages['header.user.menu.dashboard'].defaultMessage}
-          url="/"
+          url="/subscription-learner-dashboard"
           variant="dropdownItem"
         />
       )
