@@ -6,7 +6,13 @@ import { ProductCardProps } from './data/types';
 
 import './index.scss';
 
+const DESCRIPTION_MAX_LENGTH = 130;
+
 const getPlainText = (value: string) => value.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+
+const truncateText = (value: string, maxLength: number) => (
+  value.length > maxLength ? `${value.slice(0, maxLength).trimEnd()}...` : value
+);
 
 export const ProductCard: FC<ProductCardProps> = ({ item, isLoading }) => {
   return (
@@ -30,7 +36,9 @@ export const ProductCard: FC<ProductCardProps> = ({ item, isLoading }) => {
 
       <Card.Section className="d-flex flex-column flex-grow-1 overflow-hidden">
         <div className="flex-grow-1 min-h-0">
-          <p className="text-truncate-3 mb-2">{getPlainText(item.primary_description)}</p>
+          <p className="text-truncate-3 mb-2">
+            {truncateText(getPlainText(item.primary_description), DESCRIPTION_MAX_LENGTH)}
+          </p>
         </div>
 
         {(item.product === 'Program' && item.tagText) && (
