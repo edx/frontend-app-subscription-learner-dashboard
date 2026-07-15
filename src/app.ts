@@ -14,7 +14,7 @@ const app: App = {
     ENABLE_PROGRAMS: false,
     ECOMMERCE_BASE_URL: '',
     ORDER_HISTORY_URL: '',
-    SUPPORT_URL: '',
+    SUPPORT_URL: 'https://help.edx.org/edxlearner/s/?language=en_US',
     SHOW_UNENROLL_SURVEY: false,
   }
 };

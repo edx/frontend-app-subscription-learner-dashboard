@@ -6,7 +6,7 @@ import { subscriptionLearnerDashboardApp } from './src';
 import '@openedx/frontend-base/shell/style';
 import '@openedx/brand-openedx/dist/core.min.css';
 import '@openedx/brand-openedx/dist/light.min.css';
-import { subscriptionAccountRole, subscriptionHelpRole, subscriptionProfileRole, subscriptionSignoutRole } from '@src/constants';
+import { subscriptionAccountRole, subscriptionProfileRole, subscriptionSignoutRole } from '@src/constants';
 
 const siteConfig: SiteConfig = {
   siteId: 'learner-dashboard-dev',
@@ -32,10 +32,6 @@ const siteConfig: SiteConfig = {
     {
       role: subscriptionAccountRole,
       url: 'http://localhost:1997/account/'
-    },
-    {
-      role: subscriptionHelpRole,
-      url: 'https://help.edx.org/edxlearner/s/?language=en_US'
     },
     {
       role: subscriptionSignoutRole,

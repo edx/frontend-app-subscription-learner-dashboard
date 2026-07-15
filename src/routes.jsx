@@ -1,10 +1,10 @@
 import { authenticatedLoader } from '@openedx/frontend-base';
-import {  subscriptionDashboardRole, subscriptionProgramProgressRole } from './constants';
+import {  subscriptionDashboardRole, subscriptionDashboardUrlPath, subscriptionProgramProgressRole } from './constants';
 
 const routes = [
   {
     id: 'org.edx.frontend.route.subsLearnerDashboard.main',
-    path: '/subscription-learner-dashboard',
+    path: subscriptionDashboardUrlPath,
     loader: authenticatedLoader,
     handle: {
       role: subscriptionDashboardRole
