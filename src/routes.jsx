@@ -1,10 +1,31 @@
-import { authenticatedLoader } from '@openedx/frontend-base';
+import { authenticatedLoader, getAuthenticatedHttpClient } from '@openedx/frontend-base';
+import { getSubsInitApiUrl } from './data/services/subs/urls';
+import { redirect } from 'react-router-dom';
+
+// loader to check if the user has subscription access
+const subscriptionAccessLoader = async () => {
+    const { data } = await getAuthenticatedHttpClient().get(getSubsInitApiUrl());
+
+    if (data.userSubscription && !data.userSubscription.isSubscriber) {
+      throw redirect('http://localhost:3000/');
+    }
+  
+    return null;
+};
+
+// composed loader that checks for authentication and subscription access
+const protectedLoader = async (args) => {
+  await authenticatedLoader(args);
+  await subscriptionAccessLoader();
+
+  return null;
+};
 
 const routes = [
   {
     id: 'org.edx.frontend.route.subsLearnerDashboard.main',
     path: '/subscription-learner-dashboard',
-    loader: authenticatedLoader,
+    loader: protectedLoader,
     handle: {
       role: 'org.edx.frontend.subs.role.dashboard'
     },
@@ -16,7 +37,7 @@ const routes = [
   {
     id: 'org.edx.frontend.route.subsLearnerDashboard.programProgress',
     path: '/subscription-program-progress/:uuid',
-    loader: authenticatedLoader,
+    loader: protectedLoader,
     handle: {
       role: 'org.edx.frontend.subs.role.programProgress'
     },
