@@ -6,11 +6,19 @@ import { ProductCardProps } from './data/types';
 
 import './index.scss';
 
+const DESCRIPTION_MAX_LENGTH = 130;
+
+const getPlainText = (value: string) => value.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+
+const truncateText = (value: string, maxLength: number) => (
+  value.length > maxLength ? `${value.slice(0, maxLength).trimEnd()}...` : value
+);
+
 export const ProductCard: FC<ProductCardProps> = ({ item, isLoading }) => {
   return (
     <Card
       className="shadow-sm d-flex flex-column rounded w-100 overflow-hidden"
-      variant={item.isProgram ? 'dark' : 'light'}
+      variant={item.product === 'Course' ? 'light' : 'dark'}
       data-testid="product-card"
       isLoading={isLoading}
     >
@@ -28,10 +36,12 @@ export const ProductCard: FC<ProductCardProps> = ({ item, isLoading }) => {
 
       <Card.Section className="d-flex flex-column flex-grow-1 overflow-hidden">
         <div className="flex-grow-1 min-h-0">
-          <p className="text-truncate-3 mb-2">{item.body}</p>
+          <p className="text-truncate-3 mb-2">
+            {truncateText(getPlainText(item.primary_description), DESCRIPTION_MAX_LENGTH)}
+          </p>
         </div>
 
-        {(item.isProgram && item.tagText) && (
+        {(item.product === 'Program' && item.tagText) && (
           <Badge
             variant="light"
             className="d-inline-flex align-items-center px-2 py-1 align-self-start"
@@ -43,7 +53,7 @@ export const ProductCard: FC<ProductCardProps> = ({ item, isLoading }) => {
       </Card.Section>
 
       <Card.Footer className="d-flex justify-content-between align-items-center">
-        <span className={`small ${item.isProgram ? 'text-white' : 'text-muted'}`}>{item.footerLabel}</span>
+        <span className={`small ${item.product === 'Program' ? 'text-white' : 'text-muted'}`}>{item.footerLabel}</span>
       </Card.Footer>
     </Card>
   );

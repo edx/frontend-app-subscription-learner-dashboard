@@ -2,17 +2,25 @@ import React from 'react';
 import { renderHook, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { fetchRecentlyViewedCoursesAndPrograms } from '@src/data/services/subs';
+import { fetchPopularProducts } from '@src/utils/algoliaUtils';
 import { useRecentlyViewedCoursesAndProgramsData } from './useRecentlyViewedCoursesAndProgramsData';
 
-jest.mock('@src/data/services/subs');
+jest.mock('@src/utils/algoliaUtils', () => ({
+  fetchPopularProducts: jest.fn(),
+}));
 
-const mockedFetchRecentlyViewedCoursesAndPrograms = fetchRecentlyViewedCoursesAndPrograms as jest.MockedFunction<
-  typeof fetchRecentlyViewedCoursesAndPrograms
+const mockedFetchPopularProducts = fetchPopularProducts as jest.MockedFunction<
+  typeof fetchPopularProducts
 >;
 
 const createWrapper = () => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
 
   const Wrapper = ({ children }: { children: React.ReactNode }) => (
     <QueryClientProvider client={queryClient}>
@@ -26,21 +34,25 @@ const createWrapper = () => {
 };
 
 describe('useRecentlyViewedCoursesAndProgramsData', () => {
+  const mockSearchClient = {} as any;
+
+  beforeEach(() => {
+    mockedFetchPopularProducts.mockReset();
+  });
+
   it('should fetch and return recently viewed data successfully', async () => {
     const mockData = [{
-      id: 1,
+      objectID: '1',
       title: 'Test Course',
-      body: 'This is a test course description',
-      url: 'https://example.com/image.jpg',
-      thumbnail: 'https://example.com/thumbnail.jpg',
-      isProgram: false,
-      tagText: 'Professional Certificate',
-      footerLabel: 'Test Category'
+      primary_description: 'This is a test course description',
+      image_url: 'https://example.com/image.jpg',
+      organization_logo_override: 'https://example.com/thumbnail.jpg',
+      content_type: 'Course',
     }];
 
-    mockedFetchRecentlyViewedCoursesAndPrograms.mockResolvedValue(mockData);
+    mockedFetchPopularProducts.mockResolvedValue(mockData as any);
 
-    const { result } = renderHook(() => useRecentlyViewedCoursesAndProgramsData(), {
+    const { result } = renderHook(() => useRecentlyViewedCoursesAndProgramsData(mockSearchClient, true), {
       wrapper: createWrapper(),
     });
 
@@ -48,23 +60,33 @@ describe('useRecentlyViewedCoursesAndProgramsData', () => {
       expect(result.current.isSuccess).toBe(true);
     });
 
-    expect(result.current.data).toEqual(mockData);
+    expect(result.current.data).toEqual([
+      {
+        objectID: '1',
+        title: 'Test Course',
+        primary_description: 'This is a test course description',
+        url: 'https://example.com/image.jpg',
+        thumbnail: 'https://example.com/thumbnail.jpg',
+        footerLabel: 'Course',
+        product: 'Course',
+      },
+    ]);
   });
 
   it('should be in loading state initially', () => {
-    mockedFetchRecentlyViewedCoursesAndPrograms.mockImplementation(() => new Promise(() => {}));
+    mockedFetchPopularProducts.mockImplementation(() => new Promise(() => {}));
 
-    const { result } = renderHook(() => useRecentlyViewedCoursesAndProgramsData(), {
+    const { result } = renderHook(() => useRecentlyViewedCoursesAndProgramsData(mockSearchClient, true), {
       wrapper: createWrapper(),
     });
 
-    expect(result.current.isLoading).toBe(true);
+    expect(result.current.isLoading || result.current.isPending).toBe(true);
   });
 
   it('should handle error state', async () => {
-    mockedFetchRecentlyViewedCoursesAndPrograms.mockRejectedValue(new Error('API Error'));
+    mockedFetchPopularProducts.mockRejectedValue(new Error('API Error'));
 
-    const { result } = renderHook(() => useRecentlyViewedCoursesAndProgramsData({ retry: false }), {
+    const { result } = renderHook(() => useRecentlyViewedCoursesAndProgramsData(mockSearchClient, true), {
       wrapper: createWrapper(),
     });
 
@@ -76,9 +98,9 @@ describe('useRecentlyViewedCoursesAndProgramsData', () => {
   });
 
   it('should have correct query configuration', async () => {
-    mockedFetchRecentlyViewedCoursesAndPrograms.mockResolvedValue([]);
+    mockedFetchPopularProducts.mockResolvedValue([]);
 
-    const { result } = renderHook(() => useRecentlyViewedCoursesAndProgramsData(), {
+    const { result } = renderHook(() => useRecentlyViewedCoursesAndProgramsData(mockSearchClient, true), {
       wrapper: createWrapper(),
     });
 
@@ -87,13 +109,13 @@ describe('useRecentlyViewedCoursesAndProgramsData', () => {
     });
 
     expect(result.current.data).toEqual([]);
-    expect(mockedFetchRecentlyViewedCoursesAndPrograms).toHaveBeenCalled();
+    expect(mockedFetchPopularProducts).toHaveBeenCalled();
   });
 
   it('should handle empty data response', async () => {
-    mockedFetchRecentlyViewedCoursesAndPrograms.mockResolvedValue([]);
+    mockedFetchPopularProducts.mockResolvedValue([]);
 
-    const { result } = renderHook(() => useRecentlyViewedCoursesAndProgramsData(), {
+    const { result } = renderHook(() => useRecentlyViewedCoursesAndProgramsData(mockSearchClient, true), {
       wrapper: createWrapper(),
     });
 
@@ -102,5 +124,13 @@ describe('useRecentlyViewedCoursesAndProgramsData', () => {
     });
 
     expect(result.current.data).toEqual([]);
+  });
+
+  it('should not fetch when search client is null', async () => {
+    renderHook(() => useRecentlyViewedCoursesAndProgramsData(null, true), {
+      wrapper: createWrapper(),
+    });
+
+    expect(mockedFetchPopularProducts).not.toHaveBeenCalled();
   });
 });

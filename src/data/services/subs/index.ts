@@ -1,6 +1,4 @@
 export {
-  fetchRecommendedCourses,
-  fetchRecentlyViewedCoursesAndPrograms,
   getProgramProgressData,
   getProgramsListData,
   initializeCourseList,
