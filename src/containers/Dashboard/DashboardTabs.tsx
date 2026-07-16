@@ -3,12 +3,12 @@ import { Tabs, Tab } from '@openedx/paragon';
 import CoursesPanel from '../CoursesPanel';
 import ProgramsPanel from '../ProgramsPanel';
 import HistoryPanel from '../HistoryPanel';
-import { useInitializeSubsCourseDashboard } from '@src/data/hooks';
 
-const DashboardTabs = () => {
-  const { data } = useInitializeSubsCourseDashboard();
+interface IDashboardContentProps {
+  hasCourseHistory: boolean,
+}
 
-  const hasCourseHistory = (data?.nonUpgradeableCourses?.length ?? 0) > 0;
+const DashboardTabs = ({ hasCourseHistory }: IDashboardContentProps) => {
   // Defining the tabs here
   const dashboardTabs = useMemo(() => {
     const tabs = [
