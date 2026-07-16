@@ -14,7 +14,7 @@ const app: App = {
     ENABLE_PROGRAMS: false,
     ECOMMERCE_BASE_URL: '',
     ORDER_HISTORY_URL: '',
-    SUPPORT_URL: '',
+    SUPPORT_URL: 'https://help.edx.org/edxlearner/s/?language=en_US',
     SHOW_UNENROLL_SURVEY: false,
     ALGOLIA_APP_ID: 'IGSYV1Z1XI',
     ALGOLIA_SEARCH_API_KEY: '9b43cfe4f35ae59780d99ea70e3e239d',

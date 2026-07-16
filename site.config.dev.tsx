@@ -6,6 +6,7 @@ import { subscriptionLearnerDashboardApp } from './src';
 import '@openedx/frontend-base/shell/style';
 import '@openedx/brand-openedx/dist/core.min.css';
 import '@openedx/brand-openedx/dist/light.min.css';
+import { subscriptionAccountRole, subscriptionProfileRole, subscriptionSignoutRole } from '@src/constants';
 
 const siteConfig: SiteConfig = {
   siteId: 'learner-dashboard-dev',
@@ -25,15 +26,15 @@ const siteConfig: SiteConfig = {
   ],
   externalRoutes: [
     {
-      role: 'org.openedx.frontend.role.profile',
+      role: subscriptionProfileRole,
       url: 'http://localhost:1995/profile/'
     },
     {
-      role: 'org.openedx.frontend.role.account',
+      role: subscriptionAccountRole,
       url: 'http://localhost:1997/account/'
     },
     {
-      role: 'org.openedx.frontend.role.logout',
+      role: subscriptionSignoutRole,
       url: 'http://localhost:18000/logout'
     },
   ],
