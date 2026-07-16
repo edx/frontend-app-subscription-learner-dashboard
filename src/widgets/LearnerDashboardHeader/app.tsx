@@ -131,6 +131,7 @@ const app: App = {
     },
     {
       // TO-DO : Resume your last course will be implemented seprately in a different ticket.(Ticket: SUBS-818)
+      // https://2u-internal.atlassian.net/browse/SUBS-818
       slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
       id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuLastCourse.v1',
       op: WidgetOperationTypes.PREPEND,
