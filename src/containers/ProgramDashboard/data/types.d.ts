@@ -112,7 +112,7 @@ export interface ProgressCardData {
   programType?: string,
   checkoutUrl?: string,
   expired?: boolean,
-  fullProgramPrice?: string,
+  seats?: Seat[],
 }
 
 export interface ProgressCardActionsProps {

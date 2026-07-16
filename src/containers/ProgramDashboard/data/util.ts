@@ -12,9 +12,12 @@ export const UPGRADEABLE_SEAT_TYPES = ['verified', 'professional', 'no-id-profes
  *   lms/static/js/learner_dashboard/models/course_card_model.js -> getCertificatePriceString()
  *
  * Upgradeable seat types: 'verified', 'professional', 'no-id-professional', 'credit'
- * Format: '$300.00' for USD, '300.00 EUR' for other currencies.
+ * Format:
+ *   - USD (default):           '$300.00'
+ *   - USD (includeUSDCode):    '$300.00 USD'
+ *   - Other currencies:        '300.00 EUR'
  */
-export function getCertificatePriceString(seats?: Seat[]): string {
+export function getCertificatePriceString(seats?: Seat[], includeUSDCode = false): string {
   if (!seats || seats.length === 0) {
     return '';
   }
@@ -23,11 +26,10 @@ export function getCertificatePriceString(seats?: Seat[]): string {
     return '';
   }
   const seat = upgradeableSeats[0];
-  const priceWithCurrency = `${seat.price} ${seat.currency}`;
   if (seat.currency === 'USD') {
-    return `$${priceWithCurrency}`;
+    return includeUSDCode ? `$${seat.price} USD` : `$${seat.price}`;
   }
-  return priceWithCurrency; // For non-USD currencies, return in the format "300.00 EUR"
+  return `${seat.price} ${seat.currency}`;
 }
 
 export function getProgramIcon(type: string) {

@@ -22,7 +22,8 @@ export const ProgressCardButton: FC<ProgressCardButtonProps> = ({ variant, redir
   if (isUpgradeButton) {
     return (
       <>
-        {/* TODO rerender the page and remove Upgrade with your subscription since after upgrade api call the course catalog button */}
+        {/* TODO rerender the page after upgrade. This is the modal after clicking the upgrade button and the upgrade is successful.
+        Also, work is needed on what should happen if the upgrade fails, once confirmed */}
         <Button variant={variant} onClick={open}>{buttonText}</Button>
         <StandardModal
           title={formatMessage(messages.programProgressInProgressCourseProfessionalUpgradeModalTitle, { title })}

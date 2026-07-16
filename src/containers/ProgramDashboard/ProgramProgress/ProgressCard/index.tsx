@@ -9,16 +9,17 @@ import { ProgressCardActions } from '../ProgressCardActions';
 import { dateFormatter } from '@src/utils/dateFormatter';
 import { ProgressCardButton } from '../ProgressCardActions/ProgressCardButton';
 import { PROGRAM_TYPE_MAP } from '../../data/constants';
+import { getCertificatePriceString } from '../../data/util';
 
 export const ProgressCard: FC<ProgressCardProps> = ({ progressCardData, isLoading, tabType }) => {
   const { formatMessage, formatDate } = useIntl();
 
-  const { title, pacingType, start, end, certificateUrl, courseUrl, upgradeUrl, price, programType, checkoutUrl, expired } = progressCardData;
+  const { title, pacingType, start, end, certificateUrl, courseUrl, upgradeUrl, programType, checkoutUrl, expired, seats } = progressCardData;
 
   const inProgressTabKey = formatMessage(messages.programProgressInProgressTab).toLowerCase();
   const isInProgressTab = tabType === inProgressTabKey;
   const isProfessionalProgram = programType === PROGRAM_TYPE_MAP.PROFESSIONAL_CERTIFICATE;
-  const isMicroProgram = programType === PROGRAM_TYPE_MAP.MICROMASTERS || programType === PROGRAM_TYPE_MAP.MICROBACHELORS;
+  const isMicroMastersProgram = programType === PROGRAM_TYPE_MAP.MICROMASTERS;
   /*
     - Formatting pacing type safely
     - replace underscores with spaces
@@ -95,20 +96,20 @@ export const ProgressCard: FC<ProgressCardProps> = ({ progressCardData, isLoadin
                   buttonText={formatMessage(messages.programProgressCardUpgradeButton)}
                   type="upgrade"
                   title={title}
-                  price={price}
+                  price={getCertificatePriceString(seats)}
                   courseUrl={courseUrl || ''}
                 />
               )}
-              {isMicroProgram
+              {isMicroMastersProgram
               && checkoutUrl
               && canUpgrade
               && (
                 <ProgressCardButton
                   variant="brand"
                   redirectUrl={checkoutUrl || ' '}
-                  buttonText={formatMessage(messages.programProgressInProgressCourseMicromastersUpgrade,
-                    { price }
-                  )}
+                  buttonText={formatMessage(messages.programProgressInProgressCourseMicromastersUpgrade, {
+                    price: getCertificatePriceString(seats, true),
+                  })}
                 />
               )}
             </Col>

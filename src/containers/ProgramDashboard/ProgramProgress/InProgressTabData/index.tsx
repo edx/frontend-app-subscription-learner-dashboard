@@ -24,7 +24,7 @@ export const InProgressTabData: FC = () => {
 
   const progressCards = inProgressData.map((course) => {
     const courseRuns = course.courseRuns || [];
-    const [{ pacingType = '', start = '', end = '', courseUrl = '', upgradeUrl = '', seats = undefined } = {}] = Array.isArray(courseRuns) ? courseRuns : [];
+    const [{ pacingType = '', start = '', end = '', courseUrl = '', upgradeUrl = '', seats = [] } = {}] = Array.isArray(courseRuns) ? courseRuns : [];
     const price = getCertificatePriceString(seats);
 
     const progressCardData = {
@@ -37,6 +37,7 @@ export const InProgressTabData: FC = () => {
       price: price || '',
       programType: programType || '',
       checkoutUrl: checkoutUrl || '',
+      seats: seats || [],
       expired: course.expired || false, // using expired from course object to determine if the course is expired as per condition on confluence and learners dashboard code.
     };
 

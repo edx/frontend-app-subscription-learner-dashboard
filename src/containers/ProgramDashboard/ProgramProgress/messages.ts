@@ -172,7 +172,7 @@ const messages = defineMessages({
     description: 'Modal title for Professional Certificate courses in the In Progress tab.',
   },
   programProgressInProgressCourseProfessionalUpgradeModalContent: {
-    defaultMessage: "You're saving as a subscriber. This course is valued at ${price}.",
+    defaultMessage: "You're saving as a subscriber. This course is valued at {price}.",
     id: 'program.progress.in.progress.course.professional.upgrade.modal.content',
     description: 'Modal content for Professional Certificate courses in the In Progress tab.',
   },
