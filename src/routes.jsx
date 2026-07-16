@@ -18,7 +18,7 @@ const subscriptionAccessLoader = async () => {
       throw error;
     }
 
-    throw redirect('/subscription-learner-dashboard');  //keep the user on subscription learner dashboard if an error occurs
+    return null; // keep the user on the current page if an error occurs
   }
 };
 
