@@ -4,13 +4,17 @@ import { redirect } from 'react-router-dom';
 
 // loader to check if the user has subscription access
 const subscriptionAccessLoader = async () => {
+  try {
     const { data } = await getAuthenticatedHttpClient().get(getSubsInitApiUrl());
 
     if (data.userSubscription && !data.userSubscription.isSubscriber) {
-      throw redirect('http://localhost:3000/');
+      throw redirect('/');  //redirect to learner dashboard if user does not have subscription access
     }
   
     return null;
+  } catch (error) {
+    throw redirect('/');  //redirect to learner dashboard if an error occurs
+  }
 };
 
 // composed loader that checks for authentication and subscription access
