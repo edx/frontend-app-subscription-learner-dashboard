@@ -16,10 +16,8 @@ function SupportLink() {
 export default function SupportLinkMenuItem({ variant = 'hyperlink' }) {
   const { SUPPORT_URL: url } = getAppConfig(appId);
 
-  console.log("test", url)
-
-  // if (!url)
-  //   return null;
+  if (!url)
+    return null;
 
   return (
     <LinkMenuItem

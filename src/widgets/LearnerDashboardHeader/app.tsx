@@ -129,19 +129,18 @@ const app: App = {
         />
       )
     },
-    // {
-    // To Do : https://2u-internal.atlassian.net/browse/SUBS-757, Resume Last course is yet to be implemented.
-    //   slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
-    //   id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuLastCourse.v1',
-    //   op: WidgetOperationTypes.PREPEND,
-    //   element: (
-    //     <LinkMenuItem
-    //       label={messages['header.user.menu.lastCourse'].defaultMessage}
-    //       url="/last-course"
-    //       variant="dropdownItem"
-    //     />
-    //   )
-    // },
+    {
+      slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
+      id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuLastCourse.v1',
+      op: WidgetOperationTypes.PREPEND,
+      element: (
+        <LinkMenuItem
+          label={messages['header.user.menu.lastCourse'].defaultMessage}
+          url="/last-course"
+          variant="dropdownItem"
+        />
+      )
+    },
   ]
 };
 
