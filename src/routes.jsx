@@ -1,4 +1,6 @@
 import { authenticatedLoader, getAuthenticatedHttpClient } from '@openedx/frontend-base';
+
+import {  subscriptionDashboardRole, subscriptionDashboardUrlPath, subscriptionProgramProgressRole } from './constants';
 import { getSubsInitApiUrl } from './data/services/subs/urls';
 import { redirect } from 'react-router-dom';
 
@@ -33,10 +35,10 @@ const protectedLoader = async (args) => {
 const routes = [
   {
     id: 'org.edx.frontend.route.subsLearnerDashboard.main',
-    path: '/subscription-learner-dashboard',
+    path: subscriptionDashboardUrlPath,
     loader: protectedLoader,
     handle: {
-      role: 'org.edx.frontend.subs.role.dashboard'
+      role: subscriptionDashboardRole
     },
     async lazy () {
       const module = await import('./Main');
@@ -48,7 +50,7 @@ const routes = [
     path: '/subscription-program-progress/:uuid',
     loader: protectedLoader,
     handle: {
-      role: 'org.edx.frontend.subs.role.programProgress'
+      role: subscriptionProgramProgressRole
     },
     async lazy () {
       const module = await import('./containers/ProgramDashboard/ProgramProgress/index');
