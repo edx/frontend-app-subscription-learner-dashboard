@@ -1,11 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
+import { IntlProvider } from '@openedx/frontend-base';
 import { ProgressCardButton } from './ProgressCardButton';
 
 const renderComponent = (props = {}) => render(
   <MemoryRouter>
-    <ProgressCardButton variant="primary" redirectUrl="/course" buttonText="View Course" {...props} />
+    <IntlProvider locale="en">
+      <ProgressCardButton variant="primary" redirectUrl="/course" buttonText="View Course" {...props} />
+    </IntlProvider>
   </MemoryRouter>
 );
 

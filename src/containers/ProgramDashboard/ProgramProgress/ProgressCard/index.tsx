@@ -8,12 +8,17 @@ import './index.scss';
 import { ProgressCardActions } from '../ProgressCardActions';
 import { dateFormatter } from '@src/utils/dateFormatter';
 import { ProgressCardButton } from '../ProgressCardActions/ProgressCardButton';
+import { PROGRAM_TYPE_MAP } from '../../data/constants';
 
 export const ProgressCard: FC<ProgressCardProps> = ({ progressCardData, isLoading, tabType }) => {
   const { formatMessage, formatDate } = useIntl();
 
-  const { title, pacingType, start, end, certificateUrl, courseUrl } = progressCardData;
+  const { title, pacingType, start, end, certificateUrl, courseUrl, upgradeUrl, price, programType, checkoutUrl, expired } = progressCardData;
 
+  const inProgressTabKey = formatMessage(messages.programProgressInProgressTab).toLowerCase();
+  const isInProgressTab = tabType === inProgressTabKey;
+  const isProfessionalProgram = programType === PROGRAM_TYPE_MAP.PROFESSIONAL_CERTIFICATE;
+  const isMicroProgram = programType === PROGRAM_TYPE_MAP.MICROMASTERS || programType === PROGRAM_TYPE_MAP.MICROBACHELORS;
   /*
     - Formatting pacing type safely
     - replace underscores with spaces
@@ -40,6 +45,8 @@ export const ProgressCard: FC<ProgressCardProps> = ({ progressCardData, isLoadin
       : `${formatMessage(messages.programProgressCardStartText)} ${startDate}`;
   }
 
+  // using expired key from course object to determine if the course is expired as per condition on confluence and learners dashboard code.
+  const canUpgrade = upgradeUrl && !expired;
   return (
     <Card className="progress-card mb-3" data-testid="progress-card" isLoading={isLoading}>
       <Card.Section className="pt-3 pb-2 px-4">
@@ -53,7 +60,7 @@ export const ProgressCard: FC<ProgressCardProps> = ({ progressCardData, isLoadin
           <ProgressCardActions tabType={tabType} redirectUrl={courseUrl} />
         </Row>
 
-        { tabType === (formatMessage(messages.programProgressCompletedTab).toLowerCase()) && (
+        {tabType === (formatMessage(messages.programProgressCompletedTab).toLowerCase()) && (
           <Row className="pt-3 pb-2 px-2 border-top border-2 border-muted mb-2 align-items-center">
             <Col xs={12} className="d-flex justify-content-between align-items-center px-0">
               <span className="text-start">
@@ -68,6 +75,46 @@ export const ProgressCard: FC<ProgressCardProps> = ({ progressCardData, isLoadin
             </Col>
           </Row>
         )}
+
+        {isInProgressTab && (
+          <Row className="pt-3 pb-2 px-2 border-top border-2 border-muted mb-2 align-items-center">
+            <Col xs={12} className="d-flex justify-content-between align-items-center px-0">
+              {/* TODO : Certificate status will change after Upgrade is successful through api */}
+              <span className="text-start">
+                {formatMessage(messages.programProgressInProgressCertificateStatus, {
+                  status: canUpgrade ? formatMessage(messages.programProgressInProgressCertificateNeedsVerified) : formatMessage(messages.programProgressInProgressCertificateNotEarned), // TODO : Certificate status will change after Upgrade is successful through api
+                })}
+              </span>
+
+              {isProfessionalProgram
+              && canUpgrade
+              && (
+                <ProgressCardButton
+                  variant="brand"
+                  redirectUrl=""
+                  buttonText={formatMessage(messages.programProgressCardUpgradeButton)}
+                  type="upgrade"
+                  title={title}
+                  price={price}
+                  courseUrl={courseUrl || ''}
+                />
+              )}
+              {isMicroProgram
+              && checkoutUrl
+              && canUpgrade
+              && (
+                <ProgressCardButton
+                  variant="brand"
+                  redirectUrl={checkoutUrl || ' '}
+                  buttonText={formatMessage(messages.programProgressInProgressCourseMicromastersUpgrade,
+                    { price }
+                  )}
+                />
+              )}
+            </Col>
+          </Row>
+        )}
+
       </Card.Section>
     </Card>
   );

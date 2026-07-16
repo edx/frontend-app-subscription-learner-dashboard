@@ -62,7 +62,7 @@ describe('ProgramProgressTabs', () => {
     const inProgressTab = screen.getByRole('tab', { name: /In progress/i });
     expect(inProgressTab).toHaveAttribute('aria-selected', 'true');
     expect(
-      screen.getByText('In progress tab data will be available soon.')
+      screen.getByText('Courses in progress')
     ).toBeInTheDocument();
   });
 
