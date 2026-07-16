@@ -92,7 +92,7 @@ describe('DashboardTabs', () => {
 
     expect(screen.getByText('Courses')).toBeInTheDocument();
     expect(screen.getAllByText('Programs')).toHaveLength(1);
-    expect(screen.queryByText('Course History')).not.toBeInTheDocument();
+    expect(screen.queryByText('Course history')).not.toBeInTheDocument();
   });
 
   it('Courses tab is active by default and shows CoursesPanel', () => {
@@ -114,7 +114,7 @@ describe('DashboardTabs', () => {
   it('switches to History tab on click', () => {
     renderComponent({ hasCourseHistory: true });
 
-    fireEvent.click(screen.getByText('Course History'));
+    fireEvent.click(screen.getByText('Course history'));
 
     expect(
       screen.getByTestId('history-panel')
