@@ -27,7 +27,7 @@ const DashboardTabs = ({ hasCourseHistory }: IDashboardContentProps) => {
     if (hasCourseHistory) {
       tabs.push({
         key: 'history',
-        title: 'Course History',
+        title: 'Course history',
         panel: <HistoryPanel />,
       });
     }
