@@ -1,12 +1,13 @@
 import { authenticatedLoader } from '@openedx/frontend-base';
+import {  subscriptionDashboardRole, subscriptionDashboardUrlPath, subscriptionProgramProgressRole } from './constants';
 
 const routes = [
   {
     id: 'org.edx.frontend.route.subsLearnerDashboard.main',
-    path: '/subscription-learner-dashboard',
+    path: subscriptionDashboardUrlPath,
     loader: authenticatedLoader,
     handle: {
-      role: 'org.edx.frontend.subs.role.dashboard'
+      role: subscriptionDashboardRole
     },
     async lazy () {
       const module = await import('./Main');
@@ -18,7 +19,7 @@ const routes = [
     path: '/subscription-program-progress/:uuid',
     loader: authenticatedLoader,
     handle: {
-      role: 'org.edx.frontend.subs.role.programProgress'
+      role: subscriptionProgramProgressRole
     },
     async lazy () {
       const module = await import('./containers/ProgramDashboard/ProgramProgress/index');

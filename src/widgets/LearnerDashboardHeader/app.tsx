@@ -1,6 +1,6 @@
 import { App, LinkMenuItem, WidgetOperationTypes, getAppConfig } from '@openedx/frontend-base';
 
-import { appId } from '../../constants';
+import { appId, subscriptionDashboardUrlPath, subscriptionSignoutRole } from '../../constants';
 
 import ConfirmEmailBanner from './ConfirmEmailBanner';
 import CoursesLink from './CoursesLink';
@@ -55,12 +55,12 @@ const app: App = {
       ),
     },
     {
-      slotId: 'org.openedx.frontend.slot.header.secondaryLinks.v1',
+      slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
       id: 'org.openedx.frontend.widget.learnerDashboard.headerLinkSupport.v1',
       op: WidgetOperationTypes.APPEND,
       element: (
         <SupportLinkMenuItem
-          variant="navLink"
+          variant="dropdownItem"
         />
       ),
       condition: {
@@ -82,65 +82,67 @@ const app: App = {
       }
     },
     {
-      slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
-      id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuOrderHistory.v1',
-      op: WidgetOperationTypes.PREPEND,
-      element: (
-        <LinkMenuItem
-          label={messages['header.user.menu.orderHistory'].defaultMessage}
-          role="org.openedx.frontend.role.account"
-          variant="dropdownItem"
-        />
-      )
-    },
-    {
-      slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
-      id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuHelp.v1',
-      op: WidgetOperationTypes.PREPEND,
-      element: (
-        <LinkMenuItem
-          label={messages['header.user.menu.help'].defaultMessage}
-          role="org.openedx.frontend.role.account"
-          variant="dropdownItem"
-        />
-      )
-    },
-    {
-      slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
-      id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuMyCourses.v1',
-      op: WidgetOperationTypes.PREPEND,
-      element: (
-        <LinkMenuItem
-          label={messages['header.user.menu.myCourses'].defaultMessage}
-          role="org.openedx.frontend.role.account"
-          variant="dropdownItem"
-        />
-      )
-    },
-    {
-      slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
-      id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuDashboard.v1',
+      slotId: 'org.openedx.frontend.slot.header.desktopRight.v1',
+      id: 'org.edx.frontend.widget.learnerHome.headerLinkDashboard.v1',
       op: WidgetOperationTypes.PREPEND,
       element: (
         <LinkMenuItem
           label={messages['header.user.menu.dashboard'].defaultMessage}
-          role="org.openedx.frontend.role.account"
+          url={subscriptionDashboardUrlPath}
+          variant="navLink"
+        />
+      )
+    },
+    {
+      slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
+      id: 'org.edx.frontend.widget.header.user.menu.manageSubscription.v1',
+      op: WidgetOperationTypes.APPEND,
+      element: (
+        <LinkMenuItem
+          label={messages['header.user.menu.manageSubscription'].defaultMessage}
+          url="/subscription-manage"
           variant="dropdownItem"
         />
       )
     },
     {
       slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
-      id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuLastCourse.v1',
-      op: WidgetOperationTypes.PREPEND,
+      id: 'org.edx.frontend.widget.learnerDashboard.headerAuthenticatedMenuSignOut.v1',
+      op: WidgetOperationTypes.APPEND,
       element: (
         <LinkMenuItem
-          label={messages['header.user.menu.lastCourse'].defaultMessage}
-          role="org.openedx.frontend.role.account"
+          label={messages['header.user.menu.signOut'].defaultMessage}
+          role={subscriptionSignoutRole}
           variant="dropdownItem"
         />
       )
     },
+    {
+      slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
+      id: 'org.edx.frontend.widget.learnerDashboard.dashboard.v1',
+      op: WidgetOperationTypes.PREPEND,
+      element: (
+        <LinkMenuItem
+          label={messages['header.user.menu.dashboard'].defaultMessage}
+          url={subscriptionDashboardUrlPath}
+          variant="dropdownItem"
+        />
+      )
+    },
+    // {
+    //   // TO-DO : Resume your last course will be implemented seprately in a different ticket.(Ticket: SUBS-818)
+    //   // https://2u-internal.atlassian.net/browse/SUBS-818
+    //   slotId: 'org.openedx.frontend.slot.header.authenticatedMenu.v1',
+    //   id: 'org.openedx.frontend.widget.learnerDashboard.headerAuthenticatedMenuLastCourse.v1',
+    //   op: WidgetOperationTypes.PREPEND,
+    //   element: (
+    //     <LinkMenuItem
+    //       label={messages['header.user.menu.lastCourse'].defaultMessage}
+    //       url="/last-course"
+    //       variant="dropdownItem"
+    //     />
+    //   )
+    // },
   ]
 };
 
