@@ -9,7 +9,7 @@ const subscriptionAccessLoader = async () => {
   try {
     const { data } = await getAuthenticatedHttpClient().get(getSubsInitApiUrl());
 
-    if (data.userSubscription && !data.userSubscription.isSubscriber) {
+    if (!data?.userSubscription || !data.userSubscription.isSubscriber) {
       throw redirect('/learner-dashboard');  //redirect to learner dashboard if user does not have subscription access
     }
   
@@ -20,7 +20,7 @@ const subscriptionAccessLoader = async () => {
       throw error;
     }
 
-    return null; // keep the user on the current page if an error occurs
+    throw redirect('/learner-dashboard'); // redirect to learner dashboard if an error occurs
   }
 };
 
