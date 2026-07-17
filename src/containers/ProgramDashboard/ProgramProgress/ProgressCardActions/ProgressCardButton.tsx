@@ -35,12 +35,12 @@ export const ProgressCardButton: FC<ProgressCardButtonProps> = ({ variant, redir
             <ActionRow>
               <Button variant="tertiary" onClick={close}>Close</Button>
               <Button
-                as="a"
-                href={courseUrl}
+                as={Link}
+                to={courseUrl!}
                 variant="brand"
                 data-testid="action-row-btn"
               >
-                Resume Course
+                {formatMessage(messages.programProgressCardResumeCourseButton)}
               </Button>
             </ActionRow>
           )}

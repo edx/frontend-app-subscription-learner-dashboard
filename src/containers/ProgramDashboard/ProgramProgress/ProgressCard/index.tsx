@@ -89,6 +89,7 @@ export const ProgressCard: FC<ProgressCardProps> = ({ progressCardData, isLoadin
 
               {isProfessionalProgram
               && canUpgrade
+              && getCertificatePriceString(seats)
               && (
                 <ProgressCardButton
                   variant="brand"
@@ -97,7 +98,7 @@ export const ProgressCard: FC<ProgressCardProps> = ({ progressCardData, isLoadin
                   type="upgrade"
                   title={title}
                   price={getCertificatePriceString(seats)}
-                  courseUrl={courseUrl || ''}
+                  courseUrl={courseUrl}
                 />
               )}
               {isMicroMastersProgram

@@ -98,7 +98,7 @@ describe('InProgressTabData', () => {
 
     expect(screen.getByText('Courses in progress')).toBeInTheDocument();
     expect(screen.queryByText('Enroll in the next course in the program.')).not.toBeInTheDocument();
-    expect(screen.queryByText('You have completed all the courses in the program.')).not.toBeInTheDocument();
+    expect(screen.queryByText('You have completed all courses in the program.')).not.toBeInTheDocument();
   });
 
   it('passes isLoading to ProgressCard', () => {
