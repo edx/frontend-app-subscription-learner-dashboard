@@ -84,7 +84,7 @@ describe('InProgressTabData', () => {
 
     renderComponent();
 
-    expect(screen.getByText('You have completed all the courses in the program.')).toBeInTheDocument();
+    expect(screen.getByText('You have completed all courses in the program.')).toBeInTheDocument();
   });
 
   it('renders empty state when courseData is missing', () => {

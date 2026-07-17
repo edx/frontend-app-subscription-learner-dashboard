@@ -157,12 +157,12 @@ const messages = defineMessages({
     description: 'Upgrade message for Micromasters courses in the In Progress tab.',
   },
   programProgressInProgressRemainingCourses: {
-    defaultMessage: 'Enroll in the next course in the program. ',
+    defaultMessage: 'Enroll in the next course in the program.',
     id: 'program.progress.in.progress.remaining.courses',
     description: 'Message for remaining courses in the In Progress tab.',
   },
   programProgressInProgressCompletedCourses: {
-    defaultMessage: 'You have completed all the courses in the program. ',
+    defaultMessage: 'You have completed all courses in the program.',
     id: 'program.progress.in.progress.completed.courses',
     description: 'Message for completed courses in the In Progress tab.',
   },

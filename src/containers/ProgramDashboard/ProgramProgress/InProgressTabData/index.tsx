@@ -4,7 +4,6 @@ import { useIntl } from '@openedx/frontend-base';
 
 import { ProgressCard } from '../ProgressCard';
 import messages from '../messages';
-import { getCertificatePriceString } from '../../data/util';
 
 export const InProgressTabData: FC = () => {
   const { programProgressData, isLoading } = useProgressData();
@@ -25,7 +24,6 @@ export const InProgressTabData: FC = () => {
   const progressCards = inProgressData.map((course) => {
     const courseRuns = course.courseRuns || [];
     const [{ pacingType = '', start = '', end = '', courseUrl = '', upgradeUrl = '', seats = [] } = {}] = Array.isArray(courseRuns) ? courseRuns : [];
-    const price = getCertificatePriceString(seats);
 
     const progressCardData = {
       title: course.title,
@@ -34,7 +32,6 @@ export const InProgressTabData: FC = () => {
       pacingType: pacingType,
       courseUrl: courseUrl || '',
       upgradeUrl: upgradeUrl || '',
-      price: price || '',
       programType: programType || '',
       checkoutUrl: checkoutUrl || '',
       seats: seats || [],

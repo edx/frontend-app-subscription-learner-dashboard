@@ -9,7 +9,7 @@ import messages from '../messages';
 export const ProgressCardButton: FC<ProgressCardButtonProps> = ({ variant, redirectUrl, buttonText, type, title, price, courseUrl }) => {
   const [isOpen, open, close] = useToggle(false);
   const { formatMessage } = useIntl();
-  const isUpgradeButton = type === 'upgrade' && courseUrl;
+  const isUpgradeButton = type === 'upgrade' && courseUrl; // TODO : Check needs to be added to open this modal only when Upgrade api is as success
 
   if (redirectUrl) {
     return (
@@ -30,6 +30,7 @@ export const ProgressCardButton: FC<ProgressCardButtonProps> = ({ variant, redir
           isOpen={isOpen}
           onClose={close}
           hasCloseButton={false}
+          className="program-progress-upgrade-modal"
           footerNode={(
             <ActionRow>
               <Button variant="tertiary" onClick={close}>Close</Button>

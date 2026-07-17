@@ -2,7 +2,7 @@ import MicroMastersProgramDetailsSvgIcon from '../assets/micromasters-icon.svg';
 import ProfCertProgramDetailsSvgIcon from '../assets/professional-certificate-program-details.svg';
 import XSeriesProgramDetailsSvgIcon from '../assets/xseries-program-details.svg';
 import { PROGRAM_TYPE_MAP } from './constants';
-import { Seat } from './types';
+import type { Seat } from './types';
 
 export const UPGRADEABLE_SEAT_TYPES = ['verified', 'professional', 'no-id-professional', 'credit'];
 

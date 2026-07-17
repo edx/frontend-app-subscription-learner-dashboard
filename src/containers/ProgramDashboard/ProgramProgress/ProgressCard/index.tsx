@@ -47,7 +47,7 @@ export const ProgressCard: FC<ProgressCardProps> = ({ progressCardData, isLoadin
   }
 
   // using expired key from course object to determine if the course is expired as per condition on confluence and learners dashboard code.
-  const canUpgrade = upgradeUrl && !expired;
+  const canUpgrade = Boolean(upgradeUrl) && !expired;
   return (
     <Card className="progress-card mb-3" data-testid="progress-card" isLoading={isLoading}>
       <Card.Section className="pt-3 pb-2 px-4">
@@ -106,7 +106,7 @@ export const ProgressCard: FC<ProgressCardProps> = ({ progressCardData, isLoadin
               && (
                 <ProgressCardButton
                   variant="brand"
-                  redirectUrl={checkoutUrl || ' '}
+                  redirectUrl={checkoutUrl}
                   buttonText={formatMessage(messages.programProgressInProgressCourseMicromastersUpgrade, {
                     price: getCertificatePriceString(seats, true),
                   })}
