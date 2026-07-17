@@ -4,11 +4,11 @@ import CoursesPanel from '../CoursesPanel';
 import ProgramsPanel from '../ProgramsPanel';
 import HistoryPanel from '../HistoryPanel';
 
-interface IDashboardContentProps {
+interface IDashboardTabsProps {
   hasCourseHistory: boolean,
 }
 
-const DashboardTabs = ({ hasCourseHistory }: IDashboardContentProps) => {
+const DashboardTabs = ({ hasCourseHistory }: IDashboardTabsProps) => {
   // Defining the tabs here
   const dashboardTabs = useMemo(() => {
     const tabs = [
