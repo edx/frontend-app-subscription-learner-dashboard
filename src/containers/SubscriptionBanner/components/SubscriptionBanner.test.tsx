@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import moment from 'moment';
 import { SubscriptionBanner } from './SubscriptionBanner';
 
 jest.mock('react-intl', () => ({
@@ -34,6 +35,42 @@ jest.mock('@src/hooks', () => ({
 }));
 
 describe('SubscriptionBanner', () => {
+  const getStartOfDayMs = (dateString: string) => moment(dateString).startOf('day').valueOf();
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  test('renders trial heading with "expires today" when trial end date is today', () => {
+    jest.spyOn(moment, 'now').mockReturnValue(getStartOfDayMs('2026-07-22'));
+
+    render(<SubscriptionBanner />);
+
+    const trialTitle = screen.getByText(/your edx subscription trial expires today\./i);
+    expect(trialTitle).toBeInTheDocument();
+    expect(trialTitle.textContent).not.toContain('{daysLeft}');
+  });
+
+  test('renders trial heading with "expires tomorrow" when trial end date is tomorrow', () => {
+    const nowSpy = jest.spyOn(moment, 'now').mockReturnValue(getStartOfDayMs('2026-07-21'));
+
+    render(<SubscriptionBanner />);
+
+    expect(screen.getByText(/your edx subscription trial expires tomorrow\./i)).toBeInTheDocument();
+
+    nowSpy.mockRestore();
+  });
+
+  test('renders trial heading with interpolated days when trial end date is more than one day away', () => {
+    const nowSpy = jest.spyOn(moment, 'now').mockReturnValue(getStartOfDayMs('2026-07-19'));
+
+    render(<SubscriptionBanner />);
+
+    expect(screen.getByText(/your edx subscription trial expires in 3 days\./i)).toBeInTheDocument();
+
+    nowSpy.mockRestore();
+  });
+
   // --- Renew Button ---
   { /* TODO [TEMP]: Removing test cases related to Renew button as there is no dynamic data to determine the subscription status and render the button accordingly.
       Reason: Development before backend connection
