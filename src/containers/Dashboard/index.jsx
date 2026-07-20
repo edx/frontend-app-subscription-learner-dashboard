@@ -22,6 +22,7 @@ export const Dashboard = () => {
   const showSelectSessionModal = selectSessionModal.cardId !== null;
 
   const hasCourses = useMemo(() => data?.subscriptionCourses?.length > 0, [data]);
+  const hasCourseHistory = (data?.nonUpgradeableCourses?.length ?? 0) > 0;
 
   return (
     <div id="learnerdashboardroot">
@@ -41,7 +42,7 @@ export const Dashboard = () => {
                 <DashboardLayout>
                   <SubscriptionBanner />
                   <DashboardTitle />
-                  <DashboardContent />
+                  <DashboardContent hasCourseHistory={hasCourseHistory} />
                   <RecentlyViewedPanel />
                 </DashboardLayout>
               )}

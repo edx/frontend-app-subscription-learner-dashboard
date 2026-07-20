@@ -3,11 +3,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { IntlProvider } from '@openedx/frontend-base';
 import DashboardTabs from './DashboardTabs';
 
-interface TabsProps {
-  children?: React.ReactNode,
-  className?: string,
-};
-
 interface TabProps {
   title?: React.ReactNode,
   children?: React.ReactNode,
@@ -16,12 +11,16 @@ interface TabProps {
 };
 
 jest.mock('@openedx/paragon', () => {
-  const MockTabs = ({ children, className }: TabsProps) => (
-    <div className={className}>{children}</div>
+  const React = jest.requireActual('react');
+  const MockTabs = ({ children, className, onSelect }: any) => (
+    <div className={className}>
+      {React.Children.map(children, child =>
+        React.cloneElement(child, { onSelect })
+      )}
+    </div>
   );
 
   MockTabs.displayName = 'MockTabs';
-
   const MockTab = ({
     title,
     children,
@@ -44,7 +43,12 @@ jest.mock('@openedx/paragon', () => {
   };
 });
 
-const renderComponent = () => render(<IntlProvider locale="en"><DashboardTabs /></IntlProvider>);
+const renderComponent = (props = {}) =>
+  render(
+    <IntlProvider locale="en">
+      <DashboardTabs hasCourseHistory={false} {...props} />
+    </IntlProvider>
+  );
 
 jest.mock('../ProgramsPanel', () => {
   const MockProgramsPanel = () => (
@@ -88,7 +92,7 @@ describe('DashboardTabs', () => {
 
     expect(screen.getByText('Courses')).toBeInTheDocument();
     expect(screen.getAllByText('Programs')).toHaveLength(1);
-    expect(screen.getByText('History')).toBeInTheDocument();
+    expect(screen.queryByText('Course history')).not.toBeInTheDocument();
   });
 
   it('Courses tab is active by default and shows CoursesPanel', () => {
@@ -108,9 +112,9 @@ describe('DashboardTabs', () => {
   });
 
   it('switches to History tab on click', () => {
-    renderComponent();
+    renderComponent({ hasCourseHistory: true });
 
-    fireEvent.click(screen.getByText('History'));
+    fireEvent.click(screen.getByText('Course history'));
 
     expect(
       screen.getByTestId('history-panel')

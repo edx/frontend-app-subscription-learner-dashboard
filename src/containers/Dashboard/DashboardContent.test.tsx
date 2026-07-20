@@ -19,7 +19,7 @@ jest.mock('./DashboardTabs', () => {
 
 describe('DashboardContent', () => {
   it('renders both main content and sidebar', () => {
-    render(<DashboardContent />);
+    render(<DashboardContent hasCourseHistory={false} />);
 
     expect(screen.getByTestId('dashboard-tabs')).toBeInTheDocument();
     expect(screen.getByTestId('dashboard-sidebar')).toBeInTheDocument();

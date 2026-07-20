@@ -4,25 +4,36 @@ import CoursesPanel from '../CoursesPanel';
 import ProgramsPanel from '../ProgramsPanel';
 import HistoryPanel from '../HistoryPanel';
 
-const DashboardTabs = () => {
+interface IDashboardTabsProps {
+  hasCourseHistory: boolean,
+}
+
+const DashboardTabs = ({ hasCourseHistory }: IDashboardTabsProps) => {
   // Defining the tabs here
-  const dashboardTabs = useMemo(() => ([
-    {
-      key: 'courses',
-      title: 'Courses',
-      panel: <CoursesPanel />,
-    },
-    {
-      key: 'programs',
-      title: 'Programs',
-      panel: <ProgramsPanel />,
-    },
-    {
-      key: 'history',
-      title: 'History',
-      panel: <HistoryPanel />,
-    },
-  ]), []);
+  const dashboardTabs = useMemo(() => {
+    const tabs = [
+      {
+        key: 'courses',
+        title: 'Courses',
+        panel: <CoursesPanel />,
+      },
+      {
+        key: 'programs',
+        title: 'Programs',
+        panel: <ProgramsPanel />,
+      },
+    ];
+
+    if (hasCourseHistory) {
+      tabs.push({
+        key: 'history',
+        title: 'Course history',
+        panel: <HistoryPanel />,
+      });
+    }
+
+    return tabs;
+  }, [hasCourseHistory]);
 
   const [activeTab, setActiveTab] = useState(dashboardTabs[0].key);
   const handleTabSelect = useCallback((tabKey) => {
