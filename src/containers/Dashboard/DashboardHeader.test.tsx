@@ -20,13 +20,13 @@ const renderComponent = (
 describe('DashboardHeader', () => {
   it('renders header title and subtitle correctly', () => {
     renderComponent(defaultStartDate, {
-      [messages.dashboardHeaderWelcomeTitle.id]: 'Welcome to Dashboard',
+      [messages.dashboardHeaderWelcomeTitle.id]: 'Welcome to your learning home.',
       [messages.dashboardHeaderWelcomeMessage.id]:
         'Subscriber since {startDate}',
     });
 
     expect(screen.getByTestId('dashboard-title'))
-      .toHaveTextContent('Welcome to Dashboard');
+      .toHaveTextContent('Welcome to your learning home.');
 
     expect(screen.getByTestId('dashboard-subtitle'))
       .toHaveTextContent(
@@ -53,12 +53,12 @@ describe('DashboardHeader', () => {
     const startDate = 'March 15, 2025';
 
     renderComponent(startDate, {
-      [messages.dashboardHeaderWelcomeTitle.id]: 'Welcome',
+      [messages.dashboardHeaderWelcomeTitle.id]: 'Welcome to your learning home.',
       [messages.dashboardHeaderWelcomeMessage.id]:
-        'Started on {startDate}',
+        'Subscriber since {startDate}',
     });
 
     expect(screen.getByTestId('dashboard-subtitle'))
-      .toHaveTextContent(`Started on ${startDate}`);
+      .toHaveTextContent(`Subscriber since ${startDate}`);
   });
 });
