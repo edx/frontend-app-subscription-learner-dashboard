@@ -14,16 +14,21 @@ export const ProgressCardActions: FC<ProgressCardActionsProps> = ({ tabType, red
   const courseData = programProgressData?.courseData || {};
   const remainingCourseCount = courseData?.notStarted?.length || 0;
   const completedCourseCount = courseData?.completed?.length || 0;
+  const inProgressCourseCount = courseData?.inProgress?.length || 0;
 
   return (
     <Col xs={12} className="d-flex justify-content-md-end align-items-start mb-2">
       {/** View course details button */}
-      { tabType === formatMessage(messages.programProgressRemainingTab).toLowerCase() && remainingCourseCount > 0 && (
+      {tabType === formatMessage(messages.programProgressRemainingTab).toLowerCase() && remainingCourseCount > 0 && (
         <ProgressCardButton variant="outline-primary" redirectUrl={redirectUrl || ''} buttonText={formatMessage(messages.programProgressCardViewCourseDetailButton)} />
       )}
 
       {/** Resume course button */}
-      { tabType === formatMessage(messages.programProgressCompletedTab).toLowerCase() && completedCourseCount > 0 && (
+      {(
+        (tabType === formatMessage(messages.programProgressCompletedTab).toLowerCase() && completedCourseCount > 0)
+        || (tabType === formatMessage(messages.programProgressInProgressTab).toLowerCase() && inProgressCourseCount > 0)
+      )
+      && (
         <ProgressCardButton variant="primary" redirectUrl={redirectUrl || ''} buttonText={formatMessage(messages.programProgressCardResumeCourseButton)} />
       )}
     </Col>

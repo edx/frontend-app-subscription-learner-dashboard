@@ -18,3 +18,9 @@
   color: var(--pgn-color-gray-700);
   font-size: 1em;
 }
+
+.program-progress-upgrade-modal .pgn__action-row{
+  .btn-tertiary{
+    border: none;
+  }
+}

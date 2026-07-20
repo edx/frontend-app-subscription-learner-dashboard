@@ -146,6 +146,51 @@ const messages = defineMessages({
     id: 'program.progress.certificate.content.two',
     description: 'Second content paragraph shown under the program progress circle',
   },
+  programProgressInProgressCourse: {
+    defaultMessage: 'Courses in progress',
+    id: 'program.progress.in.progress.course',
+    description: 'Header text to be displayed inside the In Progress tab of the program progress page.',
+  },
+  programProgressInProgressCourseMicromastersUpgrade: {
+    defaultMessage: 'Upgrade to verified for {price}',
+    id: 'program.progress.in.progress.course.micromasters.upgrade',
+    description: 'Upgrade message for Micromasters courses in the In Progress tab.',
+  },
+  programProgressInProgressRemainingCourses: {
+    defaultMessage: 'Enroll in the next course in the program.',
+    id: 'program.progress.in.progress.remaining.courses',
+    description: 'Message for remaining courses in the In Progress tab.',
+  },
+  programProgressInProgressCompletedCourses: {
+    defaultMessage: 'You have completed all courses in the program.',
+    id: 'program.progress.in.progress.completed.courses',
+    description: 'Message for completed courses in the In Progress tab.',
+  },
+  programProgressInProgressCourseProfessionalUpgradeModalTitle: {
+    defaultMessage: 'You now have full access to the {title}',
+    id: 'program.progress.in.progress.course.professional.upgrade.modal.title',
+    description: 'Modal title for Professional Certificate courses in the In Progress tab.',
+  },
+  programProgressInProgressCourseProfessionalUpgradeModalContent: {
+    defaultMessage: "You're saving as a subscriber. This course is valued at {price}.",
+    id: 'program.progress.in.progress.course.professional.upgrade.modal.content',
+    description: 'Modal content for Professional Certificate courses in the In Progress tab.',
+  },
+  programProgressInProgressCertificateStatus: {
+    defaultMessage: 'Certificate Status: {status}',
+    id: 'program.progress.in.progress.certificate.status',
+    description: 'Certificate status for courses in the In Progress tab.',
+  },
+  programProgressInProgressCertificateNeedsVerified: {
+    defaultMessage: 'Needs verified certificate',
+    id: 'program.progress.in.progress.certificate.needs.verified',
+    description: 'Certificate status indicating that a verified certificate is needed for courses in the In Progress tab.',
+  },
+  programProgressInProgressCertificateNotEarned: {
+    defaultMessage: 'Not earned yet',
+    id: 'program.progress.in.progress.certificate.not.earned',
+    description: 'Certificate status indicating that the certificate has not been earned yet for courses in the In Progress tab.',
+  },
 });
 
 export default messages;

@@ -107,6 +107,12 @@ export interface ProgressCardData {
   end?: string,
   certificateUrl?: string,
   courseUrl?: string,
+  upgradeUrl?: string,
+  price?: string,
+  programType?: string,
+  checkoutUrl?: string,
+  expired?: boolean,
+  seats?: Seat[],
 }
 
 export interface ProgressCardActionsProps {
@@ -118,6 +124,10 @@ export interface ProgressCardButtonProps {
   variant: 'outline-primary' | 'brand' | 'primary',
   redirectUrl: string,
   buttonText: string,
+  type?: string,
+  title?: string,
+  price?: string,
+  courseUrl?: string,
 }
 
 export interface ProgramProgressSidebarProps {
@@ -137,3 +147,21 @@ export interface CircleSegmentProps {
   index: number,
   classList: string,
 };
+
+export interface Seat {
+  type: string,
+  price: string,
+  currency: string,
+  sku?: string,
+  upgradeDeadline?: string | null,
+}
+
+export interface CourseRun {
+  pacingType?: string,
+  start?: string,
+  end?: string,
+  courseUrl?: string,
+  upgradeUrl?: string,
+  price?: string,
+  seats?: Seat[],
+}

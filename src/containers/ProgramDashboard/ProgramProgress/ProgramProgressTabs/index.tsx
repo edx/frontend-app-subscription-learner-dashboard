@@ -6,6 +6,7 @@ import { ProgramProgressTabsProps, ProgramProgressTabItems } from '../../data/ty
 import messages from '../messages';
 import { RemainingTabData } from '../RemainingTabData';
 import { CompletedTabData } from '../CompletedTabData';
+import { InProgressTabData } from '../InProgressTabData';
 
 export const ProgramProgressTabs: FC<ProgramProgressTabsProps> = ({ type, counts }) => {
   const { inProgress, remaining, completed } = counts;
@@ -16,7 +17,7 @@ export const ProgramProgressTabs: FC<ProgramProgressTabsProps> = ({ type, counts
       key: 'in-progress',
       title: formatMessage(messages.programProgressInProgressTab),
       count: inProgress,
-      panel: <span>In progress tab data will be available soon.</span>,
+      panel: <InProgressTabData />,
     },
     {
       key: 'remaining',
