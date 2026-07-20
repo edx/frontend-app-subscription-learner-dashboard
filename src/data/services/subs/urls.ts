@@ -3,7 +3,7 @@ import StrictDict from '@src/utils/StrictDict';
 
 export const getApiUrl = () => (`${getSiteConfig().lmsBaseUrl}/api`);
 
-const getSubsInitApiUrl = () => (`${getApiUrl()}/subscription/init/`);
+export const getSubsInitApiUrl = () => (`${getApiUrl()}/subscription/init/`);
 
 export const programProgressUrl = (uuid: string) => `${getApiUrl()}/subscription/programs/${encodeURIComponent(uuid)}/`;
 
