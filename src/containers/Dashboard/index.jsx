@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { DashboardHeader } from './DashboardHeader';
 
 import { useSelectSessionModal } from '@src/data/context';
 import { useInitializeSubsCourseDashboard } from '@src/data/hooks';
@@ -14,12 +15,15 @@ import hooks from './hooks';
 import './index.scss';
 import { SubscriptionBanner } from '../SubscriptionBanner';
 import { DashboardTitle } from './DashboardTitle';
+import { useInitializeSubsDashboard } from '@src/data/hooks';
 
 export const Dashboard = () => {
   const { data, isPending } = useInitializeSubsCourseDashboard();
+  const { data: learnerData } = useInitializeSubsDashboard();
   const { pageTitle } = hooks.useDashboardMessages();
   const { selectSessionModal } = useSelectSessionModal();
   const showSelectSessionModal = selectSessionModal.cardId !== null;
+  const userSubscriptionStartDate = learnerData?.userSubscription?.subscriptionStartDate || '';
 
   const hasCourses = useMemo(() => data?.subscriptionCourses?.length > 0, [data]);
 
@@ -39,6 +43,7 @@ export const Dashboard = () => {
               ? (<LoadingView />)
               : (
                 <DashboardLayout>
+                  <DashboardHeader startDate={userSubscriptionStartDate} />
                   <SubscriptionBanner />
                   <DashboardTitle />
                   <DashboardContent />

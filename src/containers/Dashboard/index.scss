@@ -1,5 +1,16 @@
 @use "@openedx/paragon/styles/css/core/custom-media-breakpoints.css";
+$title-color: #002B2B !default;
+$subtitle-color: #454545 !default;
 
 .course-list-column {
   padding: 0 var(--pgn-spacing-spacer-4);
+}
+
+.dashboard-header-title{
+  color: $title-color;
+  font-size: var(--pgn-typography-font-size-h3-base);
+}
+
+.dashboard-subtitle{
+  color: $subtitle-color;
 }
