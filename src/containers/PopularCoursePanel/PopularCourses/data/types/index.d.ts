@@ -1,6 +1,6 @@
 import { ProductCardItem } from '../../../../ProductCard/data/types';
 
-export interface RecentlyViewedCourseProgramProps {
+export interface PopularCoursesProps {
   items: ProductCardItem[],
   isLoading: boolean,
 }

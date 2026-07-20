@@ -5,7 +5,7 @@ import { useInitializeSubsCourseDashboard } from '@src/data/hooks';
 import SelectSessionModal from '../../containers/SelectSessionModal';
 import { DashboardContent } from './DashboardContent';
 import DashboardModalSlot from '../../slots/DashboardModalSlot';
-import RecentlyViewedPanel from '../RecentlyViewedPanel';
+import PopularCoursePanel from '../PopularCoursePanel';
 
 import LoadingView from './LoadingView';
 import DashboardLayout from './DashboardLayout';
@@ -43,7 +43,7 @@ export const Dashboard = () => {
                   <SubscriptionBanner />
                   <DashboardTitle />
                   <DashboardContent hasCourseHistory={hasCourseHistory} />
-                  <RecentlyViewedPanel />
+                  <PopularCoursePanel />
                 </DashboardLayout>
               )}
           </div>

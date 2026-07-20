@@ -18,7 +18,7 @@ export const searchKeys = {
     [...searchKeys.all, 'popular', productType, limit] as const,
 };
 
-export const useRecentlyViewedCoursesAndProgramsData = (
+export const usePopularCoursesData = (
   searchClient: SearchClient | null,
   enabled: boolean,
 ): UseQueryResult<ProductCardItem[]> =>
@@ -37,6 +37,9 @@ export const useRecentlyViewedCoursesAndProgramsData = (
           organization_logo_override?: string,
           content_type?: string,
           type?: string,
+          partner?: string,
+          weeks_to_complete?: number,
+          level?: string,
         };
 
         return {
@@ -45,8 +48,11 @@ export const useRecentlyViewedCoursesAndProgramsData = (
           primary_description: hitDetails.primary_description ?? hitDetails.short_description ?? hitDetails.description ?? '',
           url: hitDetails.card_image_url ?? hitDetails.image_url ?? hitDetails.marketing_url ?? '',
           thumbnail: hitDetails.organization_logo_override ?? '',
-          footerLabel: hitDetails.content_type ?? hitDetails.type ?? 'Course',
+          content_type: hitDetails.content_type ?? hitDetails.type ?? 'Course',
           product: 'Course',
+          partner: hitDetails.partner ?? '',
+          weeks_to_complete: hitDetails.weeks_to_complete ?? undefined,
+          level: hitDetails.level ?? undefined,
         };
       });
     },

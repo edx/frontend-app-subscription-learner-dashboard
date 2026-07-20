@@ -1,20 +1,13 @@
 import { FC } from 'react';
-import { Card, Badge, Icon } from '@openedx/paragon';
-import { School } from '@openedx/paragon/icons';
+import { useIntl } from '@openedx/frontend-base';
+import { Card, Icon } from '@openedx/paragon';
+import { Timelapse, Speed } from '@openedx/paragon/icons';
 
 import { ProductCardProps } from './data/types';
-
-import './index.scss';
-
-const DESCRIPTION_MAX_LENGTH = 130;
-
-const getPlainText = (value: string) => value.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-
-const truncateText = (value: string, maxLength: number) => (
-  value.length > maxLength ? `${value.slice(0, maxLength).trimEnd()}...` : value
-);
+import messages from './messages';
 
 export const ProductCard: FC<ProductCardProps> = ({ item, isLoading }) => {
+  const { formatMessage } = useIntl();
   return (
     <Card
       className="shadow-sm d-flex flex-column rounded w-100 overflow-hidden"
@@ -22,6 +15,8 @@ export const ProductCard: FC<ProductCardProps> = ({ item, isLoading }) => {
       data-testid="product-card"
       isLoading={isLoading}
     >
+      <Card.Header title={item.content_type} className="pb-2 bg-light-500 text-primary-500" size="xs" />
+
       <div className="position-relative">
         <Card.ImageCap
           src={item.url}
@@ -32,29 +27,20 @@ export const ProductCard: FC<ProductCardProps> = ({ item, isLoading }) => {
         />
       </div>
 
-      <Card.Header title={item.title} />
+      <Card.Header title={item.title} size="sm" />
+      <Card.Header title={item.partner ?? ''} className="d-flex justify-content-between align-items-center" size="xs" />
 
-      <Card.Section className="d-flex flex-column flex-grow-1 overflow-hidden">
-        <div className="flex-grow-1 min-h-0">
-          <p className="text-truncate-3 mb-2">
-            {truncateText(getPlainText(item.primary_description), DESCRIPTION_MAX_LENGTH)}
-          </p>
-        </div>
-
-        {(item.product === 'Program' && item.tagText) && (
-          <Badge
-            variant="light"
-            className="d-inline-flex align-items-center px-2 py-1 align-self-start"
-          >
-            <Icon src={School} className="mr-2" />
-            {item.tagText}
-          </Badge>
-        )}
+      <Card.Section className="d-flex flex-column flex-grow-1 overflow-hidden mt-6">
+        <span className="d-flex align-items-center">
+          <Icon src={Timelapse} className="mr-2" />
+          <span>{formatMessage(messages.weeksToComplete, { count: item.weeks_to_complete })}</span>
+        </span>
+        <span className="d-flex align-items-center mt-3">
+          <Icon src={Speed} className="mr-2" />
+          <span>{formatMessage(messages.level, { level: item.level ?? '' })}</span>
+        </span>
       </Card.Section>
 
-      <Card.Footer className="d-flex justify-content-between align-items-center">
-        <span className={`small ${item.product === 'Program' ? 'text-white' : 'text-muted'}`}>{item.footerLabel}</span>
-      </Card.Footer>
     </Card>
   );
 };
