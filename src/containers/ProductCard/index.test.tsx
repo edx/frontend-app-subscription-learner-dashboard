@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { IntlProvider } from 'react-intl';
+import { IntlProvider } from '@openedx/frontend-base';
 import '@testing-library/jest-dom';
 
 import { ProductCard } from './index';

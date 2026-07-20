@@ -28,17 +28,24 @@ export const ProductCard: FC<ProductCardProps> = ({ item, isLoading }) => {
       </div>
 
       <Card.Header title={item.title} size="sm" />
-      <Card.Header title={item.partner ?? ''} className="d-flex justify-content-between align-items-center" size="xs" />
+
+      {item.partner ? (
+        <Card.Header title={item.partner} className="d-flex justify-content-between align-items-center" size="xs" />
+      ) : null}
 
       <Card.Section className="d-flex flex-column flex-grow-1 overflow-hidden mt-6">
-        <span className="d-flex align-items-center">
-          <Icon src={Timelapse} className="mr-2" />
-          <span>{formatMessage(messages.weeksToComplete, { count: item.weeks_to_complete })}</span>
-        </span>
-        <span className="d-flex align-items-center mt-3">
-          <Icon src={Speed} className="mr-2" />
-          <span>{formatMessage(messages.level, { level: item.level ?? '' })}</span>
-        </span>
+        {typeof item.weeks_to_complete === 'number' && (
+          <span className="d-flex align-items-center">
+            <Icon src={Timelapse} className="mr-2" />
+            <span>{formatMessage(messages.weeksToComplete, { count: item.weeks_to_complete })}</span>
+          </span>
+        )}
+        {item.level ? (
+          <span className={`d-flex align-items-center${typeof item.weeks_to_complete === 'number' ? ' mt-3' : ''}`}>
+            <Icon src={Speed} className="mr-2" />
+            <span>{formatMessage(messages.level, { level: item.level })}</span>
+          </span>
+        ) : null}
       </Card.Section>
 
     </Card>
