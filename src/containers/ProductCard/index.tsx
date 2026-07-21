@@ -18,7 +18,7 @@ export const ProductCard: FC<ProductCardProps> = ({ item, isLoading }) => {
     >
       <Card.Header title={item.content_type} className="pb-2 pt-2 bg-light-500 text-primary-500 content-type" size="xs" />
 
-      <div className="position-relative">
+      <div className="position-relative image-container">
         <Card.ImageCap
           src={item.url}
           srcAlt={`${item.title} main-image`}
