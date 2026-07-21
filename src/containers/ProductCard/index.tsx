@@ -3,7 +3,7 @@ import { useIntl } from '@openedx/frontend-base';
 import { Card, Icon } from '@openedx/paragon';
 import { Timelapse, Speed } from '@openedx/paragon/icons';
 import './index.scss';
-import cardFallbackImg from '@openedx/brand-openedx/paragon/images/card-imagecap-fallback.png';
+import cardFallbackImg from '@edx/brand/paragon/images/card-imagecap-fallback.png';
 import { ProductCardProps } from './data/types';
 import messages from './messages';
 

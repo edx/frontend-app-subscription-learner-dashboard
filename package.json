@@ -47,6 +47,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@openedx/brand-openedx": "npm:@edx/elm-theme@^1.11.1",
+    "@edx/brand": "npm:@openedx/brand-openedx@^1.2.3",
     "classnames": "^2.3.1",
     "font-awesome": "4.7.0",
     "lodash": "^4.17.21",
