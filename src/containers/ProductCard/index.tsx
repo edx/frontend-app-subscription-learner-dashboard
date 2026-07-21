@@ -3,7 +3,7 @@ import { useIntl } from '@openedx/frontend-base';
 import { Card, Icon } from '@openedx/paragon';
 import { Timelapse, Speed } from '@openedx/paragon/icons';
 import './index.scss';
-
+import cardFallbackImg from '@openedx/brand-openedx/paragon/images/card-imagecap-fallback.png';
 import { ProductCardProps } from './data/types';
 import messages from './messages';
 
@@ -20,7 +20,7 @@ export const ProductCard: FC<ProductCardProps> = ({ item, isLoading }) => {
 
       <div className="position-relative image-container">
         <Card.ImageCap
-          src={item.url}
+          src={item.url || cardFallbackImg}
           srcAlt={`${item.title} main-image`}
           data-testid="product-card-image"
           logoSrc={item.thumbnail || ''}
