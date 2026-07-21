@@ -6,8 +6,11 @@ export interface ProductCardItem {
   tagText?: string,
   url: string,
   thumbnail?: string,
-  footerLabel: string,
+  content_type: string,
   product: string,
+  partner?: string,
+  weeks_to_complete?: number,
+  level?: string,
 }
 
 export interface ProductCardProps {

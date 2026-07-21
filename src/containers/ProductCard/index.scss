@@ -1,6 +1,17 @@
-.text-truncate-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.product-card-title { 
+  min-height: 6.4rem;
+}
+
+.card-container > .content-type > .pgn__card-header-content {
+  margin-top: 0;
+}
+
+.card-container .pgn__card-logo-cap {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.card-container .pgn__card-image-cap {
+  border-radius: 0 !important;
 }

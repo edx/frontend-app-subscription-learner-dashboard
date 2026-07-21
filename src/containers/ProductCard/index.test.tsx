@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { IntlProvider } from '@openedx/frontend-base';
 import '@testing-library/jest-dom';
 
 import { ProductCard } from './index';
@@ -27,8 +28,10 @@ describe('ProductCard', () => {
     url: 'https://via.placeholder.com/150',
     thumbnail: 'https://via.placeholder.com/50',
     product: 'Program',
-    tagText: 'New',
-    footerLabel: 'Test Category',
+    content_type: 'Test Category',
+    partner: '',
+    weeks_to_complete: 4,
+    level: 'Beginner',
   };
 
   const renderComponent = (overrideProps = {}) => {
@@ -37,7 +40,11 @@ describe('ProductCard', () => {
       isLoading: false,
     };
 
-    return render(<ProductCard {...props} />);
+    return render(
+      <IntlProvider locale="en">
+        <ProductCard {...props} />
+      </IntlProvider>,
+    );
   };
 
   describe('Rendering', () => {
@@ -50,7 +57,6 @@ describe('ProductCard', () => {
       renderComponent();
 
       expect(screen.getByText('Test Card')).toBeInTheDocument();
-      expect(screen.getByText('Test Body Content')).toBeInTheDocument();
       expect(screen.getByText('Test Category')).toBeInTheDocument();
     });
 
@@ -58,41 +64,39 @@ describe('ProductCard', () => {
       renderComponent();
 
       expect(screen.getByText('Test Card')).toBeInTheDocument();
-      expect(screen.getByText('Test Body Content')).toBeInTheDocument();
       expect(screen.getByText('Test Category')).toBeInTheDocument();
     });
 
-    it('strips html tags from description text', () => {
-      renderComponent({ primary_description: '<p>This is <strong>plain</strong> text</p>' });
+    it('renders content_type in header', () => {
+      renderComponent({ content_type: 'Custom Type' });
 
-      expect(screen.getByText('This is plain text')).toBeInTheDocument();
-      expect(screen.queryByText('<p>This is <strong>plain</strong> text</p>')).not.toBeInTheDocument();
+      expect(screen.getByText('Custom Type')).toBeInTheDocument();
     });
   });
 
   describe('Badge Rendering', () => {
-    it('renders badge when product is Program and tagText exists', () => {
-      renderComponent();
+    it('renders partner when provided', () => {
+      renderComponent({ partner: 'Acme Corp' });
 
-      expect(screen.getByText('New')).toBeInTheDocument();
+      expect(screen.getByText('Acme Corp')).toBeInTheDocument();
     });
 
-    it('does not render badge when product is Course', () => {
-      renderComponent({ product: 'Course' });
+    it('renders empty partner when not provided', () => {
+      renderComponent({ partner: undefined });
 
-      expect(screen.queryByText('New')).not.toBeInTheDocument();
+      expect(screen.getByTestId('product-card')).toBeInTheDocument();
     });
 
-    it('does not render badge when tagText is empty', () => {
-      renderComponent({ tagText: '' });
+    it('does not render partner when empty string', () => {
+      renderComponent({ partner: '' });
 
-      expect(screen.queryByText('New')).not.toBeInTheDocument();
+      expect(screen.getByTestId('product-card')).toBeInTheDocument();
     });
 
-    it('does not render badge when tagText is undefined', () => {
-      renderComponent({ tagText: undefined });
+    it('renders partner with product Course', () => {
+      renderComponent({ product: 'Course', partner: 'Test Partner' });
 
-      expect(screen.queryByText('New')).not.toBeInTheDocument();
+      expect(screen.getByText('Test Partner')).toBeInTheDocument();
     });
   });
 
@@ -118,7 +122,11 @@ describe('ProductCard', () => {
 
   describe('Loading State', () => {
     it('renders without crashing when loading', () => {
-      render(<ProductCard item={baseMockData} isLoading />);
+      render(
+        <IntlProvider locale="en">
+          <ProductCard item={baseMockData} isLoading />
+        </IntlProvider>,
+      );
 
       expect(screen.getByTestId('product-card')).toBeInTheDocument();
     });

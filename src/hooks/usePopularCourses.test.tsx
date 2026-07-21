@@ -3,7 +3,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { fetchPopularProducts } from '@src/utils/algoliaUtils';
-import { useRecentlyViewedCoursesAndProgramsData } from './useRecentlyViewedCoursesAndProgramsData';
+import { usePopularCoursesData } from './usePopularCourses';
 
 jest.mock('@src/utils/algoliaUtils', () => ({
   fetchPopularProducts: jest.fn(),
@@ -33,7 +33,7 @@ const createWrapper = () => {
   return Wrapper;
 };
 
-describe('useRecentlyViewedCoursesAndProgramsData', () => {
+describe('usePopularCoursesData', () => {
   const mockSearchClient = {} as any;
 
   beforeEach(() => {
@@ -52,7 +52,7 @@ describe('useRecentlyViewedCoursesAndProgramsData', () => {
 
     mockedFetchPopularProducts.mockResolvedValue(mockData as any);
 
-    const { result } = renderHook(() => useRecentlyViewedCoursesAndProgramsData(mockSearchClient, true), {
+    const { result } = renderHook(() => usePopularCoursesData(mockSearchClient, true), {
       wrapper: createWrapper(),
     });
 
@@ -67,8 +67,11 @@ describe('useRecentlyViewedCoursesAndProgramsData', () => {
         primary_description: 'This is a test course description',
         url: 'https://example.com/image.jpg',
         thumbnail: 'https://example.com/thumbnail.jpg',
-        footerLabel: 'Course',
+        content_type: 'Course',
         product: 'Course',
+        partner: '',
+        weeks_to_complete: undefined,
+        level: undefined,
       },
     ]);
   });
@@ -76,7 +79,7 @@ describe('useRecentlyViewedCoursesAndProgramsData', () => {
   it('should be in loading state initially', () => {
     mockedFetchPopularProducts.mockImplementation(() => new Promise(() => {}));
 
-    const { result } = renderHook(() => useRecentlyViewedCoursesAndProgramsData(mockSearchClient, true), {
+    const { result } = renderHook(() => usePopularCoursesData(mockSearchClient, true), {
       wrapper: createWrapper(),
     });
 
@@ -86,7 +89,7 @@ describe('useRecentlyViewedCoursesAndProgramsData', () => {
   it('should handle error state', async () => {
     mockedFetchPopularProducts.mockRejectedValue(new Error('API Error'));
 
-    const { result } = renderHook(() => useRecentlyViewedCoursesAndProgramsData(mockSearchClient, true), {
+    const { result } = renderHook(() => usePopularCoursesData(mockSearchClient, true), {
       wrapper: createWrapper(),
     });
 
@@ -100,7 +103,7 @@ describe('useRecentlyViewedCoursesAndProgramsData', () => {
   it('should have correct query configuration', async () => {
     mockedFetchPopularProducts.mockResolvedValue([]);
 
-    const { result } = renderHook(() => useRecentlyViewedCoursesAndProgramsData(mockSearchClient, true), {
+    const { result } = renderHook(() => usePopularCoursesData(mockSearchClient, true), {
       wrapper: createWrapper(),
     });
 
@@ -115,7 +118,7 @@ describe('useRecentlyViewedCoursesAndProgramsData', () => {
   it('should handle empty data response', async () => {
     mockedFetchPopularProducts.mockResolvedValue([]);
 
-    const { result } = renderHook(() => useRecentlyViewedCoursesAndProgramsData(mockSearchClient, true), {
+    const { result } = renderHook(() => usePopularCoursesData(mockSearchClient, true), {
       wrapper: createWrapper(),
     });
 
@@ -127,7 +130,7 @@ describe('useRecentlyViewedCoursesAndProgramsData', () => {
   });
 
   it('should not fetch when search client is null', async () => {
-    renderHook(() => useRecentlyViewedCoursesAndProgramsData(null, true), {
+    renderHook(() => usePopularCoursesData(null, true), {
       wrapper: createWrapper(),
     });
 

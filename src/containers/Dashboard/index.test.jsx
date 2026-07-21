@@ -23,7 +23,7 @@ jest.mock('./hooks', () => ({
 
 jest.mock('../../slots/DashboardModalSlot', () => jest.fn(() => <div>DashboardModalSlot</div>));
 jest.mock('@src/containers/CoursesPanel', () => jest.fn(() => <div>CoursesPanel</div>));
-jest.mock('../RecentlyViewedPanel', () => jest.fn(() => <div>RecentlyViewedPanel</div>));
+jest.mock('../PopularCoursePanel', () => jest.fn(() => <div>PopularCoursePanel</div>));
 jest.mock('@src/containers/SelectSessionModal', () => jest.fn(() => <div>SelectSessionModal</div>));
 jest.mock('./DashboardLayout', () => jest.fn(({ children }) => <div>DashboardLayout{children}</div>));
 
@@ -79,10 +79,10 @@ describe('Dashboard', () => {
         const dashboardLayout = screen.getByText('DashboardLayout');
         expect(dashboardLayout).toBeInTheDocument();
       });
-      it('should render RecentlyViewedPanel', () => {
+      it('should render PopularCoursePanel', () => {
         createWrapper({ initIsPending: false });
-        const recentlyViewedPanel = screen.getByText('RecentlyViewedPanel');
-        expect(recentlyViewedPanel).toBeInTheDocument();
+        const popularCoursePanel = screen.getByText('PopularCoursePanel');
+        expect(popularCoursePanel).toBeInTheDocument();
       });
     });
   });
