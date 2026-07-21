@@ -25,10 +25,10 @@ describe('DashboardHeader', () => {
         'Subscriber since {startDate}',
     });
 
-    expect(screen.getByTestId('dashboard-title'))
+    expect(screen.getByTestId('dashboard-header-title'))
       .toHaveTextContent('Welcome to your learning home.');
 
-    expect(screen.getByTestId('dashboard-subtitle'))
+    expect(screen.getByTestId('dashboard-header-subtitle'))
       .toHaveTextContent(
         `Subscriber since ${defaultStartDate}`,
       );
@@ -36,17 +36,15 @@ describe('DashboardHeader', () => {
 
   it('renders fallback title message when title translation is not provided', () => {
     renderComponent(defaultStartDate, {
-      [messages.dashboardHeaderWelcomeTitle.id]:
+      [messages.dashboardHeaderWelcomeMessage.id]:
         'Subscriber since {startDate}',
     });
 
-    expect(screen.getByTestId('dashboard-title'))
-      .toBeInTheDocument();
+    expect(screen.getByTestId('dashboard-header-title'))
+      .toHaveTextContent(messages.dashboardHeaderWelcomeTitle.defaultMessage);
 
-    expect(screen.getByTestId('dashboard-subtitle'))
-      .toHaveTextContent(
-        `Subscriber since ${defaultStartDate}`,
-      );
+    expect(screen.getByTestId('dashboard-header-subtitle'))
+      .toHaveTextContent(`Subscriber since ${defaultStartDate}`);
   });
 
   it('renders interpolated startDate in subtitle', () => {
@@ -58,7 +56,7 @@ describe('DashboardHeader', () => {
         'Subscriber since {startDate}',
     });
 
-    expect(screen.getByTestId('dashboard-subtitle'))
+    expect(screen.getByTestId('dashboard-header-subtitle'))
       .toHaveTextContent(`Subscriber since ${startDate}`);
   });
 });
