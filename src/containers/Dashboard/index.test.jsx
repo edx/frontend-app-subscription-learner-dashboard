@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { IntlProvider } from '@openedx/frontend-base';
 import { useSelectSessionModal } from '@src/data/context';
 import { useInitializeSubsCourseDashboard } from '@src/data/hooks';
+import { useInitializeSubsDashboard } from '@src/data/hooks';
 
 import hooks from './hooks';
 import Dashboard from '.';
@@ -12,6 +13,7 @@ jest.mock('@src/data/context', () => ({
 
 jest.mock('@src/data/hooks', () => ({
   useInitializeSubsCourseDashboard: jest.fn(),
+  useInitializeSubsDashboard: jest.fn(),
 }));
 
 jest.mock('./hooks', () => ({
@@ -41,6 +43,7 @@ describe('Dashboard', () => {
     });
     const dataMocked = { data: hasCourses ? { subscriptionCourses: [1, 2] } : { subscriptionCourses: [] }, isPending: initIsPending };
     useInitializeSubsCourseDashboard.mockReturnValue(dataMocked);
+    useInitializeSubsDashboard.mockReturnValue({ data: {} });
     useSelectSessionModal.mockReturnValue({ selectSessionModal: showSelectSessionModal ? { cardId: 1 } : null });
     return render(<IntlProvider locale="en"><Dashboard /></IntlProvider>);
   };
