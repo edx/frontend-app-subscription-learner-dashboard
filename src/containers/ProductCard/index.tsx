@@ -23,7 +23,7 @@ export const ProductCard: FC<ProductCardProps> = ({ item, isLoading }) => {
           src={item.url}
           srcAlt={`${item.title} main-image`}
           data-testid="product-card-image"
-          logoSrc={item.thumbnail || item.url}
+          logoSrc={item.thumbnail || ''}
           logoAlt={`${item.title} thumbnail-image`}
         />
       </div>
