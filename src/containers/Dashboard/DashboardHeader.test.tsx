@@ -59,4 +59,14 @@ describe('DashboardHeader', () => {
     expect(screen.getByTestId('dashboard-header-subtitle'))
       .toHaveTextContent(`Subscriber since ${startDate}`);
   });
+
+  it('does not render subtitle when startDate is missing', () => {
+    renderComponent('', {
+      [messages.dashboardHeaderWelcomeTitle.id]: 'Welcome to your learning home.',
+      [messages.dashboardHeaderWelcomeMessage.id]:
+        'Subscriber since {startDate}',
+    });
+
+    expect(screen.queryByTestId('dashboard-header-subtitle')).not.toBeInTheDocument();
+  });
 });

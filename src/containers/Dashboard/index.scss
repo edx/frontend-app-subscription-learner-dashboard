@@ -6,11 +6,11 @@ $subtitle-color: #454545 !default;
   padding: 0 var(--pgn-spacing-spacer-4);
 }
 
-.dashboard-header-title{
+.dashboard-header-title {
   color: $title-color;
   font-size: var(--pgn-typography-font-size-h3-base);
 }
 
-.dashboard-subtitle{
+.dashboard-header-subtitle {
   color: $subtitle-color;
 }
