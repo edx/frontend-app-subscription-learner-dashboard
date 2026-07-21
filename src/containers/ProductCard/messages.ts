@@ -10,7 +10,7 @@ const messages = defineMessages({
     id: 'subs-dash.level.label',
     defaultMessage: '{level} level',
     description: 'Label for the level field',
-  }
+  },
 });
 
 export default messages;

@@ -34,7 +34,7 @@ export const ProductCard: FC<ProductCardProps> = ({ item, isLoading }) => {
         <Card.Header title={item.partner} className="d-flex justify-content-between align-items-center" size="xs" />
       ) : null}
 
-      <Card.Section className="d-flex flex-column flex-grow-1 overflow-hidden mt-6">
+      <Card.Section className="d-flex flex-column flex-grow-1 overflow-hidden mt-5">
         {typeof item.weeks_to_complete === 'number' && (
           <span className="d-flex align-items-center">
             <Icon src={Timelapse} className="mr-2" />
