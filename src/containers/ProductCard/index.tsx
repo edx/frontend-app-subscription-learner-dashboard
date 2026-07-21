@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useIntl } from '@openedx/frontend-base';
 import { Card, Icon } from '@openedx/paragon';
 import { Timelapse, Speed } from '@openedx/paragon/icons';
+import './index.scss';
 
 import { ProductCardProps } from './data/types';
 import messages from './messages';
@@ -10,12 +11,12 @@ export const ProductCard: FC<ProductCardProps> = ({ item, isLoading }) => {
   const { formatMessage } = useIntl();
   return (
     <Card
-      className="shadow-sm d-flex flex-column rounded w-100 overflow-hidden"
+      className="shadow-sm d-flex flex-column rounded w-100 overflow-hidden card-container"
       variant={item.product === 'Course' ? 'light' : 'dark'}
       data-testid="product-card"
       isLoading={isLoading}
     >
-      <Card.Header title={item.content_type} className="pb-2 bg-light-500 text-primary-500" size="xs" />
+      <Card.Header title={item.content_type} className="pb-2 pt-2 bg-light-500 text-primary-500 content-type" size="xs" />
 
       <div className="position-relative">
         <Card.ImageCap
@@ -27,7 +28,7 @@ export const ProductCard: FC<ProductCardProps> = ({ item, isLoading }) => {
         />
       </div>
 
-      <Card.Header title={item.title} size="sm" />
+      <Card.Header title={item.title} size="sm" className="product-card-title" />
 
       {item.partner ? (
         <Card.Header title={item.partner} className="d-flex justify-content-between align-items-center" size="xs" />
