@@ -1,0 +1,19 @@
+$text-color: #002B2B !default;
+
+.subscription-information {
+    background: var(--pgn-color-light-200);
+
+    .my-subscription-heading {
+        color: $text-color;
+    }
+
+    .subscription-status-alert {
+        h6 {
+            margin-bottom: 0;
+        }
+
+        p {
+            color: var(--pgn-color-black);
+        }
+    }
+}

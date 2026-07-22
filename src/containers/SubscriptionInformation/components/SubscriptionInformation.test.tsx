@@ -17,53 +17,74 @@ const renderComponent = () => {
   return render(
     <IntlProvider locale="en">
       <SubscriptionInformation />
-    </IntlProvider>
+    </IntlProvider>,
   );
 };
 
 describe('SubscriptionInformation', () => {
-  describe('edX Logo', () => {
-    it('renders the edX logo image', () => {
+  describe('Subscription heading', () => {
+    it('renders the My Subscription heading', () => {
       renderComponent();
-      const logo = screen.getByAltText('edX Logo');
-      expect(logo).toBeInTheDocument();
-    });
 
-    it('renders the edX logo with the correct src', () => {
-      renderComponent();
-      const logo = screen.getByAltText('edX Logo');
-      expect(logo).toHaveAttribute('src', 'https://www.edx.org/trademark-logos/edx-logo-elm.svg');
+      expect(
+        screen.getByRole('heading', {
+          name: formatMessage(messages.mySubscriptionHeading),
+        }),
+      ).toBeInTheDocument();
     });
   });
 
   describe('Subscription status alert', () => {
-    it('renders the alert with "Subscription Status" heading', () => {
+    it('renders the alert', () => {
       renderComponent();
-      expect(screen.getByText(formatMessage(messages.statusMessage))).toBeInTheDocument();
-    });
 
-    it('renders the alert with info variant class', () => {
-      renderComponent();
       const alert = screen.getByRole('alert');
       expect(alert).toBeInTheDocument();
+    });
+
+    it('renders the subscription status and plan name', () => {
+      renderComponent();
+
+      expect(
+        screen.getByText(/Active, Monthly plan/i),
+      ).toBeInTheDocument();
+    });
+
+    it('renders the renewal message', () => {
+      renderComponent();
+
+      expect(
+        screen.getByText(/Your next payment is/i),
+      ).toBeInTheDocument();
+    });
+
+    it('renders the cached status icon', () => {
+      renderComponent();
+
+      expect(screen.getByRole('alert')).toContainElement(
+        document.querySelector('.icon'),
+      );
     });
   });
 
   describe('Manage my subscription button', () => {
     it('renders the "Manage my subscription" button', () => {
       renderComponent();
+
       const btn = screen.getByTestId('manage-button');
       expect(btn).toBeInTheDocument();
     });
 
     it('button has correct href pointing to manageSubscriptionURL', () => {
       renderComponent();
+
       const btn = screen.getByTestId('manage-button');
       expect(btn).toHaveAttribute('href', manageSubscriptionURL);
     });
 
     it('button opens in a new tab with correct attributes', () => {
       renderComponent();
+
       const btn = screen.getByTestId('manage-button');
       expect(btn).toHaveAttribute('target', '_blank');
       expect(btn).toHaveAttribute('rel', 'noopener noreferrer');
@@ -71,21 +92,46 @@ describe('SubscriptionInformation', () => {
 
     it('button is accessible as a link role', () => {
       renderComponent();
-      const btn = screen.getByRole('link', { name: /manage my subscription/i });
+
+      const btn = screen.getByRole('link', {
+        name: /manage my subscription/i,
+      });
+
       expect(btn).toBeInTheDocument();
     });
   });
 
-  // --- Container ---
   describe('Container structure', () => {
     it('renders the subscription-information container', () => {
       const { container } = renderComponent();
-      expect(container.querySelector('.subscription-information')).toBeInTheDocument();
+
+      expect(
+        container.querySelector('.subscription-information'),
+      ).toBeInTheDocument();
     });
 
     it('renders the subscription-status-alert class on the alert', () => {
       const { container } = renderComponent();
-      expect(container.querySelector('.subscription-status-alert')).toBeInTheDocument();
+
+      expect(
+        container.querySelector('.subscription-status-alert'),
+      ).toBeInTheDocument();
+    });
+
+    it('renders the my-subscription-heading class', () => {
+      const { container } = renderComponent();
+
+      expect(
+        container.querySelector('.my-subscription-heading'),
+      ).toBeInTheDocument();
+    });
+
+    it('renders the alert heading as h6', () => {
+      renderComponent();
+
+      expect(
+        screen.getByRole('heading', { level: 6 }),
+      ).toBeInTheDocument();
     });
   });
 });
