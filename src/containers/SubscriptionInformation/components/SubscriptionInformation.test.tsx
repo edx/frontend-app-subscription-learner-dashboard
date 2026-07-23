@@ -61,9 +61,7 @@ describe('SubscriptionInformation', () => {
     it('renders the cached status icon', () => {
       renderComponent();
 
-      expect(screen.getByRole('alert')).toContainElement(
-        document.querySelector('.icon'),
-      );
+      expect(screen.getByTestId('subscription-status-icon')).toBeInTheDocument();
     });
   });
 

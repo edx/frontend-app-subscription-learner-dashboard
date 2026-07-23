@@ -11,14 +11,14 @@ import { Cached } from '@openedx/paragon/icons';
 // For now, we can use this hardcoded data to test the SubscriptionInformation component.
 const subscriptionInformationData = {
   isSubscribed: true,
-  subscriptionStatus: 'Active', // can be 'active', 'cancelled', 'expired'
+  subscriptionStatus: 'Active', // can be 'Active', 'Cancelled', 'Expired'
   subscriptionStartDate: '05/22/25',
   subscriptionEndDate: '05/22/26',
   subscriptionRenewalDate: '05/22/26',
   subscriptionRenewalPrice: '$36',
   numberOfCoursesEnrolled: 5,
   totalSavings: '$120',
-  planName: 'Monthly plan',
+  planName: 'Monthly Plan',
 };
 
 export const SubscriptionInformation: FC = () => {
@@ -51,7 +51,7 @@ export const SubscriptionInformation: FC = () => {
         <Alert.Heading
           as="h6"
         >
-          <Icon src={Cached} className="icon mr-1" />
+          <Icon src={Cached} className="icon mr-1" data-testid="subscription-status-icon" />
           {/* TODO : To be updated from API response once correct response is received */}
           {subscriptionInformationData.subscriptionStatus}, {subscriptionInformationData.planName}
         </Alert.Heading>
