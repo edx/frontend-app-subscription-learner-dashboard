@@ -19,12 +19,17 @@ const messages = defineMessages({
   renewalMessage: {
     id: 'learner-dash.subscriptionInformation.information.subscriptionSchedule',
     description: 'Subscription Schedule',
-    defaultMessage: 'Subscription payment scheduled for {subscriptionRenewalDate}.',
+    defaultMessage: 'Your next payment is {subscriptionRenewalDate}.',
   },
   manageSubscriptionMessage: {
     id: 'learner-dash.subscriptionInformation.information.manageSubscription',
     description: 'Manage Subscription',
     defaultMessage: 'Manage my subscription',
+  },
+  mySubscriptionHeading: {
+    id: 'learner-dash.subscriptionInformation.information.mySubscriptionHeading',
+    description: 'My Subscription Heading',
+    defaultMessage: 'My subscription',
   },
 });
 

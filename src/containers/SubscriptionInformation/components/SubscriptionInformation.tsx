@@ -1,21 +1,24 @@
 import { FC } from 'react';
-import { Alert, Button, Image } from '@openedx/paragon';
+import { Alert, Button, Icon } from '@openedx/paragon';
 import { useIntl } from '@openedx/frontend-base';
 import { utilHooks } from '@src/hooks';
 import messages from '../messages';
 import { manageSubscriptionURL } from '@src/data/constants/app';
+import '../index.scss';
+import { Cached } from '@openedx/paragon/icons';
 
 // TODO: We can replace the below hardcoded subscriptionInformationData with the actual data from the API once we have the API ready.
 // For now, we can use this hardcoded data to test the SubscriptionInformation component.
 const subscriptionInformationData = {
   isSubscribed: true,
-  subscriptionStatus: 'cancelled', // can be 'active', 'cancelled', 'expired'
+  subscriptionStatus: 'Active', // can be 'Active', 'Cancelled', 'Expired'
   subscriptionStartDate: '05/22/25',
   subscriptionEndDate: '05/22/26',
   subscriptionRenewalDate: '05/22/26',
   subscriptionRenewalPrice: '$36',
   numberOfCoursesEnrolled: 5,
   totalSavings: '$120',
+  planName: 'Monthly Plan',
 };
 
 export const SubscriptionInformation: FC = () => {
@@ -25,7 +28,7 @@ export const SubscriptionInformation: FC = () => {
   const subscriptionActions = [
     <Button
       key="manage-subscription"
-      variant="outline-brand"
+      variant="tertiary"
       data-testid="manage-button"
       href={manageSubscriptionURL}
       target="_blank"
@@ -37,31 +40,21 @@ export const SubscriptionInformation: FC = () => {
   ];
 
   return (
-    <div className="container subscription-information p-3\.5">
-      <Image
-        className="mr-2"
-        src="https://www.edx.org/trademark-logos/edx-logo-elm.svg"
-        rounded
-        alt="edX Logo"
-        width={40}
-        height={60}
-      />
-      {subscriptionInformationData.subscriptionStatus === 'cancelled' && (
-        <h3>{formatMessage(messages.cancelledMessage, { totalSavings: subscriptionInformationData.totalSavings })}</h3>
-      )}
-      <p>
-        {formatMessage(messages.coursesEnrollmentMessage, {
-          numberOfCoursesEnrolled: subscriptionInformationData.numberOfCoursesEnrolled,
-          totalSavings: subscriptionInformationData.totalSavings,
-        })}
-      </p>
+    <div className="container subscription-information py-5 px-4">
+      <h2 className="mb-4 my-subscription-heading">{formatMessage(messages.mySubscriptionHeading)}</h2>
       <Alert
         dismissible={false}
         show={true}
         actions={subscriptionActions}
-        className="subscription-status-alert bg-light-200"
+        className="subscription-status-alert bg-white"
       >
-        <Alert.Heading>{formatMessage(messages.statusMessage)}</Alert.Heading>
+        <Alert.Heading
+          as="h6"
+        >
+          <Icon src={Cached} className="icon mr-1" data-testid="subscription-status-icon" />
+          {/* TODO : To be updated from API response once correct response is received */}
+          {subscriptionInformationData.subscriptionStatus}, {subscriptionInformationData.planName}
+        </Alert.Heading>
         <p>
           {formatMessage(messages.renewalMessage, {
             subscriptionRenewalDate: formatDate(subscriptionInformationData.subscriptionRenewalDate),
