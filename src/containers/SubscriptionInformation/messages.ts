@@ -29,7 +29,7 @@ const messages = defineMessages({
   mySubscriptionHeading: {
     id: 'learner-dash.subscriptionInformation.information.mySubscriptionHeading',
     description: 'My Subscription Heading',
-    defaultMessage: 'My Subscription',
+    defaultMessage: 'My subscription',
   },
 });
 
